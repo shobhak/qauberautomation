@@ -104,10 +104,33 @@
       Then I log in as a QA engineer input "denisshirokikh", "12345678"
       Then I click on "Project Search" in blue menu bar
       Then I scroll to end of page
-      Then I click on element having xpath "//*[@id='content']//*[contains(text(),'3')]"
-      #Then I wait for 3 sec
-      #Then I click on element having xpath "//*[@id='content']//*[contains(text(),'Previous')]"
-      #And element having xpath "//*[@id='activees']" should have text as "2"
+      Then I click on element having xpath ".//*[@id='content']/div[11]/a[5]"
+      Then I wait for 3 sec
+      Then I click on element having xpath "//*[@id='content']//*[contains(text(),'Previous')]"
+      Then I wait for 3 sec
+      And element having xpath "//*[@id='activees']" should have text as "4"
+
+
+    @T45815
+    Scenario: Verify that View User Feedback link directs user to the page containing users reviews
+      Given I navigate to login page
+      Then I log in as a QA engineer input "denisshirokikh", "12345678"
+      Then I click on "Project Search" in blue menu bar
+      Then I click on element having xpath "(//*[@class='post-main-details']//*[contains(text(),'View User Feedback')])[2]"
+      And element having xpath "//*[@class='page_heading_me']" should have partial text as "User Feedback"
+
+
+    @T45824
+    Scenario: Verify that User Profile link directs user to the user profile page under Project Search
+      Given I navigate to login page
+      Then I log in as a QA engineer input "denisshirokikh", "12345678"
+      Then I wait for 3 sec
+      Then I click on "Project Search" in blue menu bar
+      Then I wait for 3 sec
+      Then I click on element having xpath "(//*[@class='avatar-posted-by-username'])[1]"
+      And I verify user page has correct content
+
+
 
 
 

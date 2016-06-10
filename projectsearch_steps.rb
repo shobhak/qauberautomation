@@ -37,3 +37,11 @@ Then(/^I enter "([^"]*)" in rating field and click search$/) do |rating|
   $driver.find_element(:xpath, "//*[@name='rating_over']").send_keys rating
   Sdriver.find_element(:xpath, "//*[@name='search_provider']").click
 end
+
+And(/^I verify user page has correct content$/) do
+  eng_name = $driver.find_element(:xpath, "//div[@class='mm_inn']").text
+  p eng_name
+  cont_name = $driver.find_element(:xpath, "(//*[@class='avatar-posted-by-username'])[1]").text
+  p cont_name
+  assert(eng_name.include(cont_name),"Content is incorrect")
+end
