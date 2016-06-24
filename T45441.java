@@ -1,3 +1,6 @@
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -8,20 +11,24 @@ import org.openqa.selenium.interactions.Actions;
 
 public class T45441 {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 //Verify that QA Engineer and Project Owner can Make Payment - Chrome
-System.setProperty("webdriver.chrome.driver", "C:\\Users\\sujai\\Documents\\Portnov\\Vladimir - Selenium\\Eclipse workspace\\chromedriver_win32 (1)\\chromedriver.exe");
+		Properties property = new Properties();
+		FileInputStream file = new FileInputStream("C:\\Users\\sujai\\Documents\\Portnov\\Vladimir - Selenium\\Eclipse workspace\\BidQA\\src\\BidQAData.properties");
+		property.load(file);
+		
+		System.setProperty("webdriver.chrome.driver", property.getProperty("SystemSetPropertyChrome"));
 		
 		WebDriver driver = new ChromeDriver();
-		driver.get("http://test.bidqa.com/");
+		driver.get(property.getProperty("url"));
 		driver.manage().window().maximize();
 		
 		//Login as QA Engineer
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[8]/a")).click();
-		driver.findElement(By.xpath(".//*[@name='log']")).sendKeys("RS");
-		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys("abcdefgh");
+		driver.findElement(By.xpath(".//*[@name='log']")).sendKeys(property.getProperty("QAEnggUserName"));
+		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys(property.getProperty("QAEnggPassword"));
 		driver.findElement(By.xpath(".//*[@id='submits']")).click();
 		
 		//My account == Finances
@@ -34,8 +41,8 @@ System.setProperty("webdriver.chrome.driver", "C:\\Users\\sujai\\Documents\\Port
 		
 		//Make payment
 		driver.findElement(By.partialLinkText("Make Payment")).click();
-		driver.findElement(By.id("amount")).sendKeys("20");
-		driver.findElement(By.name("username")).sendKeys("Su");
+		driver.findElement(By.id("amount")).sendKeys(property.getProperty("T45441PaymentAmount"));
+		driver.findElement(By.name("username")).sendKeys(property.getProperty("T45441PayProjectOwner"));
 		driver.findElement(By.name("payme")).click();
 		
 		//Verify the transaction
@@ -50,8 +57,8 @@ System.setProperty("webdriver.chrome.driver", "C:\\Users\\sujai\\Documents\\Port
 		
 		//Login as Project owner
 		driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[8]/a")).click();
-		driver.findElement(By.xpath(".//*[@name='log']")).sendKeys("Su");
-		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys("abcdefgh");
+		driver.findElement(By.xpath(".//*[@name='log']")).sendKeys(property.getProperty("ProjOwnUserName"));
+		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys(property.getProperty("ProjOwnPassword"));
 		driver.findElement(By.xpath(".//*[@id='submits']")).click();
 		
 		//My account == Finances
@@ -73,8 +80,8 @@ System.setProperty("webdriver.chrome.driver", "C:\\Users\\sujai\\Documents\\Port
 				
 				//Making payment
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-				driver.findElement(By.id("amount")).sendKeys("20");
-				driver.findElement(By.name("username")).sendKeys("RS");
+				driver.findElement(By.id("amount")).sendKeys(property.getProperty("T45441PayQAEngg"));
+				driver.findElement(By.name("username")).sendKeys(property.getProperty("T45441QAEnggName"));
 				driver.findElement(By.name("payme")).click();
 				
 				//Check transactions

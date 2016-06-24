@@ -1,3 +1,6 @@
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
@@ -10,19 +13,22 @@ import org.openqa.selenium.support.ui.Select;
 
 public class T45706 {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 //		Verify that the user can send a message as a QA Engineer - Firefox (Works on Firefox)
+		Properties property = new Properties();
+		FileInputStream file = new FileInputStream("C:\\Users\\sujai\\Documents\\Portnov\\Vladimir - Selenium\\Eclipse workspace\\BidQA\\src\\BidQAData.properties");
+		property.load(file);
 		
 		WebDriver driver = new FirefoxDriver();
 		
-driver.get("http://test.bidqa.com/");
+driver.get(property.getProperty("url"));
 		
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 				
 				driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[8]/a")).click();
-				driver.findElement(By.xpath(".//*[@name='log']")).sendKeys("RS");
-				driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys("abcdefgh");
+				driver.findElement(By.xpath(".//*[@name='log']")).sendKeys(property.getProperty("QAEnggUserName"));
+				driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys(property.getProperty("QAEnggPassword"));
 				driver.findElement(By.xpath(".//*[@id='submits']")).click();
 				
 				driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -38,10 +44,10 @@ driver.get("http://test.bidqa.com/");
 				//Click on Send new message
 				driver.findElement(By.partialLinkText("Send New Message")).click();
 				
-				driver.findElement(By.xpath(".//*[@id='to_as']")).sendKeys("Su");
+				driver.findElement(By.xpath(".//*[@id='to_as']")).sendKeys(property.getProperty("T45706SendNewMessageTo"));
 				
 				//Enter Subject
-				driver.findElement(By.id("subject_a")).sendKeys("Testing Private Messaging functionality");
+				driver.findElement(By.id("subject_a")).sendKeys(property.getProperty("T45706SubjectPvtMsg"));
 				
 				driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 				//driver.findElement(By.className("mce-content-body ")).sendKeys("Testing Private messaging..... text");
@@ -51,11 +57,15 @@ driver.get("http://test.bidqa.com/");
 				Tab.sendKeys(Keys.TAB);
 				Thread.sleep(1000);
 				
-				driver.switchTo().activeElement().sendKeys("Testing Private messaging ..... text");
+				driver.switchTo().activeElement().sendKeys(property.getProperty("T45706PvtMsgBody"));
 								
 				driver.findElement(By.xpath("//input[@class='submit_bottom2']")).click();
 				
-				//driver.exit();
+				//Logout
+				driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[7]/a")).click();
+				
+				
+				driver.quit();
 	}
 
 }

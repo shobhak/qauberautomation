@@ -1,9 +1,11 @@
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.UnhandledAlertException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -12,18 +14,22 @@ import org.openqa.selenium.support.ui.Select;
 
 public class T45433 {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 		
 		//Verify Project Owner can deposit escrow for a selected project (working for Firefox)
+		Properties property = new Properties();
+		FileInputStream file = new FileInputStream("C:\\Users\\sujai\\Documents\\Portnov\\Vladimir - Selenium\\Eclipse workspace\\BidQA\\src\\BidQAData.properties");
+		property.load(file);
+		
 		WebDriver driver = new FirefoxDriver();
 		
-		driver.get("http://test.bidqa.com/");
+		driver.get(property.getProperty("url"));
 		
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[8]/a")).click();
-		driver.findElement(By.xpath(".//*[@id='log']")).sendKeys("Su");
-		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys("abcdefgh");
+		driver.findElement(By.xpath(".//*[@id='log']")).sendKeys(property.getProperty("ProjOwnUserName"));
+		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys(property.getProperty("ProjOwnPassword"));
 		driver.findElement(By.xpath(".//*[@id='submits']")).click();
 		
 		//Create an object for actions
@@ -63,6 +69,9 @@ public class T45433 {
 		{
 			System.out.println("Deposit not complete");
 		}
+		//Logout
+		driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[7]/a")).click();
+		
 		driver.quit();
 		
 	

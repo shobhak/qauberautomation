@@ -1,6 +1,10 @@
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
+import java.util.Properties;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -12,21 +16,24 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class T45821 {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 //Verify that the 1st & Last Page Number is redirected correctly when the project owner select them from all posted Project Search on BIDQA. - Chrome
-
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\sujai\\Documents\\Portnov\\Vladimir - Selenium\\Eclipse workspace\\chromedriver_win32 (1)\\chromedriver.exe");
+		Properties property = new Properties();
+		FileInputStream file = new FileInputStream(property.getProperty("SystemSetPropertyChrome"));
+		property.load(file);
+		
+		System.setProperty("webdriver.chrome.driver", property.getProperty("SystemSetPropertyChrome"));
 		WebDriver driver = new ChromeDriver();
-				
-		driver.get("http://test.bidqa.com/");
+						
+		driver.get(property.getProperty("url"));
 		driver.manage().window().maximize();
 		
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[8]/a")).click();
-		driver.findElement(By.xpath(".//*[@name='log']")).sendKeys("RS");
-		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys("abcdefgh");
+		driver.findElement(By.xpath(".//*[@name='log']")).sendKeys(property.getProperty("QAEnggUserName"));
+		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys(property.getProperty("QAEnggPassword"));
 		driver.findElement(By.xpath(".//*[@id='submits']")).click();
 		
 		//Click on All Projects
@@ -79,6 +86,10 @@ public class T45821 {
 		{
 			System.out.println("Last page is not chosen correctly");
 		}
+		
+		//Logout
+				driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[7]/a")).click();
+
 		driver.quit();
 				
 	}

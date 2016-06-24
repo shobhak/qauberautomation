@@ -1,3 +1,7 @@
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
@@ -8,20 +12,24 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class T45387 {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 //Verify that Project Owner can make payments to QA Engineers - Chrome
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\sujai\\Documents\\Portnov\\Vladimir - Selenium\\Eclipse workspace\\chromedriver_win32 (1)\\chromedriver.exe");
+		Properties property = new Properties();
+		FileInputStream file = new FileInputStream("C:\\Users\\sujai\\Documents\\Portnov\\Vladimir - Selenium\\Eclipse workspace\\BidQA\\src\\BidQAData.properties");
+		property.load(file);
+		
+		System.setProperty("webdriver.chrome.driver", property.getProperty("SystemSetPropertyChrome"));
 		
 		WebDriver driver = new ChromeDriver();
 		
-		driver.get("http://test.bidqa.com/");
+		driver.get(property.getProperty("url"));
 		driver.manage().window().maximize();
 
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[8]/a")).click();
-		driver.findElement(By.xpath(".//*[@name='log']")).sendKeys("Su");
-		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys("abcdefgh");
+		driver.findElement(By.xpath(".//*[@name='log']")).sendKeys(property.getProperty("ProjOwnUserName"));
+		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys(property.getProperty("ProjOwnPassword"));
 		driver.findElement(By.xpath(".//*[@id='submits']")).click();
 
 		//My account == Finances
@@ -45,9 +53,9 @@ public class T45387 {
 
 		driver.findElement(By.id("loadLogin")).click();
 		driver.findElement(By.id("login_email")).clear();
-		driver.findElement(By.id("login_email")).sendKeys("srjssmiles-buyer@gmail.com");
+		driver.findElement(By.id("login_email")).sendKeys(property.getProperty("PaypalLoginEmail"));
 		driver.findElement(By.id("login_password")).clear();
-		driver.findElement(By.id("login_password")).sendKeys("abcdefgh");
+		driver.findElement(By.id("login_password")).sendKeys(property.getProperty("PaypalPassword"));
 		driver.findElement(By.id("submitLogin")).click();
 
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -70,7 +78,7 @@ public class T45387 {
 
 		System.out.println("Amount being paid is: "+driver.switchTo().activeElement().getText());
 
-		driver.findElement(By.name("username")).sendKeys("RS");
+		driver.findElement(By.name("username")).sendKeys(property.getProperty("T45387MakePaymentTo"));
 		driver.findElement(By.name("payme")).click();
 		
 		Thread.sleep(10000);
@@ -89,6 +97,9 @@ public class T45387 {
 		//Verify transaction on 'Transactions' page
 		driver.findElement(By.partialLinkText("Transactions")).click();
 		System.out.println(driver.findElement(By.xpath("//div[@class='my_box3']")).getText());
+		
+		//Logout
+		driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[7]/a")).click();
 
 		driver.quit();
 

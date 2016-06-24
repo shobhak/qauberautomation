@@ -1,3 +1,6 @@
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
@@ -7,10 +10,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class T45395 {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 //Verify Project Owner can see all the transaction on transaction page - Chrome
-System.setProperty("webdriver.chrome.driver", "C:\\Users\\sujai\\Documents\\Portnov\\Vladimir - Selenium\\Eclipse workspace\\chromedriver_win32 (1)\\chromedriver.exe");
+		Properties property = new Properties();
+		FileInputStream file = new FileInputStream("C:\\Users\\sujai\\Documents\\Portnov\\Vladimir - Selenium\\Eclipse workspace\\BidQA\\src\\BidQAData.properties");
+		property.load(file);
+		
+		System.setProperty("webdriver.chrome.driver", property.getProperty("SystemSetPropertyChrome"));
 		
 		WebDriver driver = new ChromeDriver();
 		
@@ -18,8 +25,8 @@ System.setProperty("webdriver.chrome.driver", "C:\\Users\\sujai\\Documents\\Port
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[8]/a")).click();
-		driver.findElement(By.xpath(".//*[@name='log']")).sendKeys("Su");
-		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys("abcdefgh");
+		driver.findElement(By.xpath(".//*[@name='log']")).sendKeys(property.getProperty("ProjOwnUserName"));
+		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys(property.getProperty("ProjOwnPassword"));
 		driver.findElement(By.xpath(".//*[@id='submits']")).click();
 		
 		//My account == Finances
@@ -33,7 +40,7 @@ System.setProperty("webdriver.chrome.driver", "C:\\Users\\sujai\\Documents\\Port
 		driver.findElement(By.partialLinkText("Withdraw Money")).click();
 		String RandomNumber = String.valueOf(ThreadLocalRandom.current().nextInt(25,65));
 		driver.findElement(By.xpath("//input[@id='amount']")).sendKeys(RandomNumber);
-		driver.findElement(By.xpath("//input[@name='paypal']")).sendKeys("srjssmiles-buyer@gmail.com");
+		driver.findElement(By.xpath("//input[@name='paypal']")).sendKeys(property.getProperty("PaypalLoginEmail"));
 		driver.findElement(By.xpath("//input[@name='withdraw']")).click();
 		Thread.sleep(5000);
 		System.out.println("Balance after withdrawal & before deposit is: "+driver.findElement(By.xpath("//span[@class='balance']")).getText());
@@ -51,9 +58,9 @@ System.setProperty("webdriver.chrome.driver", "C:\\Users\\sujai\\Documents\\Port
 				driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 				driver.findElement(By.id("loadLogin")).click();
 				driver.findElement(By.xpath(".//*[@id='login_email']")).clear();
-				driver.findElement(By.xpath(".//*[@id='login_email']")).sendKeys("srjssmiles-buyer@gmail.com");
+				driver.findElement(By.xpath(".//*[@id='login_email']")).sendKeys(property.getProperty("PaypalLoginEmail"));
 				driver.findElement(By.xpath(".//*[@id='login_password']")).clear();
-				driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys("abcdefgh");
+				driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys(property.getProperty("PaypalPassword"));
 				
 				driver.findElement(By.id("submitLogin")).click();
 				driver.findElement(By.id("continue_abovefold")).click();
@@ -64,6 +71,9 @@ System.setProperty("webdriver.chrome.driver", "C:\\Users\\sujai\\Documents\\Port
 				//Find the transactions
 				driver.findElement(By.partialLinkText("Transactions")).click();
 				System.out.println(driver.findElement(By.xpath(".//*[@id='content']/div/div[2]")).getText());
+				
+				//Logout
+				driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[7]/a")).click();
 				
 				driver.quit();
 		

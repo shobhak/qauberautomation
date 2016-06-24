@@ -1,3 +1,6 @@
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
@@ -9,17 +12,20 @@ import org.openqa.selenium.interactions.Actions;
 
 public class T45411 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 //Verify that QA Engineer can see all the transaction on transaction page - Firefox (Works for firefox)
+		Properties property = new Properties();
+		FileInputStream file = new FileInputStream("C:\\Users\\sujai\\Documents\\Portnov\\Vladimir - Selenium\\Eclipse workspace\\BidQA\\src\\BidQAData.properties");
+		property.load(file);
 		
 		WebDriver driver = new FirefoxDriver();
-		driver.get("http://test.bidqa.com/");
+		driver.get(property.getProperty("url"));
 			
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[8]/a")).click();
-		driver.findElement(By.xpath(".//*[@name='log']")).sendKeys("RS");
-		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys("abcdefgh");
+		driver.findElement(By.xpath(".//*[@name='log']")).sendKeys(property.getProperty("QAEnggUserName"));
+		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys(property.getProperty("QAEnggPassword"));
 		driver.findElement(By.xpath(".//*[@id='submits']")).click();
 		
 		//Creating mouse action of moving to My Account
@@ -39,7 +45,7 @@ public class T45411 {
 		
 		//Enter paypal email
 		driver.findElement(By.xpath("//input[@name='paypal']")).clear();
-		driver.switchTo().activeElement().sendKeys("srjssmiles-buyer@gmail.com");
+		driver.switchTo().activeElement().sendKeys(property.getProperty("PaypalLoginEmail"));
 		
 		driver.findElement(By.xpath("//input[@value='Withdraw']")).click();
 		
@@ -51,7 +57,10 @@ public class T45411 {
 		//Print Transactions page  for reference
 		System.out.println(driver.findElement(By.xpath("//div[@class='my_box3']")).getText());
 		
-		//driver.quit();
+		//Logout
+		driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[7]/a")).click();
+		
+		driver.quit();
 	}
 
 }

@@ -1,3 +1,6 @@
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
@@ -7,18 +10,21 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 
 public class T45391 {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
 		//Verify Project Owner can close request to withdraw money from the account - Firefox (Working in Firefox)
+		Properties property = new Properties();
+		FileInputStream file = new FileInputStream("C:\\Users\\sujai\\Documents\\Portnov\\Vladimir - Selenium\\Eclipse workspace\\BidQA\\src\\BidQAData.properties");
+		property.load(file);
 		
 		WebDriver driver = new FirefoxDriver();
 
-		driver.get("http://test.bidqa.com/");
+		driver.get(property.getProperty("url"));
 
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[8]/a")).click();
-		driver.findElement(By.xpath(".//*[@name='log']")).sendKeys("Su");
-		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys("abcdefgh");
+		driver.findElement(By.xpath(".//*[@name='log']")).sendKeys(property.getProperty("ProjOwnUserName"));
+		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys(property.getProperty("ProjOwnPassword"));
 		driver.findElement(By.xpath(".//*[@id='submits']")).click();
 
 		//My account == Finances
@@ -42,9 +48,9 @@ public class T45391 {
 
 		driver.findElement(By.id("loadLogin")).click();
 		driver.findElement(By.id("login_email")).clear();
-		driver.findElement(By.id("login_email")).sendKeys("srjssmiles-buyer@gmail.com");
+		driver.findElement(By.id("login_email")).sendKeys(property.getProperty("PaypalLoginEmail"));
 		driver.findElement(By.id("login_password")).clear();
-		driver.findElement(By.id("login_password")).sendKeys("abcdefgh");
+		driver.findElement(By.id("login_password")).sendKeys(property.getProperty("PaypalPassword"));
 		driver.findElement(By.id("submitLogin")).click();
 		
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -69,7 +75,7 @@ public class T45391 {
 		
 		Thread.sleep(3000);
 		driver.findElement(By.xpath("//input[@name='paypal']")).clear();
-		driver.switchTo().activeElement().sendKeys("srjssmiles-buyer@gmail.com");
+		driver.switchTo().activeElement().sendKeys(property.getProperty("PaypalLoginEmail"));
 		
 		driver.findElement(By.xpath("//input[@name='withdraw']")).click();
 		
@@ -83,6 +89,9 @@ public class T45391 {
 		
 		//Closing balance after cancellation
 		System.out.println("Amount after cancellation of withdrawal is: "+driver.findElement(By.xpath("//span[@class='balance']")).getText());
+		
+		//Logout
+		driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[7]/a")).click();
 		
 		driver.quit();
 

@@ -1,3 +1,6 @@
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
@@ -9,19 +12,23 @@ import org.openqa.selenium.ie.InternetExplorerDriver;
 
 public class T45432 {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub
 		
 		//Verify that Project Owner can make payments to QA Engineers - Firefox (not Internet Explorer) (Working on Firefox)
 //System.setProperty("webdriver.ie.driver", "C:\\Users\\sujai\\Documents\\Portnov\\Vladimir - Selenium\\Eclipse workspace\\IEDriverServer_x64_2.53.0\\IEDriverServer.exe");
-WebDriver driver = new FirefoxDriver();
+		Properties property = new Properties();
+		FileInputStream file = new FileInputStream("C:\\Users\\sujai\\Documents\\Portnov\\Vladimir - Selenium\\Eclipse workspace\\BidQA\\src\\BidQAData.properties");
+		property.load(file);
+		
+		WebDriver driver = new FirefoxDriver();
 
-driver.get("http://test.bidqa.com/");
+driver.get(property.getProperty("url"));
 
 driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[8]/a")).click();
-driver.findElement(By.xpath(".//*[@name='log']")).sendKeys("Su");
-driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys("abcdefgh");
+driver.findElement(By.xpath(".//*[@name='log']")).sendKeys(property.getProperty("ProjOwnUserName"));
+driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys(property.getProperty("ProjOwnPassword"));
 driver.findElement(By.xpath(".//*[@id='submits']")).click();
 
 //My account == Finances
@@ -45,9 +52,9 @@ System.out.println(driver.getTitle());
 
 driver.findElement(By.id("loadLogin")).click();
 driver.findElement(By.id("login_email")).clear();
-driver.findElement(By.id("login_email")).sendKeys("srjssmiles-buyer@gmail.com");
+driver.findElement(By.id("login_email")).sendKeys(property.getProperty("PaypalLoginEmail"));
 driver.findElement(By.id("login_password")).clear();
-driver.findElement(By.id("login_password")).sendKeys("abcdefgh");
+driver.findElement(By.id("login_password")).sendKeys(property.getProperty("PaypalPassword"));
 driver.findElement(By.id("submitLogin")).click();
 
 driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
@@ -65,7 +72,7 @@ driver.findElement(By.id("amount")).sendKeys(RandomNumber);
 
 System.out.println("Amount being paid is: "+driver.switchTo().activeElement().getText());
 
-driver.findElement(By.name("username")).sendKeys("RS");
+driver.findElement(By.name("username")).sendKeys(property.getProperty("T45432QAEngineer"));
 driver.findElement(By.name("payme")).click();
 
 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -84,6 +91,9 @@ System.out.println("Balance after payment: "+driver.findElement(By.xpath("//span
 driver.findElement(By.partialLinkText("Transactions")).click();
 System.out.println(driver.findElement(By.xpath("//div[@class='my_box3']")).getText());
 
+//Logout
+driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[7]/a")).click();
+		
 driver.quit();
 
 	}

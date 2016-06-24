@@ -1,5 +1,8 @@
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import java.util.Properties;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.concurrent.TimeUnit;
 
@@ -12,18 +15,22 @@ import org.openqa.selenium.support.ui.Select;
 
 public class T45400 {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException, IOException {
 		// TODO Auto-generated method stub
-//Verify that Project Owner can create a Milestone Payment - Chrome (Works for Chrome)
-		System.setProperty("webdriver.chrome.driver", "C:\\Users\\sujai\\Documents\\Portnov\\Vladimir - Selenium\\Eclipse workspace\\chromedriver_win32 (1)\\chromedriver.exe");
+		//Verify that Project Owner can create a Milestone Payment - Chrome (Works for Chrome)
+		
+		Properties property = new Properties();
+		FileInputStream file = new FileInputStream("C:\\Users\\sujai\\Documents\\Portnov\\Vladimir - Selenium\\Eclipse workspace\\BidQA\\src\\BidQAData.properties");
+		property.load(file);
+		System.setProperty("webdriver.chrome.driver", property.getProperty("SystemSetPropertyChrome"));
 		
 		WebDriver driver = new ChromeDriver();
-		driver.get("http://test.bidqa.com/");
+		driver.get(property.getProperty("url"));
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
 		driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[8]/a")).click();
-		driver.findElement(By.xpath(".//*[@name='log']")).sendKeys("Su");
-		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys("abcdefgh");
+		driver.findElement(By.xpath(".//*[@name='log']")).sendKeys(property.getProperty("ProjOwnUserName"));
+		driver.findElement(By.xpath(".//*[@id='login_password']")).sendKeys(property.getProperty("ProjOwnPassword"));
 		driver.findElement(By.xpath(".//*[@id='submits']")).click();
 		
 		//My account == Finances
@@ -51,7 +58,7 @@ public class T45400 {
 				String a=String.valueOf(f.format(RandomNumber));
 				driver.findElement(By.id("amount_text")).sendKeys(a);
 				
-				driver.findElement(By.id("description")).sendKeys("Milestone payment");
+				driver.findElement(By.id("description")).sendKeys(property.getProperty("T45400MilestonePaymentDesc"));
 				
 				driver.findElement(By.id("completion_date")).click();
 				driver.findElement(By.xpath("//span[@class='ui-icon ui-icon-circle-triangle-e']")).click();
@@ -61,6 +68,9 @@ public class T45400 {
 				driver.findElement(By.id("submit_milestone")).click();
 				
 				System.out.println(driver.findElement(By.xpath(".//*[@id='content']/div[3]/div")).getText());
+				
+				//Logout
+				driver.findElement(By.xpath(".//*[@id='cssmenu']/ul/li[7]/a")).click();
 				
 				driver.quit();
 				
