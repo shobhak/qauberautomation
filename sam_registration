@@ -1,0 +1,87 @@
+package Sanity_Check;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+//import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import java.util.Random;
+import java.io.File;
+import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.OutputType;
+import com.sun.jna.platform.FileUtils;
+//import org.openqa.selenium.interactions.Actions;
+//import org.openqa.selenium.support.ui.WebDriverWait;
+//import org.openqa.selenium.support.ui.ExpectedConditions;
+
+public class Registration {
+
+	public static void main(String[] args) throws InterruptedException {
+		
+		System.setProperty("webdriver.chrome.driver", "C:/Selenium/chromedriver.exe");
+		
+		//Step1: Open Chrome
+		WebDriver wd = new ChromeDriver();
+		wd.manage().window().maximize();
+		
+		//Step2: Go to fits-alfa URL 
+		wd.get("http://qabidder.net/fits-alfa/");
+		
+		//Wait until load
+		Thread.sleep(5000);
+		
+		//Wait until element will be visible
+		private volatile boolean value;
+		if(wd.getPageSource().contains("SIGN IN TO CONTINUE.")){
+			System.out.println("Test Case Pass");
+		}else{
+			System.out.println("Text not present");
+		}
+		
+		//Step3: Click on "Register Now" button
+		wd.findElement(By.linkText("Register Now")).click();	
+		
+		//Wait until load
+		Thread.sleep(5000);
+		
+		//Step4:Create random variable
+		Random rand = new Random();
+		int  n = rand.nextInt(1000) + 5;		
+				
+		//Step5: Enter Username: sam_test"n"
+		wd.findElement(By.name("account_name")).sendKeys(new String[]{"sam_test" + n});
+		
+		//Step6: Enter Email: samiurkov+n@gmail.com
+		wd.findElement(By.name("account_email")).sendKeys(new String[]{"samiurkov+" + n + "@gmail.com"});
+		
+		//Step7: Enter Password: test777
+		wd.findElement(By.id("id-password")).sendKeys(new String[]{"test777"});	
+		
+		//Step8: Confirm Password: test777
+		wd.findElement(By.name("account_password_confirm")).sendKeys(new String[]{"test777"});
+		
+		//Step9: Click on "Continue registration" button
+		wd.findElement(By.xpath("/html/body/div[2]/div/div/div[1]/div/div[2]/form/button")).click();	
+		
+		//Step10: Click on "Finish registration" button
+		wd.findElement(By.xpath("/html/body/div[2]/div/div/div[2]/div[3]/button")).click();		
+
+		Thread.sleep(5000);
+		
+		//Step 11: Verify text "Registration successful" present
+		if(wd.getPageSource().contains("Registration successful.")){
+			System.out.println("Test Case Pass");
+		}else{
+			System.out.println("Text not present");
+		}
+
+		//Step 12: Take a screenshot
+		File scrFile = ((TakesScreenshot)wd).getScreenshotAs(OutputType.FILE);
+		FileUtils.copyFile(scrFile, new File("C:/Users/komandaa/Desktop/screenshot" +n+ ".png"));
+		
+		//Step 13: Create LOGS
+		
+
+		//Step9: Close browser
+		//wd.close();
+	}
+
+}
