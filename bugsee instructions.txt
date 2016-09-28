@@ -1,0 +1,16 @@
+Copy Bugsee.framework to your project by drag and dropping in into the right location. When asked, chose to copy them:
+
+Make sure that you've linked your app with these frameworks:
+
+SystemConfiguration
+CoreMotion
+CoreMedia
+Foundation
+CoreFoundation
+AVFoundation
+CoreTelephony
+libc++
+
+Import Bugsee header file in your app delegate or the file you intend to initialize the framework from
+
+ #import <Bugsee/Bugsee.h>
