@@ -67,11 +67,9 @@ class LoginTest(unittest.TestCase):
         driver.find_element_by_xpath("html/body/div[2]/section/div/div/div/form/div/div[8]/ul/li[2]/a").click()
         time.sleep(2)
         driver.find_element_by_xpath("html/body/div[2]/section/div/div/div/form/div/div[9]/ul/li[2]/a").click()
-        time.sleep(10)
-       # loginbuttonelement.click()
-        #time.sleep(2)
-        self.driver.find_element_by_xpath("//a[contains(text(),'Logout')]")
         time.sleep(1)
+        # logout
+        self.driver.find_element_by_xpath("//a[contains(text(),'Logout')]").click()
 
 
     def teardown(self):
