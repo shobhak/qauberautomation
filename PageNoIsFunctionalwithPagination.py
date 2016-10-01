@@ -24,31 +24,22 @@ class PageNoFunctional(unittest.TestCase):
         driver.find_element_by_xpath("//button[@type='submit']").click()
         #Click on Reports button from main navigation
         driver.find_element_by_xpath("//li[2]/a/span").click
+        print("on reports page")
 
-        number_of_pages = driver.find_elements_by_xpath("//div[2]/section/div/div/div/div[2]/div[2]/table/tbody/tr[12]/td/dir-pagination-controls/ul/li/a")
-        print(number_of_pages)
-        #page = driver.find_element_by_xpath("//div[2]/section/div/div/div/div[2]/div[2]/table/tbody/tr[12]/td/dir-pagination-controls/ul/li/a")
-        if number_of_pages > 0:
-            print("Pagination Exists")
-            for current_page in number_of_pages:
-                driver.findElementByXPath("//div[2]/section/div/div/dir-pagination-controls/ul/li[" + current_page + "]/a").click
-                print(current_page)
+        driver.find_element_by_xpath("//a[@ng-click='setCurrent(pagination.current + 1)']").click()
+        if driver.find_element_by_xpath("//a[contains(.,'2')]"):
+            time.sleep(2)
+            print("On 2nd page")
         else:
-           print("Pagination Doesn't Exists")
+            print("Can't go to next page")
 
+        driver.find_element_by_xpath("//a[@ng-click='setCurrent(pagination.current - 1)']").click()
+        if driver.find_element_by_xpath("//a[contains(.,'1')]"):
+            time.sleep(2)
+            print("On 1st page")
+        else:
+            print("Can't go to previous page")
 
-
-
-        #for page_link in driver.find_elements_by_xpath("html/body/div[2]/section/div/div/div/div[2]/div[2]/table/tbody/tr[12]/td/dir-pagination-controls/ul/li/a"):
-           # print "page number: %s" % page_link.text
-           # page_link.click()
-
-        #click on page2
-        #driver.find_element_by_link_text("2").click()
-        #print("You are on Page 2")
-
-        # driver.find_element_by_xpath("//div[2]/section/div/div/div/div[2]/div[2]/table/tbody/tr[12]/td/dir-pagination-controls/ul/li[3]/a").click
-        # self.assertEqual("Report 2130",driver.find_element_by_xpath("//div[2]/section/div/div/div/div[2]/div[2]/table/tbody/tr[1]/td/div/div/div/div[1]/h4"))
         driver.find_element_by_link_text("Logout").click()
 
     def tearDown(self):
