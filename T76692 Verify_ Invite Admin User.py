@@ -71,7 +71,7 @@ class InviteAdminUser(unittest.TestCase):
         email = f.email()
         print(email)
         driver.find_element_by_xpath("(//input[@type='text'])[12]").send_keys(email)
-        ####### u'\ue007' TO PRESS ENTER KEY
+        #######Ascii value  u'\ue007' TO PRESS ENTER KEY
         driver.find_element_by_xpath("(//input[@type='text'])[12]").send_keys(u'\ue007')
         time.sleep(5)
         ####### click on Invite button
