@@ -1,0 +1,3 @@
+2016-10-10 -- INFO       newlogMsg2file - This is the information 
+2016-10-10 -- INFO       newlogMsg2file - This info message is from the run method
+2016-10-10 -- DEBUG      newlogMsg2file - This is the additional info
