@@ -77,23 +77,20 @@ class AssignUserToOrgnization(unittest.TestCase):
         print("done")
         driver.find_element_by_xpath("//button[contains(@ng-click,'ctrl.nextStep()')]").click()
         time.sleep(2)
+        #Script to assign user to an organization
         driver.find_element_by_xpath("//span[contains(.,'Users')]").click()
         time.sleep(2)
+        #select emailid for admin user
         driver.find_element_by_xpath( "//tr[5]/td[1]/em").click()
         time.sleep(2)
-        #driver.find_element_by_xpath("//p[contains(.,'Email: avani112@gmail.com']").click()
-        #driver.find_element_by_xpath(".//*[@id='ngdialog5']/div[2]/div[1]/div/table/tbody/tr[19]/td[3]/div").click()
-        #driver.find_element_by_xpath("//div[@class='depth-level'][text()='Duke and Sons']").click()
-        #driver.find_element_by_xpath("//div[@class='depth-level firepath-matching-node']").click()
-        driver.find_element_by_xpath("//tr[29]/td[2]/a/i").click()
-        #driver.find_element_by_xpath("//i[@class='fa fa-trash']").click()
+        # delete admin user for organization
+        driver.find_element_by_xpath("//tr[50]/td[2]/a/i").click()
         time.sleep(5)
-        driver.find_element_by_xpath("//[@id='ngdialog2']/div[2]/div[1]/div/table/tbody/tr[29]/td[1]/select").click()
-        time.sleep(5)
-        driver.find_element_by_xpath("//[@id='ngdialog2']/div[2]/div[1]/div/table/tbody/tr[30]/td[1]/select/option[@value='20']").click()
+        #select regular user for organization
+        driver.find_element_by_xpath("//tr[50]/td[1]/select[@ng-model='entity.status']/option[text()='Regular User']").click()
         time.sleep(2)
-        driver.find_element_by_xpath("//i[contains(@class,'fa fa-floppy-o firepath-matching-node')]").click()
-        # driver.find_element_by_xpath("//i[@class='fa fa-floppy-o']").click()
+        #save the changes
+        driver.find_element_by_xpath("//tr[50]/td[2]/a/i").click()
         time.sleep(2)
         driver.find_element_by_xpath("//button[text()='Update']").click()
         time.sleep(5)
