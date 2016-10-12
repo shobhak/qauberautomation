@@ -77,21 +77,19 @@ class AssignUserToOrgnization(unittest.TestCase):
         print("done")
         driver.find_element_by_xpath("//button[contains(@ng-click,'ctrl.nextStep()')]").click()
         time.sleep(2)
-        #Script to assign user to an organization
         driver.find_element_by_xpath("//span[contains(.,'Users')]").click()
         time.sleep(2)
-        #select emailid for admin user
-        driver.find_element_by_xpath( "//tr[5]/td[1]/em").click()
+        driver.find_element_by_xpath("//tr[5]/td[1]/em").click()
         time.sleep(2)
-        # delete admin user for organization
-        driver.find_element_by_xpath("//tr[50]/td[2]/a/i").click()
-        time.sleep(5)
-        #select regular user for organization
-        driver.find_element_by_xpath("//tr[50]/td[1]/select[@ng-model='entity.status']/option[text()='Regular User']").click()
-        time.sleep(2)
-        #save the changes
-        driver.find_element_by_xpath("//tr[50]/td[2]/a/i").click()
-        time.sleep(2)
+        Actual_OrgName = driver.find_element_by_xpath("//tr[89]/td[3]/div").text
+        self.assertEqual(cname,Actual_OrgName)
+        UserRight = driver.find_element_by_xpath("//tr[89]/td[1]/div").text
+
+        message = "Expected result to be {expected} and actual {actual} : are same".format(
+            expected=cname,
+            actual=Actual_OrgName
+        )
+        self.assertEqual("Admin", UserRight,message)
         driver.find_element_by_xpath("//button[text()='Update']").click()
         time.sleep(5)
         driver.find_element_by_xpath("//a[contains(.,'Logout')]").click()
