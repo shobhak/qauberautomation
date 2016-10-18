@@ -2,8 +2,23 @@ from selenium import webdriver
 from faker import Faker
 import time
 import unittest
+import logging
+from datetime import datetime
+import os
 
 class Addreport_Preview(unittest.TestCase):
+    mypath = r'C:\Users\UNI\PycharmProjects\Wave-Fits\TestSuite\Logs&Seccenshots\AddreportPreview'
+    if not os.path.exists(mypath):
+        os.makedirs(mypath)
+    newtime = datetime.now().strftime("%Y%m%d%H%M%S")
+    logging.basicConfig(
+        filename='C:\Users\UNI\PycharmProjects\Wave-Fits\TestSuite\Logs&Seccenshots\AddreportPreview\AddReportPreviewLogs' + newtime +'.txt',level=logging.DEBUG)
+    logging.debug('debug message')
+    logging.info('info message')
+    logging.warn('warn message')
+    logging.error('error message')
+    logging.critical('critical message')
+
     def setUp(self):
         self.driver = webdriver.Chrome()
         #self.driver = webdriver.Firefox()
@@ -63,8 +78,12 @@ class Addreport_Preview(unittest.TestCase):
         time.sleep(2)
         print("You are on preview page")
         time.sleep(2)
-        fname= driver.find_element_by_xpath("//strong[@class='ng-binding firepath-matching-node']")
-        print (fname)
+        #TakeScreeshot
+        newtime = datetime.now().strftime("%Y%m%d%H%M%S")
+        driver.save_screenshot('C:\Users\UNI\PycharmProjects\Wave-Fits\TestSuite\Logs&Seccenshots\AddreportPreview\AddReportPreview' + newtime + '.png')
+
+        #fname= driver.find_element_by_xpath("//strong[@class='ng-binding firepath-matching-node']")
+        #print (fname)
         driver.find_element_by_link_text("Logout").click()
 
     def tearDown(self):
