@@ -9,8 +9,12 @@ import com.github.javafaker.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.UUID;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+//import java.util.UUID;
 import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
+//import org.testng.Assert;
 //import org.openqa.selenium.OutputType;
 //import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.WebDriver;
@@ -20,13 +24,28 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 //import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.testng.annotations.AfterSuite;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.BeforeTest;
 
 
 
 //import newlogMsg2file.*;
 
-public class registration {
+public class registration  {
+	@AfterTest
 	public static void main (String []args) throws Exception{
+		
+		//CreateEmail newEmail = new CreateEmail();
+		//newEmail.randomEmail();
+		Date now = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("hh mm ss");
+		String time = dateFormat.format(now);
+		File dir = new File(time);
+		dir.mkdir();
+		new File("C:\\Users\\shobha\\Desktop\\New folder\\registration").mkdir();
+		
 		final Logger log = Logger.getLogger(registration.class);
 
 		System.setProperty("webdriver.chrome.driver", "C:\\Users\\shobha\\chromedriver.exe");
@@ -37,7 +56,7 @@ public class registration {
 		//webpage
 		//driver.get("http://testwave.qabidder.net/#/page/login");
 		driver.get("http://testwave.qabidder.net/#/page/register-sa");
-		PropertyConfigurator.configure("log4j2.properties");
+		PropertyConfigurator.configure("C://Users//shobha//workspace2//testwave//src//test//java//qauber//com//testwave//log4j6.properties");
 		log.debug("This is the additional info");
 		  
 		//wait
@@ -75,9 +94,10 @@ public class registration {
 		
 		Thread.sleep(1000);
 		//declaring a string calling method randomEmail . The method is below.
-		final String randomEmail = randomEmail();
+		final String email;
+		 randomEmail();
 		//finding the email element and sending randomEmail there
-		driver.findElement(By.name("account_email")).sendKeys(randomEmail);
+		driver.findElement(By.name("account_email")).sendKeys(randomEmail() );
 	    	
 		Thread.sleep(1000);
 		//finding the password element and sending  password
@@ -101,9 +121,7 @@ public class registration {
 		driver.findElement(By.name("phone")).sendKeys(phoneNum);
 		
 		Thread.sleep(1000);
-		
-
-		driver.findElement(By.name("email")).sendKeys(randomEmail);
+		driver.findElement(By.name("email")).sendKeys(randomEmail() );
 		Thread.sleep(2000);
 		//find the address field and enter faker generated address
 		String address = fake.secondaryAddress();
@@ -129,20 +147,25 @@ public class registration {
 		driver.findElement(By.xpath("//div[3]/button")).click();
 
 		//take a screenshot of the successful registration page 
-		File screenshot2 = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+		String regSuccess = driver.findElement(By.xpath("//div[1]/div")).getText();
+		//Assert.assertTrue(regSuccess.contains("Registration successful."));
+		/*File screenshot2 = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		try {
 			FileUtils.copyFile(screenshot2,new File("C:\\Users\\shobha\\Desktop\\New folder\\registration\\image.jpeg"));
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
+		
 		
 		//browser quit
         //driver.quit();
 	}// mainaccount_name
-		
-		 private static String randomEmail() {
-		        return "random-" + UUID.randomUUID().toString() + "@gmail.com";
-		    }
-
-}//registration
+    @BeforeTest
+    private static String randomEmail() {
+    
+    	Faker fake21 = new Faker();
+    	return fake21.firstName()+ "@mailinator.com";
+    		    }
+    	 
+    }//registration
