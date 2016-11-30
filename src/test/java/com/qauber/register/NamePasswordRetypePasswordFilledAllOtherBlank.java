@@ -82,6 +82,8 @@ public class NamePasswordRetypePasswordFilledAllOtherBlank {
             if (driver.findElements(By.xpath("//button[@class='btn btn-block btn-primary mt-lg']")).size() != 0) {
 
                 System.out.println("Test passed!");
+                client.addResult(runid, testid, 1, "Actual value = expected value", tester);
+
             }
             else {
 
