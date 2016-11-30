@@ -20,7 +20,7 @@ public class RegisterwithEmail {
     String ActualResult = "";
     APIClientExtension client;
     int runid = Config.getRunID(); //Test Run ID (TestRail - Test Runs & Results - Automation)
-    int caseid = 74298;
+    int caseid = 74297;
 
     @BeforeClass
     public void setUp() {
