@@ -58,6 +58,8 @@ public class NamePasswordRetypePasswordFilledAllOtherBlank {
 
         tester = "Vlad's computer";
 
+
+
         //set up faker for data input (email & password) randomization
         Faker faker = new Faker();
 
@@ -90,7 +92,6 @@ public class NamePasswordRetypePasswordFilledAllOtherBlank {
                 System.out.println("Button is not displayed!");
                 AssertionError e = new AssertionError();
                 throw e;
-
             }
 
         } catch (AssertionError e) { //on fail, run this
