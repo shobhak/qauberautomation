@@ -1,4 +1,4 @@
-package com.qauber.register;
+package com.qauber.login;
 
 
 import com.qauber.config.Config;
