@@ -1,6 +1,7 @@
 package com.qauber.register;
 
 
+import com.qauber.config.Config;
 import com.qauber.testrail.APIClientExtension;
 import org.testng.Assert;
 import org.openqa.selenium.By;
@@ -14,24 +15,19 @@ import org.testng.annotations.Test;
  */
 public class CopyrightIsPresentOnRegistrationPage {
     APIClientExtension client;
-    //String ActualResult = "";
-    int runid = 528;
+    int runid = Config.getRunID(); //Test Run ID (TestRail - Test Runs & Results - Automation)
     int caseid = 74298;
+
     @BeforeClass
     public void setUp() {
 
-
-        client = new APIClientExtension("https://bidqa.testrail.net/");
-        client.setUser("Testers@qauber.com");
-        client.setPassword("qauber2016!");
-
+        client = Config.testRailLogin();
 
     }
 
     @Test
     public void StartWebDriver() throws InterruptedException {
 
-        System.setProperty("webdriver.chrome.driver", "C:\\Users\\Mariia\\Downloads\\chromedriver_win32\\chromedriver.exe");
 
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
