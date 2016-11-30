@@ -25,9 +25,6 @@ public class RegisrationButtonIsFunctional {
     @Test
     public void StartWebDriver() throws InterruptedException {
 
-       // assertThat("aaa").
-
-        //String newtitle;
 
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
