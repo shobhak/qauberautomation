@@ -1,3 +1,4 @@
+import com.qauber.config.Config;
 import com.qauber.testrail.APIClientExtension;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -29,7 +30,7 @@ public class SampleTestRailAPIUsage {
         System.out.println(resultsObject);
 
         try {
-            resultsObject = testrailClient.addResult(Config.getRunID(), testid, 4, "Testing Turkey Day", "API is testing custom_testerresult");
+            resultsObject = testrailClient.addResult(runid, testid, 4, "Testing Turkey Day", "API is testing custom_testerresult");
         } catch (IllegalStateException e) {
             e.printStackTrace();
         }

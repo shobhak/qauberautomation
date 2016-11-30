@@ -1,3 +1,5 @@
+package com.qauber.config;
+
 import com.qauber.testrail.APIClientExtension;
 
 /**

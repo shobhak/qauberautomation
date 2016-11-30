@@ -1,4 +1,5 @@
 import com.github.javafaker.Faker;
+import com.qauber.config.Config;
 import com.qauber.testrail.APIClientExtension;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.By;
