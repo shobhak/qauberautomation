@@ -24,9 +24,6 @@ public class LogoInRegisterPageIsFunctional {
         @Test
         public void StartWebDriver() throws InterruptedException {
 
-
-            System.setProperty("webdriver.chrome.driver", "C:\\Users\\Mariia\\Downloads\\chromedriver_win32\\chromedriver.exe");
-
             WebDriver driver = new ChromeDriver();
             driver.manage().window().maximize();
             //Open Home page
