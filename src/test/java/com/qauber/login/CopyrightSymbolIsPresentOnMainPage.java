@@ -28,7 +28,6 @@ public class CopyrightSymbolIsPresentOnMainPage {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
 
-
         //Open Home page
 
         driver.get("http://testwave.qabidder.net/#/page/login");
