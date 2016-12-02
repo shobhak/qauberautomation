@@ -94,6 +94,7 @@ public class EmailAndPasswordFilledAllOtherBlank {
             e.printStackTrace();
 
         }
+        client.addResult(runid, testid, 1, "Actual value = expected value", tester);
 
 
     }
