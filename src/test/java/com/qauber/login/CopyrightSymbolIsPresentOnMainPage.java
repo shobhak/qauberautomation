@@ -1,5 +1,5 @@
 package com.qauber.login;
-
+// Test case # C74295 "Verify that Copyright symbol is present on Login page"
 
 import com.qauber.config.Config;
 import com.qauber.testrail.APIClientExtension;
@@ -11,20 +11,22 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class CopyrightSymbolIsPresentOnMainPage {
+//call to Config class
     APIClientExtension client;
     int runid = Config.getRunID(); //Test Run ID (TestRail - Test Runs & Results - Automation)
+    //Put the Case Id number
     int caseid = 74295;
 
     @BeforeClass
     public void setUp() {
-
+      //API connection with Testrail
         client = Config.testRailLogin();
 
     }
 
     @Test
     public void StartWebDriver() throws InterruptedException {
-
+      // Connection with ChromeDriver
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
 
