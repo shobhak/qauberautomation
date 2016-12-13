@@ -27,7 +27,7 @@ public class EmailAndPasswordFilledAllOtherBlank {
     @BeforeClass
     public void setUp() throws InterruptedException {
         //set up Chrome environment
-        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
+//        System.setProperty("webdriver.chrome.driver", "C:\\chromedriver.exe");
 
         //go to registration page
         driver.get("http://testwave.qabidder.net/#/page/register-sa");
