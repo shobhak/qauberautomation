@@ -10,8 +10,14 @@ public class Reports {
 
     WebDriver driver;
 
-    By containsText = By.xpath("/html/body/div/section/div/div/div/div/div[@class='input-group'][7]/input");
-    By publishedOnCheckBox = By.xpath("/html/body/div/section/div/div/div/div/div[@class='input-group'][5]/span/label/span");
+    By lastName = By.xpath("//input[@ng-model='slnSearchKey']");
+    By firstName = By.xpath("//input[@ng-model='sfnSearchKey']");
+    By CaseID = By.xpath("//input[@ng-model='ciSearchKey']");
+    By suspectType = By.xpath("//select[@ng-model='stSearchKey']");
+    By publishedOnCheckBox = By.xpath("//input[@ng-model='enablePublishedOn']");
+    By containsText = By.xpath("//input[@ng-model='ctSearchKey']");
+    //By pagination = By.linkText();
+
 
     //TODO: make this refer to multiple rows...
     By searchResultsRow; //set in selectReport(int row)
