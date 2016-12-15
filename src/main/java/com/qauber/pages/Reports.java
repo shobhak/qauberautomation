@@ -11,9 +11,12 @@ public class Reports {
     WebDriver driver;
 
     By containsText = By.xpath("/html/body/div/section/div/div/div/div/div[@class='input-group'][7]/input");
+
     By publishedOnCheckBox = By.xpath("/html/body/div/section/div/div/div/div/div[@class='input-group'][5]/span/label/span");
 
     //TODO: make this refer to multiple rows...
+    By pictureRow1 = By.xpath("//*/li[@class='list-group-item ng-scope']/a/span[@class='ng-binding']");
+
     By searchResultsRow; //set in selectReport(int row)
 
     public Reports(WebDriver driver) {
@@ -34,5 +37,9 @@ public class Reports {
 
     public void clickPublishedOnCheckbox() {
         driver.findElement(publishedOnCheckBox).click();
+    }
+
+    public void clickPicture1() { //TODO: general pic get
+        driver.findElement(pictureRow1).click();
     }
 }

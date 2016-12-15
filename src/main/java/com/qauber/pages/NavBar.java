@@ -2,6 +2,7 @@ package com.qauber.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 /**
  * Created by erikfriedlander on 12/14/16.
@@ -9,10 +10,7 @@ import org.openqa.selenium.WebDriver;
 public class NavBar {
 
     WebDriver driver;
-    By entities = By.xpath("/html/body/div/aside/div/nav[@class='sidebar']/ul/li[2]/a/span");
-    By users = By.xpath("/html/body/div/aside/div/nav[@class='sidebar']/ul/li[3]/a/span");
-    By addReport = By.xpath("/html/body/div/aside/div/nav[@class='sidebar']/ul/li[4]/a/span");
-    By reports = By.xpath("/html/body/div/aside/div/nav[@class='sidebar']/ul/li[5]/a/span");
+    WebElement element;
 
     //Constructor
     public NavBar(WebDriver driver){
@@ -20,6 +18,38 @@ public class NavBar {
         this.driver = driver;
 
     }
+
+    public WebElement entitiesButton() {
+        element = driver.findElement(By.xpath("/html/body/div/aside/div/nav[@class='sidebar']/ul/li[2]/a/span"));
+        return element;
+    }
+
+    public WebElement usersButton() {
+        element = driver.findElement(By.xpath("/html/body/div/aside/div/nav[@class='sidebar']/ul/li[3]/a/span"));
+        return element;
+    }
+
+    public WebElement addReportButton() {
+        element = driver.findElement(By.xpath("/html/body/div/aside/div/nav[@class='sidebar']/ul/li[4]/a/span"));
+        return element;
+    }
+
+    public WebElement reportsButton() {
+        element = driver.findElement(By.xpath("/html/body/div/aside/div/nav[@class='sidebar']/ul/li[5]/a/span"));
+        return element;
+    }
+
+
+
+    //Old code below for compatibility purposes
+    //TODO: refactor and delete code at end
+
+    By entities = By.xpath("/html/body/div/aside/div/nav[@class='sidebar']/ul/li[2]/a/span");
+    By users = By.xpath("/html/body/div/aside/div/nav[@class='sidebar']/ul/li[3]/a/span");
+    By addReport = By.xpath("/html/body/div/aside/div/nav[@class='sidebar']/ul/li[4]/a/span");
+    By reports = By.xpath("/html/body/div/aside/div/nav[@class='sidebar']/ul/li[5]/a/span");
+
+
 
 
     public void clickEntities(){
