@@ -76,13 +76,13 @@ public class POMTestCase {
         navBar = new NavBar(driver);
 
         //Cycle through buttons with pause
-        navBar.clickEntities();
+        navBar.entitiesButton().click();
         Thread.sleep(2500);
-        navBar.clickUsers();
+        navBar.usersButton().click();
         Thread.sleep(2500);
-        navBar.clickAddReport();
+        navBar.addReportButton().click();
         Thread.sleep(2500);
-        navBar.clickReports();
+        navBar.reportsButton().click();
         Thread.sleep(2500);
 
         //Open 'Reports' in Selenium
@@ -98,13 +98,17 @@ public class POMTestCase {
 
         //Select first report
         reports.selectReport(1);
+        Thread.sleep(10000);
+
+        //Open image
+        reports.clickPicture1();
 
     }
 
     @AfterClass
     public void breakDown () throws InterruptedException {
 
-        Thread.sleep(60000);
+        Thread.sleep(10000);
 
         driver.manage().deleteAllCookies();
         driver.quit();
