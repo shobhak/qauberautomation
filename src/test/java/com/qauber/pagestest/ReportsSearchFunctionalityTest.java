@@ -26,6 +26,7 @@ public class ReportsSearchFunctionalityTest {
 
     @BeforeTest
     public void SetUp() throws InterruptedException {
+
         driver = new ChromeDriver();
 
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -39,7 +40,6 @@ public class ReportsSearchFunctionalityTest {
         Thread.sleep(1000);
         login.loginToWave("raizzz.test@gmail.com", "013666");
 
-        login.clickLogin();
     }
 
     @Test
