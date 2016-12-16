@@ -71,28 +71,36 @@ public class ReportsSearchFunctionalityTest {
         reports.suspectType("Victim");
         reports.suspectType("");
 
-        // Example
+        // Choose Published Date From
         Thread.sleep(2000);
         reports.publishedDateFromIcon("January", "01", "2013");
+        // Choose Published Date To (Today)
         reports.publishedDateToIcon("Today");
 
+        // Choose Created Date From
         Thread.sleep(3000);
         reports.createdDateFromIcon("January", "01", "2013");
+        // Clear field with Created Date From
         Thread.sleep(1000);
         reports.createdDateFromIcon("Clear");
 
+        // Choose Created Date To
         Thread.sleep(3000);
         reports.createdDateToIcon("January", "01", "2013");
+        // Clear field with Created Date To
         Thread.sleep(1000);
         reports.createdDateToIcon("Clear");
 
+        // Click checkbox Published On
         Thread.sleep(3000);
         reports.publishedOnCheckBox().click();
 
+        // Search by Contain Text
         Thread.sleep(3000);
         reports.containsTextField().clear();
         reports.containsTextField().sendKeys("Vas");
 
+        // Select 1 row in search result
         Thread.sleep(5000);
         reports.selectReport(1).click();
 
