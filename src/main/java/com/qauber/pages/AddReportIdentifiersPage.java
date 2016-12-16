@@ -88,6 +88,20 @@ public class AddReportIdentifiersPage {
         return element;
     }
 
+    public WebElement previousButton(){
+        element = driver.findElement(By.xpath("//form/div/div[4]/ul/li[1]/a/span"));
+        return element;
+    }
+
+    public WebElement nextButton(){
+        element = driver.findElement(By.xpath("//form/div/div[4]/ul/li[2]/a"));
+        return element;
+    }
+
+
+
+
+
 
 
 }
