@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Max on 12/16/2016.
+ * Test verify all functionalities of Reports page.
  */
 public class ReportsSearchFunctionalityTest {
 
@@ -50,22 +51,27 @@ public class ReportsSearchFunctionalityTest {
 
         reports = new Reports(driver);
 
+        // Search by Last Name
         Thread.sleep(2000);
         reports.lastNameField().clear();
         reports.lastNameField().sendKeys("Pupkin");
 
+        // Search by First Name
         Thread.sleep(2000);
         reports.firstNameField().clear();
         reports.firstNameField().sendKeys("Vasia");
 
+        // Search by Case ID
         Thread.sleep(2000);
         reports.caseIdField().clear();
         reports.caseIdField().sendKeys("707");
 
+        // Search by Suspect Type
         Thread.sleep(2000);
         reports.suspectType("Victim");
         reports.suspectType("");
 
+        // Example
         Thread.sleep(2000);
         reports.publishedDateFromIcon("January", "01", "2013");
         reports.publishedDateToIcon("Today");
