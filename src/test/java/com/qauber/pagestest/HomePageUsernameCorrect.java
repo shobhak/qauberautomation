@@ -1,8 +1,8 @@
 package com.qauber.pagestest;
 
 import com.qauber.config.Config;
+import com.qauber.pages.Header;
 import com.qauber.pages.LoginPage;
-import com.qauber.pages.HomePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -22,10 +22,33 @@ public class HomePageUsernameCorrect {
 
     WebDriver driver;
     LoginPage login;
-    HomePage homePage;
+    Header header;
 
 
     String actualUserName = "Erik F";
+
+
+    @Test
+    public void testHomePageUsernameCorrect () throws InterruptedException {
+
+        //Create POM objects
+        login = new LoginPage(driver);
+        header = new Header(driver);
+
+        //go to website
+        driver.get(Config.getBaseURL());
+
+        //Verify Login Footer Text (so we're on right page)
+        Assert.assertEquals(login.footerText().getText(), "© 2016 - FITS\n" + "FITS Web Application");
+        Thread.sleep(3000);
+
+        //Log in to application
+        login.loginToWave("erikfqauber@gmail.com", "testwave");
+        Thread.sleep(3000);
+
+        //Verify user name on home page
+        Assert.assertEquals(header.userName().getText(), actualUserName);
+    }
 
     @BeforeClass
     public void setUp() {
@@ -34,36 +57,8 @@ public class HomePageUsernameCorrect {
         //implicit wait
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        //pull URL from config
-        driver.get(Config.getBaseURL());
-
         //maximize window for our viewing pleasure
         driver.manage().window().maximize();
-    }
-
-
-    @Test
-    public void testHomePageUsernameCorrect () throws InterruptedException {
-
-        //Create Login Page Object
-        login = new LoginPage(driver);
-
-        //Verify Login Footer Text (so we're on right page)
-        String loginPageFooterText = login.getLoginFooterText();
-        Assert.assertEquals(loginPageFooterText, "© 2016 - FITS\n" + "FITS Web Application");
-
-        Thread.sleep(3000);
-
-        //Log in to application
-        login.loginToWave("erikfqauber@gmail.com", "testwave");
-
-        Thread.sleep(3000);
-
-        //Open 'home page' in Selenium...
-        homePage = new HomePage(driver);
-
-        //Verify user name on home page
-        Assert.assertEquals(homePage.getHomePageUserName(), actualUserName);
     }
 
     @AfterClass

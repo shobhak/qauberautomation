@@ -23,7 +23,7 @@ public class AddReportsNavigationSampleTest {
     WebDriver driver;
 
     LoginPage login;
-    HomePage homePage;
+    Header header;
     NavBar navBar;
     AddReportNavigation addReportNavigation;
     AddReportsOrganization addReportsOrganization;
@@ -33,7 +33,7 @@ public class AddReportsNavigationSampleTest {
 
         //Create all Page Objects
         login = new LoginPage(driver);
-        homePage = new HomePage(driver);
+        header = new Header(driver);
         navBar = new NavBar(driver);
         addReportsOrganization = new AddReportsOrganization(driver);
         addReportNavigation = new AddReportNavigation(driver);
