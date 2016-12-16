@@ -90,7 +90,7 @@ public class POMTestCase {
         Thread.sleep(2000);
 
         //Select first report
-        reports.selectReport(1);
+        reports.selectReport(1).click();
         Thread.sleep(10000);
 
         //Open image
