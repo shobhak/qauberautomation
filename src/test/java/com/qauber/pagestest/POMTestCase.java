@@ -1,7 +1,7 @@
 package com.qauber.pagestest;
 
 import com.qauber.config.Config;
-import com.qauber.pages.HomePage;
+import com.qauber.pages.Header;
 import com.qauber.pages.LoginPage;
 import com.qauber.pages.NavBar;
 import com.qauber.pages.Reports;
@@ -27,7 +27,7 @@ public class POMTestCase {
     WebDriver driver;
 
     LoginPage login;
-    HomePage homePage;
+    Header header;
     NavBar navBar;
     Reports reports;
 
@@ -42,9 +42,6 @@ public class POMTestCase {
         //implicit wait
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        //pull URL from config
-        driver.get(Config.getBaseURL());
-
         //maximize window for our viewing pleasure
         driver.manage().window().maximize();
     }
@@ -52,28 +49,24 @@ public class POMTestCase {
     @Test
     public void testHomePageUsernameCorrect () throws InterruptedException {
 
-        //Create Login Page Object
+        //Create POM objects
         login = new LoginPage(driver);
+        header = new Header(driver);
+        navBar = new NavBar(driver);
 
-        //Verify Login Footer Text (so we're on right page)
-        String loginPageFooterText = login.getLoginFooterText();
-        Assert.assertEquals(loginPageFooterText, "© 2016 - FITS\n" + "FITS Web Application");
-
+        //Go to website
+        driver.get(Config.getBaseURL());
         Thread.sleep(3000);
 
         //Log in to application
         login.loginToWave("erikfqauber@gmail.com", "testwave");
-
         Thread.sleep(3000);
 
         //Open 'home page' in Selenium...
-        homePage = new HomePage(driver);
+        header = new Header(driver);
 
         //Verify user name on home page
-        Assert.assertEquals(homePage.getHomePageUserName(), actualUserName);
-
-        //Open 'Nav Bar' in Selenium
-        navBar = new NavBar(driver);
+        Assert.assertEquals(header.userName().getText(), actualUserName);
 
         //Cycle through buttons with pause
         navBar.entitiesButton().click();
@@ -97,7 +90,7 @@ public class POMTestCase {
         Thread.sleep(2000);
 
         //Select first report
-        reports.selectReport(1);
+        reports.selectReport(1).click();
         Thread.sleep(10000);
 
         //Open image
