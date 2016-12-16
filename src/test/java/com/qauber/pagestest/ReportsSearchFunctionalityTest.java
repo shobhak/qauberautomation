@@ -14,6 +14,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Max on 12/16/2016.
+ * Test verify all functionalities of Reports page.
  */
 public class ReportsSearchFunctionalityTest {
 
@@ -50,43 +51,56 @@ public class ReportsSearchFunctionalityTest {
 
         reports = new Reports(driver);
 
+        // Search by Last Name
         Thread.sleep(2000);
         reports.lastNameField().clear();
         reports.lastNameField().sendKeys("Pupkin");
 
+        // Search by First Name
         Thread.sleep(2000);
         reports.firstNameField().clear();
         reports.firstNameField().sendKeys("Vasia");
 
+        // Search by Case ID
         Thread.sleep(2000);
         reports.caseIdField().clear();
         reports.caseIdField().sendKeys("707");
 
+        // Search by Suspect Type
         Thread.sleep(2000);
         reports.suspectType("Victim");
         reports.suspectType("");
 
+        // Choose Published Date From
         Thread.sleep(2000);
         reports.publishedDateFromIcon("January", "01", "2013");
+        // Choose Published Date To (Today)
         reports.publishedDateToIcon("Today");
 
+        // Choose Created Date From
         Thread.sleep(3000);
         reports.createdDateFromIcon("January", "01", "2013");
+        // Clear field with Created Date From
         Thread.sleep(1000);
         reports.createdDateFromIcon("Clear");
 
+        // Choose Created Date To
         Thread.sleep(3000);
         reports.createdDateToIcon("January", "01", "2013");
+        // Clear field with Created Date To
         Thread.sleep(1000);
         reports.createdDateToIcon("Clear");
 
+        // Click checkbox Published On
         Thread.sleep(3000);
         reports.publishedOnCheckBox().click();
 
+        // Search by Contain Text
         Thread.sleep(3000);
         reports.containsTextField().clear();
         reports.containsTextField().sendKeys("Vas");
 
+        // Select 1 row in search result
         Thread.sleep(5000);
         reports.selectReport(1).click();
 
