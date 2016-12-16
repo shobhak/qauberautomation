@@ -80,11 +80,7 @@ public class Reports {
     public void publishedDateFromIcon(String startMonth, String startDay, String startYear) // Example of Date format ("January", "01", "2000")
     {
         driver.findElement(By.xpath("//button[@ng-click='openedSearchFrom=true']")).click();
-        driver.findElement(By.xpath("//th[@colspan='6']/button")).click();
-        driver.findElement(By.xpath("//th[@colspan='1']/button")).click();
-        driver.findElement(By.xpath("//span[text()='"+startYear.substring(2,4)+"']")).click();
-        driver.findElement(By.xpath("//span[text()='"+startMonth+"']")).click();
-        driver.findElement(By.xpath("//span[text()='"+startDay+"']")).click();
+        calendar(startMonth, startDay, startYear);
     }
 
     public void publishedDateFromIcon(String keyWord) // Set name of button: "Close", "Clear", "Today"
@@ -97,11 +93,7 @@ public class Reports {
     public void publishedDateToIcon(String endMonth, String endDay, String endYear) // Example of Date format ("January", "01", "2000")
     {
         driver.findElement(By.xpath("//button[@ng-click='openedSearchTo=true']")).click();
-        driver.findElement(By.xpath("//th[@colspan='6']/button")).click();
-        driver.findElement(By.xpath("//th[@colspan='1']/button")).click();
-        driver.findElement(By.xpath("//span[text()='"+endYear.substring(2,4)+"']")).click();
-        driver.findElement(By.xpath("//span[text()='"+endMonth+"']")).click();
-        driver.findElement(By.xpath("//span[text()='"+endDay+"']")).click();
+        calendar(endMonth, endDay, endYear);
     }
 
     public void publishedDateToIcon(String keyWord) // Set name of button: "Close", "Clear", "Today"
@@ -113,11 +105,7 @@ public class Reports {
     public void createdDateFromIcon(String startMonth, String startDay, String startYear) // Example of Date format ("January", "01", "2000")
     {
         driver.findElement(By.xpath("//button[@ng-click='openedCreatedFrom=true']")).click();
-        driver.findElement(By.xpath("//th[@colspan='6']/button")).click();
-        driver.findElement(By.xpath("//th[@colspan='1']/button")).click();
-        driver.findElement(By.xpath("//span[text()='"+startYear.substring(2,4)+"']")).click();
-        driver.findElement(By.xpath("//span[text()='"+startMonth+"']")).click();
-        driver.findElement(By.xpath("//span[text()='"+startDay+"']")).click();
+        calendar(startMonth, startDay, startYear);
     }
 
     public void createdDateFromIcon(String keyWord) // Set name of button: "Close", "Clear", "Today"
@@ -130,11 +118,7 @@ public class Reports {
     public void createdDateToIcon(String endMonth, String endDay, String endYear) // Example of Date format ("January", "01", "2000")
     {
         driver.findElement(By.xpath("//button[@ng-click='openedCreatedTo=true']")).click();
-        driver.findElement(By.xpath("//th[@colspan='6']/button")).click();
-        driver.findElement(By.xpath("//th[@colspan='1']/button")).click();
-        driver.findElement(By.xpath("//span[text()='"+endYear.substring(2,4)+"']")).click();
-        driver.findElement(By.xpath("//span[text()='"+endMonth+"']")).click();
-        driver.findElement(By.xpath("//span[text()='"+endDay+"']")).click();
+        calendar(endMonth, endDay, endYear);
     }
 
     public void createdDateToIcon(String keyWord) // Set name of button: "Close", "Clear", "Today"
@@ -143,8 +127,14 @@ public class Reports {
         driver.findElement(By.xpath("//button[text()='"+keyWord+"']")).click();
     }
 
-
-
+    public void calendar(String Month, String Day, String Year)
+    {
+        driver.findElement(By.xpath("//th[@colspan='6']/button")).click();
+        driver.findElement(By.xpath("//th[@colspan='1']/button")).click();
+        driver.findElement(By.xpath("//span[text()='" + Year.substring(2, 4) + "']")).click();
+        driver.findElement(By.xpath("//span[text()='" + Month + "']")).click();
+        driver.findElement(By.xpath("//span[text()='" + Day + "']")).click();
+    }
 
 
 
