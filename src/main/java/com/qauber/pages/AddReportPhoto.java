@@ -20,16 +20,16 @@ public class AddReportPhoto {
     }
 
     public WebElement previousButton(){
-        element = driver.findElement(By.cssSelector(".previous>a"));
+        element = driver.findElement(By.xpath("//form/div/div[8]/ul/li[1]/a"));
         return element;
     }
 
     public WebElement nextButton(){
-        element = driver.findElement(By.cssSelector(".next>a"));
+        element = driver.findElement(By.xpath("//form/div/div[8]/ul/li[2]/a"));
         return element;
     }
 
-    public WebElement addPhotoButton() // use .sendKeys() to upload image.
+    public WebElement addPhotoButton() // use .sendKeys() to upload image. TODO it doesn't work.
     {
         element = driver.findElement(By.cssSelector(".upload.btn.btn-primary.btn-labeled"));
         return element;
