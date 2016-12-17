@@ -23,7 +23,7 @@ public class AddReportsNavigationSampleTest {
     WebDriver driver;
 
     LoginPage login;
-    HomePage homePage;
+    Header header;
     NavBar navBar;
     AddReportNavigation addReportNavigation;
     AddReportsOrganization addReportsOrganization;
@@ -33,13 +33,17 @@ public class AddReportsNavigationSampleTest {
 
         //Create all Page Objects
         login = new LoginPage(driver);
-        homePage = new HomePage(driver);
+        header = new Header(driver);
         navBar = new NavBar(driver);
         addReportsOrganization = new AddReportsOrganization(driver);
         addReportNavigation = new AddReportNavigation(driver);
 
-        //Log in to application
+
+        //Go to website (pull URL from config)
+        driver.get(Config.getBaseURL());
         Thread.sleep(5000);
+
+        //Log in to application
         login.loginToWave("erikfqauber@gmail.com", "testwave");
 
         Thread.sleep(3000);
@@ -55,8 +59,6 @@ public class AddReportsNavigationSampleTest {
 
         //Cycle through tabs with 1 second wait
         addReportNavigation.subjectInformationTab().click();
-        Thread.sleep(1000);
-        addReportNavigation.environmentTab().click();
         Thread.sleep(1000);
         addReportNavigation.identifiersTab().click();
         Thread.sleep(1000);
@@ -80,9 +82,6 @@ public class AddReportsNavigationSampleTest {
         //implicit wait
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
-        //pull URL from config
-        driver.get(Config.getBaseURL());
-
         //maximize window for our viewing pleasure
         driver.manage().window().maximize();
     }
@@ -90,7 +89,7 @@ public class AddReportsNavigationSampleTest {
     @AfterClass
     public void breakDown () throws InterruptedException {
 
-        Thread.sleep(60000);
+        Thread.sleep(60000); //This is for demonstration purposes only, so the page does not close immediately
 
         driver.manage().deleteAllCookies();
         driver.quit();
