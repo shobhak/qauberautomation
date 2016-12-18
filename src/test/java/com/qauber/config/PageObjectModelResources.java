@@ -12,9 +12,10 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by erikfriedlander on 12/17/16.
  */
-public class BaseTestCase {
+public class PageObjectModelResources {
 
     private WebDriver driver;
+    private User testCaseUser;
 
 //First page
     private LoginPage login;
@@ -41,7 +42,10 @@ public class BaseTestCase {
     private AddReportVehicle addReportVehicle;
 
     public void setUpWithConfig(ConfigOOP config) {
-
+        //get user information
+        testCaseUser = new User(config);
+        System.out.println(testCaseUser.getUsername());
+        System.out.println(testCaseUser.getPassword());
 
         // Choose web browser/driver from Config
         driver = chooseDriver(config);
@@ -59,6 +63,7 @@ public class BaseTestCase {
         header = new Header(driver);
         navBar = new NavBar(driver);
         profilePanel = new ProfilePanel(driver);
+        editProfile = new EditProfile(driver);
 
         entities = new Entities(driver);
         reports = new Reports(driver);
@@ -93,6 +98,8 @@ public class BaseTestCase {
             return new ChromeDriver(); //don't touch my enum
         }
     }
+
+    //TODO: implement chooseUser (this will affect config.user)
 
     protected WebDriver getDriver() { //visible from subclasses, not public OR private
         return driver;
@@ -146,7 +153,7 @@ public class BaseTestCase {
         return addReportPhoto;
     }
 
-    public AddReportsOrganization getAddReportOrganization() {
+    protected AddReportsOrganization getAddReportOrganization() {
         return addReportOrganization;
     }
 
@@ -156,5 +163,9 @@ public class BaseTestCase {
 
     protected AddReportVehicle getAddReportVehicle() {
         return addReportVehicle;
+    }
+
+    protected User getTestCaseUser() {
+        return testCaseUser;
     }
 }

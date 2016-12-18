@@ -10,6 +10,7 @@ public class ConfigOOP {
     //Configurations, feel free to change these
     private int RUNID = 528;
     private BrowserType browserType = BrowserType.CHROME;
+    private UserType userType = UserType.SAU;
     private String BASEURL = "http://testwave.qabidder.net";
     private String LOGPATH = "/log/test.txt";
 
@@ -32,6 +33,16 @@ public class ConfigOOP {
     public void setBrowserType(BrowserType browserType) {
         this.browserType = browserType;
     }
+
+    //list of valid user types
+    public enum UserType {
+        SAU,
+        AU,
+        RU
+    }
+
+
+
 
     public int getRunID() {
         return RUNID;
