@@ -2,8 +2,6 @@ package com.qauber.pagestest;
 
 import com.qauber.config.Config;
 import com.qauber.pages.*;
-import javafx.scene.control.CheckBox;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -16,7 +14,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * Created by lenochka on 15.12.2016.
  */
-public class ElenasTestCase {
+public class ReportIdentificationInformationTestCase {
 
     WebDriver driver;
 
@@ -79,7 +77,7 @@ public class ElenasTestCase {
         Thread.sleep(2000);
         addReportIdentificationInformation.cityField().sendKeys("Moscow");
         Thread.sleep(2000);
-        addReportIdentificationInformation.countryField().sendKeys("Russia");
+//        addReportIdentificationInformation.countryField().sendKeys("Russia");
         Thread.sleep(2000);
         //addReportIdentificationInformation.stateField().sendKeys("undefined");
         Thread.sleep(2000);
@@ -103,7 +101,7 @@ public class ElenasTestCase {
         Thread.sleep(2000);*/
 
        //Next Button
-       addReportIdentificationInformation.nextButton().click();
+//       addReportIdentificationInformation.nextButton().click();
         Thread.sleep(2000);
 
         //Navigate
@@ -111,12 +109,12 @@ public class ElenasTestCase {
         Thread.sleep(2000);
 
         //Previous Button
-        addReportIdentificationInformation.previousButton().click();
+//        addReportIdentificationInformation.previousButton().click();
         Thread.sleep(2000);
 
         // Navigate
         addReportNavigation.identificationInformationTab().click();
-        Thread.sleep(2000);*/
+        Thread.sleep(2000);
 
 
     }
