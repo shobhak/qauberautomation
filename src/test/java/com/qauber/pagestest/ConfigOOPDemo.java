@@ -25,7 +25,7 @@ public class ConfigOOPDemo extends PageObjectModelResources {
         getNavBar().addReportButton().click();
 
         getAddReportOrganization().clickOrganization1();
-        getAddReportOrganization().clickNextButton();
+        getAddReportOrganization().nextButton().click();
 
         Thread.sleep(1000);
 
