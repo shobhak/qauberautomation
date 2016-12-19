@@ -1,7 +1,7 @@
 package com.qauber.pagestest;
 
-import com.qauber.config.BaseTestCase;
-import com.qauber.config.ConfigOOP;
+import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.ConfigOOP;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 /**
  * Created by erikfriedlander on 12/16/16.
  */
-public class ConfigOOPDemo extends BaseTestCase {
+public class ConfigOOPDemo extends PageObjectModelResources {
 
     ConfigOOP config;
 
@@ -20,7 +20,7 @@ public class ConfigOOPDemo extends BaseTestCase {
         getDriver().get(config.getBaseURL());
         Thread.sleep(3000);
 
-        getLogin().loginToWave("erikfqauber@gmail.com", "testwave");
+        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
 
         getNavBar().addReportButton().click();
 
@@ -39,8 +39,14 @@ public class ConfigOOPDemo extends BaseTestCase {
     @BeforeClass
     public void setUp() {
         config = new ConfigOOP();
-        config.setBrowserType(ConfigOOP.BrowserType.FIREFOX);
+        config.setBrowserType(ConfigOOP.BrowserType.CHROME);
         setUpWithConfig(config);
+
+//        getTestCaseUser().setUsername("firstName@mailinator.com");
+//        getTestCaseUser().setPassword("12345678");
+
+        System.out.println(getTestCaseUser().getUsername());
+        System.out.println(getTestCaseUser().getPassword());
     }
 
     @AfterClass
