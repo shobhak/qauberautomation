@@ -29,8 +29,9 @@ public class SimpleSampleTestCase extends PageObjectModelResources {
         Thread.sleep(10000);
 
         getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
-        getNavBar().clickAddReport();
+        Thread.sleep(5000);
 
+        getNavBar().addReportButton().click();
         Thread.sleep(15000);
 
     }
