@@ -1,4 +1,4 @@
-package com.qauber.config;
+package com.qauber.pagesresource;
 
 /**
  * Created by erikfriedlander on 12/17/16.

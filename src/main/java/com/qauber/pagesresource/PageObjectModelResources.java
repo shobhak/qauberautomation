@@ -1,4 +1,4 @@
-package com.qauber.config;
+package com.qauber.pagesresource;
 
 import com.qauber.pages.*;
 import org.openqa.selenium.WebDriver;
@@ -16,9 +16,12 @@ public class PageObjectModelResources {
 
     private WebDriver driver;
     private User testCaseUser;
+    private UserFactory userFactory;
 
-//First page
+//Pages before login
     private LoginPage login;
+    private RegistrationPage1 registrationPage1;
+    private RegistrationPage2 registrationPage2;
 
 //Pages/elements accessible from all pages
     private Header header;
@@ -41,14 +44,29 @@ public class PageObjectModelResources {
     private AddReportSubjectInformationPage addReportSubjectInformationPage;
     private AddReportVehicle addReportVehicle;
 
+//
+
+    public void setUpWithUser(User.UserType userType, WebDriver webDriver) {
+        //get user information
+        userFactory = new UserFactory();
+        testCaseUser = userFactory.getUser(userType);
+        System.out.println(testCaseUser.getUsername());
+        System.out.println(testCaseUser.getPassword());
+
+        setUpScript(webDriver);
+    }
+
     public void setUpWithConfig(ConfigOOP config) {
         //get user information
         testCaseUser = new User(config);
         System.out.println(testCaseUser.getUsername());
         System.out.println(testCaseUser.getPassword());
+        setUpScript(chooseDriver(config)); //call setUpScript with WebDriver from config
 
+    }
+
+    public void setUpScript(WebDriver driver) {
         // Choose web browser/driver from Config
-        driver = chooseDriver(config);
 
         //implicit wait
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -60,6 +78,8 @@ public class PageObjectModelResources {
 
         //Set page references
         login = new LoginPage(driver);
+        registrationPage1 = new RegistrationPage1(driver);
+        registrationPage2 = new RegistrationPage2(driver);
         header = new Header(driver);
         navBar = new NavBar(driver);
         profilePanel = new ProfilePanel(driver);
@@ -76,10 +96,14 @@ public class PageObjectModelResources {
         addReportOrganization = new AddReportsOrganization(driver);
         addReportSubjectInformationPage = new AddReportSubjectInformationPage(driver);
         addReportVehicle = new AddReportVehicle(driver);
-
     }
 
     public void breakDownHelper() {
+        driver.manage().deleteAllCookies();
+        driver.quit();
+    }
+
+    public void breakDownHelper(WebDriver driver) {
         driver.manage().deleteAllCookies();
         driver.quit();
     }
@@ -99,7 +123,7 @@ public class PageObjectModelResources {
         }
     }
 
-    //TODO: implement chooseUser (this will affect config.user)
+    //get Page Object Model Resources
 
     protected WebDriver getDriver() { //visible from subclasses, not public OR private
         return driver;
@@ -109,9 +133,14 @@ public class PageObjectModelResources {
         return login;
     }
 
+
+
     protected Header getHeader() {
         return header;
     }
+
+    protected RegistrationPage1 getRegistrationPage1() { return registrationPage1; }
+    protected RegistrationPage2 getRegistrationPage2() { return registrationPage2; }
 
     protected NavBar getNavBar() {
         return navBar;
@@ -165,6 +194,10 @@ public class PageObjectModelResources {
         return addReportVehicle;
     }
 
+
+    //
+
+    //TODO: implement chooseUser (this will affect config.user) - may have been done already with User and UserFactory
     protected User getTestCaseUser() {
         return testCaseUser;
     }
