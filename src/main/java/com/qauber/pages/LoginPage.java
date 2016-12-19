@@ -38,7 +38,7 @@ public class LoginPage {
     }
 
     public WebElement registerButton() {
-        return driver.findElement(By.cssSelector("a.btn.btn-block.btn-default"));
+        return driver.findElement(By.xpath("//div[2]/a"));
     }
 
     public void loginToWave(String strUserName,String strPassword){
@@ -46,7 +46,14 @@ public class LoginPage {
         userNameField().sendKeys(strUserName);
         passwordField().sendKeys(strPassword);
         loginButton().click();
+        //TODO: add exception code... maybe check for successful/unsuccessful login and throw LoginFailure / UserNotFound / etc?
 
+    }
+
+    //By request, may delete.
+    public boolean verifyLoginPage() {
+        String footerContent = "© 2016 - FITS\n" + "FITS Web Application";
+        return getLoginFooterText().equals(footerContent);
     }
 
     /////////////Old code, refactor and delete
