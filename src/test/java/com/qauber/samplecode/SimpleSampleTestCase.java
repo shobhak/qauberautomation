@@ -20,6 +20,7 @@ public class SimpleSampleTestCase extends PageObjectModelResources {
     public void setUp() {
         driver = new ChromeDriver();
         setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
+        //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
     }
 
     @Test
