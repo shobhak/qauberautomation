@@ -9,11 +9,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Maksim on 12/16/2016.
- * TODO, IT IS NOT FINISHED.
  */
 
 
@@ -47,51 +47,61 @@ public class AddReportsPhotoTest {
     }
 
     @Test
-    public void Search() throws InterruptedException {
+    public void Search() throws InterruptedException, AWTException {
 
         navBar = new NavBar(driver);
 
+        // Click add report button
         Thread.sleep(1000);
         navBar.addReportButton().click();
 
+        // Choose the first organization in list
         Thread.sleep(1000);
         organization = new AddReportsOrganization(driver);
         organization.clickOrganization1();
 
         navigation = new AddReportNavigation(driver);
 
+        // Navigate to photo tab
         Thread.sleep(1000);
         navigation.photoTab().click();
 
         photo = new AddReportPhoto(driver);
 
+        // Verify Previous button
         Thread.sleep(1000);
         photo.previousButton().click();
         Thread.sleep(1000);
         navigation.photoTab().click();
 
+        // Verify Next button
         Thread.sleep(1000);
         photo.nextButton().click();
         Thread.sleep(1000);
         navigation.photoTab().click();
 
+        // Upload 5 photo, one by one
         Thread.sleep(3000);
-        photo.addPhotoButton().sendKeys("https://images.unsplash.com/photo-1456318019777-ccdc4d5b2396");
+        photo.addPhotoButton("C:\\1.png");
         Thread.sleep(3000);
-        photo.addPhotoButton().sendKeys("https://images.unsplash.com/photo-1456318019777-ccdc4d5b2396");
+        photo.addPhotoButton("C:\\1.png");
         Thread.sleep(3000);
-        photo.addPhotoButton().sendKeys("https://images.unsplash.com/photo-1456318019777-ccdc4d5b2396");
+        photo.addPhotoButton("C:\\1.png");
         Thread.sleep(3000);
-        photo.addPhotoButton().sendKeys("https://images.unsplash.com/photo-1456318019777-ccdc4d5b2396");
+        photo.addPhotoButton("C:\\1.png");
         Thread.sleep(3000);
-        photo.addPhotoButton().sendKeys("https://images.unsplash.com/photo-1456318019777-ccdc4d5b2396");
+        photo.addPhotoButton("C:\\1.png");
+        Thread.sleep(3000);
 
+        // Verify that warning message is displayed.
         Assert.assertTrue(photo.warningMessage().isDisplayed());
 
+        // Delete photo 5
         Thread.sleep(2000);
-        photo.deletePhotoIcon(5);
+        photo.deletePhotoIcon(5).click();
+        // Delete photo 1 (by default)
         Thread.sleep(2000);
-        photo.deletePhotoIcon();
+        photo.deletePhotoIcon().click();
     }
 
     @AfterTest
