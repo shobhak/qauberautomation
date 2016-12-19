@@ -25,9 +25,9 @@ public class SimpleSampleTestCase extends PageObjectModelResources {
     @Test
     public void simpleSampleTestCase() throws InterruptedException {
         driver.get(Config.getBaseURL());
-        Thread.sleep(3000);
+        Thread.sleep(10000);
 
-        getLogin().loginToWave("erikfqauber@gmail.com", "testwave");
+        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
         getNavBar().clickAddReport();
 
         Thread.sleep(15000);
