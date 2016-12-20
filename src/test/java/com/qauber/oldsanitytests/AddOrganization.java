@@ -1,9 +1,5 @@
-package com.qauber.sanity;
+package com.qauber.oldsanitytests;
 
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLSelectElement;
-import com.github.javafaker.Faker;
-import com.sun.jmx.snmp.tasks.ThreadService;
-import org.apache.bcel.generic.Select;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
