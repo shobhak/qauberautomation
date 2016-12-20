@@ -11,7 +11,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Maksim on 12/19/2016.
- * TODO Slider doesn't work.
+ *
  */
 public class SubscriptionSettingsTest {
 
@@ -48,13 +48,16 @@ public class SubscriptionSettingsTest {
         settings = new SubscriptionSettings(driver);
         panel = new ProfilePanel(driver);
 
+        // open profile panel
         Thread.sleep(1000);
         header.userName().click();
 
+        // click on second organization in list
         Thread.sleep(1000);
         panel.settinsButton().click();
         panel.organizationLink(2).click();
 
+        // close Subscription Settings
         Thread.sleep(1000);
         settings.closeButton().click();
 
@@ -64,8 +67,9 @@ public class SubscriptionSettingsTest {
         Thread.sleep(1000);
         panel.organizationLink(2).click();
 
+        // Move slider to chosen position
         Thread.sleep(500);
-        settings.slider(10);
+        settings.slider(22);
 
         Thread.sleep(5000);
     }
