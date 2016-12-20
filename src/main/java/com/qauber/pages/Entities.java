@@ -1,6 +1,10 @@
 package com.qauber.pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 /**
  * Created by erikfriedlander on 12/16/16.
@@ -8,6 +12,7 @@ import org.openqa.selenium.WebDriver;
 public class Entities {
 
     WebDriver driver;
+    WebElement element;
 
     public Entities(WebDriver driver) {
         this.driver = driver;
@@ -23,5 +28,57 @@ public class Entities {
 //      return WebElement driver.findElement(By.xpath("//tr[@class='ng-scope']/td[@class='pl-lg']"));
 //
 //    }
+
+    //Create all web elements in Entities page
+
+    // Web element for "Add organization"
+    public WebElement addOrganizationButton(){
+        element = driver.findElement(By.xpath("//section/div/h3/button"));
+        return element;
+    }
+
+    // Web elements list for "Info" organization
+    public List<WebElement> organizationList(){
+        List<WebElement> elements = driver.findElements(By.cssSelector("td.pl-lg > a.ng-binding"));
+        return elements;
+    }
+
+
+    // Web element for "Info" organization
+    public WebElement organizationInfo(int rowindex){
+        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[1]/a"));
+        return element;
+    }
+
+    // Web element for "Info" logo image
+    public WebElement organizationLogo(int rowindex){
+        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[1]/div/img"));
+        return element;
+    }
+
+    // Web element for "Action" assign permission
+    public WebElement assignPermission(int rowindex){
+        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[2]/button[1]"));
+        return element;
+    }
+
+    // Web element for "Action" edit organization
+    public WebElement editOrganization(int rowindex){
+        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[2]/button[2]"));
+        return element;
+    }
+
+    // Web element for "Action" finish create an organization
+    public WebElement finishCreateOrganization(int rowindex){
+        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[2]/button[3]"));
+        return element;
+    }
+
+    // Web element for "Action" delete an organization
+    public WebElement deleteOrganization(int rowindex){
+        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[2]/button[4]"));
+        return element;
+    }
+
 
 }
