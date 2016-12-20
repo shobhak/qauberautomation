@@ -37,6 +37,12 @@ public class SimpleSampleTestCase extends PageObjectModelResources {
         getNavBar().entitiesButton().click();
         Thread.sleep(5000);
 
+        getAddReportOrganization().clickOrganization1();
+        Thread.sleep(5000);
+
+
+
+
     }
 
     @AfterClass

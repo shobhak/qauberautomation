@@ -23,7 +23,7 @@ public class ReportIdentificationInformationTestCase {
     NavBar navBar;
     AddReportsOrganization addReportsOrganization;
     AddReportNavigation addReportNavigation;
-   AddReportIdentificationInformation addReportIdentificationInformation;
+    AddReportIdentificationInformation addReportIdentificationInformation;
 
 
     @BeforeClass
@@ -74,13 +74,13 @@ public class ReportIdentificationInformationTestCase {
 
 
         //Navigate to Add ID Info
-        addReportIdentificationInformation.primaryLanguageField().sendKeys("Russian");
+        addReportIdentificationInformation.primaryLanguageField().sendKeys("Esperanto");
         Thread.sleep(2000);
         addReportIdentificationInformation.streetAddressField().sendKeys("123 Any street");
         Thread.sleep(2000);
-        addReportIdentificationInformation.cityField().sendKeys("Moscow");
+        addReportIdentificationInformation.cityField().sendKeys("Hm");
         Thread.sleep(2000);
-        addReportIdentificationInformation.countryField().sendKeys("Russia");
+        addReportIdentificationInformation.countryField().sendKeys("Nigaragua");
         Thread.sleep(2000);
         //addReportIdentificationInformation.stateField().sendKeys("undefined");
         Thread.sleep(2000);
@@ -94,7 +94,9 @@ public class ReportIdentificationInformationTestCase {
         Thread.sleep(2000);
         addReportIdentificationInformation.occupationField().sendKeys("plumber");
         Thread.sleep(2000);
-        addReportIdentificationInformation.driverLicenseField().sendKeys("Q09876541");
+        //System.out.println("---------------------");
+        //System.out.println(addReportIdentificationInformation.getEmailField());
+        /*addReportIdentificationInformation.driverLicenseField().sendKeys("Q09876541");
         Thread.sleep(2000);
         addReportIdentificationInformation.driverlicenseDropList("California").click();
         Thread.sleep(2000);
@@ -103,7 +105,7 @@ public class ReportIdentificationInformationTestCase {
         Thread.sleep(2000);
         addReportIdentificationInformation.schoolNameField().sendKeys("The Best School on the Block");
         Thread.sleep(2000);
-        addReportIdentificationInformation.schoolAddress().sendKeys("");
+        addReportIdentificationInformation.schoolAddress().sendKeys("155 Somewhere avenue");
         Thread.sleep(2000);
         addReportIdentificationInformation.schoolCity().sendKeys("Austin");
         Thread.sleep(2000);
@@ -120,9 +122,9 @@ public class ReportIdentificationInformationTestCase {
         addReportIdentificationInformation.parentNameField().sendKeys("The Schwarzeneggers");
         Thread.sleep(2000);
 
-        addReportIdentificationInformation.parentAddressField().sendKeys("");
+        addReportIdentificationInformation.parentAddressField().sendKeys("666 Latham street");
         Thread.sleep(2000);
-        addReportIdentificationInformation.parentCityField().sendKeys("");
+        addReportIdentificationInformation.parentCityField().sendKeys("Los Altos");
         Thread.sleep(2000);
 
         addReportIdentificationInformation.parentDropList("Utah").click();
@@ -137,10 +139,10 @@ public class ReportIdentificationInformationTestCase {
         addReportIdentificationInformation.employerNameField().sendKeys("smth");
         Thread.sleep(2000);
 
-        addReportIdentificationInformation.employerAddressField().sendKeys("");
+        addReportIdentificationInformation.employerAddressField().sendKeys("250 Del Medio Aveniue");
         Thread.sleep(2000);
 
-        addReportIdentificationInformation.employerCityField().sendKeys("");
+        addReportIdentificationInformation.employerCityField().sendKeys("Mountain View");
         Thread.sleep(2000);
 
         addReportIdentificationInformation.employerStateDropList("Guam").click();
@@ -149,7 +151,7 @@ public class ReportIdentificationInformationTestCase {
         addReportIdentificationInformation.employerZipField().sendKeys("99556");
         Thread.sleep(2000);
 
-        addReportIdentificationInformation.employerTelephoneField().sendKeys("1239995637!&*(&");
+        addReportIdentificationInformation.employerTelephoneField().sendKeys("1239995637!&*(&"); */
 
         //Next Button
         addReportIdentificationInformation.nextButton().click();
