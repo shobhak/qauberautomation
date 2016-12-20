@@ -3,21 +3,21 @@ package com.qauber.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import java.util.List;
 
-/**
- * Created by gaming on 12/19/2016.
- */
+//Created by lenochka on 19.12.2016.
+//Created/Merged/Edited by Denys_G on 12/19/2016.
 public class Users {
     WebDriver driver;
 
-    public Users(WebDriver driver) {
-        this.driver = driver;
-    }
-    public WebElement InviteUser(){return driver.findElement(By.xpath(""));}
+    public Users(WebDriver driver) {this.driver = driver;}
+
+    public WebElement inviteUserButton() {return driver.findElement(By.xpath(".//*[@ng-click='openInviteForm()']"));}
+    public WebElement inviteUserEmailField(){return driver.findElement(By.xpath(".//*[@placeholder = 'email@example.com']"));}
+    public WebElement sendInviteButton() {return driver.findElement(By.cssSelector("button.btn.btn-primary.mr"));}
+
     //public WebElement mailtoEmail() {return driver.findElement(By.xpath("//a[contains(@ng-href,'mailto:')]"));}
-    public WebElement assignPermissionsButton(String userName) {
+    public WebElement assignPermissionsButtonByName(String userName) {
         int listNo = 0;
 //        String userName1 = "WAVE1TESThh";
         List<WebElement> list = driver.findElements(By.xpath("//div[@class='text-bold ng-binding']"));
@@ -35,3 +35,14 @@ public class Users {
         return list.get(listNo);
     }
 }
+
+
+
+
+
+
+
+
+
+
+

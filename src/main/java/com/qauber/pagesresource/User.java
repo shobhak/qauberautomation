@@ -24,7 +24,7 @@ public class User {
     public enum UserType {
         SAU,
         AU,
-        RU,
+        RU
     }
 
     public String getUsername() {

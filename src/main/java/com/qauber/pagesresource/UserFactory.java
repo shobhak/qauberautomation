@@ -35,7 +35,7 @@ public class UserFactory {
             user = getUserLoginFileData(userType); //set user from file
 
         } catch (NullPointerException e) { //If file not found, create a new user of that type
-            user = generateUser(userType);
+            user = generateUser(userType); //GENERATE USER
 
             //TODO: improve file not found handling
             System.out.println("User Config File not found: generating config files and new user");
@@ -54,10 +54,16 @@ public class UserFactory {
    private User generateUser(User.UserType userType) {
 
        User user = new User();
+       GenerateRandomSuperAdminUser randomSuperAdminUserGenerator = new GenerateRandomSuperAdminUser();
 
        if (userType == userType.SAU) {
-           user.setUsername("SAU@mailinator.com");
-           user.setPassword("12345678");
+           try { //attempt to make a new SAU
+               System.out.println("Attempting to generate new super admin user. Please be patient, this may take up to 5 minutes.");
+               user = randomSuperAdminUserGenerator.generateRandomSuperAdminUser("http://testwave.qabidder.net");
+           } catch (InterruptedException e) { //if failed, set default config
+               user.setUsername("SAU@mailinator.com");
+               user.setPassword("12345678");
+           }
        }
        else if (userType == userType.AU) {
            user.setUsername("AU@mailinator.com");
@@ -67,7 +73,7 @@ public class UserFactory {
            user.setUsername("RU@mailinator.com");
            user.setPassword("12345678");
        }
-       user.setUserType(userType);
+       user.setUserType(userType); //write user to disk
 
        return user;
 
@@ -159,6 +165,21 @@ public class UserFactory {
         }
 
         else return false;
+    }
+
+    public void wipeLocalUserConfig() { //delete local user configuration files, but not directory
+
+        for (User.UserType userType: User.UserType.values()) {
+            System.out.println("Deleting: "+getFileName(userType).toString());
+            File file = new File(getFileName(userType));
+            file.delete();
+        }
+    }
+
+    public void wipeLocalUserConfig(User.UserType userType) {
+        System.out.println("Deleting: "+getFileName(userType).toString());
+        File file = new File(getFileName(userType));
+        file.delete();
     }
 
 }
