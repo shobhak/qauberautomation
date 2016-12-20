@@ -3,6 +3,8 @@ package com.qauber.pagestest;
 import com.github.javafaker.Faker;
 import com.qauber.config.Config;
 import com.qauber.pages.*;
+import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -16,82 +18,77 @@ import java.util.Random;
 /**
  * Created by jingx on 12/16/2016.
  */
-public class AddReportISubjectInformationTest {
+public class AddReportISubjectInformationTest extends PageObjectModelResources {
     WebDriver driver;
     
     @BeforeClass
     public void setUp(){
         driver = new ChromeDriver();
+        setUpWithUser(User.UserType.SAU, driver);
     }
 
     @Test
     public void addSubjectInformationData() throws InterruptedException {
         driver.manage().window().maximize();
         driver.get(Config.getBaseURL());
-        LoginPage login = new LoginPage(driver);
-        NavBar navBar = new NavBar(driver);
-        AddReportNavigation addReportNavigation = new AddReportNavigation(driver);
-        AddReportsOrganization addReportsOrganization = new AddReportsOrganization(driver);
-        AddReportSubjectInformationPage addReportSubjectInformation = new AddReportSubjectInformationPage(driver);
 
         Faker faker = new Faker();
         Random randomInt = new Random();
         Random randomDouble = new Random();
 
-        Thread.sleep(5000);
-        login.loginToWave("jing_qauber_001@mailinator.com", "Portnov1");
-
+        Thread.sleep(8000);
+        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
         Thread.sleep(3000);
 
         //Go to 'Reports'
-        navBar.addReportButton().click();
+        getNavBar().addReportButton().click();
 
 
         //Select first organization
         Thread.sleep(1000);
-        addReportsOrganization.clickOrganization1();
+        getAddReportOrganization().clickOrganization1();
         Thread.sleep(1000);
 
 
         // select subject information tab
-        addReportNavigation.subjectInformationTab().click();
+        getAddReportNavigation().subjectInformationTab().click();
         Thread.sleep(2000);
 
         // click previous button
-        addReportSubjectInformation.previouButton().click();
+        getAddReportSubjectInformationPage().previouButton().click();
         Thread.sleep(2000);
-        addReportNavigation.subjectInformationTab().click();
+        getAddReportNavigation().subjectInformationTab().click();
         Thread.sleep(2000);
 
         // click next button
-        addReportSubjectInformation.nextButton().click();
+        getAddReportSubjectInformationPage().nextButton().click();
         Thread.sleep(2000);
-        addReportNavigation.subjectInformationTab().click();
+        getAddReportNavigation().subjectInformationTab().click();
         Thread.sleep(2000);
 
         // enter data for first name
-        addReportSubjectInformation.firstName().sendKeys(faker.name().firstName());
+        getAddReportSubjectInformationPage().firstName().sendKeys(faker.name().firstName());
         Thread.sleep(1000);
 
         // enter data for middle name
-        addReportSubjectInformation.middleName().sendKeys(faker.name().lastName());
+        getAddReportSubjectInformationPage().middleName().sendKeys(faker.name().lastName());
         Thread.sleep(1000);
 
         // enter data for last name
-        addReportSubjectInformation.lastName().sendKeys(faker.name().lastName());
+        getAddReportSubjectInformationPage().lastName().sendKeys(faker.name().lastName());
         Thread.sleep(1000);
 
         // enter data for suspect type
-        addReportSubjectInformation.subjectType().click();
+        getAddReportSubjectInformationPage().subjectType().click();
         Thread.sleep(1000);
-        new Select(addReportSubjectInformation.subjectType()).selectByIndex(randomInt.nextInt(5));
+        new Select(getAddReportSubjectInformationPage().subjectType()).selectByIndex(randomInt.nextInt(5));
         Thread.sleep(1000);
 
         // enter data for date of birth
-        addReportSubjectInformation.dateOfBirth().click();
+        getAddReportSubjectInformationPage().dateOfBirth().click();
         Thread.sleep(1000);
         String dateofbirth = "" + randomInt.nextInt(12) + randomInt.nextInt(28) + (1900 + randomInt.nextInt(117));
-        addReportSubjectInformation.dateOfBirth().sendKeys(dateofbirth);
+        getAddReportSubjectInformationPage().dateOfBirth().sendKeys(dateofbirth);
         Thread.sleep(1000);
 
 //        // enter data for date of birth from calendar icon
@@ -115,116 +112,86 @@ public class AddReportISubjectInformationTest {
 
 
         // enter data for nickname
-        addReportSubjectInformation.nickName().sendKeys(faker.lorem().word());
+        getAddReportSubjectInformationPage().nickName().sendKeys(faker.lorem().word());
         Thread.sleep(1000);
 
         // enter data for race
-        addReportSubjectInformation.race().click();
+        getAddReportSubjectInformationPage().race().click();
         Thread.sleep(1000);
-        new Select(addReportSubjectInformation.race()).selectByIndex(randomInt.nextInt(19));
+        new Select(getAddReportSubjectInformationPage().race()).selectByIndex(randomInt.nextInt(19));
         Thread.sleep(1000);
 
         // enter data for height
         double height1 = 1.00 + randomDouble.nextDouble()*7.00;
-        addReportSubjectInformation.height().sendKeys(Double.toString(height1));
+        getAddReportSubjectInformationPage().height().sendKeys(Double.toString(height1));
         Thread.sleep(1000);
 
         // enter data for weight
         double weight1 = 10.0 + randomDouble.nextDouble()*200.0;
-        addReportSubjectInformation.weight().sendKeys(Double.toString(weight1));
+        getAddReportSubjectInformationPage().weight().sendKeys(Double.toString(weight1));
         Thread.sleep(1000);
 
         // enter data for hair color
-        addReportSubjectInformation.hairColor().click();
+        getAddReportSubjectInformationPage().hairColor().click();
         Thread.sleep(1000);
-        new Select(addReportSubjectInformation.hairColor()).selectByIndex(randomInt.nextInt(14));
+        new Select(getAddReportSubjectInformationPage().hairColor()).selectByIndex(randomInt.nextInt(14));
         Thread.sleep(1000);
 
         // enter data for hair length
-        addReportSubjectInformation.hairLength().click();
+        getAddReportSubjectInformationPage().hairLength().click();
         Thread.sleep(1000);
-        new Select(addReportSubjectInformation.hairLength()).selectByIndex(randomInt.nextInt(6));
+        new Select(getAddReportSubjectInformationPage().hairLength()).selectByIndex(randomInt.nextInt(6));
         Thread.sleep(1000);
 
         // enter data for hair style
-        addReportSubjectInformation.hairStyle().click();
+        getAddReportSubjectInformationPage().hairStyle().click();
         Thread.sleep(1000);
-        new Select(addReportSubjectInformation.hairStyle()).selectByIndex(randomInt.nextInt(22));
+        new Select(getAddReportSubjectInformationPage().hairStyle()).selectByIndex(randomInt.nextInt(22));
         Thread.sleep(1000);
 
         // enter data for sex
-        addReportSubjectInformation.sex().click();
+        getAddReportSubjectInformationPage().sex().click();
         Thread.sleep(1000);
-        new Select(addReportSubjectInformation.sex()).selectByIndex(randomInt.nextInt(3));
+        new Select(getAddReportSubjectInformationPage().sex()).selectByIndex(randomInt.nextInt(3));
         Thread.sleep(1000);
 
         // enter data for build
-        addReportSubjectInformation.build().click();
+        getAddReportSubjectInformationPage().build().click();
         Thread.sleep(1000);
-        new Select(addReportSubjectInformation.build()).selectByIndex(randomInt.nextInt(9));
+        new Select(getAddReportSubjectInformationPage().build()).selectByIndex(randomInt.nextInt(9));
         Thread.sleep(1000);
 
         // enter data for eye color
-        addReportSubjectInformation.eyeColor().click();
+        getAddReportSubjectInformationPage().eyeColor().click();
         Thread.sleep(1000);
-        new Select(addReportSubjectInformation.eyeColor()).selectByIndex(randomInt.nextInt(8));
+        new Select(getAddReportSubjectInformationPage().eyeColor()).selectByIndex(randomInt.nextInt(8));
         Thread.sleep(1000);
 
         // enter data for complexion
-        addReportSubjectInformation.complexion().click();
+        getAddReportSubjectInformationPage().complexion().click();
         Thread.sleep(1000);
-        new Select(addReportSubjectInformation.complexion()).selectByIndex(randomInt.nextInt(5));
+        new Select(getAddReportSubjectInformationPage().complexion()).selectByIndex(randomInt.nextInt(5));
         Thread.sleep(1000);
 
         // enter data for teeth
-        addReportSubjectInformation.teeth().click();
+        getAddReportSubjectInformationPage().teeth().click();
         Thread.sleep(1000);
-        new Select(addReportSubjectInformation.teeth()).selectByIndex(randomInt.nextInt(4));
+        new Select(getAddReportSubjectInformationPage().teeth()).selectByIndex(randomInt.nextInt(4));
         Thread.sleep(1000);
 
         // enter data for hand preference
-        addReportSubjectInformation.handPreference().click();
+        getAddReportSubjectInformationPage().handPreference().click();
         Thread.sleep(1000);
-        new Select(addReportSubjectInformation.handPreference()).selectByIndex(randomInt.nextInt(4));
+        new Select(getAddReportSubjectInformationPage().handPreference()).selectByIndex(randomInt.nextInt(4));
         Thread.sleep(1000);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     }
 
 
     @AfterClass
-    public void tearDown() throws InterruptedException {
-        Thread.sleep(20000);
-
-        driver.manage().deleteAllCookies();
-        driver.quit();
+    public void breakDown(){
+        breakDownHelper(driver);
     }
-
-
-
 
 }

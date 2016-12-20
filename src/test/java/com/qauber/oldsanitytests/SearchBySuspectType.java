@@ -1,9 +1,10 @@
-package com.qauber.sanity;
+package com.qauber.oldsanitytests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -11,23 +12,25 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class SearchByPagination {
+public class SearchBySuspectType {
     WebDriver driver = new ChromeDriver();
     public String Url = "http://testwave.qabidder.net/#/page/login";
     public String login = "raizzz.test@gmail.com"; // Login
     public String password = "013666";             // Password
-    public String list = "3";                      // Number of page to select in pagination
+    public String suspectType = "Victim";
 
     @Test
-    public void verifyHomepageTitle() throws InterruptedException {
+    public void verifyHomepageTitle()
+    {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.findElement(By.linkText("Reports")).click();
 
+        Select dropMenu = new Select(driver.findElement(By.xpath("//select[@ng-model='stSearchKey']")));
+        dropMenu.selectByValue(suspectType);
         driver.findElement(By.xpath("//button[@ng-click='openedSearchFrom=true']")).click();
         driver.findElement(By.xpath("//button[@ng-click='select(null, $event)']")).click();
-        WebElement element = driver.findElement(By.linkText(list));
-        element.click();
-        Assert.assertEquals(driver.findElement(By.xpath("//li[@class='ng-scope active']/a")).getText(), list);
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='media-box-body']/div[1]/div/h4/span")).getText().contains(suspectType
+        ));
     }
 
     @BeforeTest

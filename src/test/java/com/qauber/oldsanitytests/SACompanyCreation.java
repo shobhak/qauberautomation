@@ -1,4 +1,4 @@
-package com.qauber.sanity;
+package com.qauber.oldsanitytests;
 
 import com.github.javafaker.Faker;
 import org.openqa.selenium.By;

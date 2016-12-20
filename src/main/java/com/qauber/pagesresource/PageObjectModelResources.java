@@ -32,7 +32,9 @@ public class PageObjectModelResources {
 //Navbar pages
     //    private Users users;
     private Entities entities;
+    private EditOrganizationPage editOrganizationPage;
     private Reports reports;
+    private ReportsViewReport reportsViewReport;
 
 //Add reports pages
     private AddReportEnvironment addReportEnvironment;
@@ -43,6 +45,7 @@ public class PageObjectModelResources {
     private AddReportsOrganization addReportOrganization;
     private AddReportSubjectInformationPage addReportSubjectInformationPage;
     private AddReportVehicle addReportVehicle;
+
 
 //
 
@@ -86,7 +89,9 @@ public class PageObjectModelResources {
         editProfile = new EditProfile(driver);
 
         entities = new Entities(driver);
+        editOrganizationPage = new EditOrganizationPage(driver);
         reports = new Reports(driver);
+        reportsViewReport = new ReportsViewReport(driver);
 
         addReportEnvironment = new AddReportEnvironment(driver);
         addReportIdentificationInformation = new AddReportIdentificationInformation(driver);
@@ -135,9 +140,7 @@ public class PageObjectModelResources {
 
 
 
-    protected Header getHeader() {
-        return header;
-    }
+    protected Header getHeader() { return header; }
 
     protected RegistrationPage1 getRegistrationPage1() { return registrationPage1; }
     protected RegistrationPage2 getRegistrationPage2() { return registrationPage2; }
@@ -158,9 +161,13 @@ public class PageObjectModelResources {
         return entities;
     }
 
+    protected EditOrganizationPage getOrganization() {return  editOrganizationPage;}
+
     protected Reports getReports() {
         return reports;
     }
+
+    protected ReportsViewReport getReportsViewReport() {return reportsViewReport; }
 
     protected AddReportEnvironment getAddReportEnvironment() {
         return addReportEnvironment;
