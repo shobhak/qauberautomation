@@ -41,7 +41,7 @@ public class Delite_Subdepartment_AU {
         DeliteButton.click();
 
 
-
+        driver.quit();
 
 
     }

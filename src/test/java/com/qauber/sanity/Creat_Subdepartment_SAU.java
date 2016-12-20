@@ -45,7 +45,7 @@ public class Creat_Subdepartment_SAU {
         String createdDepartmentName = driver.findElement(By.linkText("Second_44 Department")).getText();
         Assert.assertEquals(createdDepartmentName, departmentName);
 
-
+        driver.quit();
 
     }
 }
