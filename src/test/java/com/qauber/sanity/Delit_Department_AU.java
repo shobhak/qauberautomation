@@ -36,7 +36,7 @@ public class Delit_Department_AU {
         WebElement Delite = driver.findElement(By.xpath("//button[contains(@ng-click,'confirm()')]"));
         Delite.click();
 
-
+        driver.quit();
 
 
     }
