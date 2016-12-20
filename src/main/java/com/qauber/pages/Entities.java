@@ -57,25 +57,25 @@ public class Entities {
     }
 
     // Web element for "Action" assign permission
-    public WebElement assignPermission(int rowindex){
+    public WebElement assignPermissionButton(int rowindex){
         element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[2]/button[1]"));
         return element;
     }
 
     // Web element for "Action" edit organization
-    public WebElement editOrganization(int rowindex){
+    public WebElement editOrganizationButton(int rowindex){
         element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[2]/button[2]"));
         return element;
     }
 
     // Web element for "Action" finish create an organization
-    public WebElement finishCreateOrganization(int rowindex){
+    public WebElement finishCreateOrganizationButton(int rowindex){
         element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[2]/button[3]"));
         return element;
     }
 
     // Web element for "Action" delete an organization
-    public WebElement deleteOrganization(int rowindex){
+    public WebElement deleteOrganizationButton(int rowindex){
         element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[2]/button[4]"));
         return element;
     }
