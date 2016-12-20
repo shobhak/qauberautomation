@@ -21,7 +21,7 @@ public class AddReportPreview {
     }
 
     public WebElement previousButton() {
-        return driver.findElement(By.name("//form/div/div[9]/ul/li[1]/a"));
+        return driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[9]/ul/li[1]/a"));
     }
 }
 
