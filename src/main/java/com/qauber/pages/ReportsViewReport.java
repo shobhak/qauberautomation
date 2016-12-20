@@ -15,10 +15,6 @@ public class ReportsViewReport {
         this.driver = driver;
     }
 
-    public WebElement viewReportButton() {
-        return driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/div[2]/div[2]/table/tbody/tr[1]/td/div/div/div[2]/div[4]/a"));
-    }
-
     public static WebElement downloadAsPDFButton(WebDriver driver) {
         return driver.findElement(By.xpath("//button[text()='Download as PDF']"));
     }
