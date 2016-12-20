@@ -15,6 +15,7 @@ public class FakerTest {
         Faker faker = new Faker();
         String name = faker.name().fullName();
 
+        System.out.println(faker.pokemon().name());
         System.out.println(faker.gameOfThrones().character());
 
         System.out.println(name);
