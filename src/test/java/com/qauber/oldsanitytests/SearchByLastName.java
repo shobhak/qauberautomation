@@ -1,4 +1,4 @@
-package com.qauber.sanity;
+package com.qauber.oldsanitytests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,41 +11,25 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class SearchByPublishedDate {
+public class SearchByLastName {
     WebDriver driver = new ChromeDriver();
     public String Url = "http://testwave.qabidder.net/#/page/login";
     public String login = "raizzz.test@gmail.com"; // Login
     public String password = "013666";             // Password
-
-    public String startMonth = "December";
-    public String startDay = "10";
-    public String startYear = "2016";
-
-    public String endMonth = "December";
-    public String endDay = "12";
-    public String endYear = "2016";
-
+    public String lastName = "Pupkin";             // Last name in report
 
     @Test
-    public void verifyHomepageTitle() throws InterruptedException {
-
+    public void verifyHomepageTitle()
+    {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.findElement(By.linkText("Reports")).click();
 
+        WebElement element = driver.findElement(By.xpath("//input[@ng-model='slnSearchKey']"));
+        element.clear();
+        element.sendKeys(lastName);
         driver.findElement(By.xpath("//button[@ng-click='openedSearchFrom=true']")).click();
-        driver.findElement(By.xpath("//th[@colspan='6']/button")).click();
-        driver.findElement(By.xpath("//th[@colspan='1']/button")).click();
-        driver.findElement(By.xpath("//span[text()='"+startYear.substring(2,4)+"']")).click();
-        driver.findElement(By.xpath("//span[text()='"+startMonth+"']")).click();
-        driver.findElement(By.xpath("//span[text()='"+startDay+"']")).click();
-        driver.findElement(By.xpath("//button[@ng-click='openedSearchTo=true']")).click();
-        driver.findElement(By.xpath("//th[@colspan='6']/button")).click();
-        driver.findElement(By.xpath("//th[@colspan='1']/button")).click();
-        driver.findElement(By.xpath("//span[text()='"+endYear.substring(2,4)+"']")).click();
-        driver.findElement(By.xpath("//span[text()='"+endMonth+"']")).click();
-        driver.findElement(By.xpath("//span[text()='"+endDay+"']")).click();
-
-        Assert.assertTrue(driver.findElement(By.xpath("//span[text()='"+startMonth.substring(0,3)+" "+startDay+", "+startYear+"']")).isDisplayed());
+        driver.findElement(By.xpath("//button[@ng-click='select(null, $event)']")).click();
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='media-box-body']/div[1]/div/h4")).getText().contains(lastName));
     }
 
     @BeforeTest
@@ -72,5 +56,4 @@ public class SearchByPublishedDate {
         driver.quit();
     }
 }
-
 

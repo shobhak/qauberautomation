@@ -1,3 +1,5 @@
+package com.qauber.oldsanitytests;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,7 +9,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 /**
  * Created by San Jose on 12/13/2016.
  */
-public class Add_Report_Vehicle {
+public class Add_Report_V_Passenger {
 
     @Test
     public void SAU() throws InterruptedException {
@@ -31,10 +33,10 @@ public class Add_Report_Vehicle {
         WebElement ChTransport = driver.findElement(By.xpath("//div[contains(@class,'fa fa-automobile size')]"));
         ChTransport.click();
         Thread.sleep(5000);
-        WebElement Pedestrain = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/fieldset/div[1]/div[1]/div/label/span"));
-        Pedestrain.click();
-        WebElement NextButton = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/ul/li[2]/a/span"));
-        NextButton.click();
+        WebElement Passenger = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/fieldset/div[1]/div[2]/div/label/span" + ""));
+        Passenger.click();
+        //WebElement NextButton = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/ul/li[2]/a/span"));
+        //NextButton.click();
 
 
     }

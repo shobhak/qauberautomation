@@ -1,3 +1,5 @@
+package com.qauber.oldsanitytests;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,10 +9,11 @@ import org.openqa.selenium.chrome.ChromeDriver;
 /**
  * Created by San Jose on 12/13/2016.
  */
-public class Add_Report_V_Passenger {
+public class Delit_Department_SAU {
+
 
     @Test
-    public void SAU() throws InterruptedException {
+    public void AU() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("http://testwave.qabidder.net/#/page/login");
@@ -23,18 +26,18 @@ public class Add_Report_V_Passenger {
         WebElement Login = driver.findElement(By.xpath("//button[contains(@type,'submit')]"));
         Login.click();
         Thread.sleep(5000);
-        WebElement AddReport = driver.findElement(By.xpath("//span[contains(.,'Add Report')]"));
-        AddReport.click();
+        WebElement Entities = driver.findElement(By.xpath("//span[contains(.,'Entities')]"));
+        Entities.click();
         Thread.sleep(5000);
-        WebElement Choose = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[2]/fieldset/div[2]/div/div/label/span"));
-        Choose.click();
-        WebElement ChTransport = driver.findElement(By.xpath("//div[contains(@class,'fa fa-automobile size')]"));
-        ChTransport.click();
+        WebElement Editorgan = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/div/table/tbody/tr[2]/td[1]/a"));
+        Editorgan.click();
         Thread.sleep(5000);
-        WebElement Passenger = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/fieldset/div[1]/div[2]/div/label/span" + ""));
-        Passenger.click();
-        //WebElement NextButton = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/ul/li[2]/a/span"));
-        //NextButton.click();
+        WebElement DeliteDep = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/div/table/tbody/tr[2]/td[2]/button[4]"));
+        DeliteDep.click();
+        WebElement Delite = driver.findElement(By.xpath("//button[contains(@ng-click,'confirm()')]"));
+        Delite.click();
+
+        driver.quit();
 
 
     }

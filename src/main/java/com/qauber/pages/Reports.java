@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.Select;
 public class Reports {
 
     WebDriver driver;
-    WebElement element;
     Select select;
 
     public Reports(WebDriver driver) {
@@ -20,20 +19,17 @@ public class Reports {
 
     public WebElement lastNameField()
     {
-        element = driver.findElement(By.xpath("//input[@ng-model='slnSearchKey']"));
-        return element;
+        return driver.findElement(By.xpath("//input[@ng-model='slnSearchKey']"));
     }
 
     public WebElement firstNameField()
     {
-        element = driver.findElement(By.xpath("//input[@ng-model='sfnSearchKey']"));
-        return element;
+        return driver.findElement(By.xpath("//input[@ng-model='sfnSearchKey']"));
     }
 
     public WebElement caseIdField()
     {
-        element = driver.findElement(By.xpath("//input[@ng-model='ciSearchKey']"));
-        return element;
+        return driver.findElement(By.xpath("//input[@ng-model='ciSearchKey']"));
     }
 
     public void suspectType(String type) //Set suspect type: "", "R/P", "Suspect", "Victim", "Witness", "Other"
@@ -44,26 +40,22 @@ public class Reports {
 
     public WebElement publishedOnCheckBox()
     {
-        element = driver.findElement(By.xpath("//input[@ng-model='enablePublishedOn']"));
-        return element;
+        return driver.findElement(By.xpath("//input[@ng-model='enablePublishedOn']"));
     }
 
     public WebElement containsTextField()
     {
-        element = driver.findElement(By.xpath("//input[@ng-model='ctSearchKey']"));
-        return element;
+        return driver.findElement(By.xpath("//input[@ng-model='ctSearchKey']"));
     }
 
     public WebElement pagination(String numberOfPage)
     {
-        element = driver.findElement(By.linkText(numberOfPage));
-        return element;
+        return driver.findElement(By.linkText(numberOfPage));
     }
 
     public WebElement selectReport(int row) // Set the position of row
     {
-        element = driver.findElement(By.xpath("//tr["+row+"]//a"));
-        return element;
+        return  driver.findElement(By.xpath("//tr["+row+"]//a"));
     }
 
     public void selectReport()
@@ -73,8 +65,8 @@ public class Reports {
 
     public WebElement exportReportsListButton()
     {
-        element = driver.findElement(By.cssSelector(".pull-right.btn.btn-info.btn-sm"));
-        return element;
+        return driver.findElement(By.cssSelector(".pull-right.btn.btn-info.btn-sm"));
+
     }
 
     public void publishedDateFromIcon(String startMonth, String startDay, String startYear) // Example of Date format ("January", "01", "2000")

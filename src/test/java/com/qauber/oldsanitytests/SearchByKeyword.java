@@ -1,10 +1,9 @@
-package com.qauber.sanity;
+package com.qauber.oldsanitytests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -12,12 +11,12 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class SearchBySuspectType {
+public class SearchByKeyword {
     WebDriver driver = new ChromeDriver();
     public String Url = "http://testwave.qabidder.net/#/page/login";
     public String login = "raizzz.test@gmail.com"; // Login
     public String password = "013666";             // Password
-    public String suspectType = "Victim";
+    public String someText = "Vas";             // Some text in report
 
     @Test
     public void verifyHomepageTitle()
@@ -25,12 +24,12 @@ public class SearchBySuspectType {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.findElement(By.linkText("Reports")).click();
 
-        Select dropMenu = new Select(driver.findElement(By.xpath("//select[@ng-model='stSearchKey']")));
-        dropMenu.selectByValue(suspectType);
+        WebElement element = driver.findElement(By.xpath("//input[@ng-model='ctSearchKey']"));
+        element.clear();
+        element.sendKeys(someText);
         driver.findElement(By.xpath("//button[@ng-click='openedSearchFrom=true']")).click();
         driver.findElement(By.xpath("//button[@ng-click='select(null, $event)']")).click();
-        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='media-box-body']/div[1]/div/h4/span")).getText().contains(suspectType
-        ));
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='media-box-body']/div[1]/div/h4")).getText().contains(someText));
     }
 
     @BeforeTest
@@ -57,4 +56,3 @@ public class SearchBySuspectType {
         driver.quit();
     }
 }
-
