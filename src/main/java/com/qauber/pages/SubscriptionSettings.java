@@ -3,6 +3,7 @@ package com.qauber.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 
 /**
@@ -31,12 +32,28 @@ public class SubscriptionSettings {
         return driver.findElement(By.xpath("//button[@ng-click='closeThisDialog()']"));
     }
 
-    public void slider(int x) // TODO Doesn't work !!!
+    public void slider(int x) // type value that you want to get (from 5 to 40)
     {
-        WebElement slider = driver.findElement(By.className("slider slider-horizontal"));
-        int width=slider.getSize().getWidth();
+        WebElement slider = driver.findElement(By.cssSelector(".slider-handle.min-slider-handle.round"));
+        WebElement element = driver.findElement(By.xpath("//div[@class='slider-handle min-slider-handle round']"));
         Actions move = new Actions(driver);
-        move.moveToElement(slider, ((width*x)/40), 0).click();
-        move.build().perform();
+        Action action;
+        int i = 0;
+        if (Integer.parseInt(element.getAttribute("aria-valuenow"))<=x)
+        {
+            while (Integer.parseInt(element.getAttribute("aria-valuenow")) != x) {
+                action = move.dragAndDropBy(slider, i, 0).build();
+                action.perform();
+                i++;
+            }
+        }
+        else
+        {
+            while (Integer.parseInt(element.getAttribute("aria-valuenow")) != x) {
+                action = move.dragAndDropBy(slider, i, 0).build();
+                action.perform();
+                i--;
+            }
+        }
     }
 }
