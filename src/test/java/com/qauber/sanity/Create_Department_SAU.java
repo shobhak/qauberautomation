@@ -55,7 +55,7 @@ public class Create_Department_SAU {
         Assert.assertEquals(createdDepartmentName, departmentName);
 
 
-
+        driver.quit();
 
 
     }

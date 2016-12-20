@@ -38,5 +38,8 @@ public class Edit_Department_AU {
         WebElement Update = driver.findElement(By.xpath("//button[contains(@ng-disabled,'error.required')]"));
         Update.click();
 
+
+        driver.quit();
+
     }
 }

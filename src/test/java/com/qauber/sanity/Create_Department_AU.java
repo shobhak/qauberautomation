@@ -42,6 +42,8 @@ public class Create_Department_AU {
         String createdDepartmentName = driver.findElement(By.linkText("Second_2 Department")).getText();
         Assert.assertEquals(createdDepartmentName, departmentName);
 
+        driver.quit();
+
 
 
 
