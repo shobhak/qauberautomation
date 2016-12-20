@@ -94,6 +94,10 @@ public class AddReportIdentificationInformation {
         return element;
     }
 
+    public String getEmailField(){
+        return driver.findElement(By.xpath(".//input[@name='email']")).getText();
+    }
+
     public WebElement ssnField() {
         element = driver.findElement(By.name("socialSecurity"));
         return element;
@@ -235,8 +239,8 @@ public class AddReportIdentificationInformation {
     }
 
     public WebElement previousButton() {
-        element = driver.findElement(By.xpath(".//*[@ng-click = 'wizard.go(3)']"));
-        return element;
+        //return driver.findElement(By.xpath(".//*[@ng-click = 'wizard.go(3)']"));
+        return driver.findElement(By.xpath("//div[5]//li[contains(@class, 'previous')]/a/span"));
     }
     /*public void setPrimaryLanguage(String strPrimaryLanguage) {
         driver.findElement(PrimaryLanguage).sendKeys(strPrimaryLanguage);

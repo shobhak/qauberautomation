@@ -28,22 +28,17 @@ public class AddReportPreviewPublishTestCase {
 
     @BeforeClass
     public void setUp() {
-
         driver = new ChromeDriver();
-
         //implicit wait
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-
         //pull URL from config
         driver.get(Config.getBaseURL());
-
         //maximize window for our viewing pleasure
         driver.manage().window().maximize();
     }
 
     @Test
     public void addReportPreviewPublish () throws InterruptedException {
-
         //Create all Page Objects
         login = new LoginPage(driver);
         navBar = new NavBar(driver);
@@ -56,9 +51,7 @@ public class AddReportPreviewPublishTestCase {
         //Log in to application
         Thread.sleep(5000);
         login.loginToWave("erikfqauber@gmail.com", "testwave");
-
         Thread.sleep(3000);
-
         //Go to 'Add Report'
         navBar.addReportButton().click();
 
@@ -82,26 +75,24 @@ public class AddReportPreviewPublishTestCase {
         addReportNavigation.previewTab().click();
         Thread.sleep(1000);
 
-        //jse = (JavascriptExecutor) driver;
-        //jse.executeScript("window.scrollBy(0,1000)", "");
+        jse = (JavascriptExecutor) driver;
+        jse.executeScript("window.scrollBy(0,2000)", "");
 
-        //addReportPreview.previousButton().click();
-        //Thread.sleep(1000);
-        //addReportNavigation.previewTab().click();
-        //Thread.sleep(1000);
+        addReportPreview.previousButton().click();
+        Thread.sleep(1000);
+        addReportNavigation.previewTab().click();
+        Thread.sleep(1000);
 
         jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,1000)", "");
 
         addReportPreview.publishReportButton().click();
-        }
+    }
 
-        @AfterClass
-        public void breakDown () throws InterruptedException {
-
-            Thread.sleep(60000);
-
-            driver.manage().deleteAllCookies();
-            driver.quit();
-        }
+    @AfterClass
+    public void breakDown () throws InterruptedException {
+        Thread.sleep(60000);
+        driver.manage().deleteAllCookies();
+        driver.quit();
+    }
 }
