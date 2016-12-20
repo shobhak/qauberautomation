@@ -30,7 +30,7 @@ public class Assign_permissions {
 //    public String Email = "";
 //    public String Pswrd = "";
 
-    public String UserName = "wave2test";
+    public String UserName = "New Name";
     public String Rights = "Regular user"; // "Admin" or "Select Role"
 
     @BeforeTest
@@ -42,6 +42,7 @@ public class Assign_permissions {
         element.sendKeys(Email);
         element = driver.findElement(By.id("exampleInputPassword1"));
         element.sendKeys(Pswrd);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.findElement(By.xpath("//button[@type='submit' and text()='Login']")).click();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         //commented out with slow internet
