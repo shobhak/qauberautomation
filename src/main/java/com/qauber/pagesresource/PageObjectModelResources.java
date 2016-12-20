@@ -32,6 +32,7 @@ public class PageObjectModelResources {
 //Navbar pages
     //    private Users users;
     private Entities entities;
+    private EditOrganizationPage editOrganizationPage;
     private Reports reports;
 
 //Add reports pages
@@ -86,6 +87,7 @@ public class PageObjectModelResources {
         editProfile = new EditProfile(driver);
 
         entities = new Entities(driver);
+        editOrganizationPage = new EditOrganizationPage(driver);
         reports = new Reports(driver);
 
         addReportEnvironment = new AddReportEnvironment(driver);
@@ -157,6 +159,8 @@ public class PageObjectModelResources {
     protected Entities getEntities() {
         return entities;
     }
+
+    protected EditOrganizationPage getOrganization() {return  editOrganizationPage;}
 
     protected Reports getReports() {
         return reports;
