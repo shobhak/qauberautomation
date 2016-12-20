@@ -1,4 +1,4 @@
-package com.qauber.sanity;
+package com.qauber.oldsanitytests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,32 +9,27 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class ContinueAnUnpublishedReport {
+public class SearchByCaseID {
     WebDriver driver = new ChromeDriver();
     public String Url = "http://testwave.qabidder.net/#/page/login";
     public String login = "raizzz.test@gmail.com"; // Login
     public String password = "013666";             // Password
+    public String caseID = "902";                  // Case ID in report
 
     @Test
-    public void verifyHomepageTitle() throws InterruptedException {
+    public void verifyHomepageTitle()
+    {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.findElement(By.linkText("Reports")).click();
 
-        if(driver.findElement(By.xpath("//input[@ng-model='enablePublishedOn']")).isSelected())
-            driver.findElement(By.xpath("//input[@ng-model='enablePublishedOn']")).click();
-
-        ArrayList<WebElement> list = new ArrayList<WebElement>(driver.findElements(By.xpath("//a[@ng-click='setCurrent(pageNumber)']")));
-        list.get(list.size()-1).click();
-        list = new ArrayList<WebElement>(driver.findElements(By.xpath("//div[text()='not published']")));
-        Assert.assertEquals(list.get(list.size()-1).getText(), "not published");
-        list = new ArrayList<WebElement>(driver.findElements(By.cssSelector(".btn.btn-info.btn-sm.ng-scope")));
-        list.get(list.size()-1).click();
-        Thread.sleep(500);
-        Assert.assertEquals(driver.findElement(By.xpath("html/body/div[2]/section/div/h3")).getText(), "Field Interview Card");
-
+        WebElement element = driver.findElement(By.xpath("//input[@ng-model='ciSearchKey']"));
+        element.clear();
+        element.sendKeys(caseID);
+        driver.findElement(By.xpath("//button[@ng-click='openedSearchFrom=true']")).click();
+        driver.findElement(By.xpath("//button[@ng-click='select(null, $event)']")).click();
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='media-box-body']/div[1]/div/h4")).getText().contains(caseID));
     }
 
     @BeforeTest
@@ -61,5 +56,4 @@ public class ContinueAnUnpublishedReport {
         driver.quit();
     }
 }
-
 

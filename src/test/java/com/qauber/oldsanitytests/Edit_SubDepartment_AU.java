@@ -1,18 +1,18 @@
+package com.qauber.oldsanitytests;
+
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 
 /**
  * Created by San Jose on 12/13/2016.
  */
-public class Delit_Department_AU {
-
+public class Edit_SubDepartment_AU {
 
     @Test
-    public void AU() throws InterruptedException {
+    public void SAU() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.get("http://testwave.qabidder.net/#/page/login");
@@ -31,12 +31,22 @@ public class Delit_Department_AU {
         WebElement Editorgan = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/div/table/tbody/tr[2]/td[1]/a"));
         Editorgan.click();
         Thread.sleep(5000);
-        WebElement DeliteDep = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/div/table/tbody/tr[2]/td[2]/button[4]"));
-        DeliteDep.click();
-        WebElement Delite = driver.findElement(By.xpath("//button[contains(@ng-click,'confirm()')]"));
-        Delite.click();
+        WebElement EditDep = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/div/table/tbody/tr[2]/td[1]/a"));
+        EditDep.click();
+        Thread.sleep(5000);
+        WebElement EditDep1 = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/div/table/tbody/tr[2]/td[2]/button[2]"));
+        EditDep1.click();
+        WebElement NameDep = driver.findElement(By.xpath("//input[contains(@required,'required')]"));
+        NameDep.clear();
+        NameDep.sendKeys("Second_11 Department");
+        WebElement Update = driver.findElement(By.xpath("//button[contains(@ng-disabled,'error.required')]"));
+        Update.click();
+
 
         driver.quit();
+
+
+
 
 
     }

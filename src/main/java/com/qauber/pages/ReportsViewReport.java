@@ -8,6 +8,7 @@ import org.openqa.selenium.WebElement;
  * Created by Alya on 12/20/2016.
  */
 public class ReportsViewReport {
+
     private WebDriver driver;
 
     public ReportsViewReport(WebDriver driver) {
@@ -15,11 +16,11 @@ public class ReportsViewReport {
         this.driver = driver;
     }
 
-    public static WebElement downloadAsPDFButton(WebDriver driver) {
+    public WebElement downloadAsPDFButton() {
         return driver.findElement(By.xpath("//button[text()='Download as PDF']"));
     }
 
-    public static WebElement useAsTemplateButton(WebDriver driver) {
+    public WebElement useAsTemplateButton() {
         return driver.findElement(By.xpath("//button[text()='Use as template']"));
     }
 }

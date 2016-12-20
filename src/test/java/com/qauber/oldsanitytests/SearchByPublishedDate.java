@@ -1,4 +1,4 @@
-package com.qauber.sanity;
+package com.qauber.oldsanitytests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,8 +11,7 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class SearchByCreatedDate {
-
+public class SearchByPublishedDate {
     WebDriver driver = new ChromeDriver();
     public String Url = "http://testwave.qabidder.net/#/page/login";
     public String login = "raizzz.test@gmail.com"; // Login
@@ -33,16 +32,13 @@ public class SearchByCreatedDate {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.findElement(By.linkText("Reports")).click();
 
-        if(driver.findElement(By.xpath("//input[@ng-model='enablePublishedOn']")).isSelected())
-            driver.findElement(By.xpath("//input[@ng-model='enablePublishedOn']")).click();
-
-        driver.findElement(By.xpath("//button[@ng-click='openedCreatedFrom=true']")).click();
+        driver.findElement(By.xpath("//button[@ng-click='openedSearchFrom=true']")).click();
         driver.findElement(By.xpath("//th[@colspan='6']/button")).click();
         driver.findElement(By.xpath("//th[@colspan='1']/button")).click();
         driver.findElement(By.xpath("//span[text()='"+startYear.substring(2,4)+"']")).click();
         driver.findElement(By.xpath("//span[text()='"+startMonth+"']")).click();
         driver.findElement(By.xpath("//span[text()='"+startDay+"']")).click();
-        driver.findElement(By.xpath("//button[@ng-click='openedCreatedTo=true']")).click();
+        driver.findElement(By.xpath("//button[@ng-click='openedSearchTo=true']")).click();
         driver.findElement(By.xpath("//th[@colspan='6']/button")).click();
         driver.findElement(By.xpath("//th[@colspan='1']/button")).click();
         driver.findElement(By.xpath("//span[text()='"+endYear.substring(2,4)+"']")).click();

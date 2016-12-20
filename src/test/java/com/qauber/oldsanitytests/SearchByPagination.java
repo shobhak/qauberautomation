@@ -1,4 +1,4 @@
-package com.qauber.sanity;
+package com.qauber.oldsanitytests;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,25 +11,23 @@ import org.testng.annotations.Test;
 
 import java.util.concurrent.TimeUnit;
 
-public class SearchByLastName {
+public class SearchByPagination {
     WebDriver driver = new ChromeDriver();
     public String Url = "http://testwave.qabidder.net/#/page/login";
     public String login = "raizzz.test@gmail.com"; // Login
     public String password = "013666";             // Password
-    public String lastName = "Pupkin";             // Last name in report
+    public String list = "3";                      // Number of page to select in pagination
 
     @Test
-    public void verifyHomepageTitle()
-    {
+    public void verifyHomepageTitle() throws InterruptedException {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         driver.findElement(By.linkText("Reports")).click();
 
-        WebElement element = driver.findElement(By.xpath("//input[@ng-model='slnSearchKey']"));
-        element.clear();
-        element.sendKeys(lastName);
         driver.findElement(By.xpath("//button[@ng-click='openedSearchFrom=true']")).click();
         driver.findElement(By.xpath("//button[@ng-click='select(null, $event)']")).click();
-        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='media-box-body']/div[1]/div/h4")).getText().contains(lastName));
+        WebElement element = driver.findElement(By.linkText(list));
+        element.click();
+        Assert.assertEquals(driver.findElement(By.xpath("//li[@class='ng-scope active']/a")).getText(), list);
     }
 
     @BeforeTest
