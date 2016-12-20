@@ -31,11 +31,6 @@ public class AddReportISubjectInformationTest extends PageObjectModelResources {
     public void addSubjectInformationData() throws InterruptedException {
         driver.manage().window().maximize();
         driver.get(Config.getBaseURL());
-//        LoginPage login = new LoginPage(driver);
-//        NavBar navBar = new NavBar(driver);
-//        AddReportNavigation addReportNavigation = new AddReportNavigation(driver);
-//        AddReportsOrganization addReportsOrganization = new AddReportsOrganization(driver);
-//        AddReportSubjectInformationPage addReportSubjectInformation = new AddReportSubjectInformationPage(driver);
 
         Faker faker = new Faker();
         Random randomInt = new Random();
@@ -195,14 +190,8 @@ public class AddReportISubjectInformationTest extends PageObjectModelResources {
 
 
     @AfterClass
-    public void tearDown() throws InterruptedException {
-        Thread.sleep(20000);
-
-        driver.manage().deleteAllCookies();
-        driver.quit();
+    public void breakDown(){
+        breakDownHelper(driver);
     }
-
-
-
 
 }
