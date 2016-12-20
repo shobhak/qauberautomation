@@ -3,6 +3,8 @@ package com.qauber.pagestest;
 import com.github.javafaker.Faker;
 import com.qauber.config.Config;
 import com.qauber.pages.*;
+import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
@@ -12,96 +14,91 @@ import org.testng.annotations.Test;
 /**
  * Created by jingx on 12/16/2016.
  */
-public class AddReportIdentifiersTest {
+public class AddReportIdentifiersTest extends PageObjectModelResources {
     WebDriver driver;
 
     @BeforeClass
     public void setUp(){
         driver = new ChromeDriver();
+        setUpWithUser(User.UserType.SAU, driver);
     }
 
     @Test
     public void addIdentifiersData() throws InterruptedException {
         driver.get(Config.getBaseURL());
-        LoginPage login = new LoginPage(driver);
-        NavBar navBar = new NavBar(driver);
-        AddReportNavigation addReportNavigation = new AddReportNavigation(driver);
-        AddReportsOrganization addReportsOrganization = new AddReportsOrganization(driver);
-        AddReportIdentifiersPage addReportIdentifiersPage = new AddReportIdentifiersPage(driver);
 
         Faker faker = new Faker();
 
         Thread.sleep(5000);
-        login.loginToWave("jing_qauber_001@mailinator.com", "Portnov1");
-
-        Thread.sleep(3000);
+        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        Thread.sleep(5000);
 
         //Go to 'Reports'
-        navBar.addReportButton().click();
+        getNavBar().addReportButton().click();
 
 
         //Select first organization
         Thread.sleep(1000);
-        addReportsOrganization.clickOrganization1();
+        getAddReportOrganization().clickOrganization1();
         Thread.sleep(1000);
 
 
         // select Identifiers tab
-        addReportNavigation.identifiersTab().click();
+        getAddReportNavigation().identifiersTab().click();
         Thread.sleep(2000);
 
         // click previous button
-        addReportIdentifiersPage.previousButton().click();
+        getAddReportIdentifiersPage().previousButton().click();
         Thread.sleep(2000);
-        addReportNavigation.identifiersTab().click();
+        getAddReportNavigation().identifiersTab().click();
         Thread.sleep(2000);
 
         // click next button
-        addReportIdentifiersPage.nextButton().click();
+        getAddReportIdentifiersPage().nextButton().click();
         Thread.sleep(2000);
-        addReportNavigation.identifiersTab().click();
+        getAddReportNavigation().identifiersTab().click();
         Thread.sleep(2000);
 
         // enter data for tattoos
-        addReportIdentifiersPage.tattoosCheckbox().click();
+        getAddReportIdentifiersPage().tattoosCheckbox().click();
         Thread.sleep(1000);
-        addReportIdentifiersPage.tattoosTextField().sendKeys(faker.lorem().word());
+        getAddReportIdentifiersPage().tattoosTextField().sendKeys(faker.lorem().word());
         Thread.sleep(1000);
 
         // enter data for scars
-        addReportIdentifiersPage.scarsCheckbox().click();
+        getAddReportIdentifiersPage().scarsCheckbox().click();
         Thread.sleep(1000);
-        addReportIdentifiersPage.scarsTextField().sendKeys(faker.lorem().word());
+        getAddReportIdentifiersPage().scarsTextField().sendKeys(faker.lorem().word());
         Thread.sleep(1000);
 
         // enter data for needle marks
-        addReportIdentifiersPage.needleMarksCheckbox().click();
+        getAddReportIdentifiersPage().needleMarksCheckbox().click();
         Thread.sleep(1000);
-        addReportIdentifiersPage.needleMarksTextField().sendKeys(faker.lorem().word());
+        getAddReportIdentifiersPage().needleMarksTextField().sendKeys(faker.lorem().word());
         Thread.sleep(1000);
 
         // enter data for tracks
-        addReportIdentifiersPage.tracksCheckbox().click();
+        getAddReportIdentifiersPage().tracksCheckbox().click();
         Thread.sleep(1000);
-        addReportIdentifiersPage.tracksTextField().sendKeys(faker.lorem().word());
+        getAddReportIdentifiersPage().tracksTextField().sendKeys(faker.lorem().word());
         Thread.sleep(1000);
 
         // enter data for glasses
-        addReportIdentifiersPage.glassesCheckbox().click();
+        getAddReportIdentifiersPage().glassesCheckbox().click();
         Thread.sleep(1000);
-        addReportIdentifiersPage.glassesTextField().sendKeys(faker.lorem().word());
+        getAddReportIdentifiersPage().glassesTextField().sendKeys(faker.lorem().word());
         Thread.sleep(1000);
 
         // enter data for mustache
-        addReportIdentifiersPage.mustacheCheckbox().click();
+        getAddReportIdentifiersPage().mustacheCheckbox().click();
         Thread.sleep(1000);
-        addReportIdentifiersPage.mustacheTextField().sendKeys(faker.lorem().word());
+        getAddReportIdentifiersPage().mustacheTextField().sendKeys(faker.lorem().word());
         Thread.sleep(1000);
 
         // enter data for beard
-        addReportIdentifiersPage.beardCheckbox().click();
+        getAddReportIdentifiersPage().beardCheckbox().click();
         Thread.sleep(1000);
-        addReportIdentifiersPage.beardTextField().sendKeys(faker.lorem().word());
+        getAddReportIdentifiersPage().beardTextField().sendKeys(faker.lorem().word());
         Thread.sleep(1000);
 
 
@@ -111,14 +108,9 @@ public class AddReportIdentifiersTest {
 
 
     @AfterClass
-    public void tearDown() throws InterruptedException {
-        Thread.sleep(20000);
-
-        driver.manage().deleteAllCookies();
-        driver.quit();
+    public void breakDown(){
+        breakDownHelper(driver);
     }
-
-
 
 
 }
