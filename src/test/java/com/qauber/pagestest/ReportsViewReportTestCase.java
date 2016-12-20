@@ -29,7 +29,7 @@ public class ReportsViewReportTestCase extends PageObjectModelResources {
             getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
             Thread.sleep(5000);
             getNavBar().clickReports();
-            getReports().selectReport();
+            getReports().selectReport(1).click();
         }
 
         @AfterClass
