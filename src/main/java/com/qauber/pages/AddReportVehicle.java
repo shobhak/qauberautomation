@@ -41,37 +41,37 @@ public class AddReportVehicle {
         return element;
     }
 
-    public WebElement passengerVehicleLicenseButton() {
+    public WebElement passengerVehicleLicenseField() {
         element = driver.findElement(By.xpath("//input[contains(@placeholder,'Vehicle License')])"));
         return element;
     }
 
-    public WebElement passengerVehicleColorButton() {
+    public WebElement passengerVehicleColorField() {
         element = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/fieldset/div[2]/div[5]/div/div/input"));
         return element;
     }
 
-    public WebElement passengerVehicleMakeButton() {
+    public WebElement passengerVehicleMakeField() {
         element = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/fieldset/div[2]/div[2]/div/div/input"));
         return element;
     }
 
-    public WebElement passengerVehicleYearButton() {
+    public WebElement passengerVehicleYearField() {
         element = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/fieldset/div[2]/div[6]/div/div/input"));
         return element;
     }
 
-    public WebElement passengerVehicleModelButton() {
+    public WebElement passengerVehicleModelField() {
         element = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/fieldset/div[2]/div[3]/div/div/input"));
         return element;
     }
 
-    public WebElement passengerVehicleOdditiesButton() {
+    public WebElement passengerVehicleOdditiesField() {
         element = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/fieldset/div[2]/div[7]/div/div/input"));
         return element;
     }
 
-    public WebElement passengerVehicleBodyStyleButton() {
+    public WebElement passengerVehicleBodyStyleField() {
         element = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/fieldset/div[2]/div[4]/div/div/input"));
         return element;
     }
@@ -91,37 +91,37 @@ public class AddReportVehicle {
         return element;
     }
 
-    public WebElement driverVehicleLicenseButton() {
+    public WebElement driverVehicleLicenseField() {
         element = driver.findElement(By.xpath("//input[contains(@placeholder,'Vehicle License')])"));
         return element;
     }
 
-    public WebElement driverVehicleColorButton() {
+    public WebElement driverVehicleColorField() {
         element = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/fieldset/div[2]/div[5]/div/div/input"));
         return element;
     }
 
-    public WebElement driverVehicleMakeButton() {
+    public WebElement driverVehicleMakeField() {
         element = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/fieldset/div[2]/div[2]/div/div/input"));
         return element;
     }
 
-    public WebElement driverVehicleYearButton() {
+    public WebElement driverVehicleYearField() {
         element = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/fieldset/div[2]/div[6]/div/div/input"));
         return element;
     }
 
-    public WebElement driverVehicleModelButton() {
+    public WebElement driverVehicleModelField() {
         element = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/fieldset/div[2]/div[3]/div/div/input"));
         return element;
     }
 
-    public WebElement driverVehicleOdditiesButton() {
+    public WebElement driverVehicleOdditiesField() {
         element = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/fieldset/div[2]/div[7]/div/div/input"));
         return element;
     }
 
-    public WebElement driverVehicleBodyStyleButton() {
+    public WebElement driverVehicleBodyStyleField() {
         element = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[7]/fieldset/div[2]/div[4]/div/div/input"));
         return element;
     }

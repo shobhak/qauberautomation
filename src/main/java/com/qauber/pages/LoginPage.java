@@ -45,6 +45,11 @@ public class LoginPage {
 
         userNameField().sendKeys(strUserName);
         passwordField().sendKeys(strPassword);
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         loginButton().click();
         //TODO: add exception code... maybe check for successful/unsuccessful login and throw LoginFailure / UserNotFound / etc?
 
