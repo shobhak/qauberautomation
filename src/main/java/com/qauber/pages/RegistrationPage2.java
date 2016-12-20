@@ -49,7 +49,7 @@ public class RegistrationPage2 {
         return driver.findElement(By.xpath("//select[@name='state']"));
     }
     public WebElement postalCodeField(){
-        return driver.findElement(By.xpath("input[@name='zip']"));
+        return driver.findElement(By.xpath("//input[@name='zip']"));
     }
     public WebElement notesField(){
         return driver.findElement(By.xpath("//textarea"));
