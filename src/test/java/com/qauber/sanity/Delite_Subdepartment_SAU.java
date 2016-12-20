@@ -41,7 +41,7 @@ public class Delite_Subdepartment_SAU {
         DeliteButton.click();
 
 
-
+        driver.quit();
 
 
     }

@@ -41,7 +41,7 @@ public class Edit_SubDepartment_AU {
         Update.click();
 
 
-
+        driver.quit();
 
 
 

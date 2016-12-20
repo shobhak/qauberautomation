@@ -39,7 +39,7 @@ public class Edit_Department_SAU {
 
 
 
-
+        driver.quit();
 
 
 
