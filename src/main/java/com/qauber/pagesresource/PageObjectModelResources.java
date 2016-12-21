@@ -45,7 +45,7 @@ public class PageObjectModelResources {
     private AddReportsOrganization addReportOrganization;
     private AddReportSubjectInformationPage addReportSubjectInformationPage;
     private AddReportVehicle addReportVehicle;
-    private AddReportPreview addReportPreview;
+    private CreateSubsciption createSubsciption;
 
 
 //
@@ -102,7 +102,8 @@ public class PageObjectModelResources {
         addReportOrganization = new AddReportsOrganization(driver);
         addReportSubjectInformationPage = new AddReportSubjectInformationPage(driver);
         addReportVehicle = new AddReportVehicle(driver);
-        addReportPreview = new AddReportPreview(driver);
+        createSubsciption = new CreateSubsciption(driver);
+
     }
 
     public void breakDownHelper() {
@@ -203,7 +204,7 @@ public class PageObjectModelResources {
         return addReportVehicle;
     }
 
-    protected AddReportPreview getAddReportPreview(){return addReportPreview; }
+    protected  CreateSubsciption getCreateSubsciption() {return createSubsciption;}
 
 
     //
