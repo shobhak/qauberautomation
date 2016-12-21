@@ -25,9 +25,8 @@ public class UsersPermissionsDialog {
                 ("//tr[@ng-repeat='entity in entities']/td/button[@ng-click='assignEntity(entity)']['"+index+"']"));
     }
     public WebElement rightsDropdownByIndex(int index){
-        index = index - 1;
         return driver.findElement(By.xpath
-                ("//tr[@ng-repeat='entity in entities']/td/button[@ng-click='assignEntity(entity)']['"+index+"']"));
+                ("//tr[@ng-repeat='entity in entities']['"+index+"']/td/select[@ng-model='entity.status']"));
     }
     public void closeDialogByPressESC() throws AWTException {
         Robot robot = new Robot();
