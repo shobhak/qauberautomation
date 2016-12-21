@@ -1,7 +1,5 @@
 package com.qauber.pages;
 
-//Created by Denys_Gon 12/20/2016.
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,22 +7,25 @@ import org.openqa.selenium.WebElement;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 
-public class UsersPermissionsDialog {
+
+//Created by Denys_G on 12/21/2016.
+
+public class EntitiesPermissionsDialog {
     WebDriver driver;
 
-    public UsersPermissionsDialog(WebDriver driver) {this.driver = driver;}
+    public EntitiesPermissionsDialog(WebDriver driver) {this.driver = driver;}
 
     public WebElement deleteButtonByIndex(int index){
         return driver.findElement(By.xpath
-                ("//tr[@ng-repeat='entity in entities']/td/button[@ng-click='detachEntity(entity)']['"+index+"']"));
+                ("//tr[@ng-repeat='user in $assignCtrl.users']["+index+"]/td/button[@title='Detach']"));
     }
     public WebElement saveButtonByIndex(int index){
         return driver.findElement(By.xpath
-                ("//tr[@ng-repeat='entity in entities']/td/button[@ng-click='assignEntity(entity)']['"+index+"']"));
+                ("//tr[@ng-repeat='user in $assignCtrl.users']["+index+"]/td/button[@title='Save changes']"));
     }
     public WebElement rightsDropdownByIndex(int index){
         return driver.findElement(By.xpath
-                ("//tr[@ng-repeat='entity in entities']['"+index+"']/td/select[@ng-model='entity.status']"));
+                ("//tr[@ng-repeat='user in $assignCtrl.users']["+index+"]/td/select[@ng-model='user.assignedRole']"));
     }
     public void closeDialogByPressESC() throws AWTException {
         Robot robot = new Robot();

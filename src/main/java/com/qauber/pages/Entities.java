@@ -91,14 +91,15 @@ public class Entities {
 
     // find the matching web element from web elements list
     public int findEditOrganizationIndex(String orgname){
-        for (int i = 0; i < elements.size(); i++){
-            if (elements.get(i).getText().equals(orgname)){
+        List<WebElement> els = organizationList();
+        for (int i = 0; i < this.elements.size(); i++){
+            if (els.get(i).getText().equals(orgname)){
                 break;
             } else {
                 rowindex++;
             }
         }
-        if (rowindex == elements.size()+2){
+        if (rowindex == els.size()+2){
             System.out.println("The organization is not on the list");
         }
         return rowindex;
