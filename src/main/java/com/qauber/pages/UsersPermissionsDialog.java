@@ -15,12 +15,10 @@ public class UsersPermissionsDialog {
     public UsersPermissionsDialog(WebDriver driver) {this.driver = driver;}
 
     public WebElement deleteButtonByIndex(int index){
-        index = index - 1;
         return driver.findElement(By.xpath
                 ("//tr[@ng-repeat='entity in entities']/td/button[@ng-click='detachEntity(entity)']['"+index+"']"));
     }
     public WebElement saveButtonByIndex(int index){
-        index = index - 1;
         return driver.findElement(By.xpath
                 ("//tr[@ng-repeat='entity in entities']/td/button[@ng-click='assignEntity(entity)']['"+index+"']"));
     }
