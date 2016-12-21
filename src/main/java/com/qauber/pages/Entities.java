@@ -13,6 +13,8 @@ public class Entities {
 
     WebDriver driver;
     WebElement element;
+    List<WebElement> elements;
+    int rowindex = 2;
 
     public Entities(WebDriver driver) {
         this.driver = driver;
@@ -39,7 +41,7 @@ public class Entities {
 
     // Web elements list for "Info" organization
     public List<WebElement> organizationList(){
-        List<WebElement> elements = driver.findElements(By.cssSelector("td.pl-lg > a.ng-binding"));
+        elements = driver.findElements(By.cssSelector("td.pl-lg > a.ng-binding"));
         return elements;
     }
 
@@ -85,6 +87,21 @@ public class Entities {
     public WebElement deleteOrganizationButton(int rowindex){
         element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[2]/button[4]"));
         return element;
+    }
+
+    // find the matching web element from web elements list
+    public int findEditOrganizationIndex(String orgname){
+        for (WebElement e : elements){
+            if (orgname.equals(e.getText())){
+                break;
+            } else {
+                rowindex++;
+            }
+        }
+        if (rowindex == elements.size()+2){
+            System.out.println("The organization is not on the list");
+        }
+        return rowindex;
     }
 
 
