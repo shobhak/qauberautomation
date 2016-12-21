@@ -84,8 +84,8 @@ public class Entities {
 
     // find the matching web element from web elements list
     public int findEditOrganizationIndex(String orgname){
-        for (WebElement e : elements){
-            if (orgname.equals(e.getText())){
+        for (int i = 0; i < elements.size(); i++){
+            if (elements.get(i).getText().equals(orgname)){
                 break;
             } else {
                 rowindex++;
