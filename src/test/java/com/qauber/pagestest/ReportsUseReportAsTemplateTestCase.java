@@ -23,7 +23,7 @@ public class ReportsUseReportAsTemplateTestCase extends PageObjectModelResources
     }
 
     @Test
-    public void reportsViewReport() throws InterruptedException {
+    public void reportsUseReportAsTemplate() throws InterruptedException {
         driver.get(Config.getBaseURL());
         Thread.sleep(10000);
         getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
@@ -35,11 +35,10 @@ public class ReportsUseReportAsTemplateTestCase extends PageObjectModelResources
         getReportsViewReport().useAsTemplateButton().click();
         Thread.sleep(1000);
     }
-
-    @AfterClass
+    /*@AfterClass
     public void breakDown(){
         breakDownHelper(driver);
-    }
+    }*/
 }
 
 
