@@ -12,7 +12,7 @@ public class Header {
     WebDriver driver;
 
     //constructor
-    public Header(WebDriver driver){
+    public Header(WebDriver driver) {
         this.driver = driver;
     }
 
@@ -20,4 +20,10 @@ public class Header {
         return driver.findElement(By.cssSelector("span.mr-sm.ng-binding"));
     }
 
+    public WebElement logo() {
+        return driver.findElement(By.xpath("//a[@class=\"navbar-brand\"]"));
+    }
+    public WebElement hamburgerMenu() {
+        return driver.findElement(By.xpath("//a[@class=\"hidden-xs\"]"));
+    }
 }
