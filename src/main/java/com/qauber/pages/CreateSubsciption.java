@@ -46,5 +46,10 @@ public class CreateSubsciption {
         return element;
     }
 
+    public WebElement agreeAndContinueButton(){
+        element = driver.findElement(By.xpath("//*[@id='continue']"));
+        return element;
+    }
+
 
 }

@@ -70,6 +70,13 @@ public class Entities {
         return element;
     }
 
+    //Orange second button
+    public WebElement orangeLastEditButton(){
+        return driver.findElement(By.xpath("(.//button[3])[last()]"));
+
+        //return driver.findElement(By.xpath("(.//button[@title='Finish creating the organization'])[last()]"));
+    }
+
     // Web element for "Action" finish create an organization
     public WebElement finishCreateOrganizationButton(int rowindex){
         element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[2]/button[3]"));
