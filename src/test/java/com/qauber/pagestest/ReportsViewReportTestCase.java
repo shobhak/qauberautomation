@@ -14,27 +14,27 @@ import org.testng.annotations.Test;
  */
 public class ReportsViewReportTestCase extends PageObjectModelResources {
 
-        WebDriver driver;
+    WebDriver driver;
 
-        @BeforeClass
-        public void setUp() {
+    @BeforeClass
+    public void setUp() {
         driver = new ChromeDriver();
         setUpWithUser(User.UserType.SAU, driver);
-        }
+    }
 
-        @Test
-        public void reportsViewReport() throws InterruptedException {
-            driver.get(Config.getBaseURL());
-            Thread.sleep(10000);
-            getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
-            Thread.sleep(5000);
-            getNavBar().clickReports();
-            getReports().selectReport(1).click();
-            Thread.sleep(5000);
-        }
-
-        @AfterClass
+    @Test
+    public void reportsViewReport() throws InterruptedException {
+        int rowindex = 2;
+        driver.get(Config.getBaseURL());
+        Thread.sleep(10000);
+        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        Thread.sleep(5000);
+        getNavBar().clickReports();
+        getReports().selectReport(rowindex).click();
+        Thread.sleep(5000);
+    }
+    @AfterClass
         public void breakDown(){
             breakDownHelper(driver);
         }
-    }
+}
