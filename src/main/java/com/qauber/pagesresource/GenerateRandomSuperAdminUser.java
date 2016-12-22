@@ -55,7 +55,8 @@ public class GenerateRandomSuperAdminUser extends PageObjectModelResources {
         //////////////////////
 
         //Registration Page 2 - fill required fields with random data
-        getRegistrationPage2().setRandomDataAndRegister();
+        getRegistrationPage2().setRandomDataInFields();
+        getRegistrationPage2().finishRegistrationButton().click();
 
         //Sleep, then activate email from mailinator
         Thread.sleep(60000); //was 120000

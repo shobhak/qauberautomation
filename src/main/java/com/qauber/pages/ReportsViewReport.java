@@ -23,4 +23,8 @@ public class ReportsViewReport {
     public WebElement useAsTemplateButton() {
         return driver.findElement(By.xpath("//button[text()='Use as template']"));
     }
+
+    public WebElement reportID(){
+        return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[1]/div[2]/strong"));
+    }
 }

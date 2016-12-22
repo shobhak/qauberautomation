@@ -103,6 +103,20 @@ public class AddReportPreviewPublishTestCase extends PageObjectModelResources {
         getAddReportNavigation().previewTab().click();
         Thread.sleep(1000);
 
+        //caseID
+        getAddReportPreview().editPencilIcon().click();
+        Thread.sleep(1000);
+        getAddReportPreview().caseIDField().sendKeys(faker.number().digit());
+        Thread.sleep(1000);
+        getAddReportPreview().cancelCaseIDButton().click();
+        Thread.sleep(1000);
+        getAddReportPreview().editPencilIcon().click();
+        Thread.sleep(1000);
+        getAddReportPreview().caseIDField().sendKeys(faker.number().digit());
+        Thread.sleep(1000);
+        getAddReportPreview().saveCaseIDButton().click();
+        Thread.sleep(1000);
+
         jse = (JavascriptExecutor) driver;
         jse.executeScript("window.scrollBy(0,2000)", "");
 
