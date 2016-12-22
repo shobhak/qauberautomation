@@ -9,9 +9,9 @@ import org.openqa.selenium.safari.SafariDriver;
 
 import java.util.concurrent.TimeUnit;
 
-/**
- * Created by erikfriedlander on 12/17/16.
- */
+
+//Created by erikfriedlander on 12/17/16.
+
 public class PageObjectModelResources {
 
     private WebDriver driver;
@@ -32,6 +32,9 @@ public class PageObjectModelResources {
 //Navbar pages
     //    private Users users;
     private Entities entities;
+    private EntitiesPermissionsDialog entitiesPermissionsDialog;
+    private Users users;
+    private UsersPermissionsDialog usersPermissionsDialog;
     private EditOrganizationPage editOrganizationPage;
     private Reports reports;
     private ReportsViewReport reportsViewReport;
@@ -45,8 +48,8 @@ public class PageObjectModelResources {
     private AddReportsOrganization addReportOrganization;
     private AddReportSubjectInformationPage addReportSubjectInformationPage;
     private AddReportVehicle addReportVehicle;
+    private AddReportPreview addReportPreview;
     private CreateSubsciption createSubsciption;
-
 
 //
 
@@ -90,6 +93,9 @@ public class PageObjectModelResources {
         editProfile = new EditProfile(driver);
 
         entities = new Entities(driver);
+        entitiesPermissionsDialog = new EntitiesPermissionsDialog(driver);
+        users = new Users(driver);
+        usersPermissionsDialog = new UsersPermissionsDialog(driver);
         editOrganizationPage = new EditOrganizationPage(driver);
         reports = new Reports(driver);
         reportsViewReport = new ReportsViewReport(driver);
@@ -102,6 +108,7 @@ public class PageObjectModelResources {
         addReportOrganization = new AddReportsOrganization(driver);
         addReportSubjectInformationPage = new AddReportSubjectInformationPage(driver);
         addReportVehicle = new AddReportVehicle(driver);
+        addReportPreview = new AddReportPreview(driver);
         createSubsciption = new CreateSubsciption(driver);
 
     }
@@ -160,9 +167,14 @@ public class PageObjectModelResources {
         return editProfile;
     }
 
-    protected Entities getEntities() {
-        return entities;
-    }
+    protected Entities getEntities() {return entities;}
+
+    protected EntitiesPermissionsDialog getEntitiesPermissionsDialog() {return entitiesPermissionsDialog;}
+
+    protected Users getUsers() {return users;}
+
+    protected UsersPermissionsDialog getUsersPermissionsDialog() {return usersPermissionsDialog;}
+
 
     protected EditOrganizationPage getOrganization() {return  editOrganizationPage;}
 
@@ -204,7 +216,11 @@ public class PageObjectModelResources {
         return addReportVehicle;
     }
 
+    protected AddReportPreview getAddReportPreview() { return addReportPreview; }
+
     protected  CreateSubsciption getCreateSubsciption() {return createSubsciption;}
+
+
 
 
     //

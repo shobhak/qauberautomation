@@ -58,50 +58,7 @@ public class LoginPage {
     //By request, may delete.
     public boolean verifyLoginPage() {
         String footerContent = "© 2016 - FITS\n" + "FITS Web Application";
-        return getLoginFooterText().equals(footerContent);
-    }
-
-    /////////////Old code, refactor and delete
-
-    By userName = By.id("exampleInputEmail1");
-    By password = By.id("exampleInputPassword1");
-    By footerText = By.xpath("/html/body/div/div/div/div[@class='p-lg text-center']");
-
-    By loginButton = By.xpath("/html/body/div/div/div/div/div/form/button[@class='btn btn-block btn-primary mt-lg']");
-    By registerButton = By.cssSelector("a.btn.btn-block.btn-default");
-
-
-
-    //Set user name in textbox
-
-    public void setUserName(String strUserName){
-
-        driver.findElement(userName).sendKeys(strUserName);
-
-    }
-
-
-
-    //Set password in password textbox
-    public void setPassword(String strPassword){
-        driver.findElement(password).sendKeys(strPassword);
-    }
-
-
-    //Click on loginButton button
-
-    public void clickLogin(){
-        driver.findElement(loginButton).click();
-    }
-
-    public void clickRegister(){
-        driver.findElement(registerButton).click();
-    }
-
-    //Get the title of Login Page
-
-    public String getLoginFooterText(){
-        return driver.findElement(footerText).getText();
+        return footerText().getText().equals(footerContent);
     }
 
 }
