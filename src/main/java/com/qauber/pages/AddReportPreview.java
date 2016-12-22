@@ -16,6 +16,22 @@ public class AddReportPreview {
         this.driver = driver;
     }
 
+    public WebElement editPencilIcon() {
+        return driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[9]/div[2]/div[1]/div[2]/div[2]/div[1]/em"));
+    }
+
+    public WebElement caseIDField() {
+        return driver.findElement(By.xpath("//input[@ng-model=\"wizard.caseIdEdited\"]"));
+    }
+
+    public WebElement saveCaseIDButton (){
+        return driver.findElement(By.cssSelector(".text-success.fa.fa-check"));
+    }
+
+    public WebElement cancelCaseIDButton (){
+        return driver.findElement(By.cssSelector(".text-danger.fa.fa-times.ml"));
+    }
+
     public WebElement publishReportButton() {
         return driver.findElement(By.xpath("//a[@ng-click= \"wizard.commitReport()\"]"));
     }
