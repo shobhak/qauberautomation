@@ -55,40 +55,19 @@ public class GenerateRandomSuperAdminUser extends PageObjectModelResources {
         //////////////////////
 
         //Registration Page 2 - fill required fields with random data
-        getRegistrationPage2().companyNameField().sendKeys(faker.company().name());
-        getRegistrationPage2().contactPhoneField().sendKeys(faker.phoneNumber().phoneNumber());
-        getRegistrationPage2().contactEmailField().sendKeys(faker.internet().safeEmailAddress());
-        Thread.sleep(sleepTime/2);
-
-        //Default is United States, we don't have to do this
-//        getRegistrationPage2().countryDropDownMenu().click();
-//        getRegistrationPage2().countryDropDownMenu().sendKeys("United State");
-//        Thread.sleep(sleepTime/2);
-
-        getRegistrationPage2().addressField1().sendKeys(faker.address().streetAddress());
-        getRegistrationPage2().cityField().sendKeys(faker.address().city());
-        Thread.sleep(sleepTime/2);
-
-        getRegistrationPage2().stateDropDownMenu().click();
-        getRegistrationPage2().stateDropDownMenu().sendKeys(faker.address().state());
-        Thread.sleep(sleepTime);
-
-        getRegistrationPage2().postalCodeField().sendKeys(faker.address().zipCode());
-        Thread.sleep(sleepTime);
-
-        getRegistrationPage2().finishRegistrationButton().click();
+        getRegistrationPage2().setRandomDataAndRegister();
 
         //Sleep, then activate email from mailinator
-        Thread.sleep(120000);
+        Thread.sleep(60000); //was 120000
 
         driver.get(mailinator.getFirstLinkInFirstEmailInAccount(userName)); //get first link in first email from Mailinator, then click it
 
 
         //Sleep, then log in
         Thread.sleep(sleepTime*3);
-        driver.get(serverURL);
 
-        getLogin().loginToWave(userName, password);
+//        driver.get(serverURL);
+//        getLogin().loginToWave(userName, password);
 
         newUser.setUsername(userName);
         newUser.setPassword(password);
@@ -103,5 +82,6 @@ public class GenerateRandomSuperAdminUser extends PageObjectModelResources {
     public void breakDown() throws InterruptedException {
         Thread.sleep(15000);
         breakDownHelper(driver);
+        Thread.sleep(15000);
     }
 }
