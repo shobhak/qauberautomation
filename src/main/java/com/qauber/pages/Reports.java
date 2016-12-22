@@ -171,4 +171,8 @@ public class Reports {
     public void clickPicture1() { //TODO: general pic get
         driver.findElement(pictureRow1).click();
     }
+
+    public WebElement searchResultPhoto(int rowindex){
+        return driver.findElement(By.xpath("//tr[@class='ng-scope'][" + rowindex + "]/td/div/a/img"));
+    }
 }
