@@ -55,7 +55,6 @@ public class Users {
     }
 
     public WebElement deactivateButtonByIndex(int index){
-        index = index - 1;
         return driver.findElement(By.xpath("//tr[@pagination-id='usersPagination']/td/button[@title='Deactivate']['"+index+"']"));
     }
 
@@ -81,7 +80,6 @@ public class Users {
     }
 
     public WebElement deleteButtonByIndex(int index){
-        index = index - 1;
         return driver.findElement(By.xpath("//tr[@pagination-id='usersPagination']/td/button[@title='Deactivate']['"+index+"']"));
     }
 
