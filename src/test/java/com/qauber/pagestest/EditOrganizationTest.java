@@ -41,8 +41,9 @@ public class EditOrganizationTest extends PageObjectModelResources {
         Faker faker = new Faker();
         Random randomInt = new Random();
 
-        int rowindex = 2;
-        String orgname = "org001";
+        int rowindex = 0;
+        String orgname = "Gutmann Inc";
+
         int countryindex = randomInt.nextInt(243);
 //        int countryindex = 229;
 
@@ -55,26 +56,20 @@ public class EditOrganizationTest extends PageObjectModelResources {
         getNavBar().entitiesButton().click();
         Thread.sleep(5000);
 
-        List<WebElement> elements = getEntities().organizationList();
-        for (WebElement e : elements){
-            System.out.println(e.getText());
-            if (orgname.equals(e.getText())){
-                break;
-            } else {
-                rowindex++;
-            }
-        }
 
-        System.out.println(getEntities().organizationInfo(rowindex).getText());
+//        List<WebElement> elements = getEntities().organizationList();
 
-        getEntities().editOrganizationButton(3).click();
+        rowindex = getEntities().findEditOrganizationIndex(orgname);
+        Thread.sleep(2000);
+
+        getEntities().editOrganizationButton(rowindex).click();
         Thread.sleep(2000);
 
         //edit organization name
-        getOrganization().organizatonName().clear();
-        Thread.sleep(1000);
-        getOrganization().organizatonName().sendKeys(faker.company().name());
-        Thread.sleep(2000);
+//        getOrganization().organizatonName().clear();
+//        Thread.sleep(1000);
+//        getOrganization().organizatonName().sendKeys(faker.company().name());
+//        Thread.sleep(2000);
 
         //edit phone number
         getOrganization().phoneNumber().clear();

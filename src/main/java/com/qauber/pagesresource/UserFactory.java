@@ -35,12 +35,12 @@ public class UserFactory {
             user = getUserLoginFileData(userType); //set user from file
 
         } catch (NullPointerException e) { //If file not found, create a new user of that type
-            user = generateUser(userType); //GENERATE USER
-
-            //TODO: improve file not found handling
             System.out.println("User Config File not found: generating config files and new user");
             System.out.println("see ~/QAUberTestConfig/ for config files");
 
+            user = generateUser(userType); //GENERATE USER
+
+            //TODO: improve file not found handling
             setUserLoginFileData(user);
             //throw new FileNotFoundException();
         }
@@ -54,15 +54,27 @@ public class UserFactory {
    private User generateUser(User.UserType userType) {
 
        User user = new User();
-       GenerateRandomSuperAdminUser randomSuperAdminUserGenerator = new GenerateRandomSuperAdminUser();
+       GenerateRandomSuperAdminUser randomSuperAdminUserGenerator = new GenerateRandomSuperAdminUser(); //this is a good name. please do not write names like this again.
 
        if (userType == userType.SAU) {
            try { //attempt to make a new SAU
                System.out.println("Attempting to generate new super admin user. Please be patient, this may take up to 5 minutes.");
+               System.out.println("Try 1 of 2.");
                user = randomSuperAdminUserGenerator.generateRandomSuperAdminUser("http://testwave.qabidder.net");
-           } catch (InterruptedException e) { //if failed, set default config
-               user.setUsername("SAU@mailinator.com");
-               user.setPassword("12345678");
+           } catch (NullPointerException e) { //if failed, set default config
+               System.out.println("Try 2 of 2: Try 1 failed.");
+               try {
+                   user = randomSuperAdminUserGenerator.generateRandomSuperAdminUser("http://testwave.qabidder.net");
+               } catch (NullPointerException e1) {
+                   System.out.println("Both attempts failed, will generate user with default information.");
+               } catch (InterruptedException e1) { //if Thread.sleep fails... which I'm not worried about
+                   e1.printStackTrace();
+               }
+               System.out.println("UPDATE CONFIG FILE at ~/UberQAUTestConfig/sau.txt WITH VALID USERNAME AND PASSWORD!");
+                   user.setUsername("SAU@mailinator.com");
+                   user.setPassword("12345678");
+           } catch (InterruptedException e) { //if Thread.sleep fails... which I'm not worried about
+               e.printStackTrace();
            }
        }
        else if (userType == userType.AU) {

@@ -37,8 +37,10 @@ public class RegistrationPage1 {
         passwordField().sendKeys(password);
         retypePasswordField().sendKeys(password);
 
-        Thread.sleep(1000); //TODO: fix Thread.sleep and remove...
+        Thread.sleep(2000); //TODO: fix Thread.sleep and remove...
 
         continueRegistrationButton().click();
+
+        Thread.sleep(5000);
     }
 }

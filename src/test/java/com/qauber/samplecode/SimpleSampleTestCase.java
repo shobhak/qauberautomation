@@ -15,10 +15,12 @@ import org.testng.annotations.Test;
 public class SimpleSampleTestCase extends PageObjectModelResources {
 
     WebDriver driver;
+    int sleepTime;
 
     @BeforeClass
     public void setUp() {
         driver = new ChromeDriver();
+        sleepTime = 5000;
         setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
         //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
     }
@@ -26,23 +28,16 @@ public class SimpleSampleTestCase extends PageObjectModelResources {
     @Test
     public void simpleSampleTestCase() throws InterruptedException {
         driver.get(Config.getBaseURL());
-        Thread.sleep(10000);
+        Thread.sleep(sleepTime*2);
 
         getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
-        Thread.sleep(10000);
+        Thread.sleep(sleepTime*2);
 
         getNavBar().addReportButton().click();
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime);
 
-        getNavBar().entitiesButton().click();
-        Thread.sleep(5000);
-
-        getAddReportOrganization().clickOrganization1();
-        Thread.sleep(5000);
-
-
-
-
+        getNavBar().reportsButton().click();
+        Thread.sleep(sleepTime*2);
     }
 
     @AfterClass

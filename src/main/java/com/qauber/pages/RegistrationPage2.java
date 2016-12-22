@@ -11,6 +11,7 @@ import org.openqa.selenium.WebElement;
 public class RegistrationPage2 {
     WebDriver driver;
     Faker faker;
+    int sleepTime;
 
     public RegistrationPage2(WebDriver driver) {
         this.driver = driver;
@@ -58,8 +59,33 @@ public class RegistrationPage2 {
         return driver.findElement(By.xpath("//button[@id='registerConfirm']"));
     }
 
-    public void setRandomDataAndRegister() {
+    public void setRandomDataAndRegister() throws InterruptedException {
         //TODO: implement later? see RegisterAndActivateSAU
+        //TODO: replace GenerateRandomSuperAdminUser code for this page with this...
+        sleepTime = 5000;
+        faker = new Faker(); //(new Locale("en-US"));
+        companyNameField().sendKeys(faker.company().name());
+        contactPhoneField().sendKeys(faker.phoneNumber().phoneNumber());
+        contactEmailField().sendKeys(faker.internet().safeEmailAddress());
+        Thread.sleep(sleepTime/2);
+
+        //Default is United States, we don't have to do this
+//        getRegistrationPage2().countryDropDownMenu().click();
+//        getRegistrationPage2().countryDropDownMenu().sendKeys("United State");
+//        Thread.sleep(sleepTime/2);
+
+        addressField1().sendKeys(faker.address().streetAddress());
+        cityField().sendKeys(faker.address().city());
+        Thread.sleep(sleepTime/2);
+
+        stateDropDownMenu().click();
+        stateDropDownMenu().sendKeys(faker.address().state());
+        Thread.sleep(sleepTime);
+
+        postalCodeField().sendKeys(faker.address().zipCode());
+        Thread.sleep(sleepTime);
+
+        finishRegistrationButton().click();
     }
 
 }
