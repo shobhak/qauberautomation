@@ -216,7 +216,7 @@ public class PageObjectModelResources {
         return addReportVehicle;
     }
 
-    protected AddReportPreview addReportPreview() { return addReportPreview; }
+    protected AddReportPreview getAddReportPreview() { return addReportPreview; }
 
     protected  CreateSubsciption getCreateSubsciption() {return createSubsciption;}
 
