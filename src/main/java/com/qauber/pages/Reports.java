@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.Select;
 
 /**
  * Created by Max on 12/15/16.
+ * Modified by Ala on 12/20/16.
  */
 public class Reports {
 
@@ -127,6 +128,11 @@ public class Reports {
         driver.findElement(By.xpath("//span[text()='" + Month + "']")).click();
         driver.findElement(By.xpath("//span[text()='" + Day + "']")).click();
     }
+    // added on 12/20/16
+    public WebElement clearButton(){
+        return driver.findElement(By.cssSelector(".btn.btn-labeled.btn-primary"));
+    }
+
 
 
 
