@@ -59,7 +59,7 @@ public class RegistrationPage2 {
         return driver.findElement(By.xpath("//button[@id='registerConfirm']"));
     }
 
-    public void setRandomDataAndRegister() throws InterruptedException {
+    public void setRandomDataInFields() throws InterruptedException {
         //TODO: implement later? see RegisterAndActivateSAU
         //TODO: replace GenerateRandomSuperAdminUser code for this page with this...
         sleepTime = 5000;
@@ -85,7 +85,7 @@ public class RegistrationPage2 {
         postalCodeField().sendKeys(faker.address().zipCode());
         Thread.sleep(sleepTime);
 
-        finishRegistrationButton().click();
+//        finishRegistrationButton().click();
     }
 
 }
