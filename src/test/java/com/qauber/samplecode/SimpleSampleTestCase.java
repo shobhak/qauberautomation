@@ -9,9 +9,9 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-
-//Created by erikfriedlander on 12/19/16.
-
+/**
+ * Created by erikfriedlander on 12/19/16.
+ */
 public class SimpleSampleTestCase extends PageObjectModelResources {
 
     WebDriver driver;
