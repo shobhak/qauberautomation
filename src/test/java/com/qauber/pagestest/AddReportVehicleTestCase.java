@@ -56,7 +56,7 @@ public class AddReportVehicleTestCase extends PageObjectModelResources {
         getAddReportVehicle().passengerVehicleModelField().sendKeys("Ford 000");
 
         getAddReportVehicle().passengerVehicleBodyStyleField().click();
-        getAddReportVehicle().passengerVehicleBodyStyleField().sendKeys("CBRIO");
+        getAddReportVehicle().passengerVehicleBodyStyleField().sendKeys("CABRIO");
 
         getAddReportVehicle().passengerVehicleColorField().click();
         getAddReportVehicle().passengerVehicleColorField().sendKeys("YELLO");
