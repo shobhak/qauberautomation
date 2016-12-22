@@ -14,7 +14,7 @@ public class Entities {
     WebDriver driver;
     WebElement element;
     List<WebElement> elements;
-    int rowindex = 2;
+//    int rowindex = 2;
 
     public Entities(WebDriver driver) {
         this.driver = driver;
@@ -48,25 +48,25 @@ public class Entities {
 
     // Web element for "Info" organization
     public WebElement organizationInfo(int rowindex){
-        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[1]/a"));
+        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + (rowindex+1) + "]/td[1]/a"));
         return element;
     }
 
     // Web element for "Info" logo image
     public WebElement organizationLogo(int rowindex){
-        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[1]/div/img"));
+        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + (rowindex+1) + "]/td[1]/div/img"));
         return element;
     }
 
     // Web element for "Action" assign permission
     public WebElement assignPermissionButton(int rowindex){
-        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[2]/button[1]"));
+        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + (rowindex+1) + "]/td[2]/button[1]"));
         return element;
     }
 
     // Web element for "Action" edit organization
     public WebElement editOrganizationButton(int rowindex){
-        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[2]/button[2]"));
+        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + (rowindex+1) + "]/td[2]/button[2]"));
         return element;
     }
 
@@ -79,19 +79,20 @@ public class Entities {
 
     // Web element for "Action" finish create an organization
     public WebElement finishCreateOrganizationButton(int rowindex){
-        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[2]/button[3]"));
+        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + (rowindex+1) + "]/td[2]/button[3]"));
         return element;
     }
 
     // Web element for "Action" delete an organization
     public WebElement deleteOrganizationButton(int rowindex){
-        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + rowindex + "]/td[2]/button[4]"));
+        element = driver.findElement(By.xpath("//section/div/div/div/div/table/tbody/tr[" + (rowindex+1) + "]/td[2]/button[4]"));
         return element;
     }
 
     // find the matching web element from web elements list
     public int findEditOrganizationIndex(String orgname){
         List<WebElement> els = organizationList();
+        int rowindex = 1;
         for (int i = 0; i < this.elements.size(); i++){
             if (els.get(i).getText().equals(orgname)){
                 break;
@@ -99,7 +100,7 @@ public class Entities {
                 rowindex++;
             }
         }
-        if (rowindex == els.size()+2){
+        if (rowindex == els.size()+1){
             System.out.println("The organization is not on the list");
         }
         return rowindex;
