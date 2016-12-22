@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * Created by jingx on 12/22/2016.
  */
-public class SuperAdminDeleteEntity extends PageObjectModelResources {
+public class SuperAdminDeleteEntityTestCase extends PageObjectModelResources {
     WebDriver driver;
 
     @BeforeClass
