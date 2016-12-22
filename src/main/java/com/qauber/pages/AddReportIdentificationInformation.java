@@ -50,32 +50,19 @@ public class AddReportIdentificationInformation {
         element = driver.findElement(By.name("street-address"));
         return element;
     }
-    //*[@class='ng-binding'][text()='Kruger td'] //
-
-    /*public WebElement orgCheckbox(String org) {
-        //element = driver.findElement(By.xpath(".//*[@class='ng-binding'][text()='Kruger Ltd']/span"));
-        element = driver.findElement(By.xpath(".//*[@class='ng-binding'][text()='"+org+"']/span"));
-        return element;
-    } */
 
     public WebElement cityField() {
         element = driver.findElement(By.name("city"));
         return element;
     }
 
-    public WebElement countryField() {
-        element = driver.findElement(By.name("country"));
+    public WebElement countryDropDown() {
+        element = driver.findElement(By.xpath(".//select[@ng-model = 'wizard.report.country']/ option[@value = 'DZ']"));
         return element;
     }
 
     public WebElement stateField() {
-        element = driver.findElement(By.name("state"));
-        return element;
-    }
-
-    public WebElement stateDropList(String strStateUS) {
-        driver.findElement(By.xpath(".//select[@ng-show='showStatesDropDown']")).click();
-        element = driver.findElement(By.xpath(".//option[@class='ng-binding ng-scope'][text()='"+strStateUS+"']"));
+        element = driver.findElement(By.xpath(".//*[@ng-model = 'wizard.report.country']"));
         return element;
     }
 
@@ -94,9 +81,6 @@ public class AddReportIdentificationInformation {
         return element;
     }
 
-    public String getEmailField(){
-        return driver.findElement(By.xpath(".//input[@name='email']")).getText();
-    }
 
     public WebElement ssnField() {
         element = driver.findElement(By.name("socialSecurity"));
@@ -115,26 +99,30 @@ public class AddReportIdentificationInformation {
     }
 
     public WebElement driverlicenseDropList(String strState) {
-        //driver.findElement(By.xpath(".//*[@ng-model = 'wizard.report.dlState']")).click();
-        element = driver.findElement(By.xpath(".//select[@ng-model='wizard.report.dlState']/option[contains(text(),'"+strState+"')]"));
+        element = driver.findElement(By.xpath(".//select[@ng-model= 'wizard.report.dlState']/ option[@value = 'CT']"));
         return element;
     }
-
 
     public WebElement otherIDField() {
         element = driver.findElement(By.name("other-id"));
         return element;
     }
 
-    public WebElement otherIDState() {
-        element = driver.findElement(By.xpath(".//select[@ng-model='wizard.report.otherIdState']/option[contains(text(),'Nevada')]"));
+
+    public WebElement otherIDCountryDropDown() {
+        element = driver.findElement(By.xpath(".//select[@name = 'otherIdCountry']/ option[@value = 'AF']"));
         return element;
     }
 
+    public WebElement otherIDState() {
+        element = driver.findElement(By.name("otherIdState"));
+        return element;
+}
     public WebElement otherIDType() {
-        element = driver.findElement(By.xpath(".//input[@ng-model = 'wizard.report.otherIdType']"));
+        element = driver.findElement(By.xpath(".//input[@placeholder = 'Other ID Type']"));
         return element;
     }
+
 
     public WebElement schoolNameField() {
         element = driver.findElement(By.name("school-name"));
@@ -189,8 +177,6 @@ public class AddReportIdentificationInformation {
         element = driver.findElement(By.xpath(".//*[@ng-model = 'wizard.report.parentState']/ option[contains (text(), 'Utah' )]"));
         return element;
     }
-    // (".//select[@ng-model='wizard.report.otherIdState']/option[contains(text(),'Nevada')]"));
-
 
     public WebElement parentZipField() {
         element = driver.findElement(By.xpath(".//*[@placeholder = 'Parent Zip']"));
@@ -239,7 +225,6 @@ public class AddReportIdentificationInformation {
     }
 
     public WebElement previousButton() {
-        //return driver.findElement(By.xpath(".//*[@ng-click = 'wizard.go(3)']"));
         return driver.findElement(By.xpath("//div[5]//li[contains(@class, 'previous')]/a/span"));
     }
     /*public void setPrimaryLanguage(String strPrimaryLanguage) {

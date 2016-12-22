@@ -1,4 +1,4 @@
-package com.qauber.samplecode;
+package com.qauber.pagetest;
 
 import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
@@ -34,7 +34,7 @@ public class CreateSubscriptionPayPalTestcase extends PageObjectModelResources {
         getNavBar().entitiesButton().click();
         Thread.sleep(8000);
 
-        getEntities().orangeLastEditButton().click();
+        getEntities().finishCreateOrganizationButton(6).click();
         Thread.sleep(5000);
 
         getCreateSubsciption().finishButton().click();
@@ -48,15 +48,17 @@ public class CreateSubscriptionPayPalTestcase extends PageObjectModelResources {
         getCreateSubsciption().payWithMyPayPal().click();
         Thread.sleep(3000);
 
-        getCreateSubsciption().loginField().sendKeys("lalala1@gmail.com");
+        getCreateSubsciption().loginField().sendKeys("lalalala1@gmail.com");
         Thread.sleep(3000);
 
         getCreateSubsciption().passwordField().sendKeys("lalalala");
         Thread.sleep(3000);
 
-        getCreateSubsciption().loginField().click();
-        Thread.sleep(3000);
+        getCreateSubsciption().logInButton().click();
+        Thread.sleep(6000);
 
+        getCreateSubsciption().agreeAndContinueButton().click();
+        Thread.sleep(6000);
     }
 
     @AfterClass
