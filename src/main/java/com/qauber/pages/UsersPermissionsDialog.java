@@ -5,6 +5,8 @@ package com.qauber.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -30,5 +32,35 @@ public class UsersPermissionsDialog {
         Robot robot = new Robot();
         robot.keyPress(KeyEvent.VK_ESCAPE);
         robot.keyRelease(KeyEvent.VK_ESCAPE);
+    }
+    public void detachUserPermissions(int index) throws InterruptedException {
+        driver.findElement
+                (By.xpath("//tr[@ng-repeat='entity in entities']/td/button[@ng-click='detachEntity(entity)']['"+index+"']")).click();
+        Select dropdown = new Select(driver.findElement(By.xpath
+                ("//tr[@ng-repeat='entity in entities']['"+index+"']/td/select[@ng-model='entity.status']")));
+        Thread.sleep(500);
+        Assert.assertEquals(dropdown.getFirstSelectedOption().getText(),"Select Role");
+    }
+    public void setUserAsAdmin(int index) throws InterruptedException {
+        Select dropdown = new Select(driver.findElement(By.xpath
+                ("//tr[@ng-repeat='entity in entities']['"+index+"']/td/select[@ng-model='entity.status']")));
+        dropdown.selectByVisibleText("Admin");
+        Assert.assertEquals(dropdown.getFirstSelectedOption().getText(),"Admin");
+        driver.findElement(By.xpath
+                ("//tr[@ng-repeat='entity in entities']/td/button[@ng-click='assignEntity(entity)']['"+index+"']")).click();
+        Thread.sleep(500);
+        Assert.assertTrue(driver.findElement
+                (By.xpath("//tr[@ng-repeat='entity in entities']['"+index+"']/td/div/div[text()='Regular User']")).isDisplayed());
+    }
+    public void setUserAsRegularUser(int index) throws InterruptedException {
+        Select dropdown = new Select(driver.findElement(By.xpath
+                ("//tr[@ng-repeat='entity in entities']['"+index+"']/td/select[@ng-model='entity.status']")));
+        dropdown.selectByVisibleText("Regular user");
+        Assert.assertEquals(dropdown.getFirstSelectedOption().getText(),"Regular user");
+        driver.findElement(By.xpath
+                ("//tr[@ng-repeat='entity in entities']/td/button[@ng-click='assignEntity(entity)']['"+index+"']")).click();
+        Thread.sleep(500);
+        Assert.assertTrue(driver.findElement
+                (By.xpath("//tr[@ng-repeat='entity in entities']['"+index+"']/td/div/div[text()='Admin']")).isDisplayed());
     }
 }
