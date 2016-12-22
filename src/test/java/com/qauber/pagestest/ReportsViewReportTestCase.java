@@ -30,6 +30,7 @@ public class ReportsViewReportTestCase extends PageObjectModelResources {
             Thread.sleep(5000);
             getNavBar().clickReports();
             getReports().selectReport(1).click();
+            Thread.sleep(5000);
         }
 
         @AfterClass

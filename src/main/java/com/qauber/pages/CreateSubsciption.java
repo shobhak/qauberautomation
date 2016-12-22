@@ -28,8 +28,10 @@ public class CreateSubsciption {
     }
 
     public WebElement payWithMyPayPal(){
+
         return driver.findElement(By.xpath("//*[@id='loadLogin']"));
     }
+
     public WebElement loginField() {
         element = driver.findElement(By.xpath("//*[@id='login_email']"));
         return element;

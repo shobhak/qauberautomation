@@ -38,7 +38,10 @@ public class NavBar {
         element = driver.findElement(By.xpath("/html/body/div/aside/div/nav[@class='sidebar']/ul/li[5]/a/span"));
         return element;
     }
-
+    public WebElement mainNavigationText() {
+        element = driver.findElement(By.xpath("//nav[@class=\"sidebar\"]/ul/li[1]"));
+        return element;
+    }
 
 
     //Old code below for compatibility purposes
