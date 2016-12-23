@@ -47,6 +47,7 @@ public class AddReportPreviewPublishTestCase extends PageObjectModelResources {
     }*/
 
     WebDriver driver;
+    String reportIdValue;
 
     @BeforeClass
     public void setUp() {
@@ -104,6 +105,8 @@ public class AddReportPreviewPublishTestCase extends PageObjectModelResources {
         getAddReportNavigation().previewTab().click();
         Thread.sleep(1000);
 
+        reportIdValue = getAddReportPreview().reportIdElement().getText();
+
         //caseID
         getAddReportPreview().editPencilIcon().click();
         Thread.sleep(1000);
@@ -131,7 +134,17 @@ public class AddReportPreviewPublishTestCase extends PageObjectModelResources {
 
         getAddReportPreview().publishReportButton().click();
         Thread.sleep(1000);
-        Assert.assertTrue(getReports().verifyReportPublished("1549"));
+
+        Assert.assertTrue(verifyReportPublished(reportIdValue));
+    }
+
+    public boolean verifyReportPublished(String reportNumber) throws InterruptedException {
+        //from Reports page...
+        //search for reports which contain text (reportNumber)
+        getReports().containsTextField().sendKeys(reportNumber);
+        Thread.sleep(3000);
+        System.out.println(getReports().searchReportResultID(1).getText());
+        return getReports().searchReportResultID(1).getText().contains(reportNumber);
     }
 
     @AfterClass
