@@ -17,7 +17,7 @@ public class GenerateSAUTest {
         User user;
         UserFactory userFactory = new UserFactory();
 
-        userFactory.wipeLocalUserConfig(); //wipe local configuration files
+        userFactory.wipeLocalUserConfig(User.UserType.SAU); //wipe local configuration files
         user = userFactory.getUser(User.UserType.SAU); //attempt to read user from (wiped) config - if it fails, make a new user...
         user.listUserProperties();
 
