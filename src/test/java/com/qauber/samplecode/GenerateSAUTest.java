@@ -4,12 +4,14 @@ import com.qauber.pagesresource.User;
 import com.qauber.pagesresource.UserFactory;
 import org.testng.annotations.Test;
 
-/**
- * Created by erikfriedlander on 12/19/16.
- * Creates and activates a valid user, and saves user info in user config.
- ************* This script WIPES LOCAL USER CONFIG FILES! ****************
- *
- */
+// * Created by erikfriedlander on 12/19/16.
+// * Creates and activates a valid user, and saves user info in user config.
+// ************* This script WIPES LOCAL USER CONFIG FILES! ****************
+// *
+// */
+
+//Let's add this line too.
+
 public class GenerateSAUTest {
 
     @Test

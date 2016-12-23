@@ -9,6 +9,7 @@ import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -129,11 +130,13 @@ public class AddReportPreviewPublishTestCase extends PageObjectModelResources {
         jse.executeScript("window.scrollBy(0,1000)", "");
 
         getAddReportPreview().publishReportButton().click();
+        Thread.sleep(1000);
+        Assert.assertTrue(getReports().verifyReportPublished("1549"));
     }
 
     @AfterClass
     public void breakDown () throws InterruptedException {
-        Thread.sleep(60000);
+        Thread.sleep(15000);
         driver.manage().deleteAllCookies();
         driver.quit();
     }

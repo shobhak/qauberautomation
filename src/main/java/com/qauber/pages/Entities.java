@@ -58,7 +58,7 @@ public class Entities {
         element = driver.findElement(By.xpath("//tr[@class='ng-scope'][" + rowindex + "]/td[@class='text-center']/button[@title='Edit']"));
         return element;
     }
-    
+
 
     // Web element for "Action" finish create an organization
     public WebElement finishCreateOrganizationButton(int rowindex){
