@@ -50,6 +50,7 @@ public class PageObjectModelResources {
     private AddReportVehicle addReportVehicle;
     private AddReportPreview addReportPreview;
     private CreateSubsciption createSubsciption;
+    private CreateOrganization createOrganization;
 
 //
 
@@ -110,6 +111,7 @@ public class PageObjectModelResources {
         addReportVehicle = new AddReportVehicle(driver);
         addReportPreview = new AddReportPreview(driver);
         createSubsciption = new CreateSubsciption(driver);
+        createOrganization = new CreateOrganization(driver);
 
     }
 
@@ -220,6 +222,7 @@ public class PageObjectModelResources {
 
     protected  CreateSubsciption getCreateSubsciption() {return createSubsciption;}
 
+    protected CreateOrganization getCreateOrganization(){ return createOrganization;}
 
 
 
