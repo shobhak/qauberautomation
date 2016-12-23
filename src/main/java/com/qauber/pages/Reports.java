@@ -132,19 +132,12 @@ public class Reports {
     public WebElement clearButton(){
         return driver.findElement(By.cssSelector(".btn.btn-labeled.btn-primary"));
     }
-
+    //added on 12/22/16
     public WebElement searchReportResultID(int rowNumber){
         return driver.findElement(By.xpath("//tr["+rowNumber+"]//div[@class='row'][1]/div[@class='col-lg-12']/h4[@class='ng-binding']"));
     }
 
-    public boolean verifyReportPublished(String reportNumber) throws InterruptedException {
-        //from Reports page...
-        //search for reports which contain text (reportNumber)
-        containsTextField().sendKeys(reportNumber);
-        Thread.sleep(3000);
-        System.out.println(searchReportResultID(1).getText());
-        return searchReportResultID(1).getText().contains(reportNumber);
-    }
+
 
 
 
