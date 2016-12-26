@@ -128,15 +128,27 @@ public class Reports {
         driver.findElement(By.xpath("//span[text()='" + Month + "']")).click();
         driver.findElement(By.xpath("//span[text()='" + Day + "']")).click();
     }
+
     // added on 12/20/16
     public WebElement clearButton(){
         return driver.findElement(By.cssSelector(".btn.btn-labeled.btn-primary"));
     }
+
     //added on 12/22/16
     public WebElement searchReportResultID(int rowNumber){
         return driver.findElement(By.xpath("//tr["+rowNumber+"]//div[@class='row'][1]/div[@class='col-lg-12']/h4[@class='ng-binding']"));
     }
 
+    //added on 12/26/2016
+    public WebElement searchReportResultPublishedDate(String startMonth, String startDay, String startYear)
+    {
+        return driver.findElement(By.xpath("//span[text()='"+startMonth.substring(0,3)+" "+startDay+", "+startYear+"']"));
+    }
+
+    public WebElement activePagination()
+    {
+        return driver.findElement(By.xpath("//li[@class='ng-scope active']/a"));
+    }
 
 
 
