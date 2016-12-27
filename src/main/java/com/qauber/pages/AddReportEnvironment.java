@@ -89,8 +89,8 @@ public class AddReportEnvironment {
         return driver.findElement(By.xpath("//input[@ng-model=\"wizard.report.gangRegistrant\"]"));
     }
 
-    public WebElement otherInformationField() {
-        return driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[6]/fieldset/div[3]/div/div/div/input"));
+    public WebElement otherInformationFieldArea() {
+        return driver.findElement(By.xpath("//div[@class=\"controls\"]/textarea"));
     }
 
     public WebElement onProbationCheckbox() {
@@ -98,11 +98,11 @@ public class AddReportEnvironment {
     }
 
     public WebElement probationOfficerField() {
-        return driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[6]/fieldset/div[4]/div[2]/div/div/input"));
+        return driver.findElement(By.xpath("//input[@ng-model=\"wizard.report.probationOfficer\"]"));
     }
 
     public WebElement probationOfficerPhoneField() {
-        return driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[6]/fieldset/div[4]/div[3]/div/div/input"));
+        return driver.findElement(By.xpath("//input[@name='probationOfficerPhone']"));
     }
 
     public WebElement onParoleCheckbox() {
@@ -118,19 +118,27 @@ public class AddReportEnvironment {
     }
 
     public WebElement beatField() {
-        return driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[6]/fieldset/div[6]/div[1]/div/div/input"));
+        return driver.findElement(By.xpath("//input[@ng-model=\"wizard.report.beat\"]"));
     }
 
     public WebElement officerNameField() {
-        return driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[6]/fieldset/div[6]/div[2]/div[2]/input"));
+        return driver.findElement(By.xpath("//input[@name='officerName']"));
     }
 
     public WebElement officerIdField() {
-        return driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[6]/fieldset/div[6]/div[3]/div[2]/input"));
+        return driver.findElement(By.xpath("//input[@name='officerID']"));
+    }
+
+    public WebElement reasonForStopField(){
+        return driver.findElement(By.xpath("//input[@type='text'][@placeholder='Reason For Stop']"));
     }
 
     public WebElement stopLocationField() {
-        return driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[6]/fieldset/div[7]/div/div/div/input"));
+        return driver.findElement(By.xpath("//input[@ng-model=\"wizard.report.locationOfStop\"]"));
+    }
+
+    public WebElement dispositionOfStopField(){
+        return driver.findElement(By.xpath("//input[@ng-model='wizard.report.dispositionOfStop']"));
     }
 
     public WebElement previousButton() {
