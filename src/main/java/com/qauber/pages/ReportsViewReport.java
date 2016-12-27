@@ -27,4 +27,10 @@ public class ReportsViewReport {
     public WebElement reportID(){
         return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[1]/div[2]/strong"));
     }
+
+    // added on 12/26/2016
+
+    public WebElement caseID(){
+        return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[2]/div[2]/strong"));
+    }
 }
