@@ -56,13 +56,13 @@ public class AddReportIdentificationInformation {
         return element;
     }
 
-    public WebElement countryDropDown() {
-        element = driver.findElement(By.xpath(".//select[@ng-model = 'wizard.report.country']/ option[@value = 'DZ']"));
+    public WebElement country() {
+        element = driver.findElement(By.xpath(".//select[@ng-model = 'wizard.report.country']/ option[@value = 'AF']"));
         return element;
     }
 
     public WebElement stateField() {
-        element = driver.findElement(By.xpath(".//*[@ng-model = 'wizard.report.country']"));
+        element = driver.findElement(By.xpath(".//input[@ng-model = 'wizard.report.state']"));
         return element;
     }
 
@@ -98,7 +98,7 @@ public class AddReportIdentificationInformation {
         return element;
     }
 
-    public WebElement driverlicenseDropList(String strState) {
+    public WebElement driverlicenseDropList() {
         element = driver.findElement(By.xpath(".//select[@ng-model= 'wizard.report.dlState']/ option[@value = 'CT']"));
         return element;
     }
@@ -110,7 +110,7 @@ public class AddReportIdentificationInformation {
 
 
     public WebElement otherIDCountryDropDown() {
-        element = driver.findElement(By.xpath(".//select[@name = 'otherIdCountry']/ option[@value = 'AF']"));
+        element = driver.findElement(By.xpath(".//select[@name = 'otherIdCountry']/ option[@value = 'AL']"));
         return element;
     }
 
@@ -141,7 +141,7 @@ public class AddReportIdentificationInformation {
 
     }
 
-    public WebElement schoolStateDropList(String strStatte) {
+    public WebElement schoolStateDropList() {
         element = driver.findElement(By.xpath(".//*[@ng-model = 'wizard.report.schoolState']/option[contains(text(), 'Texas')]"));
         return  element;
     }
@@ -173,7 +173,7 @@ public class AddReportIdentificationInformation {
         return element;
     }
 
-    public WebElement parentDropList(String strSttate) {
+    public WebElement parentDropList() {
         element = driver.findElement(By.xpath(".//*[@ng-model = 'wizard.report.parentState']/ option[contains (text(), 'Utah' )]"));
         return element;
     }
@@ -203,7 +203,7 @@ public class AddReportIdentificationInformation {
         return element;
     }
 
-    public WebElement employerStateDropList(String strSState) {
+    public WebElement employerStateDropList() {
         element = driver.findElement(By.xpath(".//*[@ng-model = 'wizard.report.employerState']/ option[contains (text(), 'Guam' )]"));
         return element;
     }
