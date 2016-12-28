@@ -38,6 +38,7 @@ public class PageObjectModelResources {
     private EditOrganizationPage editOrganizationPage;
     private Reports reports;
     private ReportsViewReport reportsViewReport;
+    private UserDeletion userDeletion;
 
 //Add reports pages
     private AddReportEnvironment addReportEnvironment;
@@ -102,6 +103,7 @@ public class PageObjectModelResources {
         editOrganizationPage = new EditOrganizationPage(driver);
         reports = new Reports(driver);
         reportsViewReport = new ReportsViewReport(driver);
+        userDeletion = new UserDeletion(driver);
 
         addReportEnvironment = new AddReportEnvironment(driver);
         addReportIdentificationInformation = new AddReportIdentificationInformation(driver);
@@ -180,6 +182,8 @@ public class PageObjectModelResources {
     protected Users getUsers() {return users;}
 
     protected UsersPermissionsDialog getUsersPermissionsDialog() {return usersPermissionsDialog;}
+
+    protected UserDeletion getUserDeletion() {return userDeletion;}
 
 
     protected EditOrganizationPage getOrganization() {return  editOrganizationPage;}
