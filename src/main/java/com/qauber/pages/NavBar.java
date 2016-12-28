@@ -20,22 +20,22 @@ public class NavBar {
     }
 
     public WebElement entitiesButton() {
-        element = driver.findElement(By.xpath("/html/body/div/aside/div/nav[@class='sidebar']/ul/li[2]/a/span"));
+        element = driver.findElement(By.xpath("//a[@title='Entities']"));
         return element;
     }
 
     public WebElement usersButton() {
-        element = driver.findElement(By.xpath("/html/body/div/aside/div/nav[@class='sidebar']/ul/li[3]/a/span"));
+        element = driver.findElement(By.xpath("//a[@title='Users']"));
         return element;
     }
 
     public WebElement addReportButton() {
-        element = driver.findElement(By.xpath("/html/body/div/aside/div/nav[@class='sidebar']/ul/li[4]/a/span"));
+        element = driver.findElement(By.xpath("//a[@title='Add Report']"));
         return element;
     }
 
     public WebElement reportsButton() {
-        element = driver.findElement(By.xpath("/html/body/div/aside/div/nav[@class='sidebar']/ul/li[5]/a/span"));
+        element = driver.findElement(By.xpath("//a[@title='Reports']"));
         return element;
     }
     public WebElement mainNavigationText() {
