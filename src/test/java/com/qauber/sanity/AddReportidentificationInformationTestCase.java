@@ -1,5 +1,5 @@
 
-package com.qauber.pagestest;
+package com.qauber.sanity;
 
         import com.github.javafaker.Faker;
         import com.qauber.config.Config;
@@ -119,7 +119,7 @@ public class AddReportidentificationInformationTestCase extends PageObjectModelR
         getAddReportIdentificationInformation().schoolZip().sendKeys(faker.address().zipCode());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().schoolTelephone().sendKeys(faker.phoneNumber().phoneNumber());
+        getAddReportIdentificationInformation().schoolTelephone().sendKeys(faker.phoneNumber().cellPhone());
         Thread.sleep(2000);
 
         getAddReportIdentificationInformation().parentNameField().sendKeys("The Glossners");
@@ -137,7 +137,7 @@ public class AddReportidentificationInformationTestCase extends PageObjectModelR
         getAddReportIdentificationInformation().parentZipField().sendKeys(faker.address().zipCode());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().parentTelephoneField().sendKeys(faker.phoneNumber().phoneNumber());
+        getAddReportIdentificationInformation().parentTelephoneField().sendKeys(faker.phoneNumber().cellPhone());
         Thread.sleep(2000);
 
         getAddReportIdentificationInformation().employerNameField().sendKeys(faker.name().username());
@@ -155,7 +155,7 @@ public class AddReportidentificationInformationTestCase extends PageObjectModelR
         getAddReportIdentificationInformation().employerZipField().sendKeys(faker.address().zipCode());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().employerTelephoneField().sendKeys(faker.phoneNumber().phoneNumber());
+        getAddReportIdentificationInformation().employerTelephoneField().sendKeys(faker.phoneNumber().cellPhone());
 
         getAddReportIdentificationInformation().nextButton().click();
         Thread.sleep(2000);
