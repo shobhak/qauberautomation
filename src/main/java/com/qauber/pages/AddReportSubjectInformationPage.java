@@ -19,32 +19,32 @@ public class AddReportSubjectInformationPage {
 
     // find all web elements
     public WebElement firstName(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[1]/div[1]/div/div/input"));
+        element = driver.findElement(By.xpath("//*[@placeholder='First name']"));
         return element;
     }
 
     public WebElement middleName(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[1]/div[2]/div/div/input"));
+        element = driver.findElement(By.xpath("//*[@placeholder='Middle name']"));
         return element;
     }
 
     public WebElement lastName(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[1]/div[3]/div/div/input"));
+        element = driver.findElement(By.xpath("//*[@placeholder='Last name']"));
         return element;
     }
 
     public WebElement subjectType(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[1]/div[4]/div/div/select"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.suspectType']"));
         return element;
     }
 
     public WebElement dateOfBirth(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[2]/div[1]/div/div/p/input"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.dob']"));
         return element;
     }
 
     public WebElement dateOfBirthCalendarIcon(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[2]/div[1]/div/div/p/span/button"));
+        element = driver.findElement(By.xpath("//button[@class='btn btn-default']"));
         return element;
     }
 
@@ -52,78 +52,78 @@ public class AddReportSubjectInformationPage {
     // add more web element for calendar table
 
     public WebElement nickName(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[2]/div[2]/div/div/input"));
+        element = driver.findElement(By.xpath("//*[@placeholder='Nickname']"));
         return element;
     }
 
     public WebElement race(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[2]/div[3]/div/div/select"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.race']"));
         return element;
     }
 
     public WebElement height(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[2]/div[4]/div/div[1]/div/div/input"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.height']"));
         return element;
     }
 
     public WebElement weight(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[2]/div[4]/div/div[2]/div/div/input"));
+        element = driver.findElement(By.xpath("//*[@name='Weight']"));
         return element;
     }
 
     public WebElement hairColor(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[3]/div[1]/div/div/select"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.hairColor']"));
         return element;
     }
 
     public WebElement hairLength(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[3]/div[2]/div/div/select"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.hairLength']"));
         return element;
     }
 
     public WebElement hairStyle(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[3]/div[3]/div/div/select"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.hairStyle']"));
         return element;
     }
 
     public WebElement sex(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[3]/div[4]/div/div/select"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.sex']"));
         return element;
     }
 
     public WebElement build(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[3]/div[5]/div/div/select"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.build']"));
         return element;
     }
 
 
     public WebElement eyeColor(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[4]/div[1]/div/div/select"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.eyeColor']"));
         return element;
     }
 
     public WebElement complexion(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[4]/div[2]/div/div/select"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.complexion']"));
         return element;
     }
 
     public WebElement teeth(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[4]/div[3]/div/div/select"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.teeth']"));
         return element;
     }
 
     public WebElement handPreference(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/fieldset/div[4]/div[4]/div/div/select"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.handPreference']"));
         return element;
     }
 
     public WebElement previouButton(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/ul/li[1]/a/span"));
+        element = driver.findElement(By.xpath("//a[@ng-click='wizard.go(1)']"));
         return element;
     }
 
     public WebElement nextButton(){
-        element = driver.findElement(By.xpath("//form/div/div[3]/ul/li[2]/a"));
+        element = driver.findElement(By.xpath("//a[@ng-click='wizard.go(3)' and text()='Next']"));
         return element;
     }
 
