@@ -19,6 +19,12 @@ public class AddReportsOrganization {
         return driver.findElement(By.xpath("/html/body/div[2]/section/div/div/div/form/div/div[2]/ul/li/a/span"));
     }
 
+    // added on 12/26/2016
+    public WebElement pageHeader()
+    {
+        return driver.findElement(By.xpath("html/body/div[2]/section/div/h3"));
+    }
+
 
     ///////////Old code, refactor and delete
     //TODO: extend to multiple organizations

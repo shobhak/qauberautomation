@@ -1,4 +1,4 @@
-package com.qauber.pagestest;
+package com.qauber.sanity;
 
 import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * Created by Alya on 12/21/2016.
  */
-public class HeaderSiteMenuCollapsibleTestCase extends PageObjectModelResources {
+public class HeaderSiteMenuCollapsible extends PageObjectModelResources {
     WebDriver driver;
 
     @BeforeClass

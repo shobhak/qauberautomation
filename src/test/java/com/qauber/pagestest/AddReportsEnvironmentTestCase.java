@@ -97,7 +97,7 @@ public class AddReportsEnvironmentTestCase extends PageObjectModelResources {
         getAddReportEnvironment().affiliatingWithGangMembersCheckbox().click();
         getAddReportEnvironment().participatingInGangCrimeCheckbox().click();
         getAddReportEnvironment().gangRegistrantCheckbox().click();
-        getAddReportEnvironment().otherInformationField().sendKeys(faker.lorem().word());
+        getAddReportEnvironment().otherInformationFieldArea().sendKeys(faker.lorem().word());
         getAddReportEnvironment().onProbationCheckbox().click();
         Thread.sleep(1000);
         getAddReportEnvironment().probationOfficerField().sendKeys(faker.name().name());
