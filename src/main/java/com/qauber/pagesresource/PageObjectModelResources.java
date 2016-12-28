@@ -52,6 +52,8 @@ public class PageObjectModelResources {
     private CreateSubsciption createSubsciption;
     private CreateOrganization createOrganization;
 
+    private CompanyCreationSAU companyCreationSAU;
+
 //
 
     public void setUpWithUser(User.UserType userType, WebDriver webDriver) {
@@ -112,6 +114,8 @@ public class PageObjectModelResources {
         addReportPreview = new AddReportPreview(driver);
         createSubsciption = new CreateSubsciption(driver);
         createOrganization = new CreateOrganization(driver);
+
+        companyCreationSAU = new CompanyCreationSAU(driver);
 
     }
 
@@ -223,6 +227,8 @@ public class PageObjectModelResources {
     protected  CreateSubsciption getCreateSubsciption() {return createSubsciption;}
 
     protected CreateOrganization getCreateOrganization(){ return createOrganization;}
+
+    protected CompanyCreationSAU getCompanyCreationSAU() { return companyCreationSAU;}
 
 
 
