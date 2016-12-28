@@ -19,82 +19,82 @@ public class AddReportIdentifiersPage {
 
     // find all web elements
     public WebElement tattoosCheckbox(){
-        element = driver.findElement(By.xpath("//form/div/div[4]/fieldset/div[1]/div[1]/div/div/span/label/span"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.tattoos']//following-sibling::span"));
         return element;
     }
 
     public WebElement tattoosTextField(){
-        element = driver.findElement(By.xpath("//form/div/div[4]/fieldset/div[1]/div[1]/div/div/input"));
+        element = driver.findElement(By.xpath("//*[@placeholder='Tattoos']"));
         return element;
     }
 
     public WebElement scarsCheckbox(){
-        element = driver.findElement(By.xpath("//form/div/div[4]/fieldset/div[1]/div[2]/div/div/span/label/span"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.scars']//following-sibling::span"));
         return element;
     }
 
     public WebElement scarsTextField(){
-        element = driver.findElement(By.xpath("//form/div/div[4]/fieldset/div[1]/div[2]/div/div/input"));
+        element = driver.findElement(By.xpath("//*[@placeholder='Scars']"));
         return element;
     }
 
     public WebElement needleMarksCheckbox(){
-        element = driver.findElement(By.xpath("//form/div/div[4]/fieldset/div[1]/div[3]/div/div/span/label/span"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.needleMarks']//following-sibling::span"));
         return element;
     }
 
     public WebElement needleMarksTextField(){
-        element = driver.findElement(By.xpath("//form/div/div[4]/fieldset/div[1]/div[3]/div/div/input"));
+        element = driver.findElement(By.xpath("//*[@placeholder='Needle marks']"));
         return element;
     }
 
     public WebElement tracksCheckbox(){
-        element = driver.findElement(By.xpath("//form/div/div[4]/fieldset/div[1]/div[4]/div/div/span/label/span"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.tracks']//following-sibling::span"));
         return element;
     }
 
     public WebElement tracksTextField(){
-        element = driver.findElement(By.xpath("//form/div/div[4]/fieldset/div[1]/div[4]/div/div/input"));
+        element = driver.findElement(By.xpath("//*[@placeholder='Tracks']"));
         return element;
     }
 
     public WebElement glassesCheckbox(){
-        element = driver.findElement(By.xpath("//form/div/div[4]/fieldset/div[2]/div[1]/div/div/span/label/span"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.glasses']//following-sibling::span"));
         return element;
     }
 
     public WebElement glassesTextField(){
-        element = driver.findElement(By.xpath("//form/div/div[4]/fieldset/div[2]/div[1]/div/div/input"));
+        element = driver.findElement(By.xpath("//*[@placeholder='Glasses']"));
         return element;
     }
 
     public WebElement mustacheCheckbox(){
-        element = driver.findElement(By.xpath("//form/div/div[4]/fieldset/div[2]/div[2]/div/div/span/label/span"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.mustache']//following-sibling::span"));
         return element;
     }
 
     public WebElement mustacheTextField(){
-        element = driver.findElement(By.xpath("//form/div/div[4]/fieldset/div[2]/div[2]/div/div/input"));
+        element = driver.findElement(By.xpath("//*[@placeholder='Mustache']"));
         return element;
     }
 
     public WebElement beardCheckbox(){
-        element = driver.findElement(By.xpath("//form/div/div[4]/fieldset/div[2]/div[3]/div/div/span/label/span"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.beard']//following-sibling::span"));
         return element;
     }
 
     public WebElement beardTextField(){
-        element = driver.findElement(By.xpath("//form/div/div[4]/fieldset/div[2]/div[3]/div/div/input"));
+        element = driver.findElement(By.xpath("//*[@placeholder='Beard']"));
         return element;
     }
 
     public WebElement previousButton(){
-        element = driver.findElement(By.xpath("//form/div/div[4]/ul/li[1]/a/span"));
+        element = driver.findElement(By.xpath("//*[@ng-click='wizard.go(2)']"));
         return element;
     }
 
     public WebElement nextButton(){
-        element = driver.findElement(By.xpath("//form/div/div[4]/ul/li[2]/a"));
+        element = driver.findElement(By.xpath("//*[@ng-click='wizard.go(4)' and text()='Next']"));
         return element;
     }
 
