@@ -52,7 +52,7 @@ public class AddReportidentificationInformationTestCase extends PageObjectModelR
         Thread.sleep(1000);
 
 
-        // select sidentification information tab
+        // select identification information tab
         getAddReportNavigation().identificationInformationTab().click();
         Thread.sleep(2000);
 
@@ -156,6 +156,7 @@ public class AddReportidentificationInformationTestCase extends PageObjectModelR
         Thread.sleep(2000);
 
         getAddReportIdentificationInformation().employerTelephoneField().sendKeys(faker.phoneNumber().cellPhone());
+        Thread.sleep(2000);
 
         getAddReportIdentificationInformation().nextButton().click();
         Thread.sleep(2000);
