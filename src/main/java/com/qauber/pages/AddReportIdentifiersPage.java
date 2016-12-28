@@ -19,7 +19,7 @@ public class AddReportIdentifiersPage {
 
     // find all web elements
     public WebElement tattoosCheckbox(){
-        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.tattoos']//following-sibling::span"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.tattoos']"));
         return element;
     }
 
@@ -29,7 +29,7 @@ public class AddReportIdentifiersPage {
     }
 
     public WebElement scarsCheckbox(){
-        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.scars']//following-sibling::span"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.scars']"));
         return element;
     }
 
@@ -39,7 +39,7 @@ public class AddReportIdentifiersPage {
     }
 
     public WebElement needleMarksCheckbox(){
-        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.needleMarks']//following-sibling::span"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.needleMarks']"));
         return element;
     }
 
@@ -49,7 +49,7 @@ public class AddReportIdentifiersPage {
     }
 
     public WebElement tracksCheckbox(){
-        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.tracks']//following-sibling::span"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.tracks']"));
         return element;
     }
 
@@ -59,7 +59,7 @@ public class AddReportIdentifiersPage {
     }
 
     public WebElement glassesCheckbox(){
-        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.glasses']//following-sibling::span"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.glasses']"));
         return element;
     }
 
@@ -69,7 +69,7 @@ public class AddReportIdentifiersPage {
     }
 
     public WebElement mustacheCheckbox(){
-        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.mustache']//following-sibling::span"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.mustache']"));
         return element;
     }
 
@@ -79,7 +79,8 @@ public class AddReportIdentifiersPage {
     }
 
     public WebElement beardCheckbox(){
-        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.beard']//following-sibling::span"));
+        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.beard']"));
+//        element = driver.findElement(By.xpath("//*[@ng-model='wizard.report.beard']//following-sibling::span"));
         return element;
     }
 
