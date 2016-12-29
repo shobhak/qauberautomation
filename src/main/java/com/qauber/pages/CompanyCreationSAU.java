@@ -7,6 +7,9 @@ import org.openqa.selenium.WebElement;
 /**
  * Created by lenochka on 23.12.2016.
  */
+
+//TODO: merge with Registration1 + Registration2 (page is duplicate)
+
 public class CompanyCreationSAU {
     WebDriver driver;
 

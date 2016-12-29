@@ -31,7 +31,7 @@ public class UserDeletionTestCase extends PageObjectModelResources {
         driver.get(Config.getBaseURL());
         Thread.sleep(3000);
 
-        String emailName = "kennith.willms@hotmail.com";
+        //String emailName = "kennith.willms@hotmail.com";
 
 
         getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
@@ -40,13 +40,16 @@ public class UserDeletionTestCase extends PageObjectModelResources {
         getNavBar().clickUsers();
         Thread.sleep(3000);
 
-        getUserDeletion().deleteUserByEmail(emailName).click();
+        //getUserDeletion().deleteUserByEmail(emailName).click();
+       // Thread.sleep(3000);
+
+        getUsers().deleteButtonByIndex(1).click();
         Thread.sleep(3000);
 
-        getUserDeletion().deleteConfirmationButton().click();
+        getUsers().deleteConfirmationButton().click();
         Thread.sleep(3000);
 
-            driver.manage().deleteAllCookies();
-            driver.quit();
+         driver.manage().deleteAllCookies();
+         driver.quit();
         }
     }
