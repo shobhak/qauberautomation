@@ -89,10 +89,6 @@ public class AddReportEnvironment {
         return driver.findElement(By.xpath("//input[@ng-model=\"wizard.report.gangRegistrant\"]"));
     }
 
-    public WebElement otherInformationFieldArea() {
-        return driver.findElement(By.xpath("//div[@class=\"controls\"]/textarea"));
-    }
-
     public WebElement onProbationCheckbox() {
         return driver.findElement(By.xpath("//input[@ng-model=\"wizard.report.onProbation\"]"));
     }
@@ -137,8 +133,12 @@ public class AddReportEnvironment {
         return driver.findElement(By.xpath("//input[@ng-model=\"wizard.report.locationOfStop\"]"));
     }
 
-    public WebElement dispositionOfStopField(){
+    public WebElement dispositionField(){
         return driver.findElement(By.xpath("//input[@ng-model='wizard.report.dispositionOfStop']"));
+    }
+
+    public WebElement otherInformationCommentsFieldArea() {
+        return driver.findElement(By.xpath("//div[@class=\"controls\"]/textarea"));
     }
 
     public WebElement previousButton() {
