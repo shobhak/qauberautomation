@@ -1,6 +1,6 @@
 package com.qauber.pages;
 
-//Created by Denys_Gon 12/20/2016.
+//Created by Denys_G 12/20/2016.
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
