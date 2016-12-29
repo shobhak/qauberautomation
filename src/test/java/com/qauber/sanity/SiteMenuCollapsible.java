@@ -13,7 +13,7 @@ import org.testng.annotations.Test;
 /**
  * Created by Alya on 12/21/2016.
  */
-public class HeaderSiteMenuCollapsible extends PageObjectModelResources {
+public class SiteMenuCollapsible extends PageObjectModelResources {
     WebDriver driver;
 
     @BeforeClass
