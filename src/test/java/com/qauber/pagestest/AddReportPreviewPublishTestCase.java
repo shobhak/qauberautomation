@@ -21,8 +21,6 @@ import org.testng.annotations.Test;
 public class AddReportPreviewPublishTestCase extends PageObjectModelResources {
 
     WebDriver driver;
-    String reportIdValue;
-    String firstLastName;
 
     @BeforeClass
     public void setUp() {
@@ -36,7 +34,7 @@ public class AddReportPreviewPublishTestCase extends PageObjectModelResources {
         Thread.sleep(10000);
 
         ReportValueObject reportVO = new ReportValueObject();
-        firstLastName = reportVO.getFirstName()+" "+reportVO.getLastName();
+        String firstLastName = reportVO.getFirstName()+" "+reportVO.getLastName();
 
         getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
         Thread.sleep(5000);
@@ -67,7 +65,7 @@ public class AddReportPreviewPublishTestCase extends PageObjectModelResources {
         Assert.assertEquals(getAddReportPreview().suspectName().getText(),firstLastName);
         Assert.assertEquals(getAddReportPreview().stopLocation().getText(), reportVO.getStopLocation());
 
-        reportIdValue = getAddReportPreview().reportIdElement().getText();
+        String reportIdValue = getAddReportPreview().reportIdElement().getText();
 
         //caseID
         getAddReportPreview().editPencilIcon().click();
