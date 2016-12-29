@@ -1,5 +1,5 @@
 
-package com.qauber.pagestest;
+package com.qauber.sanity;
 
         import com.github.javafaker.Faker;
         import com.qauber.config.Config;
@@ -26,14 +26,15 @@ public class AddReportidentificationInformationTestCase extends PageObjectModelR
     WebDriver driver;
 
     @BeforeClass
-    public void setUp() {
+        public void setUp() {
         driver = new ChromeDriver();
         setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
         //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
     }
 
     @Test
-    public void addSubjectInformationData() throws InterruptedException {
+
+        public void aaReportidentificationInformation() throws InterruptedException {
         driver.manage().window().maximize();
         driver.get(Config.getBaseURL());
 
@@ -51,35 +52,35 @@ public class AddReportidentificationInformationTestCase extends PageObjectModelR
         Thread.sleep(1000);
 
 
-        // select sidentification information tab
+        // select identification information tab
         getAddReportNavigation().identificationInformationTab().click();
         Thread.sleep(2000);
 
         getAddReportIdentificationInformation().primaryLanguageField().sendKeys("Esperanto");
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().streetAddressField().sendKeys("1233 Any lane");
+        getAddReportIdentificationInformation().streetAddressField().sendKeys(faker.address().streetAddress());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().cityField().sendKeys("London");
+        getAddReportIdentificationInformation().cityField().sendKeys(faker.address().city());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().countryDropDown().click();
+        getAddReportIdentificationInformation().country().click();
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().stateField().sendKeys("hjghf");
+        getAddReportIdentificationInformation().stateField().sendKeys(faker.address().state());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().zipField().sendKeys("12345");
+        getAddReportIdentificationInformation().zipField().sendKeys(faker.address().zipCode());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().phoneField().sendKeys("1234567890");
+        getAddReportIdentificationInformation().phoneField().sendKeys(faker.phoneNumber().cellPhone());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().emailField().sendKeys("anemail@mail.de");
+        getAddReportIdentificationInformation().emailField().sendKeys(faker.internet().emailAddress());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().ssnField().sendKeys("123456789");
+        getAddReportIdentificationInformation().ssnField().sendKeys(faker.idNumber().ssnValid());
         Thread.sleep(2000);
 
         getAddReportIdentificationInformation().occupationField().sendKeys("plumber");
@@ -88,73 +89,74 @@ public class AddReportidentificationInformationTestCase extends PageObjectModelR
         getAddReportIdentificationInformation().driverLicenseField().sendKeys("AGHH866");
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().driverlicenseDropList("Connecticut").click();
+        getAddReportIdentificationInformation().driverlicenseDropList().click();
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().otherIDField().sendKeys("67GHnsmh");
+        getAddReportIdentificationInformation().otherIDField().sendKeys(faker.idNumber().valid());
         Thread.sleep(2000);
 
         getAddReportIdentificationInformation().otherIDCountryDropDown().click();
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().otherIDState().sendKeys("any");
+        getAddReportIdentificationInformation().otherIDState().sendKeys(faker.address().state());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().otherIDType().sendKeys("761yh");
+        getAddReportIdentificationInformation().otherIDType().sendKeys("card");
         Thread.sleep(2000);
 
         getAddReportIdentificationInformation().schoolNameField().sendKeys("Cool School");
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().schoolAddress().sendKeys("73677 Address Avenue");
+        getAddReportIdentificationInformation().schoolAddress().sendKeys(faker.address().streetAddress());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().schoolCity().sendKeys("Gangnam");
+        getAddReportIdentificationInformation().schoolCity().sendKeys(faker.address().city());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().schoolStateDropList("Taxas").click();
+        getAddReportIdentificationInformation().schoolStateDropList().click();
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().schoolZip().sendKeys("12345");
+        getAddReportIdentificationInformation().schoolZip().sendKeys(faker.address().zipCode());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().schoolTelephone().sendKeys("1239997755");
+        getAddReportIdentificationInformation().schoolTelephone().sendKeys(faker.phoneNumber().cellPhone());
         Thread.sleep(2000);
 
         getAddReportIdentificationInformation().parentNameField().sendKeys("The Glossners");
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().parentAddressField().sendKeys("67 wggg");
+        getAddReportIdentificationInformation().parentAddressField().sendKeys(faker.address().streetAddress());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().parentCityField().sendKeys("Freiburg");
+        getAddReportIdentificationInformation().parentCityField().sendKeys(faker.address().city());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().parentDropList("Utah").click();
+        getAddReportIdentificationInformation().parentDropList().click();
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().parentZipField().sendKeys("56784");
+        getAddReportIdentificationInformation().parentZipField().sendKeys(faker.address().zipCode());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().parentTelephoneField().sendKeys("9163305512");
+        getAddReportIdentificationInformation().parentTelephoneField().sendKeys(faker.phoneNumber().cellPhone());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().employerNameField().sendKeys("QAUBER");
+        getAddReportIdentificationInformation().employerNameField().sendKeys(faker.name().username());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().employerAddressField().sendKeys("2905 Stender Way");
+        getAddReportIdentificationInformation().employerAddressField().sendKeys(faker.address().streetAddress());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().employerCityField().sendKeys("Santa Clara");
+        getAddReportIdentificationInformation().employerCityField().sendKeys(faker.address().city());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().employerStateDropList("Guam").click();
+        getAddReportIdentificationInformation().employerStateDropList().click();
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().employerZipField().sendKeys("567890");
+        getAddReportIdentificationInformation().employerZipField().sendKeys(faker.address().zipCode());
         Thread.sleep(2000);
 
-        getAddReportIdentificationInformation().employerTelephoneField().sendKeys("0987654422");
+        getAddReportIdentificationInformation().employerTelephoneField().sendKeys(faker.phoneNumber().cellPhone());
+        Thread.sleep(2000);
 
         getAddReportIdentificationInformation().nextButton().click();
         Thread.sleep(2000);
@@ -169,12 +171,12 @@ public class AddReportidentificationInformationTestCase extends PageObjectModelR
         Thread.sleep(2000);
     }
 
-        @AfterClass
-        public void breakDown () throws InterruptedException{
+    @AfterClass
+         public void breakDown () throws InterruptedException{
 
-            Thread.sleep(10000);
+        Thread.sleep(10000);
 
-            driver.manage().deleteAllCookies();
-            driver.quit();
-        }
+        driver.manage().deleteAllCookies();
+        driver.quit();
+    }
     }

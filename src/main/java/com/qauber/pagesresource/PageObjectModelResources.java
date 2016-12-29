@@ -18,18 +18,19 @@ public class PageObjectModelResources {
     private User testCaseUser;
     private UserFactory userFactory;
 
-//Pages before login
+    //Pages before login
+    private CompanyCreationSAU companyCreationSAU;
     private LoginPage login;
     private RegistrationPage1 registrationPage1;
     private RegistrationPage2 registrationPage2;
 
-//Pages/elements accessible from all pages
+    //Pages/elements accessible from all pages
     private Header header;
     private NavBar navBar;
     private ProfilePanel profilePanel;
     private EditProfile editProfile;
 
-//Navbar pages
+    //Navbar pages
     //    private Users users;
     private Entities entities;
     private EntitiesPermissionsDialog entitiesPermissionsDialog;
@@ -39,7 +40,7 @@ public class PageObjectModelResources {
     private Reports reports;
     private ReportsViewReport reportsViewReport;
 
-//Add reports pages
+    //Add reports pages
     private AddReportEnvironment addReportEnvironment;
     private AddReportIdentificationInformation addReportIdentificationInformation;
     private AddReportIdentifiersPage addReportIdentifiersPage;
@@ -85,6 +86,7 @@ public class PageObjectModelResources {
         ////////////////// Done managing WebDriver
 
         //Set page references
+        companyCreationSAU = new CompanyCreationSAU(driver);
         login = new LoginPage(driver);
         registrationPage1 = new RegistrationPage1(driver);
         registrationPage2 = new RegistrationPage2(driver);
@@ -98,6 +100,8 @@ public class PageObjectModelResources {
         users = new Users(driver);
         usersPermissionsDialog = new UsersPermissionsDialog(driver);
         editOrganizationPage = new EditOrganizationPage(driver);
+        createOrganization = new CreateOrganization(driver);
+
         reports = new Reports(driver);
         reportsViewReport = new ReportsViewReport(driver);
 
@@ -146,6 +150,8 @@ public class PageObjectModelResources {
         return driver;
     }
 
+    protected CompanyCreationSAU getCompanyCreationSAU(){ return companyCreationSAU;}
+
     protected LoginPage getLogin() {
         return login;
     }
@@ -177,8 +183,9 @@ public class PageObjectModelResources {
 
     protected UsersPermissionsDialog getUsersPermissionsDialog() {return usersPermissionsDialog;}
 
-
     protected EditOrganizationPage getOrganization() {return  editOrganizationPage;}
+
+    protected CreateOrganization getCreateOrganization() { return createOrganization;}
 
     protected Reports getReports() {
         return reports;
@@ -222,7 +229,6 @@ public class PageObjectModelResources {
 
     protected  CreateSubsciption getCreateSubsciption() {return createSubsciption;}
 
-    protected CreateOrganization getCreateOrganization(){ return createOrganization;}
 
 
 
