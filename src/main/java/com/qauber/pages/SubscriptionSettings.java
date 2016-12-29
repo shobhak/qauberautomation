@@ -32,28 +32,33 @@ public class SubscriptionSettings {
         return driver.findElement(By.xpath("//button[@ng-click='closeThisDialog()']"));
     }
 
-    public void slider(int x) // type value that you want to get (from 5 to 40)
+    public void slider(int x) throws InterruptedException // type value that you want to get (from 5 to 40)
     {
         WebElement slider = driver.findElement(By.cssSelector(".slider-handle.min-slider-handle.round"));
         WebElement element = driver.findElement(By.xpath("//div[@class='slider-handle min-slider-handle round']"));
         Actions move = new Actions(driver);
-        Action action;
-        int i = 0;
-        if (Integer.parseInt(element.getAttribute("aria-valuenow"))<=x)
-        {
-            while (Integer.parseInt(element.getAttribute("aria-valuenow")) != x) {
-                action = move.dragAndDropBy(slider, i, 0).build();
-                action.perform();
-                i++;
-            }
-        }
-        else
-        {
-            while (Integer.parseInt(element.getAttribute("aria-valuenow")) != x) {
-                action = move.dragAndDropBy(slider, i, 0).build();
-                action.perform();
-                i--;
-            }
-        }
+        Action action = (Action) move.dragAndDropBy(slider, -200, 0).build();
+        action.perform();
+        Thread.sleep(10000);
+        Action action2 = (Action) move.dragAndDropBy(slider, x, 0).build();
+        action2.perform();
+//        Action action;
+//        int i = 0;
+//        if (Integer.parseInt(element.getAttribute("aria-valuenow"))<=x)
+//        {
+//            while (Integer.parseInt(element.getAttribute("aria-valuenow")) != x) {
+//                action = move.dragAndDropBy(slider, i, 0).build();
+//                action.perform();
+//                i++;
+//            }
+//        }
+//        else
+//        {
+//            while (Integer.parseInt(element.getAttribute("aria-valuenow")) != x) {
+//                action = move.dragAndDropBy(slider, i, 0).build();
+//                action.perform();
+//                i--;
+//            }
+//        }
     }
 }
