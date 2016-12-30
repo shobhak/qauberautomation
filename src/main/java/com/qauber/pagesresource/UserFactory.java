@@ -96,7 +96,7 @@ public class UserFactory {
 
         //TODO: handle exception (File Read Failed, empty string, etc)
 
-//        List<String> lines = FileManager.getFile("validlogins/sau.txt");
+//        List<String> lines = FileManager.getFileAsStringList("validlogins/sau.txt");
 
         String fileName = getFileName(userType);
 
@@ -104,7 +104,7 @@ public class UserFactory {
 
         List<String> lines = null;
         try {
-            lines = FileManager.getFile(fileName);
+            lines = FileManager.getFileAsStringList(fileName);
         } catch (IOException e) {
 //            e.printStackTrace();
             System.out.println("IOException: Probably file "+fileName+" not found");
@@ -155,7 +155,8 @@ public class UserFactory {
         else { //userType RU
             fileName = "ru.txt";
         }
-        fileName = System.getProperty("user.home") + File.separator + "QAUberTestConfig" + File.separator + fileName;
+//        fileName = System.getProperty("user.home") + File.separator + "QAUberTestConfig" + File.separator + fileName;
+        //no longer needed, paths in FileManager changed to relative
         System.out.println(fileName);
 
         return fileName;
