@@ -37,7 +37,7 @@ public class SubscriptionSettings {
         WebElement slider = driver.findElement(By.cssSelector(".slider-handle.min-slider-handle.round"));
         WebElement element = driver.findElement(By.xpath("//div[@class='slider-handle min-slider-handle round']"));
         Actions move = new Actions(driver);
-        Action action = (Action) move.dragAndDropBy(slider, -200, 0).build();
+        Action action = (Action) move.dragAndDropBy(slider, -300, 0).build();
         action.perform();
         Thread.sleep(10000);
         Action action2 = (Action) move.dragAndDropBy(slider, x, 0).build();
