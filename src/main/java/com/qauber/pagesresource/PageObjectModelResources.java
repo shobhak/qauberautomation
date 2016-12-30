@@ -29,6 +29,7 @@ public class PageObjectModelResources {
     private NavBar navBar;
     private ProfilePanel profilePanel;
     private EditProfile editProfile;
+    private SubscriptionSettings subscriptionSettings;
 
     //Navbar pages
     //    private Users users;
@@ -94,6 +95,7 @@ public class PageObjectModelResources {
         navBar = new NavBar(driver);
         profilePanel = new ProfilePanel(driver);
         editProfile = new EditProfile(driver);
+        subscriptionSettings = new SubscriptionSettings(driver);
 
         entities = new Entities(driver);
         entitiesPermissionsDialog = new EntitiesPermissionsDialog(driver);
@@ -174,6 +176,8 @@ public class PageObjectModelResources {
     protected EditProfile getEditProfile() {
         return editProfile;
     }
+
+    protected SubscriptionSettings getSubscriptionSettings() {return subscriptionSettings;}
 
     protected Entities getEntities() {return entities;}
 

@@ -32,7 +32,7 @@ public class SubscriptionSettings {
         return driver.findElement(By.xpath("//button[@ng-click='closeThisDialog()']"));
     }
 
-    public void slider(int x) // type value that you want to get (from 5 to 40)
+    public void slider(int x) throws InterruptedException // type value that you want to get (from 5 to 40)
     {
         WebElement slider = driver.findElement(By.cssSelector(".slider-handle.min-slider-handle.round"));
         WebElement element = driver.findElement(By.xpath("//div[@class='slider-handle min-slider-handle round']"));
@@ -55,5 +55,16 @@ public class SubscriptionSettings {
                 i--;
             }
         }
+    }
+
+    public void sliderByPercent(int x) throws InterruptedException {
+        WebElement slider = driver.findElement(By.cssSelector(".slider-handle.min-slider-handle.round"));
+        WebElement element = driver.findElement(By.xpath("//div[@class='slider-handle min-slider-handle round']"));
+        Actions move = new Actions(driver);
+        Action action = (Action) move.dragAndDropBy(slider, -300, 0).build();
+        action.perform();
+        Thread.sleep(10000);
+        Action action2 = (Action) move.dragAndDropBy(slider, x, 0).build();
+        action2.perform();
     }
 }

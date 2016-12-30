@@ -9,6 +9,7 @@ import java.util.List;
 
 // Created by Denys_G on 12/16/2016.
 // Modified by Max on 12/19/2016.
+// modified by Jing on 12/29/2016.
 
 public class ProfilePanel {
     WebDriver driver;
@@ -36,6 +37,9 @@ public class ProfilePanel {
     public WebElement logOutButton() {
         return driver.findElement(By.xpath("//button[@ng-click='app.logout()']"));
     }
+    public WebElement subscriptionsText() {return driver.findElement(By.xpath("//*[@class='layout-fixed offsidebar-open']//small[text()='Subscriptions']"));}
+    public List<WebElement> entitiesList() {return driver.findElements(By.xpath("//*[@class='ml mr']//*[@class='ng-binding']"));}
+
     public WebElement organizationLink(int number)
     {
         List<WebElement> list = driver.findElements(By.cssSelector(".badge.bg-info.pull-right.ng-binding"));

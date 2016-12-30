@@ -47,6 +47,12 @@ public class Entities {
         return element;
     }
 
+    // Web element for "Info" number of subscription users
+    public WebElement organizationSubscriptionUsers(int rowindex){
+        element = driver.findElement(By.xpath("//tr[@class='ng-scope'][" + rowindex + "]/td[@class='pl-lg']/span"));
+        return element;
+    }
+
     // Web element for "Action" assign permission
     public WebElement assignPermissionButton(int rowindex){
         element = driver.findElement(By.xpath("//tr[@class='ng-scope'][" + rowindex + "]/td[@class='text-center']/button[@title='Assign permissions']"));
