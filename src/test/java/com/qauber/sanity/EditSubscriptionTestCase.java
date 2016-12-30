@@ -29,7 +29,7 @@ public class EditSubscriptionTestCase extends PageObjectModelResources {
 
     @Test
     public void editSubscription() throws InterruptedException {
-        int entites;
+        int entitiesnumber;
         int editentityindex;
         int newusersnumber;
         int currentusernumber;
@@ -59,8 +59,8 @@ public class EditSubscriptionTestCase extends PageObjectModelResources {
             Thread.sleep(2000);
         }
 
-        entites = getProfilePanel().entitiesList().size();
-        editentityindex = randomInt.nextInt(entites) + 1;
+        entitiesnumber = getProfilePanel().entitiesList().size();
+        editentityindex = randomInt.nextInt(entitiesnumber) + 1;
         currentusernumber = Integer.parseInt(getProfilePanel().organizationLink(editentityindex).getText());
         System.out.println(currentusernumber);
         getProfilePanel().organizationLink(editentityindex).click();
