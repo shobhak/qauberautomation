@@ -39,6 +39,7 @@ public class ProfilePanel {
     }
     public WebElement subscriptionsText() {return driver.findElement(By.xpath("//*[@class='layout-fixed offsidebar-open']//small[text()='Subscriptions']"));}
     public List<WebElement> entitiesList() {return driver.findElements(By.xpath("//*[@class='ml mr']//*[@class='ng-binding']"));}
+    public List<WebElement> hideEntitiesForNonSAU() {return driver.findElements(By.xpath("//*[@class='ml mr']/*[@class='ng-hide']//*[@class='ng-binding']"));}
 
     public WebElement organizationLink(int number)
     {
