@@ -155,7 +155,8 @@ public class UserFactory {
         else { //userType RU
             fileName = "ru.txt";
         }
-        fileName = System.getProperty("user.home") + File.separator + "QAUberTestConfig" + File.separator + fileName;
+//        fileName = System.getProperty("user.home") + File.separator + "QAUberTestConfig" + File.separator + fileName;
+        //no longer needed, paths in FileManager changed to relative
         System.out.println(fileName);
 
         return fileName;
