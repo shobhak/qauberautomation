@@ -38,8 +38,9 @@ public class ProfilePanel {
         return driver.findElement(By.xpath("//button[@ng-click='app.logout()']"));
     }
     public WebElement subscriptionsText() {return driver.findElement(By.xpath("//*[@class='layout-fixed offsidebar-open']//small[text()='Subscriptions']"));}
-    public List<WebElement> entitiesList() {return driver.findElements(By.xpath("//*[@class='ml mr']//*[@class='ng-binding']"));}
-    public List<WebElement> hideEntitiesForNonSAU() {return driver.findElements(By.xpath("//*[@class='ml mr']/*[@class='ng-hide']//*[@class='ng-binding']"));}
+    public WebElement settingsText() {return driver.findElement(By.xpath("//h3[text()='Settings']"));}
+    public List<WebElement> entitiesList() {return driver.findElements(By.xpath("//*[@class='']//*[@class='ng-binding']"));}
+    public List<WebElement> hideEntitiesForNonSAU() {return driver.findElements(By.xpath("//*[@class='ng-hide']//*[@class='ng-binding']"));}
 
     public WebElement organizationLink(int number)
     {
