@@ -7,12 +7,21 @@ package com.qauber.pagesresource;
 public class ConfigOOP {
 
 
-    //Configurations, feel free to change these
-    private int RUNID = 528;
-    private BrowserType browserType = BrowserType.CHROME;
-    private UserType userType = UserType.SAU;
-    private String BASEURL = "http://testwave.qabidder.net";
-    private String LOGPATH = "/log/test.txt";
+    private TestRail testRail;
+    private BrowserType browserType;
+
+    private String baseURL;
+    private String logPath;
+    private int sleepTime;
+
+    public ConfigOOP(){ //Default config
+        browserType = BrowserType.CHROME;
+        baseURL = "http://testwave.qabidder.net";
+        logPath = "log/defaultlog.txt";
+        testRail = new TestRail();
+        testRail.setTester("Default Tester");
+        sleepTime = 5000; //TODO: add config for this
+    }
 
     //Talk to me before changing below code, or the internet will break 0_o - Erik
     //this may be an exaggeration
@@ -30,29 +39,39 @@ public class ConfigOOP {
         return browserType;
     }
 
-    public void setBrowserType(BrowserType browserType) {
+    public void setBrowserType(BrowserType browserType) { //make sure to return the driver (getDriver) if you use this!
         this.browserType = browserType;
     }
 
-    //list of valid user types
-    public enum UserType {
-        SAU,
-        AU,
-        RU
-    }
-
-
-
-
-    public int getRunID() {
-        return RUNID;
-    }
-
     public String getBaseURL() {
-        return BASEURL;
+        return baseURL;
+    }
+
+    public void setBaseURL(String baseURL) {
+        this.baseURL = baseURL;
     }
 
     public String getLogPath() {
-        return LOGPATH;
+        return logPath;
+    }
+
+    public int getSleepTime() {
+        return sleepTime;
+    }
+
+    public void setSleepTime(int sleepTime) {
+        this.sleepTime = sleepTime;
+    }
+
+    public TestRail getTestRail() {
+        return testRail;
+    }
+
+    public void setTestRail(TestRail testRail) {
+        this.testRail = testRail;
+    }
+
+    public void setLogPath(String logPath) {
+        this.logPath = logPath;
     }
 }
