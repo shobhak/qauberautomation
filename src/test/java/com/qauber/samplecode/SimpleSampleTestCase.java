@@ -11,7 +11,10 @@ import org.testng.annotations.Test;
 
 /**
  * Created by erikfriedlander on 12/19/16.
+ * DEPRECATED, DO NOT USE. by SimpleSampleConfigOOPTestCase.
  */
+
+@Deprecated
 public class SimpleSampleTestCase extends PageObjectModelResources {
 
     WebDriver driver;

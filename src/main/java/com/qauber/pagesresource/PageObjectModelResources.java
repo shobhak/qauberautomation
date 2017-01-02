@@ -63,6 +63,10 @@ public class PageObjectModelResources {
         setUpWithConfigFile();
     }
 
+    /*
+    Read ConfigOOP object from config file in ~/QAUberTestConfig. If config file not found or invalid, create a new one using defaults in ConfigOOP constructor.
+
+     */
     protected void setUpWithConfigFile() {
         this.config = new ConfigOOP();
         try {

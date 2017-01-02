@@ -67,7 +67,7 @@ public class ConfigOOP {
         return testRail;
     }
 
-    public void setTestRail(TestRail testRail) {
+    private void setTestRail(TestRail testRail) {
         this.testRail = testRail;
     }
 
