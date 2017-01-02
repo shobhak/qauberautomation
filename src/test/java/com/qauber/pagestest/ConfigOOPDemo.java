@@ -20,7 +20,7 @@ public class ConfigOOPDemo extends PageObjectModelResources {
         getDriver().get(config.getBaseURL());
         Thread.sleep(3000);
 
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
 
         getNavBar().addReportButton().click();
 
@@ -42,11 +42,11 @@ public class ConfigOOPDemo extends PageObjectModelResources {
         config.setBrowserType(ConfigOOP.BrowserType.CHROME);
         setUpWithConfig(config);
 
-//        getTestCaseUser().setUsername("firstName@mailinator.com");
-//        getTestCaseUser().setPassword("12345678");
+//        testUser().setUsername("firstName@mailinator.com");
+//        testUser().setPassword("12345678");
 
-        System.out.println(getTestCaseUser().getUsername());
-        System.out.println(getTestCaseUser().getPassword());
+        System.out.println(testUser().getUsername());
+        System.out.println(testUser().getPassword());
     }
 
     @AfterClass

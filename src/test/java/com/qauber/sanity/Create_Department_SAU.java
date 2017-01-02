@@ -22,7 +22,7 @@ public class Create_Department_SAU extends PageObjectModelResources {
         driver = new ChromeDriver();
         sleepTime = 5000;
         setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
+        //setUpWithUser creates TestCaseUser, access with testUser()
     }
 
     @Test
@@ -30,7 +30,7 @@ public class Create_Department_SAU extends PageObjectModelResources {
         driver.get(Config.getBaseURL());
         Thread.sleep(sleepTime*2);
 
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(sleepTime*2);
 
         //Code ↑ replaces commented code ↡

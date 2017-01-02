@@ -2,12 +2,9 @@ package com.qauber.pagestest;
 
 import com.github.javafaker.Faker;
 import com.qauber.config.Config;
-import com.qauber.pages.EditOrganizationPage;
-import com.qauber.pages.Entities;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterClass;
@@ -17,7 +14,6 @@ import org.testng.annotations.Test;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -31,7 +27,7 @@ public class EditOrganizationTest extends PageObjectModelResources {
     public void setUp() {
         driver = new ChromeDriver();
         setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
+        //setUpWithUser creates TestCaseUser, access with testUser()
     }
 
     @Test
@@ -53,7 +49,7 @@ public class EditOrganizationTest extends PageObjectModelResources {
         driver.get(Config.getBaseURL());
         Thread.sleep(10000);
 
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(5000);
 
         getNavBar().entitiesButton().click();

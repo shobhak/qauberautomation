@@ -239,7 +239,7 @@ public class PageObjectModelResources {
     //
 
     //TODO: implement chooseUser (this will affect config.user) - may have been done already with User and UserFactory
-    protected User getTestCaseUser() {
+    protected User testUser() {
         return testCaseUser;
     }
 }
