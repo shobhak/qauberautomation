@@ -88,8 +88,10 @@ public class TestRail {
     //For now, this will create a local APIClientExtension... this should be in PageObjectModelResources or something of the sort.
     //=======================
     public void addResults(TestCaseResult status, String comments) {
-        //TODO: implement addResults functionality...
-        //maybe read comments from log?
+        //TODO: read comments from log?
+        setStatus(status);
+        client.addResult(getRunID(), getCaseID(), getStatusID(), comments, getTester());
+
         System.out.println("==============================================================================");
         System.out.println("Run ID: "+runID);
         System.out.println("Test Case ID: "+caseID);
@@ -97,9 +99,6 @@ public class TestRail {
         System.out.println("Comments: "+comments);
         System.out.println("Tester: "+tester);
         System.out.println("================= TestRail(addResults(TestCaseResult status, String comments))");
-
-        setStatus(status);
-        client.addResult(getRunID(), getCaseID(), getStatusID(), comments, getTester());
     }
 
     public static APIClientExtension testRailLogin() { //passes back a logged in client
