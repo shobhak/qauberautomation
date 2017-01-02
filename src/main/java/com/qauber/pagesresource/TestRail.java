@@ -66,7 +66,7 @@ public class TestRail {
         else { statusID = 5; } // (status == TestCaseResult.FAILED)
 }
 
-    public void addResults(TestCaseResult status, String comments) {
+    public void addResults(TestCaseResult status, String comments) { //TODO: This method really should be another class, that will come later. Maybe this will call TestRailAPIClientExtension.
         //TODO: implement addResults functionality...
         //maybe read comments from log?
         System.out.println("==============================================================================");
