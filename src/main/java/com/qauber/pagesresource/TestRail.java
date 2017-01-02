@@ -1,5 +1,7 @@
 package com.qauber.pagesresource;
 
+import com.qauber.testrail.APIClientExtension;
+
 /**
  * Created by erikfriedlander on 12/24/16.
  * http://docs.gurock.com/testrail-api2/reference-results#add_result
@@ -11,6 +13,8 @@ public class TestRail {
     private int statusID;
     private String comments;
     private String tester;
+    private String testRailURL;
+    private APIClientExtension client;
 //    private int elapsed;
 
 
@@ -28,6 +32,7 @@ public class TestRail {
     public TestRail(int runID) {
         this.runID = runID;
         this.tester = "Who didn't fill out this field?";
+        this.client = testRailLogin();
     }
 
     public int getRunID() {
@@ -64,9 +69,25 @@ public class TestRail {
         else if (status == TestCaseResult.BLOCKED) { statusID = 2; }
         else if (status == TestCaseResult.RETEST) { statusID = 4; }
         else { statusID = 5; } // (status == TestCaseResult.FAILED)
-}
+    }
 
-    public void addResults(TestCaseResult status, String comments) { //TODO: This method really should be another class, that will come later. Maybe this will call TestRailAPIClientExtension.
+    private int getStatusID() {
+        return statusID;
+    }
+
+    public String getTestRailURL() {
+        return testRailURL;
+    }
+
+    protected void setTestRailURL(String testRailURL) {
+        this.testRailURL = testRailURL;
+    }
+
+    //=======================
+    //TODO: This method really should be another class, but out of time and have to push this out.
+    //For now, this will create a local APIClientExtension... this should be in PageObjectModelResources or something of the sort.
+    //=======================
+    public void addResults(TestCaseResult status, String comments) {
         //TODO: implement addResults functionality...
         //maybe read comments from log?
         System.out.println("==============================================================================");
@@ -77,6 +98,15 @@ public class TestRail {
         System.out.println("Tester: "+tester);
         System.out.println("================= TestRail(addResults(TestCaseResult status, String comments))");
 
+        setStatus(status);
+        client.addResult(getRunID(), getCaseID(), getStatusID(), comments, getTester());
+    }
+
+    public static APIClientExtension testRailLogin() { //passes back a logged in client
+        APIClientExtension client = new APIClientExtension("https://bidqa.testrail.net"); //TODO: not hardcode these
+        client.setUser("Testers@qauber.com");
+        client.setPassword("qauber2016!");
+        return client;
     }
 }
 

@@ -10,8 +10,10 @@ import org.testng.annotations.Test;
 
 /**
  * Created by erikfriedlander on 12/24/16.
- * === This test case demonstrates the use of a Config object with a configuration text file and (to be finished) TestRail integration.
+ * === This test case demonstrates the use of a Config object with a configuration text file and TestRail integration.
  * === It reports to TestRail whether the test passes or fails, with useful results - see try/catch at Assert.
+ *
+ * TEST RAIL RESULTS: https://bidqa.testrail.net/index.php?/cases/view/79853
  *
  * We test if 'Add Entity' button text on top of Entity page is correct.
  *
@@ -44,7 +46,7 @@ public class SimpleSampleConfigOOPTestCase extends PageObjectModelResources {
         setUpUser(User.UserType.SAU); //Pass in user
 
         //TestRail Configuration
-        testConfig().getTestRail().setCaseID(1357); //sample TestRail case ID, TODO: will update with 'real' test case ID later, and add link to TestRail in comments
+        testConfig().getTestRail().setCaseID(79853); //sample TestRail case ID, TODO: will update with 'real' test case ID later, and add link to TestRail in comments
         testConfig().getTestRail().setTester("Erik's Computer"); //put your name :-)
 
         //Misc configuration

@@ -74,4 +74,5 @@ public class ConfigOOP {
     public void setLogPath(String logPath) {
         this.logPath = logPath;
     }
+
 }
