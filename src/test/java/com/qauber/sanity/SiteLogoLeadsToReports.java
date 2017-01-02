@@ -26,7 +26,7 @@ public class SiteLogoLeadsToReports extends PageObjectModelResources {
     public void siteMenuCollapsible() throws InterruptedException {
         driver.get(Config.getBaseURL());
         Thread.sleep(10000);
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(5000);
         getNavBar().clickEntities();
         Thread.sleep(1000);

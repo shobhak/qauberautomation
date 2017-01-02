@@ -5,7 +5,6 @@ import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -26,7 +25,7 @@ public class ReportsUseReportAsTemplateTestCase extends PageObjectModelResources
     public void reportsUseReportAsTemplate() throws InterruptedException {
         driver.get(Config.getBaseURL());
         Thread.sleep(10000);
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(5000);
         getNavBar().clickReports();
         Thread.sleep(2000);

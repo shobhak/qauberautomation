@@ -30,7 +30,7 @@ public class AddReportsEnvironmentTestCase extends PageObjectModelResources {
 
         ReportValueObject reportVO = new ReportValueObject();
 
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(5000);
 
         getNavBar().addReportButton().click();

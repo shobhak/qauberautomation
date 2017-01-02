@@ -23,20 +23,20 @@ public class EntitiesAssignPermissions extends PageObjectModelResources {
     @Test
     public void testAsSAU() throws AWTException, InterruptedException {
         setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
+        //setUpWithUser creates TestCaseUser, access with testUser()
         assignPermissionsEntities();
     }
     @Test(priority = 1)
     public void testAsAU() throws AWTException, InterruptedException {
         setUpWithUser(User.UserType.AU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
+        //setUpWithUser creates TestCaseUser, access with testUser()
         assignPermissionsEntities();
     }
 
     public void assignPermissionsEntities() throws InterruptedException, AWTException {
         driver.get(Config.getBaseURL());
         Thread.sleep(2000);
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(2000);
         getNavBar().entitiesButton().click();
         Thread.sleep(2000);
