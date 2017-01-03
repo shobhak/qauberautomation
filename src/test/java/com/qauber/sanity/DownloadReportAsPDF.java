@@ -1,5 +1,6 @@
 package com.qauber.sanity;
 
+import com.qauber.pagesresource.FileManager;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
 import org.testng.Assert;
@@ -13,7 +14,7 @@ import java.io.File;
  */
 public class DownloadReportAsPDF extends PageObjectModelResources {
 
-    private static String downloadPath = "C:/Users/Alya/Downloads";
+    private static String downloadPath = FileManager.getDownloadPath();
 
     @BeforeClass
     public void setUp() {
