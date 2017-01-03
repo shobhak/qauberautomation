@@ -26,65 +26,28 @@ public class Create_Department_SAU extends PageObjectModelResources {
     }
 
     @Test
-    public void createDepartmentSAU() throws InterruptedException {
+    public void createDepartmentSAU() throws InterruptedException{
         driver.get(Config.getBaseURL());
-        Thread.sleep(sleepTime*2);
-
         getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
-        Thread.sleep(sleepTime*2);
-
-        //Code ↑ replaces commented code ↡
-
-//        driver.get("http://testwave.qabidder.net/#/page/login");
-//        Thread.sleep(10000);
-//        WebElement searchField = driver.findElement(By.xpath("//*[@id=\"exampleInputEmail1\"]"));
-//        searchField.clear();
-//        searchField.sendKeys("ramazan@bigmir.net");
-//        WebElement Password = driver.findElement(By.xpath("//*[@id=\"exampleInputPassword1\"]"));
-//        Password.sendKeys("password");
-//        WebElement Login = driver.findElement(By.xpath("//button[contains(@type,'submit')]"));
-//        Login.click();
-//        Thread.sleep(10000);
-
-
-    //Following code: getNavBar -
+        Thread.sleep(sleepTime);
         getNavBar().entitiesButton().click();
         Thread.sleep(sleepTime);
-//        WebElement Entities = driver.findElement(By.xpath("//span[contains(.,'Entities')]"));
-//        Entities.click();
-
-        getEntities().addOrganizationButton().click();
+        getEntities().organizationList().get(1).click();
         Thread.sleep(sleepTime);
-//        WebElement Addsubdep = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/div/table/tbody/tr[2]/td[1]/a"));
-//        Addsubdep.click();
-
-
-      //Note that 'Add Department' works for both references...
-        getEntities().addOrganizationButton().click();
-        Thread.sleep(sleepTime);
-//        WebElement Addsubdep1 = driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/div/table/tbody/tr[2]/td[1]/a"));
-//        Addsubdep1.click();
-
-        //TODO: Rewrite the following code to use the Pages from our Page Object Model.
-
-//        WebElement AddButDep1 = driver.findElement(By.xpath("//button[contains(@ng-show,'ctrl.userIsAble()')]"));
-//        AddButDep1.click();
-//        WebElement NameSubDep = driver.findElement(By.xpath("//input[contains(@required,'required')]"));
-//        NameSubDep.sendKeys("Second_44 Department");
-//        WebElement Create = driver.findElement(By.xpath("//button[contains(@ng-disabled,'error.required')]"));
-//        Create.click();
-//
-//        Thread.sleep(5000);
-//        String createdDepartmentName = driver.findElement(By.linkText("Second_44 Department")).getText();
-//        Assert.assertEquals(createdDepartmentName, departmentName);
-//
+//        getOrganization().
 
 
     }
 
+
+
+
+
+
+
     @AfterClass
     public void breakDown(){
-        breakDownHelper(driver);
+//        breakDownHelper(driver);
     }
     //        driver.quit();
 }
