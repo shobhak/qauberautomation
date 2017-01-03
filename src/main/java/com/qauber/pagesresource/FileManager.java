@@ -28,6 +28,10 @@ public class FileManager {
         return System.getProperty("user.home") + File.separator + "QAUberTestConfig" + File.separator;
     }
 
+    public static String getDownloadPath() {//if no dialog box asking for "open" or "save"
+        return System.getProperty("user.home") + File.separator + "Downloads" + File.separator;
+    }
+
     public static List<String> getFileAsStringList(String fileName) throws IOException { //gets file at getBasePath as List<String>
         return FileUtils.readLines(new File(getBasePath()+fileName), Charset.defaultCharset());
     }
