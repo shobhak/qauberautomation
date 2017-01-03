@@ -1,4 +1,4 @@
-package com.qauber.pagestest;
+package com.qauber.sanity;
 
 import com.github.javafaker.Faker;
 import com.qauber.config.Config;
@@ -26,7 +26,7 @@ public class CreateOrganizationTestCase extends PageObjectModelResources {
 
 
     @Test
-    public void createOrganizationTestPage() throws InterruptedException {
+    public void createOrganizationTestCase() throws InterruptedException {
         driver.manage().window().maximize();
         driver.get(Config.getBaseURL());
 
