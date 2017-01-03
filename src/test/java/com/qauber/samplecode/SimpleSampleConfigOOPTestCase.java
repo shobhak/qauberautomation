@@ -13,7 +13,8 @@ import org.testng.annotations.Test;
  * === This test case demonstrates the use of a Config object with a configuration text file and TestRail integration.
  * === It reports to TestRail whether the test passes or fails, with useful results - see try/catch at Assert.
  *
- * TEST RAIL RESULTS: https://bidqa.testrail.net/index.php?/cases/view/79853
+ * TEST RAIL CASE: https://bidqa.testrail.net/index.php?/cases/view/79853
+ * TEST RAIL RESULTS: https://bidqa.testrail.net/index.php?/cases/results/79853
  *
  * We test if 'Add Entity' button text on top of Entity page is correct.
  *
@@ -73,7 +74,7 @@ public class SimpleSampleConfigOOPTestCase extends PageObjectModelResources {
             Assert.assertEquals(getEntities().addOrganizationButton().getText(), "Add Entity"); //ASSERT IF TEXT IS CORRECT
             //Change assertion and see what happens.
         } catch (AssertionError e) { //IF TEXT IS WRONG, 'CATCH' ASSERTION ERROR AND REPORT RESULTS!
-            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "\"Add Entity\" button text at top of Add Organization page is incorrect"+e.getLocalizedMessage());
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "\"Add Entity\" button text at top of Add Organization page is incorrect: "+e.getLocalizedMessage());
             throw e; //Throw failed assertion back to TestRail.
             //Try commenting out 'throw e' with a failed assertion, and see what happens :-)
         }
