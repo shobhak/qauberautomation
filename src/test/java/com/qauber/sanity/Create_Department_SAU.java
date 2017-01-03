@@ -28,7 +28,7 @@ public class Create_Department_SAU extends PageObjectModelResources {
     @Test
     public void createDepartmentSAU() throws InterruptedException{
         driver.get(Config.getBaseURL());
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(sleepTime);
         getNavBar().entitiesButton().click();
         Thread.sleep(sleepTime);
