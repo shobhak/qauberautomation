@@ -1,4 +1,4 @@
-package com.qauber.pagestest;
+package com.qauber.sanity;
 
 import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
@@ -34,7 +34,7 @@ public class CreateSubscriptionPayPalTestcase extends PageObjectModelResources {
         getNavBar().entitiesButton().click();
         Thread.sleep(8000);
 
-        getEntities().finishCreateOrganizationButton(6).click();
+        getEntities().finishCreateOrganizationButton(3).click();
         Thread.sleep(5000);
 
         getCreateSubsciption().finishButton().click();
