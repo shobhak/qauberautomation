@@ -26,7 +26,7 @@ public class RegularUserCannotSeeDeleteSubscriptionOrganization extends PageObje
     public void setUp() {
         driver = new ChromeDriver();
         setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
+        //setUpWithUser creates TestCaseUser, access with testUser()
     }
 
     @Test
@@ -39,7 +39,7 @@ public class RegularUserCannotSeeDeleteSubscriptionOrganization extends PageObje
         driver.get(Config.getBaseURL());
         Thread.sleep(10000);
 
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(5000);
 
         getHeader().userName().click();
@@ -68,7 +68,7 @@ public class RegularUserCannotSeeDeleteSubscriptionOrganization extends PageObje
         setUpWithUser(User.UserType.RU, driver);
         Thread.sleep(2000);
 
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(5000);
 
         getHeader().userName().click();

@@ -11,7 +11,10 @@ import org.testng.annotations.Test;
 
 /**
  * Created by erikfriedlander on 12/19/16.
+ * DEPRECATED, DO NOT USE. by SimpleSampleConfigOOPTestCase.
  */
+
+@Deprecated
 public class SimpleSampleTestCase extends PageObjectModelResources {
 
     WebDriver driver;
@@ -22,7 +25,7 @@ public class SimpleSampleTestCase extends PageObjectModelResources {
         driver = new ChromeDriver();
         sleepTime = 5000;
         setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
+        //setUpWithUser creates TestCaseUser, access with testUser()
     }
 
     @Test
@@ -30,7 +33,7 @@ public class SimpleSampleTestCase extends PageObjectModelResources {
         driver.get(Config.getBaseURL());
         Thread.sleep(sleepTime*2);
 
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(sleepTime*2);
 
         getNavBar().addReportButton().click();

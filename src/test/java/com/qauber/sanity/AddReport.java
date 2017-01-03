@@ -36,7 +36,7 @@ public class AddReport extends PageObjectModelResources {
         ReportValueObject reportVO = new ReportValueObject();
         String firstLastName = reportVO.getFirstName()+" "+reportVO.getLastName();
 
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(5000);
 
         getNavBar().addReportButton().click();

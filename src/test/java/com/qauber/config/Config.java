@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 /**
  * Created by erikfriedlander on 11/29/16.
  */
+@Deprecated //TODO: finish replacement with ConfigOOP
 public class Config {
 
     private final static int RUNID = 528;

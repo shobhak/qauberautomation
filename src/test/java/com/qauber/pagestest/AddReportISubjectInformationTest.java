@@ -2,10 +2,8 @@ package com.qauber.pagestest;
 
 import com.github.javafaker.Faker;
 import com.qauber.config.Config;
-import com.qauber.pages.*;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
@@ -37,7 +35,7 @@ public class AddReportISubjectInformationTest extends PageObjectModelResources {
         Random randomDouble = new Random();
 
         Thread.sleep(8000);
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(3000);
 
         //Go to 'Reports'

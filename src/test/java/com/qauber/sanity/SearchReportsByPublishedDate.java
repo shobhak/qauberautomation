@@ -31,7 +31,7 @@ public class SearchReportsByPublishedDate extends PageObjectModelResources {
         driver.get(Config.getBaseURL());
         Thread.sleep(sleepTime*2);
 
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(sleepTime*2);
     }
 

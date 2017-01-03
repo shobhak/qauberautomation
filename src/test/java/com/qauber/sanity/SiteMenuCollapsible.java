@@ -26,7 +26,7 @@ public class SiteMenuCollapsible extends PageObjectModelResources {
     public void siteMenuCollapsible() throws InterruptedException {
         driver.get(Config.getBaseURL());
         Thread.sleep(10000);
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(5000);
 
         //collapse

@@ -3,21 +3,13 @@ package com.qauber.sanity;
 
         import com.github.javafaker.Faker;
         import com.qauber.config.Config;
-        import com.qauber.pages.*;
         import com.qauber.pagesresource.PageObjectModelResources;
         import com.qauber.pagesresource.User;
-        import javafx.scene.control.CheckBox;
-        import org.openqa.selenium.By;
-        import org.openqa.selenium.Keys;
         import org.openqa.selenium.WebDriver;
         import org.openqa.selenium.chrome.ChromeDriver;
-        import org.testng.Assert;
         import org.testng.annotations.AfterClass;
         import org.testng.annotations.BeforeClass;
         import org.testng.annotations.Test;
-
-        import java.util.Random;
-        import java.util.concurrent.TimeUnit;
 
 /**
  * Created by lenochka on 15.12.2016.
@@ -29,7 +21,7 @@ public class AddReportidentificationInformationTestCase extends PageObjectModelR
         public void setUp() {
         driver = new ChromeDriver();
         setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
+        //setUpWithUser creates TestCaseUser, access with testUser()
     }
 
     @Test
@@ -40,7 +32,7 @@ public class AddReportidentificationInformationTestCase extends PageObjectModelR
 
         Faker faker = new Faker();
 
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(3000);
 
         //Go to 'Reports'

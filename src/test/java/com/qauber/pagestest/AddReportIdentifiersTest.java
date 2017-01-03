@@ -2,7 +2,6 @@ package com.qauber.pagestest;
 
 import com.github.javafaker.Faker;
 import com.qauber.config.Config;
-import com.qauber.pages.*;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.WebDriver;
@@ -30,7 +29,7 @@ public class AddReportIdentifiersTest extends PageObjectModelResources {
         Faker faker = new Faker();
 
         Thread.sleep(5000);
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(5000);
 
         //Go to 'Reports'
