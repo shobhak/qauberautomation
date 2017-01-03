@@ -1,4 +1,4 @@
-package com.qauber.pagestest;
+package com.qauber.sanity;
 
 import com.github.javafaker.Faker;
 import com.qauber.config.Config;
@@ -21,18 +21,18 @@ public class CreateOrganizationTestCase extends PageObjectModelResources {
     public void setUp() {
         driver = new ChromeDriver();
         setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
+        //setUpWithUser creates TestCaseUser, access with testUser()
     }
 
 
     @Test
-    public void createOrganizationTestPage() throws InterruptedException {
+    public void createOrganizationTestCase() throws InterruptedException {
         driver.manage().window().maximize();
         driver.get(Config.getBaseURL());
 
         Faker faker = new Faker();
 
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(3000);
 
         getNavBar().clickEntities();

@@ -1,4 +1,4 @@
-package com.qauber.pagetest;
+package com.qauber.sanity;
 
 import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
@@ -20,7 +20,7 @@ public class CreateSubscriptionPayPalTestcase extends PageObjectModelResources {
     public void setUp() {
         driver = new ChromeDriver();
         setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
+        //setUpWithUser creates TestCaseUser, access with testUser()
     }
 
     @Test
@@ -28,13 +28,13 @@ public class CreateSubscriptionPayPalTestcase extends PageObjectModelResources {
         driver.get(Config.getBaseURL());
         Thread.sleep(10000);
 
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(10000);
 
         getNavBar().entitiesButton().click();
         Thread.sleep(8000);
 
-        getEntities().finishCreateOrganizationButton(6).click();
+        getEntities().finishCreateOrganizationButton(3).click();
         Thread.sleep(5000);
 
         getCreateSubsciption().finishButton().click();

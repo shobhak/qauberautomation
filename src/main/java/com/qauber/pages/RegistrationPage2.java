@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 /**
  * Created by erikfriedlander on 12/18/16.
@@ -78,8 +79,10 @@ public class RegistrationPage2 {
         cityField().sendKeys(faker.address().city());
         Thread.sleep(sleepTime/2);
 
-        stateDropDownMenu().click();
-        stateDropDownMenu().sendKeys(faker.address().state());
+//        stateDropDownMenu().click();
+//        stateDropDownMenu().sendKeys(faker.address().state());
+        Select stateDropDown = new Select(stateDropDownMenu());
+        stateDropDown.selectByIndex(faker.number().numberBetween(1, 50));
         Thread.sleep(sleepTime);
 
         postalCodeField().sendKeys(faker.address().zipCode());

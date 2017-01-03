@@ -1,9 +1,8 @@
 package com.qauber.pagestest;
 
-import com.github.javafaker.Faker;
 import com.qauber.config.Config;
-//import com.qauber.pages.*;
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.ReportValueObject;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,31 +10,10 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-//import java.util.concurrent.TimeUnit;
-
 /**
  * Created by Alya on 12/15/2016.
  */
 public class AddReportsEnvironmentTestCase extends PageObjectModelResources {
-
-    /*private WebDriver driver;
-
-    private LoginPage login;
-    private AddReportsOrganization addReportsOrganization;
-    private NavBar navBar;
-    private AddReportNavigation addReportNavigation;
-    private AddReportEnvironment addReportEnvironment;
-
-    @BeforeClass
-    public void setUp() {
-        driver = new ChromeDriver();
-        //implicit wait
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        //pull URL from config
-        driver.get(Config.getBaseURL());
-        //maximize window for our viewing pleasure
-        driver.manage().window().maximize();
-    }*/
 
     WebDriver driver;
 
@@ -50,28 +28,13 @@ public class AddReportsEnvironmentTestCase extends PageObjectModelResources {
         driver.get(Config.getBaseURL());
         Thread.sleep(10000);
 
-        Faker faker = new Faker();
+        ReportValueObject reportVO = new ReportValueObject();
 
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(5000);
 
-    /*@Test
-    public void addReportEnvironment () throws InterruptedException {
-        //Create all Page Objects
-        login = new LoginPage(driver);
-        navBar = new NavBar(driver);
-        addReportsOrganization = new AddReportsOrganization(driver);
-        addReportNavigation = new AddReportNavigation(driver);
-        addReportEnvironment = new AddReportEnvironment(driver);
-        //Log in to application
-        Thread.sleep(5000);
-        login.loginToWave("erikfqauber@gmail.com", "testwave");
-        Thread.sleep(3000);*/
-
-    //Go to 'Add Report'
         getNavBar().addReportButton().click();
 
-        //Select first organization
         Thread.sleep(1000);
         getAddReportOrganization().clickOrganization1();
         Thread.sleep(1000);
@@ -81,8 +44,9 @@ public class AddReportsEnvironmentTestCase extends PageObjectModelResources {
 
         getAddReportEnvironment().gangNameCheckBox().click();
         Thread.sleep(1000);
-        getAddReportEnvironment().gangNameField().sendKeys(faker.lorem().word());
-        getAddReportEnvironment().howLongField().sendKeys(faker.number().digit());
+
+        getAddReportEnvironment().gangNameField().sendKeys(reportVO.getGangName());
+        getAddReportEnvironment().howLongField().sendKeys(reportVO.getHowLong());
         Thread.sleep(1000);
         getAddReportEnvironment().sexCrimesCheckBox().click();
         getAddReportEnvironment().robberyCheckBox().click();
@@ -97,19 +61,21 @@ public class AddReportsEnvironmentTestCase extends PageObjectModelResources {
         getAddReportEnvironment().affiliatingWithGangMembersCheckbox().click();
         getAddReportEnvironment().participatingInGangCrimeCheckbox().click();
         getAddReportEnvironment().gangRegistrantCheckbox().click();
-        getAddReportEnvironment().otherInformationField().sendKeys(faker.lorem().word());
         getAddReportEnvironment().onProbationCheckbox().click();
         Thread.sleep(1000);
-        getAddReportEnvironment().probationOfficerField().sendKeys(faker.name().name());
-        getAddReportEnvironment().probationOfficerPhoneField().sendKeys(faker.phoneNumber().cellPhone());
+        getAddReportEnvironment().probationOfficerField().sendKeys(reportVO.getProbationOfficer());
+        getAddReportEnvironment().probationOfficerPhoneField().sendKeys(reportVO.getProbationOfficerPhone());
         getAddReportEnvironment().onParoleCheckbox().click();
         Thread.sleep(1000);
-        getAddReportEnvironment().paroleOfficerField().sendKeys(faker.name().name());
-        getAddReportEnvironment().paroleOfficerPhoneField().sendKeys(faker.phoneNumber().cellPhone());
-        getAddReportEnvironment().beatField().sendKeys(faker.lorem().word());
-        getAddReportEnvironment().officerNameField().sendKeys(faker.name().name());
-        getAddReportEnvironment().officerIdField().sendKeys(faker.idNumber().valid());
-        getAddReportEnvironment().stopLocationField().sendKeys(faker.address().city());
+        getAddReportEnvironment().paroleOfficerField().sendKeys(reportVO.getParoleOfficer());
+        getAddReportEnvironment().paroleOfficerPhoneField().sendKeys(reportVO.getParoleOfficerPhone());
+        getAddReportEnvironment().beatField().sendKeys(reportVO.getBeat());
+        getAddReportEnvironment().officerNameField().sendKeys(reportVO.getOfficerName());
+        getAddReportEnvironment().officerIdField().sendKeys(reportVO.getOfficerId());
+        getAddReportEnvironment().reasonForStopField().sendKeys(reportVO.getReasonForStop());
+        getAddReportEnvironment().stopLocationField().sendKeys(reportVO.getStopLocation());
+        getAddReportEnvironment().dispositionField().sendKeys(reportVO.getDisposition());
+        getAddReportEnvironment().otherInformationCommentsFieldArea().sendKeys(reportVO.getOtherInformationComments());
         getAddReportEnvironment().previousButton().click();
         Thread.sleep(1000);
         getAddReportNavigation().environmentTab().click();

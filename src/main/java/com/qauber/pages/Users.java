@@ -15,6 +15,7 @@ public class Users {
     public WebElement inviteUserButton() {return driver.findElement(By.xpath(".//*[@ng-click='openInviteForm()']"));}
     public WebElement inviteUserEmailField(){return driver.findElement(By.xpath(".//*[@placeholder = 'email@example.com']"));}
     public WebElement sendInviteButton() {return driver.findElement(By.cssSelector("button.btn.btn-primary.mr"));}
+    public WebElement cancelButton() {return  driver.findElement(By.xpath("//button[text()='Cancel']"));}
 
     public WebElement assignPermissionsButtonByName(String userName) {
         int listNo = 0;
@@ -80,7 +81,11 @@ public class Users {
     }
 
     public WebElement deleteButtonByIndex(int index){
-        return driver.findElement(By.xpath("//tr[@pagination-id='usersPagination']/td/button[@title='Deactivate']['"+index+"']"));
+        return driver.findElement(By.xpath(".//tr[@class='ng-scope'][' + rowindex + ']//button[@title='Delete']"));
+    }
+
+    public WebElement deleteConfirmationButton (){
+        return driver.findElement(By.xpath(".//*[@class='btn btn-danger mr'][text()='Delete']"));
     }
 
     public WebElement deleteButtonByName(String userName){

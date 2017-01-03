@@ -27,4 +27,17 @@ public class ReportsViewReport {
     public WebElement reportID(){
         return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[1]/div[2]/strong"));
     }
+
+    // added on 12/26/2016
+    public WebElement caseID(){
+        return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[2]/div[2]/strong"));
+    }
+    //added on 12/29/2016
+    public WebElement suspectName(){
+        return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[3]/div[2]/strong"));
+    }
+
+    public WebElement stopLocation(){
+        return driver.findElement(By.xpath("//*[@id='reportBody']/div[3]/div[2]/form/div[24]/div[2]/strong"));
+    }
 }

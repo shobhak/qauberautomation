@@ -2,12 +2,9 @@ package com.qauber.pagestest;
 
 import com.github.javafaker.Faker;
 import com.qauber.config.Config;
-import com.qauber.pages.EditOrganizationPage;
-import com.qauber.pages.Entities;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.AfterClass;
@@ -17,7 +14,6 @@ import org.testng.annotations.Test;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -31,7 +27,7 @@ public class EditOrganizationTest extends PageObjectModelResources {
     public void setUp() {
         driver = new ChromeDriver();
         setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
+        //setUpWithUser creates TestCaseUser, access with testUser()
     }
 
     @Test
@@ -42,7 +38,10 @@ public class EditOrganizationTest extends PageObjectModelResources {
         Random randomInt = new Random();
 
         int rowindex = 0;
-        String orgname = "Gutmann Inc";
+        String orgname = "org003";
+
+        String path1 = "C:\\Users\\Public\\Pictures\\Sample Pictures\\Chrysanthemum.jpg";
+        String path2 = "C:\\Users\\Public\\Pictures\\Sample Pictures\\Desert.jpg";
 
         int countryindex = randomInt.nextInt(243);
 //        int countryindex = 229;
@@ -50,7 +49,7 @@ public class EditOrganizationTest extends PageObjectModelResources {
         driver.get(Config.getBaseURL());
         Thread.sleep(10000);
 
-        getLogin().loginToWave(getTestCaseUser().getUsername(), getTestCaseUser().getPassword());
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(5000);
 
         getNavBar().entitiesButton().click();
@@ -90,7 +89,7 @@ public class EditOrganizationTest extends PageObjectModelResources {
         Thread.sleep(2000);
 
         // create a file path with StringSelection and copy it to clipboard
-        StringSelection filepath1 = new StringSelection("C:\\Users\\jingx\\OneDrive\\Pictures\\Saved Pictures\\QAuber\\Wave-fits\\edge_main_navigation_report.jpg");
+        StringSelection filepath1 = new StringSelection(path1);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(filepath1, null);
 
         // create a robot object and simulate the pasted action on prompt window
@@ -109,7 +108,7 @@ public class EditOrganizationTest extends PageObjectModelResources {
         getOrganization().organizationPhotoChangeButton().click();
         Thread.sleep(2000);
         // create a file path with StringSelection and copy it to clipboard
-        StringSelection filepath2 = new StringSelection("C:\\Users\\jingx\\OneDrive\\Pictures\\Saved Pictures\\QAuber\\Wave-fits\\Creating_report_not_renamed.jpg");
+        StringSelection filepath2 = new StringSelection(path2);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(filepath2, null);
 
 //        Robot robot = new Robot();

@@ -43,5 +43,12 @@ public class AddReportPreview {
     public WebElement reportIdElement(){
         return driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[9]/div[2]/div[1]/div[1]/div[2]/strong"));
     }
+    public WebElement suspectName(){
+        return driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[9]/div[2]/div[1]/div[3]/div[2]/strong"));
+    }
+
+    public WebElement stopLocation(){
+        return driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[9]/div[3]/div[2]/div[24]/div[2]/strong"));
+    }
 }
 

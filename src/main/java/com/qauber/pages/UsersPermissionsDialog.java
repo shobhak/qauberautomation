@@ -1,6 +1,6 @@
 package com.qauber.pages;
 
-//Created by Denys_Gon 12/20/2016.
+//Created by Denys_G 12/20/2016.
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,11 +10,16 @@ import org.testng.Assert;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 public class UsersPermissionsDialog {
     WebDriver driver;
 
     public UsersPermissionsDialog(WebDriver driver) {this.driver = driver;}
+
+    public List<WebElement> userEntitiesList() {
+             return driver.findElements(By.xpath("//tr//div[@class='depth-level']"));
+    }
 
     public WebElement deleteButtonByIndex(int index){
         return driver.findElement(By.xpath
@@ -63,4 +68,5 @@ public class UsersPermissionsDialog {
         Assert.assertTrue(driver.findElement
                 (By.xpath("//tr[@ng-repeat='entity in entities']['"+index+"']/td/div/div[text()='Admin']")).isDisplayed());
     }
+
 }

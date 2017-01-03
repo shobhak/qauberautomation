@@ -5,6 +5,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
+import java.util.ArrayList;
+
 /**
  * Created by Max on 12/15/16.
  * Modified by Ala on 12/20/16.
@@ -49,19 +51,35 @@ public class Reports {
         return driver.findElement(By.xpath("//input[@ng-model='ctSearchKey']"));
     }
 
-    public WebElement pagination(String numberOfPage)
+    public WebElement pagination(String numberOfPage) // To return last page in pagination type "last"
     {
-        return driver.findElement(By.linkText(numberOfPage));
+        if (numberOfPage.equals("last"))
+        {
+            ArrayList<WebElement> list = new ArrayList<WebElement>(driver.findElements(By.xpath("//a[@ng-click='setCurrent(pageNumber)']")));
+            return list.get(list.size()-1);
+        }
+        else
+        {
+            return driver.findElement(By.linkText(numberOfPage));
+        }
     }
 
-    public WebElement selectReport(int row) // Set the position of row
+    public WebElement selectReport(int row) // Set the position of row, to select last report on the page type "last"
     {
-        return  driver.findElement(By.xpath("//tr["+row+"]//a"));
+            return driver.findElement(By.xpath("//tr[" + row + "]//a"));
     }
-
-    public void selectReport()
+    public WebElement selectReport(String last) {
+        if (last.equals("last")) {
+            ArrayList<WebElement> list = new ArrayList<WebElement>(driver.findElements(By.cssSelector(".btn.btn-info.btn-sm.ng-scope")));
+            return list.get(list.size() - 1);
+        } else
+        {
+            return selectReport();
+        }
+    }
+    public WebElement selectReport()
     {
-        selectReport(1);
+        return selectReport(1);
     }
 
     public WebElement exportReportsListButton()
@@ -80,7 +98,6 @@ public class Reports {
     {
         driver.findElement(By.xpath("//button[@ng-click='openedSearchFrom=true']")).click();
         driver.findElement(By.xpath("//button[text()='"+keyWord+"']")).click();
-
     }
 
     public void publishedDateToIcon(String endMonth, String endDay, String endYear) // Example of Date format ("January", "01", "2000")
@@ -128,15 +145,31 @@ public class Reports {
         driver.findElement(By.xpath("//span[text()='" + Month + "']")).click();
         driver.findElement(By.xpath("//span[text()='" + Day + "']")).click();
     }
+
     // added on 12/20/16
     public WebElement clearButton(){
         return driver.findElement(By.cssSelector(".btn.btn-labeled.btn-primary"));
     }
+
     //added on 12/22/16
     public WebElement searchReportResultID(int rowNumber){
         return driver.findElement(By.xpath("//tr["+rowNumber+"]//div[@class='row'][1]/div[@class='col-lg-12']/h4[@class='ng-binding']"));
     }
 
+    public WebElement searchResultPhoto(int rowindex){
+        return driver.findElement(By.xpath("//tr[@class='ng-scope'][" + rowindex + "]/td/div/a/img"));
+    }
+
+    //added on 12/26/2016
+    public WebElement searchReportResultPublishedDate(String startMonth, String startDay, String startYear)
+    {
+        return driver.findElement(By.xpath("//span[text()='"+startMonth.substring(0,3)+" "+startDay+", "+startYear+"']"));
+    }
+
+    public WebElement activePagination()
+    {
+        return driver.findElement(By.xpath("//li[@class='ng-scope active']/a"));
+    }
 
 
 
@@ -165,9 +198,6 @@ public class Reports {
         searchResultsRow = By.xpath(".//*//tr["+row+"]//a");
         driver.findElement(searchResultsRow).click();
     }
-    public void selectReport1() {
-        selectReport(1);
-    }
 
     public void clickPublishedOnCheckbox() {
         driver.findElement(publishedOnCheckBox).click();
@@ -177,7 +207,4 @@ public class Reports {
         driver.findElement(pictureRow1).click();
     }
 
-    public WebElement searchResultPhoto(int rowindex){
-        return driver.findElement(By.xpath("//tr[@class='ng-scope'][" + rowindex + "]/td/div/a/img"));
-    }
 }

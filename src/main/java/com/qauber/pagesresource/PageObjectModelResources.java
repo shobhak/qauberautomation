@@ -7,6 +7,9 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -15,21 +18,24 @@ import java.util.concurrent.TimeUnit;
 public class PageObjectModelResources {
 
     private WebDriver driver;
+    private ConfigOOP config;
     private User testCaseUser;
     private UserFactory userFactory;
 
-//Pages before login
+    //Pages before login
+    private CompanyCreationSAU companyCreationSAU;
     private LoginPage login;
     private RegistrationPage1 registrationPage1;
     private RegistrationPage2 registrationPage2;
 
-//Pages/elements accessible from all pages
+    //Pages/elements accessible from all pages
     private Header header;
     private NavBar navBar;
     private ProfilePanel profilePanel;
     private EditProfile editProfile;
+    private SubscriptionSettings subscriptionSettings;
 
-//Navbar pages
+    //Navbar pages
     //    private Users users;
     private Entities entities;
     private EntitiesPermissionsDialog entitiesPermissionsDialog;
@@ -39,7 +45,7 @@ public class PageObjectModelResources {
     private Reports reports;
     private ReportsViewReport reportsViewReport;
 
-//Add reports pages
+    //Add reports pages
     private AddReportEnvironment addReportEnvironment;
     private AddReportIdentificationInformation addReportIdentificationInformation;
     private AddReportIdentifiersPage addReportIdentifiersPage;
@@ -50,9 +56,39 @@ public class PageObjectModelResources {
     private AddReportVehicle addReportVehicle;
     private AddReportPreview addReportPreview;
     private CreateSubsciption createSubsciption;
+    private CreateOrganization createOrganization;
 
-//
+    //Constructor
+    public PageObjectModelResources() {
+        setUpWithConfigFile();
+    }
 
+    /*
+    Read ConfigOOP object from config file in ~/QAUberTestConfig. If config file not found or invalid, create a new one using defaults in ConfigOOP constructor.
+
+     */
+    protected void setUpWithConfigFile() {
+        this.config = new ConfigOOP();
+        try {
+            config = FileManager.getConfigObject(FileManager.getConfigFileName(), ConfigOOP.class);
+            System.out.println(config.getBaseURL());
+        } catch (IOException e) { //If config not found, do something
+            System.out.println("Config not found, creating ~/QAUberTestConfig/config.txt");
+            List<String> comments = Arrays.asList("Default config file", "Browser name needs to be capitalized. Options - CHROME, FIREFOX, SAFARI, EDGE", "BaseURL should be in form of http://www.website.com", "We go");
+            FileManager.writeConfigObject(new ConfigOOP(), FileManager.getConfigFileName(), comments);
+        } catch (Exception e) { //if config invalid, do something else - TODO: generate config?
+            System.out.println("Invalid config or other exception, recreating ~/QAUberTestConfig/config.txt");
+            List<String> comments = Arrays.asList("INVALID CONFIG FOUND, overwriting with defaults.", "Default config file", "Browser name needs to be capitalized. Options - CHROME, FIREFOX, SAFARI, EDGE", "It's off to work", "We go");
+            FileManager.writeConfigObject(new ConfigOOP(), FileManager.getConfigFileName(), comments);
+        }
+    }
+
+    public void setUpUser(User.UserType userType) {
+        userFactory = new UserFactory();
+        testCaseUser = userFactory.getUser(userType);
+    }
+
+    @Deprecated
     public void setUpWithUser(User.UserType userType, WebDriver webDriver) {
         //get user information
         userFactory = new UserFactory();
@@ -63,6 +99,19 @@ public class PageObjectModelResources {
         setUpScript(webDriver);
     }
 
+    private WebDriver chooseDriver(ConfigOOP.BrowserType browserType) {
+        if (browserType == ConfigOOP.BrowserType.CHROME) {
+            return new ChromeDriver();
+        } else if (browserType == ConfigOOP.BrowserType.SAFARI) {
+            return new SafariDriver();
+        } else if (browserType == ConfigOOP.BrowserType.FIREFOX) {
+            return new FirefoxDriver();
+        } else {
+            return new EdgeDriver(); //(browserType == BrowserType.EDGE)
+        }
+    }
+
+    @Deprecated
     public void setUpWithConfig(ConfigOOP config) {
         //get user information
         testCaseUser = new User(config);
@@ -72,6 +121,28 @@ public class PageObjectModelResources {
 
     }
 
+    public void setUpScript() {
+        setUpScript(testConfig());
+    }
+
+    public void setUpScript(ConfigOOP config) {
+        driver = chooseDriver(config.getBrowserType());
+        //implicit wait
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+
+        //maximize window for our viewing pleasure
+        driver.manage().window().maximize();
+
+        try {
+            Thread.sleep(3000); //TODO: is this necessary?
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        ////////////////// Done managing WebDriver
+        setUpScript(driver);
+    }
+
+    @Deprecated //we don't want to pass in driver anymore
     public void setUpScript(WebDriver driver) {
         // Choose web browser/driver from Config
 
@@ -84,6 +155,7 @@ public class PageObjectModelResources {
         ////////////////// Done managing WebDriver
 
         //Set page references
+        companyCreationSAU = new CompanyCreationSAU(driver);
         login = new LoginPage(driver);
         registrationPage1 = new RegistrationPage1(driver);
         registrationPage2 = new RegistrationPage2(driver);
@@ -91,12 +163,15 @@ public class PageObjectModelResources {
         navBar = new NavBar(driver);
         profilePanel = new ProfilePanel(driver);
         editProfile = new EditProfile(driver);
+        subscriptionSettings = new SubscriptionSettings(driver);
 
         entities = new Entities(driver);
         entitiesPermissionsDialog = new EntitiesPermissionsDialog(driver);
         users = new Users(driver);
         usersPermissionsDialog = new UsersPermissionsDialog(driver);
         editOrganizationPage = new EditOrganizationPage(driver);
+        createOrganization = new CreateOrganization(driver);
+
         reports = new Reports(driver);
         reportsViewReport = new ReportsViewReport(driver);
 
@@ -110,6 +185,7 @@ public class PageObjectModelResources {
         addReportVehicle = new AddReportVehicle(driver);
         addReportPreview = new AddReportPreview(driver);
         createSubsciption = new CreateSubsciption(driver);
+        createOrganization = new CreateOrganization(driver);
 
     }
 
@@ -118,6 +194,7 @@ public class PageObjectModelResources {
         driver.quit();
     }
 
+    @Deprecated
     public void breakDownHelper(WebDriver driver) {
         driver.manage().deleteAllCookies();
         driver.quit();
@@ -144,6 +221,8 @@ public class PageObjectModelResources {
         return driver;
     }
 
+    protected CompanyCreationSAU getCompanyCreationSAU(){ return companyCreationSAU;}
+
     protected LoginPage getLogin() {
         return login;
     }
@@ -167,6 +246,8 @@ public class PageObjectModelResources {
         return editProfile;
     }
 
+    protected SubscriptionSettings getSubscriptionSettings() {return subscriptionSettings;}
+
     protected Entities getEntities() {return entities;}
 
     protected EntitiesPermissionsDialog getEntitiesPermissionsDialog() {return entitiesPermissionsDialog;}
@@ -175,8 +256,9 @@ public class PageObjectModelResources {
 
     protected UsersPermissionsDialog getUsersPermissionsDialog() {return usersPermissionsDialog;}
 
-
     protected EditOrganizationPage getOrganization() {return  editOrganizationPage;}
+
+    protected CreateOrganization getCreateOrganization() { return createOrganization;}
 
     protected Reports getReports() {
         return reports;
@@ -222,11 +304,12 @@ public class PageObjectModelResources {
 
 
 
-
-    //
-
-    //TODO: implement chooseUser (this will affect config.user) - may have been done already with User and UserFactory
-    protected User getTestCaseUser() {
+    //Test Resources - testDriver, testUser, testConfig //TODO: rename? (getTestConfig, etc....) probably not
+    protected WebDriver testDriver() {
+        return driver;
+    }
+    protected ConfigOOP testConfig () { return config; }
+    protected User testUser() {
         return testCaseUser;
     }
 }
