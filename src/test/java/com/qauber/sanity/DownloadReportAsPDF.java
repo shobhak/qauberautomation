@@ -1,10 +1,7 @@
 package com.qauber.sanity;
 
-import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -15,21 +12,21 @@ import java.io.File;
  * Created by Alya on 12/20/2016.
  */
 public class DownloadReportAsPDF extends PageObjectModelResources {
-    WebDriver driver;
 
     private static String downloadPath = "C:/Users/Alya/Downloads";
 
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
-        setUpWithUser(User.UserType.SAU, driver);
+        setUpWithConfigFile();
+        setUpUser(User.UserType.SAU);
+        setUpScript();
     }
 
     @Test
     public void downloadReport() throws InterruptedException {
         int rowindex = 1;
 
-        driver.get(Config.getBaseURL());
+        testDriver().get(testConfig().getBaseURL());
         Thread.sleep(10000);
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(5000);
