@@ -1,10 +1,7 @@
 package com.qauber.sanity;
 
-import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -15,23 +12,25 @@ import org.testng.annotations.Test;
  */
 public class ViewReport extends PageObjectModelResources {
 
-    WebDriver driver;
-
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
-        setUpWithUser(User.UserType.SAU, driver);
+        setUpWithConfigFile();
+        setUpUser(User.UserType.SAU);
+        setUpScript();
     }
 
     @Test
     public void reportsViewReport() throws InterruptedException {
         int rowindex = 1;
 
-        driver.get(Config.getBaseURL());
+        testDriver().get(testConfig().getBaseURL());
         Thread.sleep(10000);
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(5000);
         getNavBar().clickReports();
+        Thread.sleep(2000);
+        getReports().clickPublishedOnCheckbox();
+        Thread.sleep(2000);
 
         String searchReportResultID = getReports().searchReportResultID(rowindex).getText();
 
@@ -43,10 +42,9 @@ public class ViewReport extends PageObjectModelResources {
 
         Assert.assertEquals(searchReportResultID,reportID + ". " + suspectName);
     }
+
     @AfterClass
-    public void breakDown () throws InterruptedException {
-        Thread.sleep(15000);
-        driver.manage().deleteAllCookies();
-        driver.quit();
+    public void breakDown() {
+        breakDownHelper();
     }
 }
