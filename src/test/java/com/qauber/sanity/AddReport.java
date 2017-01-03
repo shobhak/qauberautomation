@@ -1,12 +1,9 @@
 package com.qauber.sanity;
 
-import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.ReportValueObject;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -20,17 +17,16 @@ import org.testng.annotations.Test;
 
 public class AddReport extends PageObjectModelResources {
 
-    WebDriver driver;
-
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
-        setUpWithUser(User.UserType.SAU, driver);
+        setUpWithConfigFile();
+        setUpUser(User.UserType.SAU);
+        setUpScript();
     }
 
     @Test
     public void addReportPreviewPublish () throws InterruptedException {
-        driver.get(Config.getBaseURL());
+        testDriver().get(testConfig().getBaseURL());
         Thread.sleep(10000);
 
         ReportValueObject reportVO = new ReportValueObject();
@@ -56,7 +52,7 @@ public class AddReport extends PageObjectModelResources {
         getAddReportEnvironment().stopLocationField().sendKeys(reportVO.getStopLocation());
         Thread.sleep(1000);
 
-        JavascriptExecutor jse = (JavascriptExecutor) driver;
+        JavascriptExecutor jse = (JavascriptExecutor) getDriver();
         jse.executeScript("window.scrollBy(0,-1000)", "");
 
         getAddReportNavigation().previewTab().click();
@@ -84,9 +80,7 @@ public class AddReport extends PageObjectModelResources {
     }
 
     @AfterClass
-    public void breakDown () throws InterruptedException {
-        Thread.sleep(15000);
-        driver.manage().deleteAllCookies();
-        driver.quit();
+    public void breakDown() {
+        breakDownHelper();
     }
 }
