@@ -9,7 +9,6 @@ import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-
 import java.io.File;
 
 /**
@@ -37,30 +36,28 @@ public class DownloadReportAsPDF extends PageObjectModelResources {
         getNavBar().clickReports();
         getReports().clickPublishedOnCheckbox();
         Thread.sleep(2000);
-
         getReports().selectReport(rowindex).click();
         Thread.sleep(2000);
 
         String viewReportID = getReportsViewReport().reportID().getText();
+        String fileName = downloadPath + "/interview_report_" + viewReportID + ".pdf";
+        deleteFile(fileName);
 
         getReportsViewReport().downloadAsPDFButton().click();
         Thread.sleep(5000);
 
-        Assert.assertTrue(isFileDownloaded(downloadPath, "interview_report_" + viewReportID + ".pdf"), "Failed to download Expected document");
+        Assert.assertTrue(isFileDownloaded(fileName), "Failed to download Expected document");
         Thread.sleep(5000);
     }
 
+    public boolean isFileDownloaded(String fileName) {
+        File file = new File(fileName);
+        return file.isFile();
+    }
 
-    public boolean isFileDownloaded(String downloadPath, String fileName) {
-        File dir = new File(downloadPath);
-        File[] dir_contents = dir.listFiles();
-
-        for (int i = 0; i < dir_contents.length; i++) {
-            if (dir_contents[i].getName().equals(fileName))
-                return true;
-        }
-
-        return false;
+    public void deleteFile(String fileName){
+        File file = new File(fileName);
+        file.delete();
     }
 
     @AfterClass
@@ -68,5 +65,7 @@ public class DownloadReportAsPDF extends PageObjectModelResources {
         breakDownHelper();
     }
 }
+
+
 
 
