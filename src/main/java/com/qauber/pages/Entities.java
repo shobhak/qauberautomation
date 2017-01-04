@@ -170,6 +170,14 @@ public class Entities {
     public WebElement addSubdepartmentButton(){
         return driver.findElement(By.xpath("//*[text()='Add Department']"));
     }
+
+    public WebElement addSubdepartmentField() {
+        return driver.findElement(By.xpath("//input[contains(@required,'required')]"));
+    }
+
+    public WebElement creatSubepartmentButton() {
+        return driver.findElement(By.xpath("//button[contains(@ng-disabled,'error.required')]"));
+    }
     //get web element list for subdepartment name
     public List<WebElement> subdepartmentNameList(){
         return driver.findElements(By.xpath("//td[@class='pl-lg']/a[@class='ng-binding']"));
