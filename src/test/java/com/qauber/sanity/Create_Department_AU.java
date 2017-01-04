@@ -4,7 +4,6 @@ import com.github.javafaker.Faker;
 import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
@@ -15,7 +14,7 @@ import org.testng.annotations.Test;
 /**
  * Created by San Jose on 12/22/16.
  */
-public class Create_Department_SAU extends PageObjectModelResources {
+public class Create_Department_AU extends PageObjectModelResources {
 
     WebDriver driver;
     int sleepTime;
@@ -24,12 +23,12 @@ public class Create_Department_SAU extends PageObjectModelResources {
     public void setUp() {
         driver = new ChromeDriver();
         sleepTime = 5000;
-        setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
+        setUpWithUser(User.UserType.AU, driver); //pass userType and browser. see ~/QAUberTestConfig
         //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
     }
 
     @Test
-    public void createDepartmentSAU() throws InterruptedException{
+    public void createDepartmentAU() throws InterruptedException{
         driver.get(Config.getBaseURL());
         Faker faker = new Faker();
 

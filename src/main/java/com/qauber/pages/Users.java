@@ -86,7 +86,7 @@ public class Users {
     }
 
     public WebElement deleteButtonByIndex(int index){
-        return driver.findElement(By.xpath(".//tr[@class='ng-scope'][' + rowindex + ']//button[@title='Delete']"));
+        return driver.findElement(By.xpath(".//tr[@class='ng-scope'][" + index + "]//button[@title='Delete']"));
     }
 
     public WebElement deleteConfirmationButton (){
