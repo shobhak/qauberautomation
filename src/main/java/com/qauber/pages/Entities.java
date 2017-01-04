@@ -126,6 +126,86 @@ public class Entities {
         return element;
     }
 
+    //On department
+    //get web element list for department name
+    public List<WebElement> departmentNameList(){
+        return driver.findElements(By.xpath("//td[@class='pl-lg']/a[@class='ng-binding']"));
+    }
+
+    public WebElement departmentName(int index){
+        return departmentNameList().get(index - 1);
+    }
+
+    //get web element list for department assign permissions buttons
+    public List<WebElement> departmentAssignPermissionsButtonList(){
+        return driver.findElements(By.xpath("//*[@title='Assign permissions']"));
+    }
+
+    public WebElement departmentAssignPermissionsButton(int index){
+        return departmentAssignPermissionsButtonList().get(index - 1);
+    }
+
+    //get web element list for department edit buttons
+    public List<WebElement> departmentEditButtonList(){
+        return driver.findElements(By.xpath("//*[@title='Edit']"));
+    }
+
+    public WebElement departmentEditButton(int index){
+        return departmentEditButtonList().get(index - 1);
+    }
+
+    //get web element list for department delete buttons
+    public List<WebElement> departmentDeleteButtonList(){
+        return driver.findElements(By.xpath("//*[@title='Delete']"));
+    }
+
+    public WebElement departmentDeleteButton(int index){
+        return departmentDeleteButtonList().get(index - 1);
+    }
+
+
+    //On subdepartment
+
+    //add subdepartment
+    public WebElement addSubdepartmentButton(){
+        return driver.findElement(By.xpath("//*[text()='Add Department']"));
+    }
+    //get web element list for subdepartment name
+    public List<WebElement> subdepartmentNameList(){
+        return driver.findElements(By.xpath("//td[@class='pl-lg']/a[@class='ng-binding']"));
+    }
+
+    public WebElement subdepartmentName(int index){
+        return subdepartmentNameList().get(index - 1);
+    }
+
+    //get web element list for subdepartment assign permissions buttons
+    public List<WebElement> subdepartmentAssignPermissionsButtonList(){
+        return driver.findElements(By.xpath("//*[@title='Assign permissions']"));
+    }
+
+    public WebElement subdepartmentAssignPermissionsButton(int index){
+        return subdepartmentAssignPermissionsButtonList().get(index - 1);
+    }
+
+    //get web element list for subdepartment edit buttons
+    public List<WebElement> subdepartmentEditButtonList(){
+        return driver.findElements(By.xpath("//*[@title='Edit']"));
+    }
+
+    public WebElement subdepartmentEditButton(int index){
+        return subdepartmentEditButtonList().get(index - 1);
+    }
+
+    //get web element list for subdepartment delete buttons
+    public List<WebElement> subdepartmentDeleteButtonList(){
+        return driver.findElements(By.xpath("//*[@title='Delete']"));
+    }
+
+    public WebElement subdepartmentDeleteButton(int index){
+        return subdepartmentDeleteButtonList().get(index - 1);
+    }
+
 }
 
 
