@@ -111,5 +111,21 @@ public class Entities {
         return rowindex;
     }
 
+    public WebElement AddDepartmentButton() {
+        element = driver.findElement(By.xpath("//button[contains(@ng-show,'ctrl.userIsAble()')]"));
+        return element;
+    }
+
+    public WebElement AddDepartmentField() {
+        element = driver.findElement(By.xpath("//input[contains(@required,'required')]"));
+        return element;
+    }
+
+    public WebElement CreatDepartmentButton() {
+        element = driver.findElement(By.xpath("//button[contains(@ng-disabled,'error.required')]"));
+        return element;
+    }
 
 }
+
+
