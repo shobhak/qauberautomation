@@ -12,6 +12,11 @@ public class Users {
 
     public Users(WebDriver driver) {this.driver = driver;}
 
+    public List<WebElement> userNameRows() { return driver.findElements(By.xpath("//table/tbody/tr/td[1]/div//a")); }
+    public WebElement nextPageButton() {return driver.findElement(By.xpath("//a[@ng-click=\"setCurrent(pagination.current + 1)\"]")); } //next page, if Users paginated. SHOWS WHETHER ENABLED OR DISABLED
+
+    //    public WebElement nextPageButtonDisabled() {return driver.findElement(By.xpath("//li[@class=\"ng-scope disabled\"]"));}; //only exists when next page is disabled
+    public boolean nextPageButtonEnabled() {return driver.findElements(By.xpath("//li[@class=\"ng-scope\" and @class !=\"disabled\"]/a[@ng-click=\"setCurrent(pagination.current + 1)\"]")).size() > 0;}
     public WebElement inviteUserButton() {return driver.findElement(By.xpath(".//*[@ng-click='openInviteForm()']"));}
     public WebElement inviteUserEmailField(){return driver.findElement(By.xpath(".//*[@placeholder = 'email@example.com']"));}
     public WebElement sendInviteButton() {return driver.findElement(By.cssSelector("button.btn.btn-primary.mr"));}
@@ -110,6 +115,11 @@ public class Users {
         return list.get(listNo);
     }
 
+    public void inviteUserWithoutActivation(String emailAddress) {
+        inviteUserButton().click();
+        inviteUserEmailField().sendKeys(emailAddress);
+        sendInviteButton().click();
+    }
 
 }
 
