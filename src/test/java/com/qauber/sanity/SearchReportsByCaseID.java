@@ -1,10 +1,8 @@
 package com.qauber.sanity;
 
-import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -22,32 +20,38 @@ public class SearchReportsByCaseID extends PageObjectModelResources {
 
     @BeforeClass
     public void setUp() throws InterruptedException {
-        driver = new ChromeDriver();
-        sleepTime = 1000;
-        setUpWithUser(User.UserType.SAU, driver);
 
-        driver.get(Config.getBaseURL());
-        Thread.sleep(sleepTime*2);
+        setUpWithConfigFile();
+        setUpUser(User.UserType.SAU);
+
+        testConfig().getTestRail().setCaseID(0000);
+        testConfig().getTestRail().setTester("Max's Computer");
+
+        sleepTime = testConfig().getSleepTime();
+        setUpScript();
+
+        testDriver().get(testConfig().getBaseURL());
+        Thread.sleep(sleepTime);
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
     }
 
     @Test
     public void searchReportsByCaseID() throws InterruptedException
     {
         getNavBar().reportsButton().click();
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
 
         getReports().caseIdField().clear();
         getReports().caseIdField().sendKeys(caseID);
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
 
         getReports().publishedDateFromIcon(keyWord);
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
 
         getReports().selectReport(1).click();
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
 
         Assert.assertTrue(getReportsViewReport().caseID().getText().equals(caseID));
     }
@@ -55,6 +59,6 @@ public class SearchReportsByCaseID extends PageObjectModelResources {
     @AfterClass
     public void breakDown()
     {
-        breakDownHelper(driver);
+        breakDownHelper();
     }
 }
