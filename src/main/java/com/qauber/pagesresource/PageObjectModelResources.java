@@ -58,6 +58,9 @@ public class PageObjectModelResources {
     private CreateSubsciption createSubsciption;
     private CreateOrganization createOrganization;
 
+    //Preconditions
+    private PreconditionsResources preconditionsResources;
+
     //Constructor
     public PageObjectModelResources() {
         setUpWithConfigFile();
@@ -187,6 +190,9 @@ public class PageObjectModelResources {
         createSubsciption = new CreateSubsciption(driver);
         createOrganization = new CreateOrganization(driver);
 
+        //Preconditions
+        preconditionsResources = new PreconditionsResources(driver);
+
     }
 
     public void breakDownHelper() {
@@ -302,7 +308,8 @@ public class PageObjectModelResources {
 
     protected  CreateSubsciption getCreateSubsciption() {return createSubsciption;}
 
-
+    //Users preconditions
+    protected PreconditionsResources getPreconditions() { return preconditionsResources; }
 
     //Test Resources - testDriver, testUser, testConfig //TODO: rename? (getTestConfig, etc....) probably not
     protected WebDriver testDriver() {
