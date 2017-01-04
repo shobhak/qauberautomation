@@ -1,6 +1,7 @@
 package com.qauber.sanity;
 
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -16,6 +17,8 @@ public class ViewReport extends PageObjectModelResources {
     public void setUp() {
         setUpWithConfigFile();
         setUpUser(User.UserType.SAU);
+        testConfig().getTestRail().setCaseID(79855);
+        testConfig().getTestRail().setTester("Alya");
         setUpScript();
     }
 
@@ -40,7 +43,14 @@ public class ViewReport extends PageObjectModelResources {
         String reportID = getReportsViewReport().reportID().getText();
         String suspectName = getReportsViewReport().suspectName().getText();
 
-        Assert.assertEquals(searchReportResultID,reportID + ". " + suspectName);
+        try {
+            Assert.assertEquals(searchReportResultID,reportID + ". " + suspectName);
+            } catch (AssertionError e) {
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Report ID and suspect name do not match "+e.getLocalizedMessage());
+            throw e;
+        }
+
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
 
     @AfterClass
