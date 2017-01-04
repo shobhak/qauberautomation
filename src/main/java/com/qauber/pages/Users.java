@@ -1,8 +1,10 @@
 package com.qauber.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+
 import java.util.List;
 
 //Created by lenochka on 19.12.2016.
@@ -115,9 +117,11 @@ public class Users {
         return list.get(listNo);
     }
 
-    public void inviteUserWithoutActivation(String emailAddress) {
+    public void inviteUserWithoutActivation(String emailAddress) throws InterruptedException {
+        ((JavascriptExecutor)driver).executeScript("javascript:window.scrollBy(0,-400)"); //scroll to top of page, thank you Denis
         inviteUserButton().click();
         inviteUserEmailField().sendKeys(emailAddress);
+        Thread.sleep(200);
         sendInviteButton().click();
     }
 
