@@ -4,6 +4,7 @@ import com.github.javafaker.Faker;
 import com.qauber.pages.NavBar;
 import com.qauber.pages.Users;
 import com.qauber.pages.UsersPermissionsDialog;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -74,7 +75,13 @@ public class UsersPreconditions {
 
             if (numberRemaining <= 0) { return 0; } //if we've found enough users, return 0
 
-            users.nextPageButton().click(); //click 'next page'
+            //click 'next page' if 'next page button' is enabled
+            if (nextButtonEnabled) {
+                //Scroll to bottom of page before clicking - for users with low-res comps
+                ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", users.nextPageButton());
+                Thread.sleep(sleepTime/10);
+                users.nextPageButton().click();
+            }
             Thread.sleep(sleepTime);
 
         } while (nextButtonEnabled); //is the next page button still enabled? see method for more
