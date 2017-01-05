@@ -21,11 +21,6 @@ import java.util.List;
 public class EnsureUserIsAdminIn extends PageObjectModelResources {
     int sleepTime;
     int userIndex;
-    boolean alreadySetUp;
-
-    public EnsureUserIsAdminIn() {
-        this.alreadySetUp = false;
-    }
 
     public void setUp() {
         //Initial setup
@@ -37,11 +32,9 @@ public class EnsureUserIsAdminIn extends PageObjectModelResources {
 
         //Create driver & page objects, finish setup
         setUpScript();
-
-        alreadySetUp = true;
     }
 
-    public void ensureUserIsAdminIn(String userName, int entityIndex) throws InterruptedException, AWTException {
+    private void ensureUserIsAdminInWithoutSetup(String userName, int entityIndex) throws InterruptedException, AWTException {
 //        userName = "Jing_qa_0111";
 //        entityIndex = 1;
 
@@ -68,45 +61,72 @@ public class EnsureUserIsAdminIn extends PageObjectModelResources {
 
         getEntitiesPermissionsDialog().closeDialogByPressESC();
         Thread.sleep(sleepTime);
+        System.out.println("The user is an admin user in " + getEntities().organizationInfo(entityIndex).getText());
     }
 
-    public void ensureUserIsAdminIn(String userName, int entityIndex, int departmentIndex) throws InterruptedException, AWTException {
-        ensureUserIsAdminIn(userName, entityIndex);
-
-        getEntities().departmentName(departmentIndex).click();
-        Thread.sleep(sleepTime);
-
-        Select Right = new Select(testDriver().findElements(By.xpath("//td/select")).get(userIndex-1));
-        String text1 = Right.getFirstSelectedOption().getText();
-        Assert.assertEquals(text1, "Admin");
-
-        getEntitiesPermissionsDialog().closeDialogByPressESC();
-        Thread.sleep(sleepTime);
-    }
-
-    public void ensureUserIsAdminIn(String userName, int entityIndex, int departmentIndex, int subDepartmentIndex) throws InterruptedException, AWTException {
+    public void ensureUserIsAdminIn(String userName, int entityIndex) throws InterruptedException, AWTException {
         try {
-            if(!alreadySetUp) { setUp(); }
-            ensureUserIsAdminIn(userName, entityIndex, departmentIndex);
-
-            getEntities().subdepartmentName(subDepartmentIndex).click();
-            Thread.sleep(sleepTime);
-
-            Select Right = new Select(testDriver().findElements(By.xpath("//td/select")).get(userIndex-1));
-            String text1 = Right.getFirstSelectedOption().getText();
-            Assert.assertEquals(text1, "Admin");
-
-            getEntitiesPermissionsDialog().closeDialogByPressESC();
-            Thread.sleep(sleepTime);
+            setUp();
+            ensureUserIsAdminInWithoutSetup(userName, entityIndex);
         } finally {
             breakDown();
         }
-
     }
 
+    private void ensureUserIsAdminInWithoutSetup(String userName, int entityIndex, int departmentIndex) throws InterruptedException, AWTException {
+        ensureUserIsAdminInWithoutSetup(userName, entityIndex);
 
-    public void breakDown(){
-        alreadySetUp = false;
-        breakDownHelper();
+        getEntities().organizationInfo(entityIndex).click();
+        Thread.sleep(sleepTime);
+
+        getEntities().departmentAssignPermissionsButton(departmentIndex).click();
+        Thread.sleep(sleepTime);
+
+        Select RightDepartment = new Select(testDriver().findElements(By.xpath("//td/select")).get(userIndex-1));
+        String text2 = RightDepartment.getFirstSelectedOption().getText();
+        Assert.assertEquals(text2, "Admin");
+
+        getEntitiesPermissionsDialog().closeDialogByPressESC();
+        Thread.sleep(sleepTime);
+
+        System.out.println("The user is an admin user in " + getEntities().departmentName(departmentIndex).getText());
     }
+
+    public void ensureUserIsAdminIn(String userName, int entityIndex, int departmentIndex) throws InterruptedException, AWTException {
+        try {
+            setUp();
+            ensureUserIsAdminInWithoutSetup(userName, entityIndex, departmentIndex);
+        } finally {
+            breakDown();
+        }
+    }
+    private void ensureUserIsAdminInWithoutSetup(String userName, int entityIndex, int departmentIndex, int subDepartmentIndex) throws InterruptedException, AWTException {
+            ensureUserIsAdminInWithoutSetup(userName, entityIndex, departmentIndex);
+
+            getEntities().departmentName(departmentIndex).click();
+            Thread.sleep(sleepTime);
+
+            getEntities().subdepartmentAssignPermissionsButton(subDepartmentIndex).click();
+            Thread.sleep(sleepTime);
+
+            Select RightSubDepartment = new Select(testDriver().findElements(By.xpath("//td/select")).get(userIndex-1));
+            String text3 = RightSubDepartment.getFirstSelectedOption().getText();
+            Assert.assertEquals(text3, "Admin");
+
+            getEntitiesPermissionsDialog().closeDialogByPressESC();
+            Thread.sleep(sleepTime);
+
+        System.out.println("The user is an admin user in " + getEntities().subdepartmentName(subDepartmentIndex).getText());
+    }
+
+    public void ensureUserIsAdminIn(String userName, int entityIndex, int departmentIndex, int subDepartmentIndex) throws InterruptedException, AWTException {
+    try {
+        setUp();
+        ensureUserIsAdminInWithoutSetup(userName, entityIndex, departmentIndex, subDepartmentIndex);
+        } finally {
+        breakDown();
+        }
+    }
+
+    public void breakDown(){ breakDownHelper(); }
 }
