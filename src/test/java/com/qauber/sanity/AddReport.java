@@ -74,7 +74,7 @@ public class AddReport extends PageObjectModelResources {
         try {
         Assert.assertTrue(verifyReportPublished(reportIdValue));
         } catch (AssertionError e) {
-            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Repirt ID do not match Report ID searched "+e.getLocalizedMessage());
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Report ID do not match Report ID searched "+e.getLocalizedMessage());
             throw e;
         }
 
