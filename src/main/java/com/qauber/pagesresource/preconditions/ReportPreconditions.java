@@ -2,7 +2,6 @@ package com.qauber.pagesresource.preconditions;
 
 import com.github.javafaker.Faker;
 import com.qauber.pages.*;
-import com.qauber.pagesresource.ReportValueObject;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -19,7 +18,6 @@ public class ReportPreconditions {
     private Faker faker;
     private NavBar navBar;
     private Reports reports;
-    private ReportValueObject reportVO;
     private AddReportsOrganization addReportsOrganization;
     private AddReportNavigation addReportNavigation;
     private AddReportSubjectInformationPage addReportSubjectInformationPage;
@@ -33,7 +31,6 @@ public class ReportPreconditions {
         faker = new Faker();
         navBar = new NavBar(driver);
         reports = new Reports(driver);
-        reportVO = new ReportValueObject();
         addReportsOrganization = new AddReportsOrganization(driver);
         addReportNavigation = new AddReportNavigation(driver);
         addReportSubjectInformationPage = new AddReportSubjectInformationPage(driver);
@@ -85,13 +82,13 @@ public class ReportPreconditions {
 
             addReportNavigation.subjectInformationTab().click();
             Thread.sleep(sleepTime);
-            addReportSubjectInformationPage.firstName().sendKeys(reportVO.getFirstName());
-            addReportSubjectInformationPage.lastName().sendKeys(reportVO.getLastName());
+            addReportSubjectInformationPage.firstName().sendKeys(faker.name().firstName());
+            addReportSubjectInformationPage.lastName().sendKeys(faker.name().lastName());
             Thread.sleep(sleepTime);
 
             addReportNavigation.environmentTab().click();
             Thread.sleep(sleepTime);
-            addReportEnvironment.stopLocationField().sendKeys(reportVO.getStopLocation());
+            addReportEnvironment.stopLocationField().sendKeys(faker.address().cityName());
             Thread.sleep(sleepTime);
 
             addReportNavigation.previewTab().click();
