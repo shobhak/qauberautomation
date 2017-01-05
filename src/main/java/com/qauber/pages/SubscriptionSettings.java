@@ -42,7 +42,7 @@ public class SubscriptionSettings {
         if (Integer.parseInt(element.getAttribute("aria-valuenow"))<=x)
         {
             while (Integer.parseInt(element.getAttribute("aria-valuenow")) != x) {
-                action = move.dragAndDropBy(slider, i, 0).build();
+                action = move.dragAndDropBy(slider, i/3, 0).build();
                 action.perform();
                 i++;
             }
@@ -50,7 +50,7 @@ public class SubscriptionSettings {
         else
         {
             while (Integer.parseInt(element.getAttribute("aria-valuenow")) != x) {
-                action = move.dragAndDropBy(slider, i, 0).build();
+                action = move.dragAndDropBy(slider, i/3, 0).build();
                 action.perform();
                 i--;
             }
