@@ -28,7 +28,7 @@ public class ReportPreconditions {
 
     public ReportPreconditions(WebDriver driver)
     {
-        sleepTime = 5000;
+        sleepTime = 1000;
         this.driver = driver;
         faker = new Faker();
         navBar = new NavBar(driver);
@@ -57,37 +57,48 @@ public class ReportPreconditions {
 
     public int verifyReportsAtLeast(int num) throws InterruptedException
     {
-        if (reports.activePagination().isDisplayed())
-            reports.pagination("last");
-        ArrayList<WebElement> list = new ArrayList<WebElement>(driver.findElements(By.cssSelector(".btn.btn-info.btn-sm.ng-scope")));
+        if (reports.activePagination().isEnabled())
+        {
+            Thread.sleep(sleepTime);
+            reports.pagination("last").click();
+            Thread.sleep(sleepTime);
+            ArrayList<WebElement> list1 = new ArrayList<WebElement>(driver.findElements(By.cssSelector(".btn.btn-info.btn-sm.ng-scope")));
+            ArrayList<WebElement> list2 = new ArrayList<WebElement>(driver.findElements(By.xpath("//a[@ng-click='setCurrent(pageNumber)']")));
 
-        return num - (Integer.parseInt(reports.activePagination().getText()) - 1)*10 + list.size();
+            return num - (list2.size()-1)*10 - list1.size();
+        }
+        else {
+            ArrayList<WebElement> list = new ArrayList<WebElement>(driver.findElements(By.cssSelector(".btn.btn-info.btn-sm.ng-scope")));
+
+            return num - list.size();
+        }
+
     }
     public void createReport(int reportsNeeded) throws InterruptedException {
 
         for (int i = 0; i<reportsNeeded; i++) {
             navBar.addReportButton().click();
-            Thread.sleep(1000);
+            Thread.sleep(sleepTime);
 
             addReportsOrganization.clickOrganization1();
-            Thread.sleep(1000);
+            Thread.sleep(sleepTime);
 
             addReportNavigation.subjectInformationTab().click();
-            Thread.sleep(1000);
+            Thread.sleep(sleepTime);
             addReportSubjectInformationPage.firstName().sendKeys(reportVO.getFirstName());
             addReportSubjectInformationPage.lastName().sendKeys(reportVO.getLastName());
-            Thread.sleep(1000);
+            Thread.sleep(sleepTime);
 
             addReportNavigation.environmentTab().click();
-            Thread.sleep(1000);
+            Thread.sleep(sleepTime);
             addReportEnvironment.stopLocationField().sendKeys(reportVO.getStopLocation());
-            Thread.sleep(1000);
+            Thread.sleep(sleepTime);
 
             addReportNavigation.previewTab().click();
-            Thread.sleep(1000);
+            Thread.sleep(sleepTime);
 
             addReportPreview.publishReportButton().click();
-            Thread.sleep(1000);
+            Thread.sleep(sleepTime);
         }
     }
 }

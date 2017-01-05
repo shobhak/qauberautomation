@@ -39,9 +39,9 @@ public class Create_SubDepartment_SAU extends PageObjectModelResources {
         Thread.sleep(sleepTime);
         getNavBar().entitiesButton().click();
         Thread.sleep(sleepTime);
-        getEntities().organizationInfo(1).click();
+        getEntities().organizationList().get(0).click();
         Thread.sleep(sleepTime);
-        getEntities().departmentName(1).click();
+        getEntities().departmentNameList().get(0).click();
         Thread.sleep(sleepTime);
         getEntities().addSubdepartmentButton().click();
         Thread.sleep(sleepTime);
