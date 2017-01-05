@@ -14,7 +14,7 @@ import org.testng.annotations.Test;
 /**
  * Created by San Jose on 12/22/16.
  */
-public class Create_SubDepartment_SAU extends PageObjectModelResources {
+public class Create_SubDepartment_AU extends PageObjectModelResources {
 
     WebDriver driver;
     int sleepTime;
@@ -23,12 +23,12 @@ public class Create_SubDepartment_SAU extends PageObjectModelResources {
     public void setUp() {
         driver = new ChromeDriver();
         sleepTime = 5000;
-        setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
+        setUpWithUser(User.UserType.AU, driver); //pass userType and browser. see ~/QAUberTestConfig
         //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
     }
 
     @Test
-    public void createSubDepartmentSAU() throws InterruptedException{
+    public void createSubDepartmentAU() throws InterruptedException{
         driver.get(Config.getBaseURL());
         Faker faker = new Faker();
 
@@ -49,7 +49,7 @@ public class Create_SubDepartment_SAU extends PageObjectModelResources {
         getEntities().CreatDepartmentButton().click();
 
 //        actualResult, expectedResult
-        Thread.sleep(2000);
+
         int lastIndex = getEntities().subdepartmentNameList().size()-1;
         actualResult = getEntities().subdepartmentNameList().get(lastIndex).getText();
         Assert.assertEquals(expectedResult, actualResult);
