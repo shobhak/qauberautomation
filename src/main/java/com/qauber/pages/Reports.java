@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Max on 12/15/16.
@@ -55,7 +56,7 @@ public class Reports {
     {
         if (numberOfPage.equals("last"))
         {
-            ArrayList<WebElement> list = new ArrayList<WebElement>(driver.findElements(By.xpath("//a[@ng-click='setCurrent(pageNumber)']")));
+            ArrayList<WebElement> list = new ArrayList<WebElement>(paginationSum());
             return list.get(list.size()-1);
         }
         else
@@ -70,7 +71,7 @@ public class Reports {
     }
     public WebElement selectReport(String last) {
         if (last.equals("last")) {
-            ArrayList<WebElement> list = new ArrayList<WebElement>(driver.findElements(By.cssSelector(".btn.btn-info.btn-sm.ng-scope")));
+            ArrayList<WebElement> list = new ArrayList<WebElement>(reportsRows());
             return list.get(list.size() - 1);
         } else
         {
@@ -171,7 +172,15 @@ public class Reports {
         return driver.findElement(By.xpath("//li[@class='ng-scope active']/a"));
     }
 
+    public List<WebElement> reportsRows()
+    {
+        return driver.findElements(By.cssSelector(".btn.btn-info.btn-sm.ng-scope"));
+    }
 
+    public List<WebElement> paginationSum()
+    {
+        return driver.findElements(By.xpath("//a[@ng-click='setCurrent(pageNumber)']"));
+    }
 
 
 

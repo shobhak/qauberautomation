@@ -2,7 +2,6 @@ package com.qauber.pagesresource.preconditions;
 
 import com.github.javafaker.Faker;
 import com.qauber.pages.*;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -59,15 +58,17 @@ public class ReportPreconditions {
             Thread.sleep(sleepTime);
             reports.pagination("last").click();
             Thread.sleep(sleepTime);
-            ArrayList<WebElement> list1 = new ArrayList<WebElement>(driver.findElements(By.cssSelector(".btn.btn-info.btn-sm.ng-scope")));
-            ArrayList<WebElement> list2 = new ArrayList<WebElement>(driver.findElements(By.xpath("//a[@ng-click='setCurrent(pageNumber)']")));
+            ArrayList<WebElement> list1 = new ArrayList<WebElement>(reports.reportsRows());
+            ArrayList<WebElement> list2 = new ArrayList<WebElement>(reports.paginationSum());
 
-            return num - (list2.size()-1)*10 - list1.size();
+            int sum = num - (list2.size()-1)*10 - list1.size();
+            return sum<=0 ? 0 : sum;
         }
         else {
-            ArrayList<WebElement> list = new ArrayList<WebElement>(driver.findElements(By.cssSelector(".btn.btn-info.btn-sm.ng-scope")));
+            ArrayList<WebElement> list = new ArrayList<WebElement>(reports.reportsRows());
 
-            return num - list.size();
+            int sum = num - list.size();
+            return sum<=0 ? 0 : sum;
         }
 
     }
