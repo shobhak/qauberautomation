@@ -49,7 +49,7 @@ public class Create_SubDepartment_SAU extends PageObjectModelResources {
         getEntities().CreatDepartmentButton().click();
 
 //        actualResult, expectedResult
-
+        Thread.sleep(2000);
         int lastIndex = getEntities().subdepartmentNameList().size()-1;
         actualResult = getEntities().subdepartmentNameList().get(lastIndex).getText();
         Assert.assertEquals(expectedResult, actualResult);
