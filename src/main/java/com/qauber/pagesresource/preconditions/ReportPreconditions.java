@@ -2,9 +2,9 @@ package com.qauber.pagesresource.preconditions;
 
 import com.github.javafaker.Faker;
 import com.qauber.pages.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-
 import java.util.ArrayList;
 
 /**
@@ -53,18 +53,33 @@ public class ReportPreconditions {
 
     public int verifyReportsAtLeast(int num) throws InterruptedException
     {
-        if (reports.activePagination().isEnabled())
+        try
         {
+            reports.pagination("1").isDisplayed();
             Thread.sleep(sleepTime);
-            reports.pagination("last").click();
-            Thread.sleep(sleepTime);
-            ArrayList<WebElement> list1 = new ArrayList<WebElement>(reports.reportsRows());
-            ArrayList<WebElement> list2 = new ArrayList<WebElement>(reports.paginationSum());
+            int sum = 0;
+            int i = 1;
+            while(true)
+            {
+                Thread.sleep(sleepTime);
+                ArrayList<WebElement> list1 = new ArrayList<WebElement>(reports.reportsRows());
+                sum = sum + list1.size();
+                ArrayList<WebElement> list2 = new ArrayList<WebElement>(reports.paginationSum());
 
-            int sum = num - (list2.size()-1)*10 - list1.size();
+                if(i<Integer.parseInt(list2.get(list2.size()-1).getText()))
+                {
+                    reports.pagination(i+1+"").click();
+                    i++;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            sum = num - sum;
             return sum<=0 ? 0 : sum;
         }
-        else {
+        catch (NoSuchElementException e){
             ArrayList<WebElement> list = new ArrayList<WebElement>(reports.reportsRows());
 
             int sum = num - list.size();
