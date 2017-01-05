@@ -35,8 +35,6 @@ public class EnsureUserIsAdminIn extends PageObjectModelResources {
     }
 
     private void ensureUserIsAdminInWithoutSetup(String userName, int entityIndex) throws InterruptedException, AWTException {
-//        userName = "Jing_qa_0111";
-//        entityIndex = 1;
 
         testDriver().get(testConfig().getBaseURL());
         Thread.sleep(2000);
@@ -55,7 +53,7 @@ public class EnsureUserIsAdminIn extends PageObjectModelResources {
         Thread.sleep(2000);
 
 
-        Select Right = new Select(testDriver().findElements(By.xpath("//td/select")).get(userIndex-1));
+        Select Right = new Select(getEntitiesPermissionsDialog().rightDropdownList().get(userIndex-1));
         String text1 = Right.getFirstSelectedOption().getText();
         Assert.assertEquals(text1, "Admin");
 
@@ -82,7 +80,7 @@ public class EnsureUserIsAdminIn extends PageObjectModelResources {
         getEntities().departmentAssignPermissionsButton(departmentIndex).click();
         Thread.sleep(sleepTime);
 
-        Select RightDepartment = new Select(testDriver().findElements(By.xpath("//td/select")).get(userIndex-1));
+        Select RightDepartment = new Select(getEntitiesPermissionsDialog().rightDropdownList().get(userIndex-1));
         String text2 = RightDepartment.getFirstSelectedOption().getText();
         Assert.assertEquals(text2, "Admin");
 
@@ -109,7 +107,7 @@ public class EnsureUserIsAdminIn extends PageObjectModelResources {
             getEntities().subdepartmentAssignPermissionsButton(subDepartmentIndex).click();
             Thread.sleep(sleepTime);
 
-            Select RightSubDepartment = new Select(testDriver().findElements(By.xpath("//td/select")).get(userIndex-1));
+            Select RightSubDepartment = new Select(getEntitiesPermissionsDialog().rightDropdownList().get(userIndex-1));
             String text3 = RightSubDepartment.getFirstSelectedOption().getText();
             Assert.assertEquals(text3, "Admin");
 
