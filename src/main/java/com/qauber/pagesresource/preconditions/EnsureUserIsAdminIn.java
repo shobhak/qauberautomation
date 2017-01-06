@@ -34,28 +34,40 @@ public class EnsureUserIsAdminIn extends PageObjectModelResources {
         setUpScript();
     }
 
+    // ensure the user is an admin user in an entity
     private void ensureUserIsAdminInWithoutSetup(String userName, int entityIndex) throws InterruptedException, AWTException {
-
         testDriver().get(testConfig().getBaseURL());
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime);
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime);
 
         getNavBar().entitiesButton().click();
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime);
+
+        try {
+            Assert.assertTrue(getEntities().organizationList().size() > entityIndex);
+        } catch (AssertionError e) {
+            System.out.println("There are less than " + entityIndex + " entities. There are only " + getEntities().organizationList().size() + " entities!");
+        }
 
         getEntities().assignPermissionButton(entityIndex).click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime);
 
         userIndex = getEntitiesPermissionsDialog().findingUserIndex(userName);
         System.out.println(userIndex);
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime);
 
-
+        // find the user role by get the text from the select web element, the verify if output is "Admin"
         Select Right = new Select(getEntitiesPermissionsDialog().rightDropdownList().get(userIndex-1));
         String text1 = Right.getFirstSelectedOption().getText();
-        Assert.assertEquals(text1, "Admin");
+
+        try{
+            Assert.assertEquals(text1, "Admin");
+        }
+        catch (AssertionError e){
+            getEntitiesPermissionsDialog().setUserAsAdmin(userIndex);
+        }
 
         getEntitiesPermissionsDialog().closeDialogByPressESC();
         Thread.sleep(sleepTime);
@@ -77,12 +89,24 @@ public class EnsureUserIsAdminIn extends PageObjectModelResources {
         getEntities().organizationInfo(entityIndex).click();
         Thread.sleep(sleepTime);
 
+        try {
+            Assert.assertTrue(getEntities().departmentNameList().size() > departmentIndex);
+        } catch (AssertionError e) {
+            System.out.println("There are less than " + departmentIndex + " departments. There are only " + getEntities().departmentNameList().size() + " departments!");
+        }
+
         getEntities().departmentAssignPermissionsButton(departmentIndex).click();
         Thread.sleep(sleepTime);
 
         Select RightDepartment = new Select(getEntitiesPermissionsDialog().rightDropdownList().get(userIndex-1));
         String text2 = RightDepartment.getFirstSelectedOption().getText();
-        Assert.assertEquals(text2, "Admin");
+
+        try{
+            Assert.assertEquals(text2, "Admin");
+        }
+        catch (AssertionError e){
+            getEntitiesPermissionsDialog().setUserAsAdmin(userIndex);
+        }
 
         getEntitiesPermissionsDialog().closeDialogByPressESC();
         Thread.sleep(sleepTime);
@@ -104,12 +128,23 @@ public class EnsureUserIsAdminIn extends PageObjectModelResources {
             getEntities().departmentName(departmentIndex).click();
             Thread.sleep(sleepTime);
 
+        try {
+            Assert.assertTrue(getEntities().subdepartmentNameList().size() > subDepartmentIndex);
+        } catch (AssertionError e) {
+            System.out.println("There are less than " + subDepartmentIndex + " sub-departments. There are only " + getEntities().subdepartmentNameList().size() + " sub-departments!");
+        }
+
             getEntities().subdepartmentAssignPermissionsButton(subDepartmentIndex).click();
             Thread.sleep(sleepTime);
 
             Select RightSubDepartment = new Select(getEntitiesPermissionsDialog().rightDropdownList().get(userIndex-1));
             String text3 = RightSubDepartment.getFirstSelectedOption().getText();
-            Assert.assertEquals(text3, "Admin");
+            try{
+                Assert.assertEquals(text3, "Admin");
+            }
+            catch (AssertionError e){
+                getEntitiesPermissionsDialog().setUserAsAdmin(userIndex);
+            }
 
             getEntitiesPermissionsDialog().closeDialogByPressESC();
             Thread.sleep(sleepTime);
