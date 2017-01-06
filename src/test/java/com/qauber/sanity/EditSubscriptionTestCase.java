@@ -36,7 +36,7 @@ public class EditSubscriptionTestCase extends PageObjectModelResources {
         int movingpercentage;
         double percentage;
         Random randomInt = new Random();
-        String paypalsandboxemail = "jing_qauber_test@test.com";
+        String paypalsandboxemail = "jing_qauber_test01@test.com";
         String paypalsandboxpassword = "portnovschool";
 
         driver.get(Config.getBaseURL());
