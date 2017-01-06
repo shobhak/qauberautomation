@@ -16,7 +16,7 @@ public class ViewReport extends PageObjectModelResources {
     @BeforeClass
     public void setUp() {
         setUpWithConfigFile();
-        setUpUser(User.UserType.SAU);
+        setUpUser(User.UserType.RU);
         testConfig().getTestRail().setCaseID(79855);
         testConfig().getTestRail().setTester("Alya");
         setUpScript();
@@ -30,7 +30,7 @@ public class ViewReport extends PageObjectModelResources {
         Thread.sleep(10000);
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(5000);
-        getNavBar().clickReports();
+        getNavBar().reportsButton().click();
         Thread.sleep(2000);
         getReports().clickPublishedOnCheckbox();
         Thread.sleep(2000);
