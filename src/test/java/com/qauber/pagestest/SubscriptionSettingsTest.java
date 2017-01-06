@@ -69,8 +69,9 @@ public class SubscriptionSettingsTest {
 
         // Move slider to chosen position
         Thread.sleep(500);
-        settings.slider(5);
-        settings.slider(40);
+        settings.slider(6);
+        settings.slider(39);
+        settings.slider(6);
         settings.slider(21);
 
         Thread.sleep(5000);

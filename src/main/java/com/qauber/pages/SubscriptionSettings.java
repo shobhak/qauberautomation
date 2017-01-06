@@ -39,19 +39,17 @@ public class SubscriptionSettings {
         Actions move = new Actions(driver);
         Action action;
         int i = 0;
-        if (Integer.parseInt(element.getAttribute("aria-valuenow"))<=x)
+        while (Integer.parseInt(element.getAttribute("aria-valuenow")) != x)
         {
-            while (Integer.parseInt(element.getAttribute("aria-valuenow")) != x) {
-                action = move.dragAndDropBy(slider, i/3, 0).build();
-                action.perform();
+            action = move.dragAndDropBy(slider, i / 3, 0).build();
+            action.perform();
+
+            if (Integer.parseInt(element.getAttribute("aria-valuenow")) < x)
+            {
                 i++;
             }
-        }
-        else
-        {
-            while (Integer.parseInt(element.getAttribute("aria-valuenow")) != x) {
-                action = move.dragAndDropBy(slider, i/3, 0).build();
-                action.perform();
+            else
+            {
                 i--;
             }
         }
