@@ -17,6 +17,7 @@ import java.awt.*;
 public class UsersAssignPermissions extends PageObjectModelResources {
 
     WebDriver driver;
+    int sleepTime;
 
     @BeforeTest
     public void setUp() {
@@ -37,20 +38,22 @@ public class UsersAssignPermissions extends PageObjectModelResources {
     }
 
     public void assignPermissionsUsers() throws InterruptedException, AWTException {
+        int index = 2;
+        /** NOTE: index in the list is different while logged in as different users*/
         driver.get(Config.getBaseURL());
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
         getNavBar().usersButton().click();
-        Thread.sleep(2000);
-        getUsers().assignPermissionsButtonByIndex(1).click();
-        Thread.sleep(500);
-        getUsersPermissionsDialog().detachUserPermissions(1);
-        Thread.sleep(300);
-        getUsersPermissionsDialog().setUserAsAdmin(1);
-        Thread.sleep(300);
+        Thread.sleep(sleepTime/2);
+        getUsers().assignPermissionsButtonByIndex(index).click();
+        Thread.sleep(sleepTime/8);
+        getUsersPermissionsDialog().detachUserPermissions(index);
+        Thread.sleep(sleepTime/8);
+        getUsersPermissionsDialog().setUserAsAdmin(index);
+        Thread.sleep(sleepTime/8);
         getUsersPermissionsDialog().closeDialogByPressESC();
-        Thread.sleep(500);
+        Thread.sleep(sleepTime/8);
     }
 
     @AfterTest

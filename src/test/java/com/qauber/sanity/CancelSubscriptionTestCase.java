@@ -63,8 +63,13 @@ public class CancelSubscriptionTestCase extends PageObjectModelResources {
         getSubscriptionSettings().cancelSubscriptionButton().click();
         Thread.sleep(10000);
 
-        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(5000);
+        try{
+            Assert.assertEquals(true, getNavBar().reportsButton().isDisplayed());
+        }
+        catch (NoSuchElementException e) {
+            getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
+            Thread.sleep(5000);
+        }
 
         getNavBar().entitiesButton().click();
         Thread.sleep(2000);

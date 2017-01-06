@@ -7,9 +7,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -67,23 +64,11 @@ public class PageObjectModelResources {
     }
 
     /*
-    Read ConfigOOP object from config file in ~/QAUberTestConfig. If config file not found or invalid, create a new one using defaults in ConfigOOP constructor.
+        Read ConfigOOP object from config file in ~/QAUberTestConfig. If config file not found or invalid, create a new one using defaults in ConfigOOP constructor.
 
-     */
+         */
     protected void setUpWithConfigFile() {
-        this.config = new ConfigOOP();
-        try {
-            config = FileManager.getConfigObject(FileManager.getConfigFileName(), ConfigOOP.class);
-            System.out.println(config.getBaseURL());
-        } catch (IOException e) { //If config not found, do something
-            System.out.println("Config not found, creating ~/QAUberTestConfig/config.txt");
-            List<String> comments = Arrays.asList("Default config file", "Browser name needs to be capitalized. Options - CHROME, FIREFOX, SAFARI, EDGE", "BaseURL should be in form of http://www.website.com", "We go");
-            FileManager.writeConfigObject(new ConfigOOP(), FileManager.getConfigFileName(), comments);
-        } catch (Exception e) { //if config invalid, do something else - TODO: generate config?
-            System.out.println("Invalid config or other exception, recreating ~/QAUberTestConfig/config.txt");
-            List<String> comments = Arrays.asList("INVALID CONFIG FOUND, overwriting with defaults.", "Default config file", "Browser name needs to be capitalized. Options - CHROME, FIREFOX, SAFARI, EDGE", "It's off to work", "We go");
-            FileManager.writeConfigObject(new ConfigOOP(), FileManager.getConfigFileName(), comments);
-        }
+        this.config = ConfigHelper.getConfigFile();
     }
 
     public void setUpUser(User.UserType userType) {
