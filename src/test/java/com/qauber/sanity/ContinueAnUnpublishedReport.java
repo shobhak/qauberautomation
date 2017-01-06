@@ -23,7 +23,7 @@ public class ContinueAnUnpublishedReport extends PageObjectModelResources {
         setUpWithConfigFile();
         setUpUser(User.UserType.SAU);
 
-        testConfig().getTestRail().setCaseID(0000);
+        testConfig().getTestRail().setCaseID(82760);
         testConfig().getTestRail().setTester("Max's Computer");
 
         sleepTime = testConfig().getSleepTime();
