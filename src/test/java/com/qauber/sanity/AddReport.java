@@ -2,6 +2,7 @@ package com.qauber.sanity;
 
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.ReportValueObject;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
@@ -21,6 +22,8 @@ public class AddReport extends PageObjectModelResources {
     public void setUp() {
         setUpWithConfigFile();
         setUpUser(User.UserType.SAU);
+        testConfig().getTestRail().setCaseID(80127);
+        testConfig().getTestRail().setTester("Alya");
         setUpScript();
     }
 
@@ -68,7 +71,14 @@ public class AddReport extends PageObjectModelResources {
         getAddReportPreview().publishReportButton().click();
         Thread.sleep(1000);
 
+        try {
         Assert.assertTrue(verifyReportPublished(reportIdValue));
+        } catch (AssertionError e) {
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Report ID do not match Report ID searched "+e.getLocalizedMessage());
+            throw e;
+        }
+
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
 
     public boolean verifyReportPublished(String reportNumber) throws InterruptedException {
