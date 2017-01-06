@@ -16,7 +16,7 @@ public class ViewReport extends PageObjectModelResources {
     @BeforeClass
     public void setUp() {
         setUpWithConfigFile();
-        setUpUser(User.UserType.RU);
+        setUpUser(User.UserType.SAU);
         testConfig().getTestRail().setCaseID(79855);
         testConfig().getTestRail().setTester("Alya");
         setUpScript();
