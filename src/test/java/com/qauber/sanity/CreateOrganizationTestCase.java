@@ -16,6 +16,8 @@ import org.testng.annotations.Test;
 public class CreateOrganizationTestCase extends PageObjectModelResources {
 
     WebDriver driver;
+    String paypalEmailAccount = "jing_qauber_test01@test.com";
+    String paypalPassword = "portnovschool";
 
     @BeforeClass
     public void setUp() {
@@ -99,10 +101,10 @@ public class CreateOrganizationTestCase extends PageObjectModelResources {
         getCreateOrganization().payWithMyPayPal().click();
         Thread.sleep(3000);
 
-        getCreateOrganization().loginField().sendKeys("lalalala1@gmail.com");
+        getCreateOrganization().loginField().sendKeys(paypalEmailAccount);
         Thread.sleep(8000);
 
-        getCreateOrganization().passwordField().sendKeys("lalalala");
+        getCreateOrganization().passwordField().sendKeys(paypalPassword);
         Thread.sleep(8000);
 
         getCreateOrganization().logInButton().click();
