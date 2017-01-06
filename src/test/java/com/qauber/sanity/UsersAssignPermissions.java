@@ -38,17 +38,19 @@ public class UsersAssignPermissions extends PageObjectModelResources {
     }
 
     public void assignPermissionsUsers() throws InterruptedException, AWTException {
+        int index = 2;
+        /** NOTE: index in the list is different while logged in as different users*/
         driver.get(Config.getBaseURL());
         Thread.sleep(sleepTime/2);
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(sleepTime/2);
         getNavBar().usersButton().click();
         Thread.sleep(sleepTime/2);
-        getUsers().assignPermissionsButtonByIndex(1).click();
+        getUsers().assignPermissionsButtonByIndex(index).click();
         Thread.sleep(sleepTime/8);
-        getUsersPermissionsDialog().detachUserPermissions(1);
+        getUsersPermissionsDialog().detachUserPermissions(index);
         Thread.sleep(sleepTime/8);
-        getUsersPermissionsDialog().setUserAsAdmin(1);
+        getUsersPermissionsDialog().setUserAsAdmin(index);
         Thread.sleep(sleepTime/8);
         getUsersPermissionsDialog().closeDialogByPressESC();
         Thread.sleep(sleepTime/8);

@@ -2,6 +2,8 @@ package com.qauber.pages;
 
 //Created by Denys_G 12/20/2016.
 
+import com.qauber.pagesresource.ConfigHelper;
+import com.qauber.pagesresource.ConfigOOP;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +16,9 @@ import java.util.List;
 
 public class UsersPermissionsDialog {
     WebDriver driver;
-    int sleepTime = 5000;
+    ConfigOOP config = ConfigHelper.getConfigFile();
+    int sleepTime = config.getSleepTime();
+
 
     public UsersPermissionsDialog(WebDriver driver) {this.driver = driver;}
 
