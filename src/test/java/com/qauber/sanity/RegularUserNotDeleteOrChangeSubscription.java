@@ -94,10 +94,10 @@ public class RegularUserNotDeleteOrChangeSubscription extends PageObjectModelRes
         }
 
         // Verify that there is no entity displayed for Regular users or Admin users
-        entitiesListNumberRU = getProfilePanel().entitiesList().size();
-        if (entitiesListNumberRU == 0){
-            System.out.println("There is no entity for Regular User.");
-        }   else {
+        try {
+            Assert.assertEquals(getProfilePanel().entitiesList().size(), 0);
+        }
+        catch(AssertionError e) {
             System.out.println("The Regular User can access the subscription, it is a bug!!!");
         }
 

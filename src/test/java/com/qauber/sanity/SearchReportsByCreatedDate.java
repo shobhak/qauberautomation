@@ -25,7 +25,7 @@ public class SearchReportsByCreatedDate extends PageObjectModelResources {
         setUpUser(User.UserType.SAU);
 
         testConfig().getTestRail().setCaseID(82763);
-        testConfig().getTestRail().setTester("Max's Computer");
+        testConfig().getTestRail().setTester("MadMax");
 
         sleepTime = testConfig().getSleepTime();
         setUpScript();
@@ -47,6 +47,8 @@ public class SearchReportsByCreatedDate extends PageObjectModelResources {
         getReports().createdDateFromIcon(startMonth, startDay, startYear);
         getReports().createdDateToIcon(keyWord);
         Thread.sleep(sleepTime*2);
+
+        //TODO: Found the way to assert that.
     }
 
     @AfterClass

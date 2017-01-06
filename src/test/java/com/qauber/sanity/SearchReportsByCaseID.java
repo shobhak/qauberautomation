@@ -1,6 +1,7 @@
 package com.qauber.sanity;
 
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -25,7 +26,7 @@ public class SearchReportsByCaseID extends PageObjectModelResources {
         setUpUser(User.UserType.SAU);
 
         testConfig().getTestRail().setCaseID(82761);
-        testConfig().getTestRail().setTester("Max's Computer");
+        testConfig().getTestRail().setTester("MadMax");
 
         sleepTime = testConfig().getSleepTime();
         setUpScript();
@@ -53,7 +54,15 @@ public class SearchReportsByCaseID extends PageObjectModelResources {
         getReports().selectReport(1).click();
         Thread.sleep(sleepTime);
 
-        Assert.assertTrue(getReportsViewReport().caseID().getText().equals(caseID));
+        try {
+            Assert.assertTrue(getReportsViewReport().caseID().getText().equals(caseID));
+        }
+        catch (AssertionError e)
+        {
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Search failed: "+e.getLocalizedMessage());
+            throw e;
+        }
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
 
     @AfterClass

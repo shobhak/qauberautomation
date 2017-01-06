@@ -47,6 +47,7 @@ public class Create_SubDepartment_AU extends PageObjectModelResources {
         Thread.sleep(sleepTime);
         getEntities().addSubdepartmentField().sendKeys(expectedResult);
         getEntities().CreatDepartmentButton().click();
+        Thread.sleep(sleepTime);
 
 //        actualResult, expectedResult
         Thread.sleep(2000);
