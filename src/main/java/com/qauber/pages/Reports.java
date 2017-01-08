@@ -182,6 +182,18 @@ public class Reports {
         return driver.findElements(By.xpath("//a[@ng-click='setCurrent(pageNumber)']"));
     }
 
+    public WebElement caseIdResult(int reportNumber)
+    {
+        List<WebElement> list = new ArrayList<WebElement>(driver.findElements(By.xpath("//div[@class='col-sm-1']/span")));
+        return list.get(reportNumber-1);
+    }
+
+    public WebElement searchReportResultPublishedDate(int reportNumber)
+    {
+        List<WebElement> list = new ArrayList<WebElement>(driver.findElements(By.xpath("//div[@class='col-sm-3 text-right']/span")));
+        return list.get(reportNumber-1);
+    }
+
 
 
 
