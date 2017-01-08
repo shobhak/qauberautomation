@@ -67,7 +67,7 @@ public class EditSubscriptionTestCase extends PageObjectModelResources {
         newusersnumber = 5 + randomInt.nextInt(36);
         System.out.println(newusersnumber);
 
-        getSubscriptionSettings().sliderByPercent(newusersnumber);
+        getSubscriptionSettings().slider(newusersnumber);
         Thread.sleep(2000);
 
         getSubscriptionSettings().changeSubscritionButton().click();
