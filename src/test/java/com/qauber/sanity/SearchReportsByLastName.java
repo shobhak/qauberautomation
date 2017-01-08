@@ -1,6 +1,7 @@
 package com.qauber.sanity;
 
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -15,8 +16,7 @@ public class SearchReportsByLastName extends PageObjectModelResources {
 
     WebDriver driver;
     int sleepTime;
-    String lastName = "Sumkin";
-    String keyWord = "Clear";
+    String lastName;
 
     @BeforeClass
     public void setUp() throws InterruptedException {
@@ -24,7 +24,7 @@ public class SearchReportsByLastName extends PageObjectModelResources {
         setUpUser(User.UserType.SAU);
 
         testConfig().getTestRail().setCaseID(82765);
-        testConfig().getTestRail().setTester("Max's Computer");
+        testConfig().getTestRail().setTester("MadMax");
 
         sleepTime = testConfig().getSleepTime();
         setUpScript();
@@ -42,14 +42,23 @@ public class SearchReportsByLastName extends PageObjectModelResources {
         getNavBar().reportsButton().click();
         Thread.sleep(sleepTime*2);
 
+        lastName = getPreconditions().getSearchHelper().randomLastName();
         getReports().lastNameField().clear();
         getReports().lastNameField().sendKeys(lastName);
         Thread.sleep(sleepTime*2);
 
-        getReports().publishedDateFromIcon(keyWord);
+        getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime*2);
 
-        Assert.assertTrue(getReports().searchReportResultID(1).getText().contains(lastName));
+        try {
+            Assert.assertTrue(getReports().searchReportResultID(1).getText().contains(lastName));
+        }
+        catch (AssertionError e)
+        {
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Search failed: "+e.getLocalizedMessage());
+            throw e;
+        }
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
 
     @AfterClass

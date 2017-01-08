@@ -1,6 +1,7 @@
 package com.qauber.sanity;
 
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -15,10 +16,7 @@ public class SearchReportsByPublishedDate extends PageObjectModelResources {
 
     WebDriver driver;
     int sleepTime;
-    String startMonth = "December";
-    String startDay = "26";
-    String startYear = "2016";
-    String keyWord = "Today";
+    String date;
 
     @BeforeClass
     public void setUp() throws InterruptedException {
@@ -26,7 +24,7 @@ public class SearchReportsByPublishedDate extends PageObjectModelResources {
         setUpUser(User.UserType.SAU);
 
         testConfig().getTestRail().setCaseID(82766);
-        testConfig().getTestRail().setTester("Max's Computer");
+        testConfig().getTestRail().setTester("MadMax");
 
         sleepTime = testConfig().getSleepTime();
         setUpScript();
@@ -44,11 +42,20 @@ public class SearchReportsByPublishedDate extends PageObjectModelResources {
         getNavBar().reportsButton().click();
         Thread.sleep(sleepTime*2);
 
-        getReports().publishedDateFromIcon(startMonth, startDay, startYear);
-        getReports().publishedDateToIcon(keyWord);
+        date = getPreconditions().getSearchHelper().randomDate();
+        getReports().publishedDateFromIcon(date);
+        getReports().publishedDateToIcon(date);
         Thread.sleep(sleepTime*2);
 
-        Assert.assertTrue(getReports().searchReportResultPublishedDate(startMonth, startDay, startYear).isDisplayed());
+        try {
+            Assert.assertTrue(getReports().searchReportResultPublishedDate(date).isDisplayed());
+        }
+        catch (AssertionError e)
+        {
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Search failed: "+e.getLocalizedMessage());
+            throw e;
+        }
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
 
     @AfterClass
