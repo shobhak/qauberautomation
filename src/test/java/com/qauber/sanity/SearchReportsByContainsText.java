@@ -16,8 +16,7 @@ public class SearchReportsByContainsText extends PageObjectModelResources {
 
     WebDriver driver;
     int sleepTime;
-    String someText = "Pet";
-    String keyWord = "Clear";
+    String someText;
 
     @BeforeClass
     public void setUp() throws InterruptedException
@@ -44,11 +43,12 @@ public class SearchReportsByContainsText extends PageObjectModelResources {
         getNavBar().reportsButton().click();
         Thread.sleep(sleepTime*2);
 
+        someText = getPreconditions().getSearchHelper().randomContainText();
         getReports().containsTextField().clear();
         getReports().containsTextField().sendKeys(someText);
         Thread.sleep(sleepTime*2);
 
-        getReports().publishedDateFromIcon(keyWord);
+        getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime*2);
 
         try

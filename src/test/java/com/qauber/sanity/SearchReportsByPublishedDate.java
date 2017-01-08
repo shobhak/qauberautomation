@@ -16,10 +16,7 @@ public class SearchReportsByPublishedDate extends PageObjectModelResources {
 
     WebDriver driver;
     int sleepTime;
-    String startMonth = "December";
-    String startDay = "26";
-    String startYear = "2016";
-    String keyWord = "Today";
+    String date;
 
     @BeforeClass
     public void setUp() throws InterruptedException {
@@ -45,12 +42,13 @@ public class SearchReportsByPublishedDate extends PageObjectModelResources {
         getNavBar().reportsButton().click();
         Thread.sleep(sleepTime*2);
 
-        getReports().publishedDateFromIcon(startMonth, startDay, startYear);
-        getReports().publishedDateToIcon(keyWord);
+        date = getPreconditions().getSearchHelper().randomDate();
+        getReports().publishedDateFromIcon(date);
+        getReports().publishedDateToIcon(date);
         Thread.sleep(sleepTime*2);
 
         try {
-            Assert.assertTrue(getReports().searchReportResultPublishedDate(startMonth, startDay, startYear).isDisplayed());
+            Assert.assertTrue(getReports().searchReportResultPublishedDate(date).isDisplayed());
         }
         catch (AssertionError e)
         {

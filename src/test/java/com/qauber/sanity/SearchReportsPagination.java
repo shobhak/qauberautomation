@@ -16,7 +16,7 @@ public class SearchReportsPagination extends PageObjectModelResources {
 
     WebDriver driver;
     int sleepTime;
-    String pagination = "2";
+    String pagination;
 
     @BeforeClass
     public void setUp() throws InterruptedException {
@@ -45,6 +45,7 @@ public class SearchReportsPagination extends PageObjectModelResources {
         getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime*2);
 
+        pagination = getPreconditions().getSearchHelper().randomPagination();
         getReports().pagination(pagination).click();
         Thread.sleep(sleepTime*2);
 

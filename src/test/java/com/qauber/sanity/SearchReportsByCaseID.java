@@ -16,8 +16,7 @@ public class SearchReportsByCaseID extends PageObjectModelResources {
 
     WebDriver driver;
     int sleepTime;
-    String caseID = "101";
-    String keyWord = "Clear";
+    String caseID;
 
     @BeforeClass
     public void setUp() throws InterruptedException {
@@ -44,18 +43,16 @@ public class SearchReportsByCaseID extends PageObjectModelResources {
         getNavBar().reportsButton().click();
         Thread.sleep(sleepTime);
 
+        caseID = getPreconditions().getSearchHelper().randomCaseID();
         getReports().caseIdField().clear();
         getReports().caseIdField().sendKeys(caseID);
         Thread.sleep(sleepTime);
 
-        getReports().publishedDateFromIcon(keyWord);
-        Thread.sleep(sleepTime);
-
-        getReports().selectReport(1).click();
+        getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime);
 
         try {
-            Assert.assertTrue(getReportsViewReport().caseID().getText().equals(caseID));
+            Assert.assertTrue(getReports().caseIdResult(1).getText().equals(caseID));
         }
         catch (AssertionError e)
         {

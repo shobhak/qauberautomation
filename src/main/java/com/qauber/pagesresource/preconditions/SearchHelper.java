@@ -33,58 +33,73 @@ public class SearchHelper {
     {
         return reports.caseIdResult(faker.number().numberBetween(1,10)).getText();
     }
+
     //Return random existing ReportResult(Example: 321. Virginia Botsford (R/P)) from first page search results.
     public String randomReportResult()
     {
         return reports.searchReportResultID(faker.number().numberBetween(1,10)).getText();
     }
+
     //Return random existing text for search by "Contain Text" field from first page search results.
     public String randomContainText()
     {
         String[] random = randomReportResult().split(" ");
         return random[1].substring(0,faker.number().numberBetween(1,random[1].length()));
     }
+
     //Return random existing first name from first page search results.
     public String randomFirstName()
     {
         String[] random = randomReportResult().split(" ");
         return random[1];
     }
+
     //Return random existing last name from first page search results.
     public String randomLastName()
     {
         String[] random = randomReportResult().split(" ");
         return random[2];
     }
+
     //Return random existing suspect type from first page search results.
     public String randomSuspectType()
     {
         String[] random = randomReportResult().split(" ");
         return random[3].substring(1,random[3].length()-1);
     }
+
     //Return random existing pagination from first page search results.
     public String randomPagination()
     {
         return reports.paginationSum().get(faker.number().numberBetween(1,reports.paginationSum().size())).getText();
     }
-    //Return random existing Date (Example: Jan 1, 2017) from first page search results.
+
+    //Return random existing Date in full format (Example: January 01 2017) from first page search results.
     public String randomDate()
     {
-        return reports.searchReportResultPublishedDate(faker.number().numberBetween(1,10)).getText();
+        String date = reports.searchReportResultPublishedDate(faker.number().numberBetween(1,10)).getText();
+        return randomMonth(date) +" "+ randomDay(date) +" "+ randomYear(date);
     }
-    //Return random existing day of month from first page search results.
-    public String randomDay()
+
+    private String randomDay(String fullDate)
     {
-        String[] date = randomDate().split(" ");
+        String[] date = fullDate.split(" ");
         date[1] = date[1].replace(",","");
         if(date[1].length()==1)
             date[1] = "0"+date[1];
         return date[1];
     }
-    //Return random existing month from first page search results.
-    public String randomMonth()
+
+    //Return random existing day of month from first page search results.
+    public String randomDay()
     {
         String[] date = randomDate().split(" ");
+        return date[1];
+    }
+
+    private String randomMonth(String fullDate)
+    {
+        String[] date = fullDate.split(" ");
         String month = date[0];
         if (month.equals("Jan")) return "January";
         if (month.equals("Feb")) return "February";
@@ -99,10 +114,25 @@ public class SearchHelper {
         if (month.equals("Nov")) return "November";
         else return "December";
     }
+
+    //Return random existing month from first page search results.
+    public String randomMonth()
+    {
+        String[] date = randomDate().split(" ");
+        return date[0];
+    }
+
+    private String randomYear(String fullDate)
+    {
+        String[] date = fullDate.split(" ");
+        return date[2];
+    }
+
     //Return random existing year from first page search results.
     public String randomYear()
     {
         String[] date = randomDate().split(" ");
         return date[2];
     }
+
 }

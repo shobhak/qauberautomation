@@ -16,8 +16,7 @@ public class SearchReportsBySuspectType extends PageObjectModelResources {
 
     WebDriver driver;
     int sleepTime;
-    String suspectType = "Victim";
-    String keyWord = "Clear";
+    String suspectType;
 
     @BeforeClass
     public void setUp() throws InterruptedException {
@@ -43,10 +42,11 @@ public class SearchReportsBySuspectType extends PageObjectModelResources {
         getNavBar().reportsButton().click();
         Thread.sleep(sleepTime*2);
 
+        suspectType = getPreconditions().getSearchHelper().randomSuspectType();
         getReports().suspectType(suspectType);
         Thread.sleep(sleepTime*2);
 
-        getReports().publishedDateFromIcon(keyWord);
+        getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime*2);
 
         try {
