@@ -214,6 +214,12 @@ public class Entities {
         return subdepartmentDeleteButtonList().get(index - 1);
     }
 
+    public List<WebElement> entityRows() {
+        return driver.findElements(By.xpath("//tbody/tr[@class='ng-scope']"));
+    }
+
+
+
 }
 
 
