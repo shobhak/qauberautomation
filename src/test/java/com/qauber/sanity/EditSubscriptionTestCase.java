@@ -33,8 +33,6 @@ public class EditSubscriptionTestCase extends PageObjectModelResources {
         int editentityindex;
         int newusersnumber;
         int currentusernumber;
-        int movingpercentage;
-        double percentage;
         Random randomInt = new Random();
         String paypalsandboxemail = "jing_qauber_test01@test.com";
         String paypalsandboxpassword = "portnovschool";
@@ -66,13 +64,10 @@ public class EditSubscriptionTestCase extends PageObjectModelResources {
         getProfilePanel().organizationLink(editentityindex).click();
         Thread.sleep(2000);
 
-        newusersnumber = (5 + randomInt.nextInt(36));
+        newusersnumber = 5 + randomInt.nextInt(36);
         System.out.println(newusersnumber);
 
-        movingpercentage = (int) Math.round(200*(((float)newusersnumber - 5.0)/34));
-        System.out.println(movingpercentage);
-
-        getSubscriptionSettings().sliderByPercent(movingpercentage);
+        getSubscriptionSettings().slider(newusersnumber);
         Thread.sleep(2000);
 
         getSubscriptionSettings().changeSubscritionButton().click();
@@ -80,17 +75,17 @@ public class EditSubscriptionTestCase extends PageObjectModelResources {
 
         //working on paypal sandbox web pages
         driver.findElement(By.xpath("//input[@id='loadLogin']")).click();
-        Thread.sleep(10000);
+        Thread.sleep(6000);
 
         driver.findElement(By.xpath("//*[@id='login_email']")).clear();
-        Thread.sleep(2000);
+        Thread.sleep(500);
         driver.findElement(By.xpath("//*[@id='login_email']")).sendKeys(paypalsandboxemail);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         driver.findElement(By.xpath("//*[@id='login_password']")).clear();
-        Thread.sleep(2000);
+        Thread.sleep(500);
         driver.findElement(By.xpath("//*[@id='login_password']")).sendKeys(paypalsandboxpassword);
-        Thread.sleep(2000);
+        Thread.sleep(1000);
 
         driver.findElement(By.xpath("//*[@id='submitLogin']")).click();
         Thread.sleep(10000);

@@ -32,7 +32,7 @@ public class ViewReport extends PageObjectModelResources {
         Thread.sleep(5000);
         getNavBar().reportsButton().click();
         Thread.sleep(2000);
-        getReports().clickPublishedOnCheckbox();
+        getReports().publishedOnCheckBox().click();
         Thread.sleep(2000);
 
         String searchReportResultID = getReports().searchReportResultID(rowindex).getText();

@@ -16,8 +16,7 @@ public class SearchReportsByLastName extends PageObjectModelResources {
 
     WebDriver driver;
     int sleepTime;
-    String lastName = "Sumkin";
-    String keyWord = "Clear";
+    String lastName;
 
     @BeforeClass
     public void setUp() throws InterruptedException {
@@ -43,11 +42,12 @@ public class SearchReportsByLastName extends PageObjectModelResources {
         getNavBar().reportsButton().click();
         Thread.sleep(sleepTime*2);
 
+        lastName = getPreconditions().getSearchHelper().randomLastName();
         getReports().lastNameField().clear();
         getReports().lastNameField().sendKeys(lastName);
         Thread.sleep(sleepTime*2);
 
-        getReports().publishedDateFromIcon(keyWord);
+        getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime*2);
 
         try {

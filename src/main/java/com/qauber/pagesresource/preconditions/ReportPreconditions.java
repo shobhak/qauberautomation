@@ -5,6 +5,8 @@ import com.qauber.pages.*;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+
 import java.util.ArrayList;
 
 /**
@@ -51,19 +53,24 @@ public class ReportPreconditions {
         }
     }
 
+    /** verifyReportsAtLeast(int num)
+     * count reports, decrementing numberRemaining
+     * if numberRemaining <= 0, return 0
+     * if out of reports to count, return numberRemaining
+     */
     public int verifyReportsAtLeast(int num) throws InterruptedException
     {
         try
         {
             reports.pagination("1").isDisplayed();
             Thread.sleep(sleepTime);
-            int sum = 0;
+            int numberRemaining = 0;
             int i = 1;
             while(true)
             {
                 Thread.sleep(sleepTime);
                 ArrayList<WebElement> list1 = new ArrayList<WebElement>(reports.reportsRows());
-                sum = sum + list1.size();
+                numberRemaining = numberRemaining + list1.size();
                 ArrayList<WebElement> list2 = new ArrayList<WebElement>(reports.paginationSum());
 
                 if(i<Integer.parseInt(list2.get(list2.size()-1).getText()))
@@ -76,20 +83,27 @@ public class ReportPreconditions {
                     break;
                 }
             }
-            sum = num - sum;
-            return sum<=0 ? 0 : sum;
+            numberRemaining = num - numberRemaining;
+            return numberRemaining <=0 ? 0 : numberRemaining;
         }
         catch (NoSuchElementException e){
             ArrayList<WebElement> list = new ArrayList<WebElement>(reports.reportsRows());
 
-            int sum = num - list.size();
-            return sum<=0 ? 0 : sum;
+            int numberRemaining = num - list.size();
+            return numberRemaining <=0 ? 0 : numberRemaining;
         }
 
     }
-    public void createReport(int reportsNeeded) throws InterruptedException {
 
-        for (int i = 0; i<reportsNeeded; i++) {
+    /**
+     *
+     * Create reports fill out only required fields,
+     * based on numberOfReportsNeeded.
+     */
+
+    public void createReport(int numberOfReportsNeeded) throws InterruptedException {
+
+        for (int i = 0; i<numberOfReportsNeeded; i++) {
             navBar.addReportButton().click();
             Thread.sleep(sleepTime);
 
@@ -98,8 +112,11 @@ public class ReportPreconditions {
 
             addReportNavigation.subjectInformationTab().click();
             Thread.sleep(sleepTime);
+
             addReportSubjectInformationPage.firstName().sendKeys(faker.name().firstName());
             addReportSubjectInformationPage.lastName().sendKeys(faker.name().lastName());
+            addReportSubjectInformationPage.caseIdField().sendKeys(faker.idNumber().valid());
+            new Select(addReportSubjectInformationPage.subjectType()).selectByIndex(faker.number().numberBetween(1,5));
             Thread.sleep(sleepTime);
 
             addReportNavigation.environmentTab().click();

@@ -48,10 +48,10 @@ public class CreateSubscriptionPayPalTestcase extends PageObjectModelResources {
         getCreateSubsciption().payWithMyPayPal().click();
         Thread.sleep(3000);
 
-        getCreateSubsciption().loginField().sendKeys("lalalala1@gmail.com");
+        getCreateSubsciption().loginField().sendKeys("jing_qauber_test01@test.com");
         Thread.sleep(3000);
 
-        getCreateSubsciption().passwordField().sendKeys("lalalala");
+        getCreateSubsciption().passwordField().sendKeys("portnovschool");
         Thread.sleep(3000);
 
         getCreateSubsciption().logInButton().click();

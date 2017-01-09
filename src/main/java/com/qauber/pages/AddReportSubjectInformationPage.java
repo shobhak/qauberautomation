@@ -127,5 +127,10 @@ public class AddReportSubjectInformationPage {
         return element;
     }
 
+    // Added by MadMax on 01/07/2017
+    public WebElement caseIdField()
+    {
+        return driver.findElement(By.name("caseNumber"));
+    }
 
 }

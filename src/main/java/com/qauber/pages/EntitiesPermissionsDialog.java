@@ -70,6 +70,7 @@ public class EntitiesPermissionsDialog {
     public List<WebElement> userNameList(){
         return driver.findElements(By.xpath("//div[@class='ng-binding']"));
     }
+
     public int findingUserIndex(String userName){
         int rowindex = 1;
         for (int i = 0; i < userNameList().size(); i++){

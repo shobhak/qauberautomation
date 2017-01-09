@@ -61,8 +61,9 @@ public class SubscriptionSettings {
         Actions move = new Actions(driver);
         Action action = (Action) move.dragAndDropBy(slider, -300, 0).build();
         action.perform();
-        Thread.sleep(10000);
-        Action action2 = (Action) move.dragAndDropBy(slider, x, 0).build();
+        Thread.sleep(5000);
+        int movingpercentage = (int) Math.round(200*(((float)x - Float.parseFloat(slider.getAttribute("aria-valuemin")))/(Integer.parseInt(slider.getAttribute("aria-valuemax"))-Integer.parseInt(slider.getAttribute("aria-valuemin"))-2)));
+        Action action2 = (Action) move.dragAndDropBy(slider, movingpercentage, 0).build();
         action2.perform();
     }
 }
