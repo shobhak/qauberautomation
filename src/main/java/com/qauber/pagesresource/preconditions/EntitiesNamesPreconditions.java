@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
  * Created by Alya on 1/4/2017.
  */
 
-// to be continued
+// TO DO: ensure name exist for department and subDepartment
 
 public class EntitiesNamesPreconditions {
     private int sleepTime;
@@ -17,6 +17,9 @@ public class EntitiesNamesPreconditions {
     private NavBar navBar;
     private Entities entities;
     private EntitiesPermissionsDialog entitiesPermissionsDialog;
+    private CreateOrganization createOrganization;
+    private String paypalEmailAccount = ""; //enter your data
+    private String paypalPassword = ""; //enter your data
 
     public EntitiesNamesPreconditions(WebDriver driver) {
 
@@ -26,43 +29,66 @@ public class EntitiesNamesPreconditions {
         navBar = new NavBar(driver);
         entities = new Entities(driver);
         entitiesPermissionsDialog = new EntitiesPermissionsDialog(driver);
+        createOrganization = new CreateOrganization(driver);
     }
 
     public void ensureEntityNameExists(String entityName) throws InterruptedException {
-        navigateToEntityPage();
         if (!isEntityNameInSystem(entityName)) {
             addEntity(entityName);
-        }
-
-        for (int i = 0; i < entities.organizationList().size(); i++) {
-            if (entities.organizationList().get(i).getText().equals(entityName)) {
-                System.out.println("The entity name is in the list");
-                break;
-            } else {
-                if (i == (entities.organizationList().size() - 1)) {
-                    addEntity(entityName);
-                }
-            }
         }
     }
 
     public boolean isEntityNameInSystem(String entityName) {
-        return true;
+        for (int i = 0; i < entities.organizationList().size(); i++) {
+            if (entities.organizationList().get(i).getText().equals(entityName)) {
+                return true;
+            }
+        }
+        return false;
     }
 
-    public void addEntity(String entityName) {
-
-    }
-
-    public void navigateToEntityPage() {
-        navBar.entitiesButton();
+    public void addEntity(String entityName) throws InterruptedException {
+        navBar.entitiesButton().click();
+        Thread.sleep(2000);
+        entities.addOrganizationButton().click();
+        Thread.sleep(2000);
+        createOrganization.entityNameField().sendKeys(entityName);
+        Thread.sleep(2000);
+        createOrganization.entityCountryDropDown("Austria").click();
+        Thread.sleep(2000);
+        createOrganization.entityAddress1().sendKeys(faker.address().streetAddress());
+        Thread.sleep(2000);
+        createOrganization.entityCity().sendKeys(faker.address().city());
+        Thread.sleep(2000);
+        createOrganization.entityState().sendKeys(faker.address().state());
+        Thread.sleep(2000);
+        createOrganization.entityPostalCode().sendKeys(faker.address().zipCode());
+        Thread.sleep(2000);
+        createOrganization.entityNextButtone().click();
+        Thread.sleep(2000);
+        createOrganization.inviteRegularUserNextButton().click();
+        Thread.sleep(3000);
+        createOrganization.inviteAdminUserNextButton().click();
+        Thread.sleep(2000);
+        createOrganization.finishButton().click();
+        Thread.sleep(2000);
+        createOrganization.payWithMyPayPal().click();
+        Thread.sleep(2000);
+        createOrganization.loginField().sendKeys(paypalEmailAccount);
+        Thread.sleep(8000);
+        createOrganization.passwordField().sendKeys(paypalPassword);
+        Thread.sleep(8000);
+        createOrganization.logInButton().click();
+        Thread.sleep(8000);
+        createOrganization.agreeAndContinueButton().click();
+        Thread.sleep(8000);
     }
 
     public void ensureDepartmentNameExists() throws InterruptedException {
 
     }
 
-    public void ensuresubDepartmentNameExists() throws InterruptedException {
+    public void ensureSubDepartmentNameExists() throws InterruptedException {
 
     }
 }
