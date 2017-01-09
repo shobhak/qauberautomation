@@ -1,6 +1,10 @@
 package com.qauber.pagesresource;
 
 import com.github.javafaker.Faker;
+import com.qauber.common.value.BuildValue;
+import com.qauber.common.value.EyeColorValue;
+import com.qauber.common.value.SexValue;
+import com.qauber.common.value.SuspectTypeValue;
 
 /**
  * Created by Alya on 12/22/2016.
@@ -15,7 +19,7 @@ public class ReportValueObject{
     private String firstName;
     private String lastName;
     private String middleName;
-    private String suspectType;
+    private SuspectTypeValue suspectType;
     private String dateOfBirth;
     private String nickName;
     private String race;
@@ -24,9 +28,9 @@ public class ReportValueObject{
     private String hairColor;
     private String hairLength;
     private String hairStyle;
-    private String sex;
-    private String build;
-    private String eyeColor;
+    private SexValue sex;
+    private BuildValue build;
+    private EyeColorValue eyeColor;
     private String complexion;
     private String teeth;
     private String handPreference;
@@ -139,6 +143,10 @@ public class ReportValueObject{
         middleName = faker.name().lastName();
         lastName = faker.name().lastName();
         nickName = faker.lorem().word();
+        suspectType = SuspectTypeValue.getRandomValue();
+        sex = SexValue.getRandomValue();
+        build = BuildValue.getRandomValue();
+        eyeColor = EyeColorValue.getRandomValue();
 
         tattoos = faker.lorem().word();
         scars = faker.lorem().word();
@@ -213,7 +221,7 @@ public class ReportValueObject{
     public String getLastName() {
         return lastName;
     }
-    public String getSuspectType() {
+    public SuspectTypeValue getSuspectType() {
         return suspectType;
     }
 
@@ -249,15 +257,15 @@ public class ReportValueObject{
         return hairStyle;
     }
 
-    public String getSex() {
+    public SexValue getSex() {
         return sex;
     }
 
-    public String getBuild() {
+    public BuildValue getBuild() {
         return build;
     }
 
-    public String getEyeColor() {
+    public EyeColorValue getEyeColor() {
         return eyeColor;
     }
 
