@@ -25,6 +25,22 @@ public class UsersPermissionsDialog {
     public List<WebElement> userEntitiesList() {
              return driver.findElements(By.xpath("//tr//div[@class='depth-level']"));
     }
+    public WebElement entityTR (int index){
+        return driver.findElement(By.xpath("//tr[td/div[@class='depth-level']]["+index+"]"));
+    }
+    public WebElement detachButtonEntityTR (int index){
+        return entityTR(index).findElement(By.xpath("/td/button[@ng-click='detachEntity(entity)']"));
+    }
+    public WebElement saveButtonEntityTR (int index){
+        return entityTR(index).findElement(By.xpath("/td/button[@ng-click='assignEntity(entity)']"));
+    }
+    public Select dropDownListEntityTR (int index){
+        return (Select) entityTR(index).findElement(By.xpath("/td/select"));
+    }
+    public WebElement rightsSavedEntityTR (int index){
+        return entityTR(index).findElement(By.xpath("/td/div/div"));
+    }
+
     public Select dropdownMenu(int index){
         return new Select(driver.findElement(By.xpath
                 ("//tr[@ng-repeat='entity in entities']['"+index+"']/td/select[@ng-model='entity.status']")));

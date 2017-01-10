@@ -117,6 +117,11 @@ public class Users {
         return list.get(listNo);
     }
 
+    public WebElement areYouSure(){
+        return driver.findElement(By.xpath("//*[@id='ngdialog1-aria-describedby']"));
+
+    }
+
     public void inviteUserWithoutActivation(String emailAddress) throws InterruptedException {
         ((JavascriptExecutor)driver).executeScript("javascript:window.scrollBy(0,-400)"); //scroll to top of page, thank you Denis
         inviteUserButton().click();
