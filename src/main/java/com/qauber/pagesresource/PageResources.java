@@ -5,6 +5,10 @@ import org.openqa.selenium.WebDriver;
 
 /**
  * Created by erikfriedlander on 1/7/17.
+ *
+ * You should only get PageResources through PageResourcesFactory.
+ * PageResources page = PageResourcesFactory.getPageResources(WebDriver driver)
+ *
  */
 public class PageResources {
 

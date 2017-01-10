@@ -51,8 +51,9 @@ public class UsersPreconditions {
      * if numberRemaining = 0, return 0
      * if out of users to count, return numberRemaining
      * we check if we're out of users to count by...
-     * 1. clicking next button (click may do nothing if we're on lat page)
-     * 2. comparing 'old' rows with 'new' rows
+     * 1. is numberRemaining > 0?
+     * 2. is next button clickable?
+     * 3. if so, click and keep going
      */
     public int verifyUsersAtLeast(int num) throws InterruptedException { //returns # of users needed
         int numberRemaining = num;
