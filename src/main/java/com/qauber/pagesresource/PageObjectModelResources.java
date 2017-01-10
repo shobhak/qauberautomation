@@ -7,9 +7,6 @@ import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
-import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
@@ -21,42 +18,7 @@ public class PageObjectModelResources {
     private ConfigOOP config;
     private User testCaseUser;
     private UserFactory userFactory;
-
-    //Pages before login
-    private CompanyCreationSAU companyCreationSAU;
-    private LoginPage login;
-    private RegistrationPage1 registrationPage1;
-    private RegistrationPage2 registrationPage2;
-
-    //Pages/elements accessible from all pages
-    private Header header;
-    private NavBar navBar;
-    private ProfilePanel profilePanel;
-    private EditProfile editProfile;
-    private SubscriptionSettings subscriptionSettings;
-
-    //Navbar pages
-    //    private Users users;
-    private Entities entities;
-    private EntitiesPermissionsDialog entitiesPermissionsDialog;
-    private Users users;
-    private UsersPermissionsDialog usersPermissionsDialog;
-    private EditOrganizationPage editOrganizationPage;
-    private Reports reports;
-    private ReportsViewReport reportsViewReport;
-
-    //Add reports pages
-    private AddReportEnvironment addReportEnvironment;
-    private AddReportIdentificationInformation addReportIdentificationInformation;
-    private AddReportIdentifiersPage addReportIdentifiersPage;
-    private AddReportNavigation addReportNavigation;
-    private AddReportPhoto addReportPhoto;
-    private AddReportsOrganization addReportOrganization;
-    private AddReportSubjectInformationPage addReportSubjectInformationPage;
-    private AddReportVehicle addReportVehicle;
-    private AddReportPreview addReportPreview;
-    private CreateSubsciption createSubsciption;
-    private CreateOrganization createOrganization;
+    private PageResources pages;
 
     //Preconditions
     private PreconditionsResources preconditionsResources;
@@ -67,23 +29,11 @@ public class PageObjectModelResources {
     }
 
     /*
-    Read ConfigOOP object from config file in ~/QAUberTestConfig. If config file not found or invalid, create a new one using defaults in ConfigOOP constructor.
+        Read ConfigOOP object from config file in ~/QAUberTestConfig. If config file not found or invalid, create a new one using defaults in ConfigOOP constructor.
 
-     */
+         */
     protected void setUpWithConfigFile() {
-        this.config = new ConfigOOP();
-        try {
-            config = FileManager.getConfigObject(FileManager.getConfigFileName(), ConfigOOP.class);
-            System.out.println(config.getBaseURL());
-        } catch (IOException e) { //If config not found, do something
-            System.out.println("Config not found, creating ~/QAUberTestConfig/config.txt");
-            List<String> comments = Arrays.asList("Default config file", "Browser name needs to be capitalized. Options - CHROME, FIREFOX, SAFARI, EDGE", "BaseURL should be in form of http://www.website.com", "We go");
-            FileManager.writeConfigObject(new ConfigOOP(), FileManager.getConfigFileName(), comments);
-        } catch (Exception e) { //if config invalid, do something else - TODO: generate config?
-            System.out.println("Invalid config or other exception, recreating ~/QAUberTestConfig/config.txt");
-            List<String> comments = Arrays.asList("INVALID CONFIG FOUND, overwriting with defaults.", "Default config file", "Browser name needs to be capitalized. Options - CHROME, FIREFOX, SAFARI, EDGE", "It's off to work", "We go");
-            FileManager.writeConfigObject(new ConfigOOP(), FileManager.getConfigFileName(), comments);
-        }
+        this.config = ConfigHelper.getConfigFile();
     }
 
     public void setUpUser(User.UserType userType) {
@@ -128,7 +78,7 @@ public class PageObjectModelResources {
         setUpScript(testConfig());
     }
 
-    public void setUpScript(ConfigOOP config) {
+    private void setUpScript(ConfigOOP config) {
         driver = chooseDriver(config.getBrowserType());
         //implicit wait
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
@@ -157,38 +107,10 @@ public class PageObjectModelResources {
 
         ////////////////// Done managing WebDriver
 
-        //Set page references
-        companyCreationSAU = new CompanyCreationSAU(driver);
-        login = new LoginPage(driver);
-        registrationPage1 = new RegistrationPage1(driver);
-        registrationPage2 = new RegistrationPage2(driver);
-        header = new Header(driver);
-        navBar = new NavBar(driver);
-        profilePanel = new ProfilePanel(driver);
-        editProfile = new EditProfile(driver);
-        subscriptionSettings = new SubscriptionSettings(driver);
+        //Get page resources
+        pages = PageResourcesFactory.getPageResources(driver);
 
-        entities = new Entities(driver);
-        entitiesPermissionsDialog = new EntitiesPermissionsDialog(driver);
-        users = new Users(driver);
-        usersPermissionsDialog = new UsersPermissionsDialog(driver);
-        editOrganizationPage = new EditOrganizationPage(driver);
-        createOrganization = new CreateOrganization(driver);
 
-        reports = new Reports(driver);
-        reportsViewReport = new ReportsViewReport(driver);
-
-        addReportEnvironment = new AddReportEnvironment(driver);
-        addReportIdentificationInformation = new AddReportIdentificationInformation(driver);
-        addReportIdentifiersPage = new AddReportIdentifiersPage(driver);
-        addReportNavigation = new AddReportNavigation(driver);
-        addReportPhoto = new AddReportPhoto(driver);
-        addReportOrganization = new AddReportsOrganization(driver);
-        addReportSubjectInformationPage = new AddReportSubjectInformationPage(driver);
-        addReportVehicle = new AddReportVehicle(driver);
-        addReportPreview = new AddReportPreview(driver);
-        createSubsciption = new CreateSubsciption(driver);
-        createOrganization = new CreateOrganization(driver);
 
         //Preconditions
         preconditionsResources = new PreconditionsResources(driver);
@@ -221,92 +143,85 @@ public class PageObjectModelResources {
         }
     }
 
-    //get Page Object Model Resources
-
+    ///////GET ALL TEST CASE RESOURCES
     protected WebDriver getDriver() { //visible from subclasses, not public OR private
         return driver;
     }
 
-    protected CompanyCreationSAU getCompanyCreationSAU(){ return companyCreationSAU;}
-
-    protected LoginPage getLogin() {
-        return login;
-    }
+    //GET PAGES
 
 
+    protected LoginPage getLogin() { return pages.getLogin(); }
 
-    protected Header getHeader() { return header; }
+    protected Header getHeader() { return pages.getHeader(); }
 
-    protected RegistrationPage1 getRegistrationPage1() { return registrationPage1; }
-    protected RegistrationPage2 getRegistrationPage2() { return registrationPage2; }
+    protected RegistrationPage1 getRegistrationPage1() { return pages.getRegistrationPage1(); }
+    protected RegistrationPage2 getRegistrationPage2() { return pages.getRegistrationPage2(); }
 
-    protected NavBar getNavBar() {
-        return navBar;
-    }
+    protected NavBar getNavBar() { return pages.getNavBar(); }
 
-    protected ProfilePanel getProfilePanel() {
-        return profilePanel;
-    }
+    protected ProfilePanel getProfilePanel() { return pages.getProfilePanel(); }
 
-    protected EditProfile getEditProfile() {
-        return editProfile;
-    }
+    protected EditProfile getEditProfile() { return pages.getEditProfile(); }
 
-    protected SubscriptionSettings getSubscriptionSettings() {return subscriptionSettings;}
+    protected SubscriptionSettings getSubscriptionSettings() {return pages.getSubscriptionSettings();}
 
-    protected Entities getEntities() {return entities;}
+    protected Entities getEntities() {return pages.getEntities();}
 
-    protected EntitiesPermissionsDialog getEntitiesPermissionsDialog() {return entitiesPermissionsDialog;}
+    protected EntitiesPermissionsDialog getEntitiesPermissionsDialog() {return pages.getEntitiesPermissionsDialog();}
 
-    protected Users getUsers() {return users;}
+    protected Users getUsers() {return pages.getUsers();}
 
-    protected UsersPermissionsDialog getUsersPermissionsDialog() {return usersPermissionsDialog;}
+    protected UsersPermissionsDialog getUsersPermissionsDialog() {return pages.getUsersPermissionsDialog();}
 
-    protected EditOrganizationPage getOrganization() {return  editOrganizationPage;}
+    protected EditOrganizationPage getOrganization() {return pages.getEditOrganizationPage();}
 
-    protected CreateOrganization getCreateOrganization() { return createOrganization;}
+    protected CreateOrganization getCreateOrganization() { return pages.getCreateOrganization();}
 
     protected Reports getReports() {
-        return reports;
+        return pages.getReports();
     }
 
-    protected ReportsViewReport getReportsViewReport() {return reportsViewReport; }
+    protected ReportsViewReport getReportsViewReport() {return pages.getReportsViewReport(); }
 
     protected AddReportEnvironment getAddReportEnvironment() {
-        return addReportEnvironment;
+        return pages.getAddReportEnvironment();
     }
 
     protected AddReportIdentificationInformation getAddReportIdentificationInformation() {
-        return addReportIdentificationInformation;
+        return pages.getAddReportIdentificationInformation();
     }
 
     protected AddReportIdentifiersPage getAddReportIdentifiersPage() {
-        return addReportIdentifiersPage;
+        return pages.getAddReportIdentifiersPage();
     }
 
     protected AddReportNavigation getAddReportNavigation() {
-        return addReportNavigation;
+        return pages.getAddReportNavigation();
     }
 
     protected AddReportPhoto getAddReportPhoto() {
-        return addReportPhoto;
+        return pages.getAddReportPhoto();
     }
 
     protected AddReportsOrganization getAddReportOrganization() {
-        return addReportOrganization;
+        return pages.getAddReportOrganization();
     }
 
     protected AddReportSubjectInformationPage getAddReportSubjectInformationPage() {
-        return addReportSubjectInformationPage;
+        return pages.getAddReportSubjectInformationPage();
     }
 
     protected AddReportVehicle getAddReportVehicle() {
-        return addReportVehicle;
+        return pages.getAddReportVehicle();
     }
 
-    protected AddReportPreview getAddReportPreview() { return addReportPreview; }
+    protected AddReportPreview getAddReportPreview() { return pages.getAddReportPreview(); }
 
-    protected  CreateSubsciption getCreateSubsciption() {return createSubsciption;}
+    protected  CreateSubsciption getCreateSubsciption() {return pages.getCreateSubsciption();}
+
+    @Deprecated //TODO: move into helper method
+    protected CompanyCreationSAU getCompanyCreationSAU(){ return pages.getCompanyCreationSAU(); }
 
     //Users preconditions
     protected PreconditionsResources getPreconditions() { return preconditionsResources; }

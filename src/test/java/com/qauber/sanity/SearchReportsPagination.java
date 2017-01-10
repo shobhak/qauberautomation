@@ -1,6 +1,7 @@
 package com.qauber.sanity;
 
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -15,15 +16,15 @@ public class SearchReportsPagination extends PageObjectModelResources {
 
     WebDriver driver;
     int sleepTime;
-    String pagination = "2";
+    String pagination;
 
     @BeforeClass
     public void setUp() throws InterruptedException {
         setUpWithConfigFile();
         setUpUser(User.UserType.SAU);
 
-        testConfig().getTestRail().setCaseID(0000);
-        testConfig().getTestRail().setTester("Max's Computer");
+        testConfig().getTestRail().setCaseID(82769);
+        testConfig().getTestRail().setTester("MadMax");
 
         sleepTime = testConfig().getSleepTime();
         setUpScript();
@@ -44,10 +45,19 @@ public class SearchReportsPagination extends PageObjectModelResources {
         getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime*2);
 
+        pagination = getPreconditions().getSearchHelper().randomPagination();
         getReports().pagination(pagination).click();
         Thread.sleep(sleepTime*2);
 
-        Assert.assertTrue(getReports().activePagination().getText().equals(pagination));
+        try {
+            Assert.assertTrue(getReports().activePagination().getText().equals(pagination));
+        }
+        catch (AssertionError e)
+        {
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Search failed: "+e.getLocalizedMessage());
+            throw e;
+        }
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
 
     @AfterClass

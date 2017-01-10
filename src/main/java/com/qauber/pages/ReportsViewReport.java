@@ -28,13 +28,44 @@ public class ReportsViewReport {
         return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[1]/div[2]/strong"));
     }
 
-    // added on 12/26/2016
     public WebElement caseID(){
         return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[2]/div[2]/strong"));
     }
-    //added on 12/29/2016
+
     public WebElement suspectName(){
         return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[3]/div[2]/strong"));
+    }
+
+    public WebElement suspectType(){
+        return downloadAsPDFButton().findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[4]/div[2]/strong"));
+    }
+
+     public WebElement dob() {
+         return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[5]/div[2]/strong"));
+     }
+
+     public WebElement nickName(){
+         return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[6]/div[2]/strong"));
+    }
+
+    public WebElement raceHeightWeight(){
+         return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[7]/div[2]/strong"));
+    }
+
+    public WebElement hairColorHairLengthHairStyle(){
+        return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[8]/div[2]/strong"));
+    }
+
+    public WebElement sexBuildEyeColor(){
+        return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[9]/div[2]/strong"));
+    }
+
+    public WebElement complexionTeethHandPreference(){
+        return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[10]/div[2]/strong"));
+    }
+
+    public WebElement dateTime(){
+        return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[11]/div[2]/strong"));
     }
 
     public WebElement stopLocation(){

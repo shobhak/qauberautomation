@@ -55,7 +55,7 @@ public class SubscriptionSettingsTest {
         // click on second organization in list
         Thread.sleep(1000);
         panel.settinsButton().click();
-        panel.organizationLink(2).click();
+        panel.organizationLink(1).click();
 
         // close Subscription Settings
         Thread.sleep(1000);
@@ -65,11 +65,14 @@ public class SubscriptionSettingsTest {
         header.userName().click();
 
         Thread.sleep(1000);
-        panel.organizationLink(2).click();
+        panel.organizationLink(1).click();
 
         // Move slider to chosen position
         Thread.sleep(500);
-        settings.slider(22);
+        settings.slider(6);
+        settings.slider(39);
+        settings.slider(6);
+        settings.slider(21);
 
         Thread.sleep(5000);
     }

@@ -63,8 +63,15 @@ public class CancelSubscriptionTestCase extends PageObjectModelResources {
         getSubscriptionSettings().cancelSubscriptionButton().click();
         Thread.sleep(10000);
 
-        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(5000);
+        // on some system, the site logout after cancellation, this is to determine the state of the site
+        // add re-login if site is logout
+        try{
+            Assert.assertEquals(true, getNavBar().reportsButton().isDisplayed());
+        }
+        catch (NoSuchElementException e) {
+            getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
+            Thread.sleep(5000);
+        }
 
         getNavBar().entitiesButton().click();
         Thread.sleep(2000);

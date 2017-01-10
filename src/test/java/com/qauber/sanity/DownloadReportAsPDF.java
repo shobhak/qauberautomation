@@ -31,8 +31,8 @@ public class DownloadReportAsPDF extends PageObjectModelResources {
         Thread.sleep(10000);
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(5000);
-        getNavBar().clickReports();
-        getReports().clickPublishedOnCheckbox();
+        getNavBar().reportsButton().click();
+        getReports().publishedOnCheckBox().click();
         Thread.sleep(2000);
         getReports().selectReport(rowindex).click();
         Thread.sleep(2000);

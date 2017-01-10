@@ -8,6 +8,7 @@ import org.testng.Assert;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.util.List;
 
 
 //Created by Denys_G on 12/21/2016.
@@ -65,4 +66,25 @@ public class EntitiesPermissionsDialog {
         robot.keyPress(KeyEvent.VK_ESCAPE);
         robot.keyRelease(KeyEvent.VK_ESCAPE);
     }
+
+    public List<WebElement> userNameList(){
+        return driver.findElements(By.xpath("//div[@class='ng-binding']"));
+    }
+
+    public int findingUserIndex(String userName){
+        int rowindex = 1;
+        for (int i = 0; i < userNameList().size(); i++){
+            if (userNameList().get(i).getText().equals(userName)){
+                break;
+            } else {
+                rowindex++;
+            }
+        }
+        if (rowindex == userNameList().size()+1){
+            System.out.println("The user is not in the list");
+        }
+        return rowindex;
+    }
+
+    public List<WebElement> rightDropdownList() {return driver.findElements(By.xpath("//td/select"));}
 }

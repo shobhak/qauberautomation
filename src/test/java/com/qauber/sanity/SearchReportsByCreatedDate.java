@@ -14,18 +14,16 @@ public class SearchReportsByCreatedDate extends PageObjectModelResources {
 
     WebDriver driver;
     int sleepTime;
-    String startMonth = "December";
-    String startDay = "26";
-    String startYear = "2016";
-    String keyWord = "Today";
+    String date;
+
 
     @BeforeClass
     public void setUp() throws InterruptedException {
         setUpWithConfigFile();
         setUpUser(User.UserType.SAU);
 
-        testConfig().getTestRail().setCaseID(0000);
-        testConfig().getTestRail().setTester("Max's Computer");
+        testConfig().getTestRail().setCaseID(82763);
+        testConfig().getTestRail().setTester("MadMax");
 
         sleepTime = testConfig().getSleepTime();
         setUpScript();
@@ -43,10 +41,13 @@ public class SearchReportsByCreatedDate extends PageObjectModelResources {
         getNavBar().reportsButton().click();
         Thread.sleep(sleepTime*2);
 
+        date = getPreconditions().getSearchHelper().randomDate();
         getReports().publishedOnCheckBox().click();
-        getReports().createdDateFromIcon(startMonth, startDay, startYear);
-        getReports().createdDateToIcon(keyWord);
+        getReports().createdDateFromIcon(date);
+        getReports().createdDateToIcon(date);
         Thread.sleep(sleepTime*2);
+
+        //TODO: Found the way to assert that.
     }
 
     @AfterClass

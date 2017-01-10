@@ -1,6 +1,7 @@
 package com.qauber.sanity;
 
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -15,8 +16,7 @@ public class SearchReportsByCaseID extends PageObjectModelResources {
 
     WebDriver driver;
     int sleepTime;
-    String caseID = "101";
-    String keyWord = "Clear";
+    String caseID;
 
     @BeforeClass
     public void setUp() throws InterruptedException {
@@ -24,8 +24,8 @@ public class SearchReportsByCaseID extends PageObjectModelResources {
         setUpWithConfigFile();
         setUpUser(User.UserType.SAU);
 
-        testConfig().getTestRail().setCaseID(0000);
-        testConfig().getTestRail().setTester("Max's Computer");
+        testConfig().getTestRail().setCaseID(82761);
+        testConfig().getTestRail().setTester("MadMax");
 
         sleepTime = testConfig().getSleepTime();
         setUpScript();
@@ -43,17 +43,23 @@ public class SearchReportsByCaseID extends PageObjectModelResources {
         getNavBar().reportsButton().click();
         Thread.sleep(sleepTime);
 
+        caseID = getPreconditions().getSearchHelper().randomCaseID();
         getReports().caseIdField().clear();
         getReports().caseIdField().sendKeys(caseID);
         Thread.sleep(sleepTime);
 
-        getReports().publishedDateFromIcon(keyWord);
+        getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime);
 
-        getReports().selectReport(1).click();
-        Thread.sleep(sleepTime);
-
-        Assert.assertTrue(getReportsViewReport().caseID().getText().equals(caseID));
+        try {
+            Assert.assertTrue(getReports().caseIdResult(1).getText().equals(caseID));
+        }
+        catch (AssertionError e)
+        {
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Search failed: "+e.getLocalizedMessage());
+            throw e;
+        }
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
 
     @AfterClass

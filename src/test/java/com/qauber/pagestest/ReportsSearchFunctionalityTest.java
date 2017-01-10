@@ -64,32 +64,33 @@ public class ReportsSearchFunctionalityTest {
         // Search by Case ID
         Thread.sleep(2000);
         reports.caseIdField().clear();
-        reports.caseIdField().sendKeys("707");
+        reports.caseIdField().sendKeys("101");
 
         // Search by Suspect Type
         Thread.sleep(2000);
         reports.suspectType("Victim");
+        Thread.sleep(1000);
         reports.suspectType("");
 
         // Choose Published Date From
         Thread.sleep(2000);
-        reports.publishedDateFromIcon("January", "01", "2013");
+        reports.publishedDateFromIcon("January 01 2013");
         // Choose Published Date To (Today)
         reports.publishedDateToIcon("Today");
 
         // Choose Created Date From
         Thread.sleep(3000);
-        reports.createdDateFromIcon("January", "01", "2013");
+        reports.createdDateFromIcon("January 01 2013");
         // Clear field with Created Date From
         Thread.sleep(1000);
         reports.createdDateFromIcon("Clear");
 
         // Choose Created Date To
         Thread.sleep(3000);
-        reports.createdDateToIcon("January", "01", "2013");
+        reports.createdDateToIcon("January 01 2013");
         // Clear field with Created Date To
         Thread.sleep(1000);
-        reports.createdDateToIcon("Clear");
+        reports.createdDateToIcon("Close");
 
         // Click checkbox Published On
         Thread.sleep(3000);
@@ -101,8 +102,8 @@ public class ReportsSearchFunctionalityTest {
         reports.containsTextField().sendKeys("Vas");
 
         // Select 1 row in search result
-        Thread.sleep(5000);
-        reports.selectReport(1).click();
+        //Thread.sleep(5000);
+        //reports.selectReport(1).click();
 
     }
 

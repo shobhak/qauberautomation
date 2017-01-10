@@ -1,4 +1,4 @@
-package com.qauber.pagestest;
+package com.qauber.sanity;
 
 import com.github.javafaker.Faker;
 import com.qauber.config.Config;
@@ -60,6 +60,7 @@ public class EditOrganizationTest extends PageObjectModelResources {
 
         rowindex = getEntities().findEditOrganizationIndex(orgname);
         Thread.sleep(2000);
+        System.out.println(rowindex);
 
         getEntities().editOrganizationButton(rowindex).click();
         Thread.sleep(2000);
