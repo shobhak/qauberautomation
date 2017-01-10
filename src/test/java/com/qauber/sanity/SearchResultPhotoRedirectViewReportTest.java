@@ -1,10 +1,7 @@
 package com.qauber.sanity;
 
-import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -14,13 +11,16 @@ import org.testng.annotations.Test;
  * Created by jingx on 12/22/2016.
  */
 public class SearchResultPhotoRedirectViewReportTest extends PageObjectModelResources {
-    WebDriver driver;
 
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
-        setUpWithUser(User.UserType.RU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with testUser()
+        setUpWithConfigFile();
+
+        testConfig().getTestRail().setCaseID(00000);    //add TC number from the TestRail
+        testConfig().getTestRail().setTester("");       //add user name
+
+        setUpUser(User.UserType.SAU);
+        setUpScript();
     }
 
     @Test
@@ -28,7 +28,7 @@ public class SearchResultPhotoRedirectViewReportTest extends PageObjectModelReso
         String getreportidfromview;
         String getreportidfromphoto;
         int rowindex = 3;
-        driver.get(Config.getBaseURL());
+        getDriver().get(testConfig().getBaseURL());
         Thread.sleep(10000);
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
@@ -68,6 +68,6 @@ public class SearchResultPhotoRedirectViewReportTest extends PageObjectModelReso
 
     @AfterClass
     public void breakDown(){
-        breakDownHelper(driver);
+        breakDownHelper();
     }
 }

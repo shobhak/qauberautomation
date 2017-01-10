@@ -1,11 +1,8 @@
 package com.qauber.sanity;
 
-import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -19,13 +16,16 @@ import java.util.List;
  * Created by Jing Xu on 12/30/2016.
  */
 public class RegularUserNotDeleteOrChangeSubscription extends PageObjectModelResources {
-    WebDriver driver;
 
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
-        setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with testUser()
+        setUpWithConfigFile();
+
+        testConfig().getTestRail().setCaseID(00000);    //add TC number from the TestRail
+        testConfig().getTestRail().setTester("");       //add user name
+
+        setUpUser(User.UserType.SAU);
+        setUpScript();
     }
 
     @Test
@@ -34,7 +34,7 @@ public class RegularUserNotDeleteOrChangeSubscription extends PageObjectModelRes
         int entitiesListNumberRU;
         List<String> hideEntitiesNameListRU = new ArrayList<String>();
 
-        driver.get(Config.getBaseURL());
+        getDriver().get(testConfig().getBaseURL());
         Thread.sleep(10000);
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
@@ -73,7 +73,7 @@ public class RegularUserNotDeleteOrChangeSubscription extends PageObjectModelRes
         getProfilePanel().logOutButton().click();
         Thread.sleep(5000);
 
-        setUpWithUser(User.UserType.RU, driver);
+        setUpUser(User.UserType.RU);
         Thread.sleep(2000);
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
@@ -104,7 +104,7 @@ public class RegularUserNotDeleteOrChangeSubscription extends PageObjectModelRes
         // finding out the hidden entities
         System.out.println("There are " + getProfilePanel().hideEntitiesForNonSAU().size() + " entities hiden from Regular Users.");
         for (int j = 0; j < getProfilePanel().hideEntitiesForNonSAU().size(); j++){
-            hideEntitiesNameListRU.add((String) ((JavascriptExecutor) driver).executeScript("return arguments[0].innerHTML", getProfilePanel().hideEntitiesForNonSAU().get(j)));
+            hideEntitiesNameListRU.add((String) ((JavascriptExecutor) getDriver()).executeScript("return arguments[0].innerHTML", getProfilePanel().hideEntitiesForNonSAU().get(j)));
             System.out.println(hideEntitiesNameListRU.get(j));
         }
 
@@ -114,6 +114,6 @@ public class RegularUserNotDeleteOrChangeSubscription extends PageObjectModelRes
 
     @AfterClass
     public void breakDown(){
-        breakDownHelper(driver);
+        breakDownHelper();
     }
 }
