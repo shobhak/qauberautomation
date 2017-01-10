@@ -25,7 +25,7 @@ public class UsersPermissionsDialog {
     public List<WebElement> userEntitiesList() {
              return driver.findElements(By.xpath("//tr//div[@class='depth-level']"));
     }
-    public WebElement entityTR (int index){
+    private WebElement entityTR (int index){
         return driver.findElement(By.xpath("//tr[td/div[@class='depth-level']]["+index+"]"));
     }
     public WebElement detachButtonEntityTR (int index){
