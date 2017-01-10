@@ -12,6 +12,9 @@ public class PreconditionsResources {
     private ReportPreconditions reportPreconditions;
     private EntitiesNamesPreconditions entitiesNamesPreconditions;
     private SearchHelper searchHelper;
+    private PermissionsPreconditions permissionsPreconditions;
+
+
 
     public PreconditionsResources(WebDriver driver) {
         usersPreconditions = new UsersPreconditions(driver);
@@ -19,6 +22,7 @@ public class PreconditionsResources {
         samplePreconditionsAsSeparateUser = new UsersPreconditionsSampleRunAsSeparateUser();
         entitiesNamesPreconditions = new EntitiesNamesPreconditions(driver);
         searchHelper = new SearchHelper(driver);
+        permissionsPreconditions = new PermissionsPreconditions();
     }
 
     public UsersPreconditions getUsersPreconditions() {
@@ -41,5 +45,9 @@ public class PreconditionsResources {
 
     public EntitiesNamesPreconditions getEntitiesNamesPreconditions() {
         return entitiesNamesPreconditions;
+    }
+
+    public PermissionsPreconditions getPermissionsPreconditions() {
+        return permissionsPreconditions;
     }
 }
