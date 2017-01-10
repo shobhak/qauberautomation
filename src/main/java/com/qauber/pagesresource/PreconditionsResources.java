@@ -13,7 +13,7 @@ public class PreconditionsResources {
     private EntitiesNamesPreconditions entitiesNamesPreconditions;
     private SearchHelper searchHelper;
     private PermissionsPreconditions permissionsPreconditions;
-
+    private EntityPreconditions entityPreconditions;
 
 
     public PreconditionsResources(WebDriver driver) {

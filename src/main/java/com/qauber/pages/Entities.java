@@ -218,7 +218,14 @@ public class Entities {
         return driver.findElements(By.xpath("//tbody/tr[@class='ng-scope']"));
     }
 
+    public boolean nextPageButtonEnabled() {return driver.findElements(By.xpath("//li[@class=\"ng-scope\" and @class !=\"disabled\"]/a[@ng-click=\"setCurrent(pagination.current + 1)\"]")).size() > 0;}
 
+    public WebElement nextPageButton() {return driver.findElement(By.xpath("//li[contains(@class, 'pagination-next ng-scope')]/a[contains(@class, 'ng-binding')]")); } //next page, if Users paginated. SHOWS WHETHER ENABLED OR DISABLED
+
+    public boolean nextPageButtonDisabled()
+    {
+        return driver.findElements(By.xpath("/html/body/div[2]/section/div/div/pages-manager/div[2]/ul/li[4]/a")).size() > 0;
+    }
 
 }
 
