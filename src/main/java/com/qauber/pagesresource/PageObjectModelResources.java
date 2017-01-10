@@ -110,8 +110,6 @@ public class PageObjectModelResources {
         //Get page resources
         pages = PageResourcesFactory.getPageResources(driver);
 
-
-
         //Preconditions
         preconditionsResources = new PreconditionsResources(driver);
 
@@ -148,8 +146,8 @@ public class PageObjectModelResources {
         return driver;
     }
 
-    //GET PAGES
 
+    //We should eventually replace below with .
 
     protected LoginPage getLogin() { return pages.getLogin(); }
 
