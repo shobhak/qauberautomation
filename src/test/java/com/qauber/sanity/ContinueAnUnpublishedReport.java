@@ -46,8 +46,12 @@ public class ContinueAnUnpublishedReport extends PageObjectModelResources {
         getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime*2);
 
-        getReports().pagination(keyWord).click();
-        Thread.sleep(sleepTime*2);
+        try {
+            getReports().pagination(keyWord).click();
+            Thread.sleep(sleepTime * 2);
+        }
+        catch (Exception e)
+        {}
 
         getReports().selectReport(keyWord).click();
         Thread.sleep(sleepTime*2);

@@ -35,7 +35,7 @@ public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObje
 
     @Test
     public void regularUserCannotReportNotAssginedEntities() throws InterruptedException, AWTException {
-        String RUemail = "jing_qa_011010@mailinator.com";
+        String RUemail = "jing_qa_011011@mailinator.com";
         int totalrows;
         List<String> notassginedlist = new ArrayList<String>();
 
@@ -57,10 +57,15 @@ public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObje
 
         for (int i = 1; i <= totalrows; i++){
             try{
-                driver.findElement(By.xpath("//tr[" + i + "][@ng-repeat='entity in entities']/td[@class='text-center'][1]//div[text()='Regular User']"));
+                driver.findElement(By.xpath("//tr[" + i + "][@ng-repeat='entity in entities']/td[@class='text-center'][1]//div[text()='Admin']"));
             }
             catch (NoSuchElementException e) {
-                notassginedlist.add(userentitieslist.get(i-1).getText());
+                try{
+                    driver.findElement(By.xpath("//tr[" + i + "][@ng-repeat='entity in entities']/td[@class='text-center'][1]//div[text()='Regular User']"));
+                }
+                catch (NoSuchElementException f) {
+                    notassginedlist.add(userentitieslist.get(i - 1).getText());
+                }
             }
         }
 
