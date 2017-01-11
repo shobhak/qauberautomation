@@ -42,7 +42,7 @@ public class SearchReportsBySpecificDateRange extends PageObjectModelResources {
         getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime);
 
-        getPreconditions().getReportPreconditions().ensureReportsAtLeast(22);
+        getPreconditions().getReportPreconditions().ensureReportsAtLeast(10);
 
         Thread.sleep(sleepTime);
         if(getReports().publishedOnCheckBox().isSelected())
