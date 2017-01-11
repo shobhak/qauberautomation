@@ -15,8 +15,7 @@ import org.testng.annotations.Test;
 public class SearchReportsBySpecificDateRange extends PageObjectModelResources {
 
     int sleepTime;
-    String date1;
-    String date2;
+    String date1,date2;
 
     @BeforeClass
     public void setUp() throws InterruptedException {
