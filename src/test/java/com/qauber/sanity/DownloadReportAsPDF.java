@@ -39,6 +39,8 @@ public class DownloadReportAsPDF extends PageObjectModelResources {
         getNavBar().reportsButton().click();
         getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime/2);
+        getPreconditions().getReportPreconditions().ensureReportsAtLeast(1);
+        Thread.sleep(sleepTime/2);
         getReports().selectReport(rowindex).click();
         Thread.sleep(sleepTime/2);
 
@@ -57,6 +59,7 @@ public class DownloadReportAsPDF extends PageObjectModelResources {
             testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "File wasn't downloaded "+e.getLocalizedMessage());
             throw e;
         }
+
         testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
 
