@@ -43,16 +43,17 @@ public class Users {
         int listNo = 0;
         email = email.toLowerCase();
         List<WebElement> list = driver.findElements(By.xpath("//div/a[contains(@ng-href, 'mailto:')]"));
-        for (int i = 0; i < list.size(); i++) {
+        for (int i = 0; i <= list.size(); i++) {
             if (list.get(i).getText().toLowerCase().equals(email)) {
                 listNo = i;
                 break;
             }
             else{
-                System.out.println("User is not present in the list");
+                System.out.println("Next user check...");
                 //or make it go search onto next page of users
             }
         }
+        System.out.println("User found");
         list = driver.findElements(By.xpath("//button[@title='Assign permissions']"));
         return list.get(listNo);
     }
