@@ -134,6 +134,9 @@ public class ReportPreconditions {
             addReportEnvironment.stopLocationField().sendKeys(faker.address().cityName());
             Thread.sleep(sleepTime);
 
+            //scroll to top before clicking, for low resolution computers
+            ((JavascriptExecutor)driver).executeScript("scroll(0,-100)");
+            Thread.sleep(sleepTime/5);
             addReportNavigation.previewTab().click();
             Thread.sleep(sleepTime);
 
