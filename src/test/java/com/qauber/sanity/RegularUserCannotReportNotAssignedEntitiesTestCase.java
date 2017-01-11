@@ -22,15 +22,23 @@ import java.util.List;
  * Created by Jing Xu on 12/27/2016.
  */
 public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObjectModelResources {
-    WebDriver driver;
+    private int sleepTime;
 
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
-        setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with testUser()
+        //Initial setup
+        setUpWithConfigFile(); //Read config file from disk, create if not present
+        setUpUser(User.UserType.SAU); //Pass in user
 
-//        setUpWithUser(User.UserType.AU, driver);
+        //TestRail Configuration
+//        testConfig().getTestRail().setCaseID(79853); //TestRail case ID
+//        testConfig().getTestRail().setTester("Erik's Script"); //put your name :-)
+
+        //Misc configuration
+        sleepTime = testConfig().getSleepTime(); //set sleepTime locally - easier than writing testConfig().getSleepTime() everywhere
+
+        //Create driver & page objects, finish setup
+        setUpScript();
     }
 
     @Test
@@ -40,28 +48,28 @@ public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObje
         List<String> notassginedlist = new ArrayList<String>();
 
 
-        driver.get(Config.getBaseURL());
-        Thread.sleep(10000);
+        testDriver().get(testConfig().getBaseURL());
+        Thread.sleep(sleepTime);
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime);
 
         getNavBar().usersButton().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime);
 
         getUsers().assignPermissionsButtonByEmail(RUemail).click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime);
 
         List<WebElement> userentitieslist = getUsersPermissionsDialog().userEntitiesList();
         totalrows = userentitieslist.size();
 
         for (int i = 1; i <= totalrows; i++){
             try{
-                driver.findElement(By.xpath("//tr[" + i + "][@ng-repeat='entity in entities']/td[@class='text-center'][1]//div[text()='Admin']"));
+                testDriver().findElement(By.xpath("//tr[" + i + "][@ng-repeat='entity in entities']/td[@class='text-center'][1]//div[text()='Admin']"));
             }
             catch (NoSuchElementException e) {
                 try{
-                    driver.findElement(By.xpath("//tr[" + i + "][@ng-repeat='entity in entities']/td[@class='text-center'][1]//div[text()='Regular User']"));
+                    testDriver().findElement(By.xpath("//tr[" + i + "][@ng-repeat='entity in entities']/td[@class='text-center'][1]//div[text()='Regular User']"));
                 }
                 catch (NoSuchElementException f) {
                     notassginedlist.add(userentitieslist.get(i - 1).getText());
@@ -74,25 +82,25 @@ public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObje
         }
 
         getUsersPermissionsDialog().closeDialogByPressESC();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime);
 
         getHeader().userName().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime);
 
         getProfilePanel().logOutButton().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime);
 
-        setUpWithUser(User.UserType.RU, driver);
-        Thread.sleep(2000);
+        setUpUser(User.UserType.RU);
+        Thread.sleep(sleepTime);
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime);
 
         getNavBar().addReportButton().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime);
 
         List<WebElement> reportentitieslist = getAddReportOrganization().entitiesList();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime);
 
         for (int x = 0; x < reportentitieslist.size(); x++){
             for (int y = 0; y < notassginedlist.size(); y++) {
@@ -105,6 +113,6 @@ public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObje
     }
     @AfterClass
     public void breakDown(){
-        breakDownHelper(driver);
+        breakDownHelper();
     }
 }
