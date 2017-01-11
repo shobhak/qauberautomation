@@ -3,7 +3,6 @@ package com.qauber.sanity;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -14,7 +13,6 @@ import org.testng.annotations.Test;
  */
 public class SearchReportsByFirstName extends PageObjectModelResources {
 
-    WebDriver driver;
     int sleepTime;
     String firstName;
 
@@ -40,15 +38,15 @@ public class SearchReportsByFirstName extends PageObjectModelResources {
     public void searchReportsByFirstName() throws InterruptedException
     {
         getNavBar().reportsButton().click();
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
+        getReports().publishedOnCheckBox().click();
+        Thread.sleep(sleepTime);
 
+        getPreconditions().getReportPreconditions().ensureReportsAtLeast(10);
         firstName = getPreconditions().getSearchHelper().randomFirstName();
         getReports().firstNameField().clear();
         getReports().firstNameField().sendKeys(firstName);
-        Thread.sleep(sleepTime*2);
-
-        getReports().publishedOnCheckBox().click();
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
 
         try {
             Assert.assertTrue(getReports().searchReportResultID(1).getText().contains(firstName));
