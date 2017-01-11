@@ -2,6 +2,7 @@ package com.qauber.sanity;
 
 import com.qauber.pagesresource.FileManager;
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -23,6 +24,8 @@ public class DownloadReportAsPDF extends PageObjectModelResources {
         setUpWithConfigFile();
         setUpUser(User.UserType.SAU);
         sleepTime = testConfig().getSleepTime();
+        testConfig().getTestRail().setCaseID(82777);
+        testConfig().getTestRail().setTester("Alya");
         setUpScript();
     }
 
@@ -41,14 +44,21 @@ public class DownloadReportAsPDF extends PageObjectModelResources {
         Thread.sleep(sleepTime/2);
 
         String viewReportID = getReportsViewReport().reportID().getText();
-        String fileName = downloadPath + "/interview_report_" + viewReportID + ".pdf";
+        String fileName = downloadPath + "interview_report_" + viewReportID + ".pdf";
+        System.out.println("FilePath: " + fileName);
         deleteFile(fileName);
 
         getReportsViewReport().downloadAsPDFButton().click();
         Thread.sleep(sleepTime);
 
+        try {
         Assert.assertTrue(isFileDownloaded(fileName), "Failed to download Expected document");
         Thread.sleep(sleepTime);
+        } catch (AssertionError e) {
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "File wasn't downloaded "+e.getLocalizedMessage());
+            throw e;
+        }
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
 
     public boolean isFileDownloaded(String fileName) {
