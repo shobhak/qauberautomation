@@ -13,6 +13,8 @@ import org.testng.annotations.Test;
  */
 public class SiteMenuCollapsible extends PageObjectModelResources {
 
+    private int sleepTime;
+
     @BeforeClass
     public void setUp() {
         setUpWithConfigFile();
@@ -25,13 +27,13 @@ public class SiteMenuCollapsible extends PageObjectModelResources {
     @Test
     public void siteMenuCollapsible() throws InterruptedException {
         testDriver().get(testConfig().getBaseURL());
-        Thread.sleep(10000);
+        Thread.sleep(sleepTime*2);
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime);
 
         //collapse
         getHeader().hamburgerMenu().click();
-        Thread.sleep(1000);
+        Thread.sleep(sleepTime/2);
 
         try {
         Assert.assertFalse(getNavBar().mainNavigationText().isDisplayed());
@@ -42,7 +44,7 @@ public class SiteMenuCollapsible extends PageObjectModelResources {
 
         //uncollapse
         getHeader().hamburgerMenu().click();
-        Thread.sleep(1000);
+        Thread.sleep(sleepTime/2);
 
         try {
         Assert.assertTrue(getNavBar().mainNavigationText().isDisplayed());
