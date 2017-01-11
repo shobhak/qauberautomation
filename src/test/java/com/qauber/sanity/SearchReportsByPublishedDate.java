@@ -3,7 +3,6 @@ package com.qauber.sanity;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.JavascriptExecutor;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -44,7 +43,6 @@ public class SearchReportsByPublishedDate extends PageObjectModelResources {
         Thread.sleep(sleepTime);
 
         getPreconditions().getReportPreconditions().ensureReportsAtLeast(10);
-        ((JavascriptExecutor)getDriver()).executeScript("scroll(0,-100)");
 
         if(!(getReports().publishedOnCheckBox().isSelected()))
             getReports().publishedOnCheckBox().click();
