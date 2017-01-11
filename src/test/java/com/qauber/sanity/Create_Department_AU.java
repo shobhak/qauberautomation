@@ -22,7 +22,7 @@ public class Create_Department_AU extends PageObjectModelResources {
     public void setUp() {
         //Initial setup
         setUpWithConfigFile(); //Read config file from disk, create if not present
-        setUpUser(User.UserType.SAU); //Pass in user
+        setUpUser(User.UserType.AU); //Pass in user
 
         //TestRail Configuration
 //        testConfig().getTestRail().setCaseID(79853); //TestRail case ID

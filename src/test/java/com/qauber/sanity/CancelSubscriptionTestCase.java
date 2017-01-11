@@ -42,23 +42,23 @@ public class CancelSubscriptionTestCase extends PageObjectModelResources {
         Random randomInt = new Random();
 
         testDriver().get(testConfig().getBaseURL());
-        Thread.sleep(10000);
+        Thread.sleep(sleepTime);
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime);
 
         getHeader().userName().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime);
 
         getProfilePanel().settinsButton().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime);
 
         try{
             Assert.assertEquals(getProfilePanel().subscriptionsText().getText(), "SUBSCRIPTIONS");
         }
         catch (NoSuchElementException e) {
             getHeader().userName().click();
-            Thread.sleep(2000);
+            Thread.sleep(sleepTime);
         }
 
         entities = getProfilePanel().entitiesList().size();
@@ -66,10 +66,10 @@ public class CancelSubscriptionTestCase extends PageObjectModelResources {
         cancelentityindex = randomInt.nextInt(entities) + 1;
         System.out.println(cancelentityindex);
         getProfilePanel().organizationLink(cancelentityindex).click();
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime);
 
         getSubscriptionSettings().cancelSubscriptionButton().click();
-        Thread.sleep(10000);
+        Thread.sleep(sleepTime);
 
         // on some system, the site logout after cancellation, this is to determine the state of the site
         // add re-login if site is logout
@@ -78,15 +78,15 @@ public class CancelSubscriptionTestCase extends PageObjectModelResources {
         }
         catch (NoSuchElementException e) {
             getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-            Thread.sleep(5000);
+            Thread.sleep(sleepTime);
         }
 
         getNavBar().entitiesButton().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime);
 
         str = getEntities().organizationSubscriptionUsers(cancelentityindex).getText();
         Assert.assertEquals(str.substring(str.indexOf(" ") + 1), "of 0 Users used");
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime);
 
     }
 

@@ -43,12 +43,13 @@ public class SearchReportsByPublishedDate extends PageObjectModelResources {
         Thread.sleep(sleepTime);
 
         getPreconditions().getReportPreconditions().ensureReportsAtLeast(10);
+        date = getPreconditions().getSearchHelper().randomDate();
+        Thread.sleep(sleepTime);
 
         if(!(getReports().publishedOnCheckBox().isSelected()))
             getReports().publishedOnCheckBox().click();
-        Thread.sleep(sleepTime);
 
-        date = getPreconditions().getSearchHelper().randomDate();
+        Thread.sleep(sleepTime);
         getReports().publishedDateFromIcon(date);
         getReports().publishedDateToIcon(date);
         Thread.sleep(sleepTime);

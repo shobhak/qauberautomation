@@ -44,16 +44,19 @@ public class SearchReportsBySpecificDateRange extends PageObjectModelResources {
 
         getPreconditions().getReportPreconditions().ensureReportsAtLeast(10);
 
-        if(!(getReports().publishedOnCheckBox().isSelected()))
-            getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime);
+        if(getReports().publishedOnCheckBox().isSelected())
+            getReports().publishedOnCheckBox().click();
 
         date1 = getPreconditions().getSearchHelper().randomDate();
+        date2 = getPreconditions().getSearchHelper().randomDate();
+
+        getReports().publishedOnCheckBox().click();
+
         getReports().publishedDateFromIcon(date1);
         getReports().publishedDateToIcon(date1);
         Thread.sleep(sleepTime);
 
-        date2 = getPreconditions().getSearchHelper().randomDate();
         getReports().createdDateFromIcon(date2);
         getReports().createdDateToIcon(date2);
         Thread.sleep(sleepTime);
