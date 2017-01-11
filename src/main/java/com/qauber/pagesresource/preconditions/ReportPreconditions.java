@@ -52,12 +52,13 @@ public class ReportPreconditions {
         if (numberOfReportsNeeded > 0) {
             createReport(numberOfReportsNeeded);
         }
+        Thread.sleep(sleepTime);
         try {
             reports.pagination("1").click();
         }
         catch (Exception e)
         {}
-        ((JavascriptExecutor)driver).executeScript("scroll(0,-100)");
+        ((JavascriptExecutor)driver).executeScript("scroll(0,-400)");
     }
 
     /** verifyReportsAtLeast(int num)
