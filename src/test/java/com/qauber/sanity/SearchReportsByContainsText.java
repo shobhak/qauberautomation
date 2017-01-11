@@ -46,6 +46,10 @@ public class SearchReportsByContainsText extends PageObjectModelResources {
         Thread.sleep(sleepTime);
 
         getPreconditions().getReportPreconditions().ensureReportsAtLeast(10);
+
+        if(getReports().publishedOnCheckBox().isSelected())
+            getReports().publishedOnCheckBox().click();
+
         someText = getPreconditions().getSearchHelper().randomContainText();
 
         getReports().containsTextField().clear();

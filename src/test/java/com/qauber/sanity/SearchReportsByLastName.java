@@ -43,6 +43,10 @@ public class SearchReportsByLastName extends PageObjectModelResources {
         Thread.sleep(sleepTime);
 
         getPreconditions().getReportPreconditions().ensureReportsAtLeast(10);
+
+        if(getReports().publishedOnCheckBox().isSelected())
+            getReports().publishedOnCheckBox().click();
+
         lastName = getPreconditions().getSearchHelper().randomLastName();
 
         getReports().lastNameField().clear();

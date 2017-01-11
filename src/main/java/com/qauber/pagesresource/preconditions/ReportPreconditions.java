@@ -51,6 +51,11 @@ public class ReportPreconditions {
         if (numberOfReportsNeeded > 0) {
             createReport(numberOfReportsNeeded);
         }
+        try {
+            reports.pagination("1").click();
+        }
+        catch (Exception e)
+        {}
     }
 
     /** verifyReportsAtLeast(int num)
@@ -72,6 +77,9 @@ public class ReportPreconditions {
                 ArrayList<WebElement> list1 = new ArrayList<WebElement>(reports.reportsRows());
                 numberRemaining = numberRemaining + list1.size();
                 ArrayList<WebElement> list2 = new ArrayList<WebElement>(reports.paginationSum());
+
+                if (numberRemaining>=num)
+                    break;
 
                 if(i<Integer.parseInt(list2.get(list2.size()-1).getText()))
                 {

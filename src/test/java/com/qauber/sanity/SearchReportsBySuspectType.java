@@ -45,6 +45,10 @@ public class SearchReportsBySuspectType extends PageObjectModelResources {
         getPreconditions().getReportPreconditions().ensureReportsAtLeast(10);
         suspectType = getPreconditions().getSearchHelper().randomSuspectType();
 
+        if(getReports().publishedOnCheckBox().isSelected())
+            getReports().publishedOnCheckBox().click();
+        Thread.sleep(sleepTime);
+
         getReports().suspectType(suspectType);
         Thread.sleep(sleepTime);
 

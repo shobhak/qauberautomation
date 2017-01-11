@@ -43,12 +43,19 @@ public class SearchReportsPagination extends PageObjectModelResources {
         Thread.sleep(sleepTime);
 
         getPreconditions().getReportPreconditions().ensureReportsAtLeast(11);
+
+        if(getReports().publishedOnCheckBox().isSelected())
+            getReports().publishedOnCheckBox().click();
+        Thread.sleep(sleepTime);
+
         pagination = getPreconditions().getSearchHelper().randomPagination();
 
         getReports().pagination(pagination).click();
         Thread.sleep(sleepTime);
 
         try {
+            System.out.println("Expected: "+pagination);
+            System.out.println("Actual: "+getReports().activePagination().getText());
             Assert.assertTrue(getReports().activePagination().getText().equals(pagination));
         }
         catch (AssertionError e)

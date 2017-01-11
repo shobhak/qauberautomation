@@ -148,7 +148,13 @@ public class Reports {
         driver.findElement(By.xpath("//th[@colspan='1']/button")).click();
         driver.findElement(By.xpath("//span[text()='" + newDate[2].substring(2, 4) + "']")).click();
         driver.findElement(By.xpath("//span[text()='" + newDate[0] + "']")).click();
-        driver.findElement(By.xpath("//span[text()='" + newDate[1] + "']")).click();
+        try {
+            driver.findElement(By.xpath("//span[text()='" + newDate[1] + "']")).click();
+        }
+        catch (Exception e)
+        {
+            driver.findElement(By.xpath("//button[text()='Today']")).click();
+        }
     }
 
     // added on 12/20/16
@@ -174,7 +180,7 @@ public class Reports {
 
     public WebElement activePagination()
     {
-        return driver.findElement(By.xpath("//li[@class='ng-scope active']/a"));
+        return driver.findElement(By.xpath("//dir-pagination-controls[@pagination-id='reportsPagination']//li[@class='ng-scope active']/a"));
     }
 
     public List<WebElement> reportsRows()
