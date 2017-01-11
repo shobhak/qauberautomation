@@ -19,6 +19,7 @@ public class SiteMenuCollapsible extends PageObjectModelResources {
     public void setUp() {
         setUpWithConfigFile();
         setUpUser(User.UserType.SAU);
+        sleepTime = testConfig().getSleepTime();
         testConfig().getTestRail().setCaseID(82778);
         testConfig().getTestRail().setTester("Alya");
         setUpScript();

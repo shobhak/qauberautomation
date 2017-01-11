@@ -16,8 +16,8 @@ import java.io.File;
  */
 public class ExportReportsListAsPDF extends PageObjectModelResources{
 
-    int sleepTime;
     private static String downloadPath = FileManager.getDownloadPath();
+    private int sleepTime;
 
     @BeforeClass
     public void setUp() {

@@ -15,13 +15,15 @@ import org.testng.annotations.Test;
 
 public class UseReportAsTemplate extends PageObjectModelResources {
 
+    private int sleepTime;
+
     @BeforeClass
     public void setUp() {
         setUpWithConfigFile();
         setUpUser(User.UserType.SAU);
-        setUpUser(User.UserType.SAU);
-        //testConfig().getTestRail().setCaseID();
-        //testConfig().getTestRail().setTester("Alya");
+        sleepTime = testConfig().getSleepTime();
+        testConfig().getTestRail().setCaseID(82780);
+        testConfig().getTestRail().setTester("Alya");
         setUpScript();
     }
 
@@ -30,15 +32,14 @@ public class UseReportAsTemplate extends PageObjectModelResources {
         int rowindex = 1;
 
         testDriver().get(testConfig().getBaseURL());
-        Thread.sleep(10000);
+        Thread.sleep(sleepTime*2);
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime);
         getNavBar().reportsButton().click();
-        Thread.sleep(2000);
         getReports().publishedOnCheckBox().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
         getReports().selectReport(rowindex).click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
         //TO DO assertions for dob, raceHeightWeight, hairColorHairLengthHairStyle, complexionTeethHandPreference
         String suspectName = getReportsViewReport().suspectName().getText();
@@ -51,9 +52,9 @@ public class UseReportAsTemplate extends PageObjectModelResources {
         String complexionTeethHandPreference = getReportsViewReport().complexionTeethHandPreference().getText();
 
         getReportsViewReport().useAsTemplateButton().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
         getAddReportOrganization().clickOrganization1();
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime/2);
         getAddReportNavigation().subjectInformationTab().click();
 
         /*suspectName = firstName+middleName+lastName, suspectType = suspectTypeString, nickname = nickName,
@@ -85,8 +86,9 @@ public class UseReportAsTemplate extends PageObjectModelResources {
         String eyeColor = StringUtils.isBlank(eyeColorString) ? "" : " " + eyeColorString;
 
         Assert.assertEquals(sexBuildEyeColor, sex + "/" + build + "/" + eyeColor);
-        //testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
+
     @AfterClass
     public void breakDown() {
         breakDownHelper();
