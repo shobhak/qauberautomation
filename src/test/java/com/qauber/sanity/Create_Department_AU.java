@@ -1,11 +1,8 @@
 package com.qauber.sanity;
 
 import com.github.javafaker.Faker;
-import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -16,21 +13,28 @@ import org.testng.annotations.Test;
  */
 public class Create_Department_AU extends PageObjectModelResources {
 
-    WebDriver driver;
     int sleepTime;
 
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
-        sleepTime = 5000;
-        setUpWithUser(User.UserType.AU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
+        //Initial setup
+        setUpWithConfigFile(); //Read config file from disk, create if not present
+        setUpUser(User.UserType.SAU); //Pass in user
+
+        //TestRail Configuration
+//        testConfig().getTestRail().setCaseID(79853); //TestRail case ID
+//        testConfig().getTestRail().setTester("Erik's Script"); //put your name :-)
+
+        //Misc configuration
+        sleepTime = testConfig().getSleepTime(); //set sleepTime locally - easier than writing testConfig().getSleepTime() everywhere
+
+        //Create driver & page objects, finish setup
+        setUpScript();
     }
 
     @Test
     public void createDepartmentAU() throws InterruptedException{
-        driver.get(Config.getBaseURL());
-        Faker faker = new Faker();
+        getDriver().get(testConfig().getBaseURL());        Faker faker = new Faker();
 
         String expectedResult = faker.lorem().word(); //department name
         String actualResult;
@@ -58,7 +62,7 @@ public class Create_Department_AU extends PageObjectModelResources {
 
     @AfterClass
     public void breakDown(){
-//        breakDownHelper(driver);
+        breakDownHelper();
     }
     //        driver.quit();
 }
