@@ -52,6 +52,7 @@ public class ReportPreconditions {
         if (numberOfReportsNeeded > 0) {
             createReport(numberOfReportsNeeded);
         }
+        Thread.sleep(sleepTime);
         try {
             reports.pagination("1").click();
         }
