@@ -12,7 +12,6 @@ import java.io.File;
 
 /**
  * Created by Alya on 12/20/2016.
- * TODO: add TestRail integration
  */
 public class DownloadReportAsPDF extends PageObjectModelResources {
 
