@@ -58,7 +58,7 @@ public class ReportPreconditions {
         }
         catch (Exception e)
         {}
-        ((JavascriptExecutor)driver).executeScript("scroll(0,-100)");
+        ((JavascriptExecutor)driver).executeScript("scroll(0,-400)");
     }
 
     /** verifyReportsAtLeast(int num)
