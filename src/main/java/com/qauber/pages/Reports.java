@@ -148,13 +148,8 @@ public class Reports {
         driver.findElement(By.xpath("//th[@colspan='1']/button")).click();
         driver.findElement(By.xpath("//span[text()='" + newDate[2].substring(2, 4) + "']")).click();
         driver.findElement(By.xpath("//span[text()='" + newDate[0] + "']")).click();
-        try {
-            driver.findElement(By.xpath("//span[text()='" + newDate[1] + "']")).click();
-        }
-        catch (Exception e)
-        {
-            driver.findElement(By.xpath("//button[text()='Today']")).click();
-        }
+        driver.findElement(By.xpath("//div[@uib-datepicker]//span[text()='" + newDate[1] + "']")).click();
+
     }
 
     // added on 12/20/16
