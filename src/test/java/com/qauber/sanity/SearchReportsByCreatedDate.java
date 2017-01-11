@@ -2,7 +2,6 @@ package com.qauber.sanity;
 
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -51,7 +50,6 @@ public class SearchReportsByCreatedDate extends PageObjectModelResources {
 
         date = getPreconditions().getSearchHelper().randomDate();
 
-        ((JavascriptExecutor)getDriver()).executeScript("scroll(0,-100)");
         getReports().createdDateFromIcon(date);
         getReports().createdDateToIcon(date);
         Thread.sleep(sleepTime);
