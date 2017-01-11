@@ -1,6 +1,7 @@
 package com.qauber.sanity;
 
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -16,6 +17,8 @@ public class SiteMenuCollapsible extends PageObjectModelResources {
     public void setUp() {
         setUpWithConfigFile();
         setUpUser(User.UserType.SAU);
+        testConfig().getTestRail().setCaseID(82778);
+        testConfig().getTestRail().setTester("Alya");
         setUpScript();
     }
 
@@ -29,12 +32,26 @@ public class SiteMenuCollapsible extends PageObjectModelResources {
         //collapse
         getHeader().hamburgerMenu().click();
         Thread.sleep(1000);
+
+        try {
         Assert.assertFalse(getNavBar().mainNavigationText().isDisplayed());
+        } catch (AssertionError e) {
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "MainNavigationText displayed "+e.getLocalizedMessage());
+            throw e;
+        }
 
         //uncollapse
         getHeader().hamburgerMenu().click();
         Thread.sleep(1000);
+
+        try {
         Assert.assertTrue(getNavBar().mainNavigationText().isDisplayed());
+        } catch (AssertionError e) {
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "MainNavigationText not displayed "+e.getLocalizedMessage());
+            throw e;
+        }
+
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
 
     @AfterClass
