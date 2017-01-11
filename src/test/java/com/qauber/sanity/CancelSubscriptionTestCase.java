@@ -1,11 +1,8 @@
 package com.qauber.sanity;
 
-import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -15,15 +12,26 @@ import java.util.Random;
 
 /**
  * Created by Jing Xu on 12/29/2016.
+ * TODO: add conditions
  */
 public class CancelSubscriptionTestCase extends PageObjectModelResources {
-    WebDriver driver;
+    private int sleepTime;
 
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
-        setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with testUser()
+        //Initial setup
+        setUpWithConfigFile(); //Read config file from disk, create if not present
+        setUpUser(User.UserType.SAU); //Pass in user
+
+        //TestRail Configuration
+//        testConfig().getTestRail().setCaseID(79853); //TestRail case ID
+//        testConfig().getTestRail().setTester("Erik's Script"); //put your name :-)
+
+        //Misc configuration
+        sleepTime = testConfig().getSleepTime(); //set sleepTime locally - easier than writing testConfig().getSleepTime() everywhere
+
+        //Create driver & page objects, finish setup
+        setUpScript();
     }
 
     @Test
@@ -33,7 +41,7 @@ public class CancelSubscriptionTestCase extends PageObjectModelResources {
         String str;
         Random randomInt = new Random();
 
-        driver.get(Config.getBaseURL());
+        testDriver().get(testConfig().getBaseURL());
         Thread.sleep(10000);
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
@@ -84,6 +92,6 @@ public class CancelSubscriptionTestCase extends PageObjectModelResources {
 
     @AfterClass
     public void breakDown(){
-        breakDownHelper(driver);
+        breakDownHelper();
     }
 }

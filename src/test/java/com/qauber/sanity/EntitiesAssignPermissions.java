@@ -1,57 +1,70 @@
 package com.qauber.sanity;
 
-import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.*;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
 
 import java.awt.*;
 
-//Created by Denys_G on 12/21/16.
+/**
+ * Created by Denys_G on 12/21/16.
+ * TODO: Add Assertions
+ * TODO: TestRail Integration
+ * TODO: preconditions?
+ */
 
 public class EntitiesAssignPermissions extends PageObjectModelResources {
 
-    WebDriver driver;
+    int sleepTime;
 
     @BeforeTest
     public void setUp() {
-        driver = new ChromeDriver();
+        //Initial setup
+        setUpWithConfigFile(); //Read config file from disk, create if not present
+
+        //Misc configuration
+        sleepTime = testConfig().getSleepTime(); //set sleepTime locally - easier than writing testConfig().getSleepTime() everywhere
+
     }
 
     @Test
     public void testAsSAU() throws AWTException, InterruptedException {
-        setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
+        setUpUser(User.UserType.SAU); //pass userType and browser. see ~/QAUberTestConfig
         //setUpWithUser creates TestCaseUser, access with testUser()
+
+        setUpScript();
         assignPermissionsEntities();
     }
     @Test(priority = 1)
     public void testAsAU() throws AWTException, InterruptedException {
-        setUpWithUser(User.UserType.AU, driver); //pass userType and browser. see ~/QAUberTestConfig
+        setUpUser(User.UserType.AU); //pass userType and browser. see ~/QAUberTestConfig
         //setUpWithUser creates TestCaseUser, access with testUser()
+
+        setUpScript();
         assignPermissionsEntities();
     }
 
     public void assignPermissionsEntities() throws InterruptedException, AWTException {
-        driver.get(Config.getBaseURL());
-        Thread.sleep(2000);
+        testDriver().get(testConfig().getBaseURL());
+        Thread.sleep(sleepTime/2);
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime);
         getNavBar().entitiesButton().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
         getEntities().assignPermissionButton(1).click();
-        Thread.sleep(500);
+        Thread.sleep(sleepTime/10);
         getEntitiesPermissionsDialog().detachUserPermissions(1);
-        Thread.sleep(300);
+        Thread.sleep(sleepTime/10);
         getEntitiesPermissionsDialog().setUserAsRegularUser(1);
-        Thread.sleep(300);
+        Thread.sleep(sleepTime/10);
         getEntitiesPermissionsDialog().closeDialogByPressESC();
-        Thread.sleep(500);
+        Thread.sleep(sleepTime/10);
     }
 
     @AfterTest
     public void breakDown(){
-        breakDownHelper(driver);
+        breakDownHelper();
     }
 }

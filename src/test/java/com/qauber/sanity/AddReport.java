@@ -12,16 +12,19 @@ import org.testng.annotations.Test;
 
 /**
  * Created by Alya on 12/19/2016.
+ * TODO: add conditions. Idea: what if getAddReportOrganization().clickOrganization1(); fails? try { } catch { ??? }
  */
 
 //creating report using required fields
 
 public class AddReport extends PageObjectModelResources {
+    private int sleepTime;
 
     @BeforeClass
     public void setUp() {
         setUpWithConfigFile();
         setUpUser(User.UserType.SAU);
+        sleepTime = testConfig().getSleepTime();
         testConfig().getTestRail().setCaseID(80127);
         testConfig().getTestRail().setTester("Alya");
         setUpScript();
@@ -30,36 +33,36 @@ public class AddReport extends PageObjectModelResources {
     @Test
     public void addReportPreviewPublish () throws InterruptedException {
         testDriver().get(testConfig().getBaseURL());
-        Thread.sleep(10000);
+        Thread.sleep(sleepTime);
 
         ReportValueObject reportVO = new ReportValueObject();
         String firstLastName = reportVO.getFirstName()+" "+reportVO.getLastName();
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime);
 
         getNavBar().addReportButton().click();
-        Thread.sleep(1000);
+        Thread.sleep(sleepTime/4);
 
         getAddReportOrganization().clickOrganization1();
-        Thread.sleep(1000);
+        Thread.sleep(sleepTime/4);
 
         getAddReportNavigation().subjectInformationTab().click();
-        Thread.sleep(1000);
+        Thread.sleep(sleepTime/4);
         getAddReportSubjectInformationPage().firstName().sendKeys(reportVO.getFirstName());
         getAddReportSubjectInformationPage().lastName().sendKeys(reportVO.getLastName());
-        Thread.sleep(1000);
+        Thread.sleep(sleepTime/4);
 
         getAddReportNavigation().environmentTab().click();
-        Thread.sleep(1000);
+        Thread.sleep(sleepTime/4);
         getAddReportEnvironment().stopLocationField().sendKeys(reportVO.getStopLocation());
-        Thread.sleep(1000);
+        Thread.sleep(sleepTime/4);
 
         JavascriptExecutor jse = (JavascriptExecutor) getDriver();
         jse.executeScript("window.scrollBy(0,-1000)", "");
 
         getAddReportNavigation().previewTab().click();
-        Thread.sleep(1000);
+        Thread.sleep(sleepTime/4);
 
         //verify info entered matches info on preview
         Assert.assertEquals(getAddReportPreview().suspectName().getText(),firstLastName);
@@ -69,7 +72,7 @@ public class AddReport extends PageObjectModelResources {
         String reportIdValue = getAddReportPreview().reportIdElement().getText();
 
         getAddReportPreview().publishReportButton().click();
-        Thread.sleep(1000);
+        Thread.sleep(sleepTime/4);
 
         try {
         Assert.assertTrue(verifyReportPublished(reportIdValue));
@@ -84,7 +87,7 @@ public class AddReport extends PageObjectModelResources {
     public boolean verifyReportPublished(String reportNumber) throws InterruptedException {
         //search for reports which contain text (reportNumber)
         getReports().containsTextField().sendKeys(reportNumber);
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime/2);
         System.out.println(getReports().searchReportResultID(1).getText());
         return getReports().searchReportResultID(1).getText().contains(reportNumber);
     }

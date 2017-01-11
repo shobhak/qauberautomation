@@ -1,37 +1,41 @@
 package com.qauber.sanity;
 
 import com.github.javafaker.Faker;
-import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
-import org.apache.bcel.generic.Select;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
  * Created by lenochka on 27.12.2016.
+ * TODO: Add preconditions
+ * TODO: add to TestRail
  */
 public class CompanyCreationSAUTestCase extends PageObjectModelResources {
-    WebDriver driver;
+    private int sleepTime;
 
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
-        setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with testUser()
+        //Initial setup
+        setUpWithConfigFile(); //Read config file from disk, create if not present
+        setUpUser(User.UserType.SAU); //Pass in user
+
+        //TestRail Configuration
+//        testConfig().getTestRail().setCaseID(79853); //TestRail case ID
+//        testConfig().getTestRail().setTester("Erik's Script"); //put your name :-)
+
+        //Misc configuration
+        sleepTime = testConfig().getSleepTime(); //set sleepTime locally - easier than writing testConfig().getSleepTime() everywhere
+
+        //Create driver & page objects, finish setup
+        setUpScript();
     }
 
     @Test
     public void companyCreationSAUTestCase() throws InterruptedException {
-        driver.manage().window().maximize();
-        driver.get(Config.getBaseURL());
-        Thread.sleep(5000);
-
-
+        testDriver().get(testConfig().getBaseURL());
+        Thread.sleep(sleepTime);
 
         Faker faker = new Faker();
         String pswd = faker.internet().password();
@@ -40,43 +44,43 @@ public class CompanyCreationSAUTestCase extends PageObjectModelResources {
         String country = "Switzerland";
 
         getCompanyCreationSAU().registerNow().click();
-        Thread.sleep(4000);
+        Thread.sleep(sleepTime);
 
         getCompanyCreationSAU().regName().sendKeys(faker.name().username());
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime*2/3);
 
         getCompanyCreationSAU().regEmail().sendKeys(faker.internet().emailAddress());
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime*2/3);
 
         getCompanyCreationSAU().regPassword().sendKeys(pswd);
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime*2/3);
 
         getCompanyCreationSAU().regConfirmPassword().sendKeys(pswd);
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime*2/3);
 
         getCompanyCreationSAU().regContinueRegistration().click();
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime*2/3);
 
         getCompanyCreationSAU().companyName().sendKeys(faker.name().username());
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime*2/3);
 
         getCompanyCreationSAU().companyPhone().sendKeys(faker.phoneNumber().cellPhone());
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime*2/3);
 
         getCompanyCreationSAU().companyEmail().sendKeys(faker.internet().emailAddress());
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime*2/3);
 
         getCompanyCreationSAU().companyCountry().sendKeys(country);
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime*2/3);
 
         getCompanyCreationSAU().companyAddress1().sendKeys(faker.address().streetAddress());
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime*2/3);
 
         getCompanyCreationSAU().companyAddress2().sendKeys(faker.address().streetAddress());
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime*2/3);
 
         getCompanyCreationSAU().companyCity().sendKeys(faker.address().city());
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime*2/3);
 
         if (country == "United States") {
             getCompanyCreationSAU().companyStateDropDown().sendKeys("Texas");
@@ -87,16 +91,13 @@ public class CompanyCreationSAUTestCase extends PageObjectModelResources {
         }
 
         getCompanyCreationSAU().companyZip().sendKeys(faker.address().zipCode());
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime*2/3);
 
         getCompanyCreationSAU().companyFinishRegButton().click();
     }
+
     @AfterClass
-    public void breakDown () throws InterruptedException{
-
-        Thread.sleep(10000);
-
-        driver.manage().deleteAllCookies();
-        driver.quit();
+    public void breakDown() throws InterruptedException {
+        breakDownHelper();
     }
 }

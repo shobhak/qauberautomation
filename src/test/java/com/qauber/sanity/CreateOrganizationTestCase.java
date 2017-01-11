@@ -3,7 +3,6 @@ package com.qauber.sanity;
 import com.github.javafaker.Faker;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -15,8 +14,7 @@ import org.testng.annotations.Test;
  */
 public class CreateOrganizationTestCase extends PageObjectModelResources {
 
-    WebDriver driver;
-    int sleepTime;
+    private int sleepTime;
     String paypalEmailAccount = "jing_qauber_test01@test.com";
     String paypalPassword = "portnovschool";
     

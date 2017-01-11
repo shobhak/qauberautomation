@@ -10,10 +10,13 @@ import org.testng.annotations.Test;
 
 /**
  * Created by San Jose on 12/22/16.
+ * TODO: Add condition - first entity must be subscribed (paid for). Check entity status before getEntities().organizationList().get(0).click();
+ * TODO: Will this test work if there is more than one page of entities? Maybe another precondition?
+ * TODO: add to TestRail
  */
 public class Create_Department_AU extends PageObjectModelResources {
 
-    int sleepTime;
+    private int sleepTime;
 
     @BeforeClass
     public void setUp() {
@@ -34,7 +37,8 @@ public class Create_Department_AU extends PageObjectModelResources {
 
     @Test
     public void createDepartmentAU() throws InterruptedException{
-        getDriver().get(testConfig().getBaseURL());        Faker faker = new Faker();
+        getDriver().get(testConfig().getBaseURL());
+        Faker faker = new Faker();
 
         String expectedResult = faker.lorem().word(); //department name
         String actualResult;

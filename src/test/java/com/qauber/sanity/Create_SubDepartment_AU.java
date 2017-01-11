@@ -10,11 +10,12 @@ import org.testng.annotations.Test;
 
 /**
  * Created by San Jose on 12/22/16.
+ * TODO: Add condition - first entity must be subscribed (paid for). Check entity status before getEntities().organizationList().get(0).click();
  * TODO: add to TestRail
  */
 public class Create_SubDepartment_AU extends PageObjectModelResources {
 
-    int sleepTime;
+    private int sleepTime;
 
     @BeforeClass
     public void setUp() {
