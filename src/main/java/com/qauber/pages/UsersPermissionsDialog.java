@@ -25,6 +25,9 @@ public class UsersPermissionsDialog {
     public List<WebElement> userEntitiesList() {
              return driver.findElements(By.xpath("//tr//div[@class='depth-level']"));
     }
+    public List<WebElement> entitiesDepSubdepsAllList() {
+        return driver.findElements(By.xpath("//td[@style='border-left: none']/div"));
+    }
     public WebElement detachButtonByEntity(int index){
         return driver.findElement(By.xpath(
                 "//tr[td/div[@class='depth-level']]["+index+"]/td/button[@ng-click='detachEntity(entity)']"));
@@ -39,18 +42,22 @@ public class UsersPermissionsDialog {
     public WebElement rightsSavedByEntity(int index){
         return driver.findElement(By.xpath("//tr[td/div[@class='depth-level']]["+index+"]/td/div/div"));
     }
+    public WebElement rightsSaved(int index){
+        return driver.findElement(By.xpath(
+                "//tr[@ng-repeat='entity in entities']["+index+"]/td/div/div"));
+    }
 
     public Select dropdownMenu(int index){
         return new Select(driver.findElement(By.xpath
-                ("//tr[@ng-repeat='entity in entities']['"+index+"']/td/select[@ng-model='entity.status']")));
+                ("//tr[@ng-repeat='entity in entities']["+index+"]/td/select[@ng-model='entity.status']")));
     }
-    public WebElement saveButton(int index){
+    public WebElement saveButtonByTR(int index){
         return driver.findElement(By.xpath
-                ("//tr[@ng-repeat='entity in entities']/td/button[@ng-click='assignEntity(entity)']['"+index+"']"));
+                ("//tr[@ng-repeat='entity in entities']["+index+"]/td/button[@ng-click='assignEntity(entity)']"));
     }
-    public WebElement detachButton(int index){
+    public WebElement detachButtonByTR(int index){
         return driver.findElement
-                (By.xpath("//tr[@ng-repeat='entity in entities']/td/button[@ng-click='detachEntity(entity)']['"+index+"']"));
+                (By.xpath("//tr[@ng-repeat='entity in entities']["+index+"]/td/button[@ng-click='detachEntity(entity)']"));
     }
     public void closeDialogByPressESC() throws AWTException {
         Robot robot = new Robot();
@@ -58,14 +65,14 @@ public class UsersPermissionsDialog {
         robot.keyRelease(KeyEvent.VK_ESCAPE);
     }
     public void detachUserPermissions(int index) throws InterruptedException {
-        detachButton(index).click();
+        detachButtonByTR(index).click();
         Thread.sleep(sleepTime/8);
         Assert.assertEquals(dropdownMenu(index).getFirstSelectedOption().getText(),"Select Role");
     }
     public void setUserAsAdmin(int index) throws InterruptedException {
         dropdownMenu(index).selectByVisibleText("Admin");
         Assert.assertEquals(dropdownMenu(index).getFirstSelectedOption().getText(),"Admin");
-        saveButton(index).click();
+        saveButtonByTR(index).click();
         Thread.sleep(sleepTime/8);
         Assert.assertTrue(driver.findElement
                 (By.xpath("//tr[@ng-repeat='entity in entities']['"+index+"']/td/div/div[text()='Admin']")).isDisplayed());
@@ -73,7 +80,7 @@ public class UsersPermissionsDialog {
     public void setUserAsRegularUser(int index) throws InterruptedException {
         dropdownMenu(index).selectByVisibleText("Regular user");
         Assert.assertEquals(dropdownMenu(index).getFirstSelectedOption().getText(),"Regular user");
-        saveButton(index).click();
+        saveButtonByTR(index).click();
         Thread.sleep(sleepTime/8);
         Assert.assertTrue(driver.findElement
                 (By.xpath("//tr[@ng-repeat='entity in entities']['"+index+"']/td/div/div[text()='Regular user']")).isDisplayed());
