@@ -3,7 +3,6 @@ package com.qauber.sanity;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -11,10 +10,11 @@ import org.testng.annotations.Test;
 
 /**
  * Created by Maksim on 12/26/2016.
+ * TODO: make it more universal, information can be in any field in report.
+ * TODO: (Idea: View > Search text in any field.)
  */
 public class SearchReportsByContainsText extends PageObjectModelResources {
 
-    WebDriver driver;
     int sleepTime;
     String someText;
 
@@ -41,15 +41,20 @@ public class SearchReportsByContainsText extends PageObjectModelResources {
     public void searchReportsByContainsText() throws InterruptedException
     {
         getNavBar().reportsButton().click();
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
+        getReports().publishedOnCheckBox().click();
+        Thread.sleep(sleepTime);
+
+        getPreconditions().getReportPreconditions().ensureReportsAtLeast(10);
+
+        if(getReports().publishedOnCheckBox().isSelected())
+            getReports().publishedOnCheckBox().click();
 
         someText = getPreconditions().getSearchHelper().randomContainText();
+
         getReports().containsTextField().clear();
         getReports().containsTextField().sendKeys(someText);
-        Thread.sleep(sleepTime*2);
-
-        getReports().publishedOnCheckBox().click();
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
 
         try
         {

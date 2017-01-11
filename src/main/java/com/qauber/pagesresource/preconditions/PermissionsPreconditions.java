@@ -32,39 +32,75 @@ public class PermissionsPreconditions extends PageObjectModelResources {
 
             getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
             Thread.sleep(sleepTime/2);
-            System.out.println("Logged in as "+testUser().getUserType()+"  "+testUser().getUsername());
+            System.out.println("To meet preconditions Logged in as "+testUser().getUserType()+"  "+testUser().getUsername());
 
             getNavBar().usersButton().click();
             Thread.sleep(sleepTime/8);
 
             UserFactory userFactory = new UserFactory();
             User au = userFactory.getUser(User.UserType.AU);
-            String  AUemail =   au.getUsername();
-            getUsers().assignPermissionsButtonByEmail(AUemail);
+            String  AUemail =   au.getUsername().toLowerCase();
+            getUsers().assignPermissionsButtonByEmail(AUemail).click();
+            Thread.sleep(sleepTime/6);
 
-            for (int i = 1; i < getUsersPermissionsDialog().userEntitiesList().size(); i++){
-                WebElement detachButt = getUsersPermissionsDialog().detachButtonEntityTR(i);
-                if (detachButt.isDisplayed() && detachButt.isEnabled()){
+            for (int i = 1; i <= getUsersPermissionsDialog().userEntitiesList().size(); i++){
+                WebElement detachButt = getUsersPermissionsDialog().detachButtonByEntity(i);
+                if (detachButt.isDisplayed()){
                     detachButt.click();
                 }
                 else{
                     ((JavascriptExecutor)testDriver()).executeScript("arguments[0].scrollIntoView(true);", detachButt);
-                    if (detachButt.isEnabled()){detachButt.click();}
-                }
-                getUsersPermissionsDialog().dropDownListEntityTR(i).selectByVisibleText("Admin");
-                getUsersPermissionsDialog().saveButtonEntityTR(i).click();
+                    detachButt.click();}
+                getUsersPermissionsDialog().dropDownListByEntity(i).selectByVisibleText("Admin");
+                Thread.sleep(sleepTime/12);
+                getUsersPermissionsDialog().saveButtonByEntity(i).click();
                 Thread.sleep(sleepTime/8);
-                Assert.assertEquals(getUsersPermissionsDialog().rightsSavedEntityTR(i).getText(), "Admin");
-
-
+                Assert.assertEquals(getUsersPermissionsDialog().rightsSavedByEntity(i).getText(), "Admin");
             }
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally { breakDown(); } //breakdown
     }
+    public void ensureRUisRegUserToAll() {
+        setUp();
+        try { //TRY WITH RESOURCES - when try completes, 'finally' will run: even if 'try'  throws an exception
+            testDriver().get(testConfig().getBaseURL());
+            Thread.sleep(sleepTime/2);
 
+            getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
+            Thread.sleep(sleepTime/2);
+            System.out.println("To meet preconditions Logged in as "+testUser().getUserType()+"  "+testUser().getUsername());
 
+            getNavBar().usersButton().click();
+            Thread.sleep(sleepTime/8);
+
+            UserFactory userFactory = new UserFactory();
+            User au = userFactory.getUser(User.UserType.RU);
+            String  RUemail =   au.getUsername().toLowerCase();
+            getUsers().assignPermissionsButtonByEmail(RUemail).click();
+            Thread.sleep(sleepTime/6);
+
+            for (int i = 1; i <= getUsersPermissionsDialog().entitiesDepSubdepsAllList().size(); i++){
+                WebElement detachButt = getUsersPermissionsDialog().detachButtonByTR(i);
+                if (detachButt.isDisplayed()){
+                    detachButt.click();
+                }
+                else{
+                    ((JavascriptExecutor)testDriver()).executeScript("arguments[0].scrollIntoView(true);", detachButt);
+                    detachButt.click();}
+                Thread.sleep(sleepTime/12);
+                getUsersPermissionsDialog().dropdownMenu(i).selectByVisibleText("Regular User");
+                Thread.sleep(sleepTime/12);
+                getUsersPermissionsDialog().saveButtonByTR(i).click();
+                Thread.sleep(sleepTime/10);
+                Assert.assertEquals(getUsersPermissionsDialog().rightsSaved(i).getText(), "Regular User");
+            }
+
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } finally { breakDown(); } //breakdown
+    }
 
     public void breakDown() {
         breakDownHelper();

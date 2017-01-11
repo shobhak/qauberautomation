@@ -3,7 +3,6 @@ package com.qauber.sanity;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -14,7 +13,6 @@ import org.testng.annotations.Test;
  */
 public class SearchReportsPagination extends PageObjectModelResources {
 
-    WebDriver driver;
     int sleepTime;
     String pagination;
 
@@ -40,16 +38,24 @@ public class SearchReportsPagination extends PageObjectModelResources {
     public void searchReportsPagination() throws InterruptedException
     {
         getNavBar().reportsButton().click();
-        Thread.sleep(sleepTime*2);
-
+        Thread.sleep(sleepTime);
         getReports().publishedOnCheckBox().click();
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
+
+        getPreconditions().getReportPreconditions().ensureReportsAtLeast(11);
+
+        if(getReports().publishedOnCheckBox().isSelected())
+            getReports().publishedOnCheckBox().click();
+        Thread.sleep(sleepTime);
 
         pagination = getPreconditions().getSearchHelper().randomPagination();
+
         getReports().pagination(pagination).click();
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
 
         try {
+            System.out.println("Expected: "+pagination);
+            System.out.println("Actual: "+getReports().activePagination().getText());
             Assert.assertTrue(getReports().activePagination().getText().equals(pagination));
         }
         catch (AssertionError e)

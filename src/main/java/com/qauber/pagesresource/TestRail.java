@@ -2,6 +2,8 @@ package com.qauber.pagesresource;
 
 import com.qauber.testrail.APIClientExtension;
 
+import java.util.Map;
+
 /**
  * Created by erikfriedlander on 12/24/16.
  * http://docs.gurock.com/testrail-api2/reference-results#add_result
@@ -56,7 +58,7 @@ public class TestRail {
     }
 
     public void setTester(String tester) {
-        this.tester = tester;
+        this.tester = "Tester is "+tester+": running on computer "+getComputerName(); //TODO: we should load computerName from config file
     }
 
     private TestCaseResult getStatus() {
@@ -106,6 +108,17 @@ public class TestRail {
         client.setUser("Testers@qauber.com");
         client.setPassword("qauber2016!");
         return client;
+    }
+
+    private String getComputerName() //Denis liked this - http://stackoverflow.com/questions/7883542/getting-the-computer-name-in-java
+    {
+        Map<String, String> env = System.getenv();
+        if (env.containsKey("COMPUTERNAME"))
+            return env.get("COMPUTERNAME");
+        else if (env.containsKey("HOSTNAME"))
+            return env.get("HOSTNAME");
+        else
+            return "Unknown Computer";
     }
 }
 

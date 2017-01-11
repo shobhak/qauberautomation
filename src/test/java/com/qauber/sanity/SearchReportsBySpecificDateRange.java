@@ -3,7 +3,6 @@ package com.qauber.sanity;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -14,10 +13,8 @@ import org.testng.annotations.Test;
  */
 public class SearchReportsBySpecificDateRange extends PageObjectModelResources {
 
-    WebDriver driver;
     int sleepTime;
-    String date1;
-    String date2;
+    String date1,date2;
 
     @BeforeClass
     public void setUp() throws InterruptedException {
@@ -41,17 +38,25 @@ public class SearchReportsBySpecificDateRange extends PageObjectModelResources {
     public void searchReportsBySpecificDateRange () throws InterruptedException
     {
         getNavBar().reportsButton().click();
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
+        getReports().publishedOnCheckBox().click();
+        Thread.sleep(sleepTime);
+
+        getPreconditions().getReportPreconditions().ensureReportsAtLeast(10);
+
+        if(!(getReports().publishedOnCheckBox().isSelected()))
+            getReports().publishedOnCheckBox().click();
+        Thread.sleep(sleepTime);
 
         date1 = getPreconditions().getSearchHelper().randomDate();
         getReports().publishedDateFromIcon(date1);
         getReports().publishedDateToIcon(date1);
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
 
         date2 = getPreconditions().getSearchHelper().randomDate();
         getReports().createdDateFromIcon(date2);
         getReports().createdDateToIcon(date2);
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
 
         try {
             Assert.assertTrue(getReports().searchReportResultPublishedDate(date1).isDisplayed());

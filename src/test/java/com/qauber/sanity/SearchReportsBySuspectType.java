@@ -3,7 +3,6 @@ package com.qauber.sanity;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -14,7 +13,6 @@ import org.testng.annotations.Test;
  */
 public class SearchReportsBySuspectType extends PageObjectModelResources {
 
-    WebDriver driver;
     int sleepTime;
     String suspectType;
 
@@ -40,14 +38,19 @@ public class SearchReportsBySuspectType extends PageObjectModelResources {
     public void searchReportsBySuspectType() throws InterruptedException
     {
         getNavBar().reportsButton().click();
-        Thread.sleep(sleepTime*2);
-
-        suspectType = getPreconditions().getSearchHelper().randomSuspectType();
-        getReports().suspectType(suspectType);
-        Thread.sleep(sleepTime*2);
-
+        Thread.sleep(sleepTime);
         getReports().publishedOnCheckBox().click();
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
+
+        getPreconditions().getReportPreconditions().ensureReportsAtLeast(24);
+        suspectType = getPreconditions().getSearchHelper().randomSuspectType();
+
+        if(getReports().publishedOnCheckBox().isSelected())
+            getReports().publishedOnCheckBox().click();
+        Thread.sleep(sleepTime);
+
+        getReports().suspectType(suspectType);
+        Thread.sleep(sleepTime);
 
         try {
             Assert.assertTrue(getReports().searchReportResultID(1).getText().contains(suspectType));

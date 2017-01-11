@@ -3,7 +3,6 @@ package com.qauber.sanity;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -14,7 +13,6 @@ import org.testng.annotations.Test;
  */
 public class SearchReportsByPublishedDate extends PageObjectModelResources {
 
-    WebDriver driver;
     int sleepTime;
     String date;
 
@@ -40,12 +38,20 @@ public class SearchReportsByPublishedDate extends PageObjectModelResources {
     public void searchReportsByPublishedDate() throws InterruptedException
     {
         getNavBar().reportsButton().click();
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
+        getReports().publishedOnCheckBox().click();
+        Thread.sleep(sleepTime);
+
+        getPreconditions().getReportPreconditions().ensureReportsAtLeast(10);
+
+        if(!(getReports().publishedOnCheckBox().isSelected()))
+            getReports().publishedOnCheckBox().click();
+        Thread.sleep(sleepTime);
 
         date = getPreconditions().getSearchHelper().randomDate();
         getReports().publishedDateFromIcon(date);
         getReports().publishedDateToIcon(date);
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
 
         try {
             Assert.assertTrue(getReports().searchReportResultPublishedDate(date).isDisplayed());

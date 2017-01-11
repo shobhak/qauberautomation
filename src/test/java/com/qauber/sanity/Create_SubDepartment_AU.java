@@ -1,11 +1,8 @@
 package com.qauber.sanity;
 
 import com.github.javafaker.Faker;
-import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -13,23 +10,33 @@ import org.testng.annotations.Test;
 
 /**
  * Created by San Jose on 12/22/16.
+ * TODO: Add condition - first entity must be subscribed (paid for). Check entity status before getEntities().organizationList().get(0).click();
+ * TODO: add to TestRail
  */
 public class Create_SubDepartment_AU extends PageObjectModelResources {
 
-    WebDriver driver;
-    int sleepTime;
+    private int sleepTime;
 
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
-        sleepTime = 5000;
-        setUpWithUser(User.UserType.AU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
+        //Initial setup
+        setUpWithConfigFile(); //Read config file from disk, create if not present
+        setUpUser(User.UserType.SAU); //Pass in user
+
+        //TestRail Configuration
+//        testConfig().getTestRail().setCaseID(79853); //TestRail case ID
+//        testConfig().getTestRail().setTester("Erik's Script"); //put your name :-)
+
+        //Misc configuration
+        sleepTime = testConfig().getSleepTime(); //set sleepTime locally - easier than writing testConfig().getSleepTime() everywhere
+
+        //Create driver & page objects, finish setup
+        setUpScript();
     }
 
     @Test
     public void createSubDepartmentAU() throws InterruptedException{
-        driver.get(Config.getBaseURL());
+        getDriver().get(testConfig().getBaseURL());
         Faker faker = new Faker();
 
         String expectedResult = faker.lorem().word(); //subdepartment name
@@ -50,7 +57,7 @@ public class Create_SubDepartment_AU extends PageObjectModelResources {
         Thread.sleep(sleepTime);
 
 //        actualResult, expectedResult
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
         int lastIndex = getEntities().subdepartmentNameList().size()-1;
         actualResult = getEntities().subdepartmentNameList().get(lastIndex).getText();
         Assert.assertEquals(expectedResult, actualResult);
@@ -60,6 +67,6 @@ public class Create_SubDepartment_AU extends PageObjectModelResources {
 
     @AfterClass
     public void breakDown(){
-      breakDownHelper(driver);
+      breakDownHelper();
     }
 }

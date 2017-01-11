@@ -6,17 +6,18 @@ import org.openqa.selenium.WebElement;
 
 /**
  * Created by lenochka on 23.12.2016.
+ * This is a combined representation of Registration1 + Registration2
  */
 
-//TODO: merge with Registration1 + Registration2 (page is duplicate)
 
+
+@Deprecated //TODO: merge with Registration1 + Registration2 (this is duplicate - and represents two pages there)
 public class CompanyCreationSAU {
     WebDriver driver;
 
 public CompanyCreationSAU(WebDriver driver) {
-
     this.driver = driver;
-}
+    }
     WebElement element;
 
 
@@ -26,7 +27,7 @@ public CompanyCreationSAU(WebDriver driver) {
         //return driver.findElement(By.xpath(".//a[@class = 'btn btn-block btn-default']"));
         //return driver.findElement(By.xpath("/html/body/div[2]/div/div/div[1]/div[2]/a"));
        // return driver.findElement(By.xpath(".//a[text() = 'Register Now']"));
-}
+    }
 
      public WebElement regName(){
 

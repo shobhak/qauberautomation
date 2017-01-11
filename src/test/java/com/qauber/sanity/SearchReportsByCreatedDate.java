@@ -39,13 +39,20 @@ public class SearchReportsByCreatedDate extends PageObjectModelResources {
     public void searchReportsByCreatedDate() throws InterruptedException
     {
         getNavBar().reportsButton().click();
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
+        getReports().publishedOnCheckBox().click();
+        Thread.sleep(sleepTime);
+
+        getPreconditions().getReportPreconditions().ensureReportsAtLeast(10);
+
+        if(getReports().publishedOnCheckBox().isSelected())
+            getReports().publishedOnCheckBox().click();
 
         date = getPreconditions().getSearchHelper().randomDate();
-        getReports().publishedOnCheckBox().click();
+
         getReports().createdDateFromIcon(date);
         getReports().createdDateToIcon(date);
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
 
         //TODO: Found the way to assert that.
     }

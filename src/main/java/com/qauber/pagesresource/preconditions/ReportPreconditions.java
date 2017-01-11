@@ -2,6 +2,7 @@ package com.qauber.pagesresource.preconditions;
 
 import com.github.javafaker.Faker;
 import com.qauber.pages.*;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -51,6 +52,12 @@ public class ReportPreconditions {
         if (numberOfReportsNeeded > 0) {
             createReport(numberOfReportsNeeded);
         }
+        try {
+            reports.pagination("1").click();
+        }
+        catch (Exception e)
+        {}
+        ((JavascriptExecutor)driver).executeScript("scroll(0,-100)");
     }
 
     /** verifyReportsAtLeast(int num)
@@ -72,6 +79,9 @@ public class ReportPreconditions {
                 ArrayList<WebElement> list1 = new ArrayList<WebElement>(reports.reportsRows());
                 numberRemaining = numberRemaining + list1.size();
                 ArrayList<WebElement> list2 = new ArrayList<WebElement>(reports.paginationSum());
+
+                if (numberRemaining>=num)
+                    break;
 
                 if(i<Integer.parseInt(list2.get(list2.size()-1).getText()))
                 {

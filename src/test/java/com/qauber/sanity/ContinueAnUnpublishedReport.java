@@ -3,7 +3,6 @@ package com.qauber.sanity;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -11,11 +10,11 @@ import org.testng.annotations.Test;
 
 /**
  * Created by Maksim on 12/26/2016.
+ * TODO: preconditions
  */
 public class ContinueAnUnpublishedReport extends PageObjectModelResources {
 
-    WebDriver driver;
-    int sleepTime;
+    private int sleepTime;
     String keyWord = "last";
     String expectedPageHeader = "Field Interview Card";
 
