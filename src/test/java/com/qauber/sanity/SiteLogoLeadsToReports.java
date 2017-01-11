@@ -28,17 +28,9 @@ public class SiteLogoLeadsToReports extends PageObjectModelResources {
         Thread.sleep(10000);
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(5000);
-        getNavBar().entitiesButton().click();
-        Thread.sleep(1000);
-        getHeader().logo().click();
-        Thread.sleep(1000);
-        /*getNavBar().usersButton().click();
-        Thread.sleep(1000);
-        getHeader().logo().click();
-        Thread.sleep(1000);
         getNavBar().addReportButton().click();
         Thread.sleep(1000);
-        getHeader().logo().click();*/
+        getHeader().logo().click();
 
         String url = getDriver().getCurrentUrl();
 
