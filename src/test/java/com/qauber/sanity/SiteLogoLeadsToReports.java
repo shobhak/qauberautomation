@@ -1,5 +1,6 @@
 package com.qauber.sanity;
 
+import com.qauber.assertutil.AssertUber;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
@@ -37,12 +38,7 @@ public class SiteLogoLeadsToReports extends PageObjectModelResources {
 
         String url = getDriver().getCurrentUrl();
 
-        try {
-            Assert.assertEquals(url, testConfig().getBaseURL()+"/#/app/reports");
-        } catch (AssertionError e) {
-            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Logo does not lead to reports "+e.getLocalizedMessage());
-            throw e;
-        }
+        AssertUber.assertEquals(url, testConfig().getBaseURL()+"/#/app/reports", "Logo doesn't lead to reports");
 
         testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
