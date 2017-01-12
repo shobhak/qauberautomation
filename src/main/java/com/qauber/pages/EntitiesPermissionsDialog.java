@@ -1,13 +1,12 @@
 package com.qauber.pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.util.List;
 
 
@@ -61,10 +60,8 @@ public class EntitiesPermissionsDialog {
         return driver.findElement(By.xpath
                 ("//tr[@ng-repeat='user in $assignCtrl.users']["+index+"]/td/select[@ng-model='user.assignedRole']"));
     }
-    public void closeDialogByPressESC() throws AWTException {
-        Robot robot = new Robot();
-        robot.keyPress(KeyEvent.VK_ESCAPE);
-        robot.keyRelease(KeyEvent.VK_ESCAPE);
+    public void closeDialogByPressESC() {
+        ((JavascriptExecutor)driver).executeScript("document.getElementsByClassName('ngdialog-close')[0].click();");
     }
 
     public List<WebElement> userNameList(){

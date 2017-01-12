@@ -5,6 +5,7 @@ package com.qauber.pages;
 import com.qauber.pagesresource.ConfigHelper;
 import com.qauber.pagesresource.ConfigOOP;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
@@ -60,9 +61,7 @@ public class UsersPermissionsDialog {
                 (By.xpath("//tr[@ng-repeat='entity in entities']["+index+"]/td/button[@ng-click='detachEntity(entity)']"));
     }
     public void closeDialogByPressESC() throws AWTException {
-        Robot robot = new Robot();
-        robot.keyPress(KeyEvent.VK_ESCAPE);
-        robot.keyRelease(KeyEvent.VK_ESCAPE);
+        ((JavascriptExecutor)driver).executeScript("document.getElementsByClassName('ngdialog-close')[0].click();");
     }
     public void detachUserPermissionsTR(int index) throws InterruptedException {
         detachButtonByTR(index).click();
