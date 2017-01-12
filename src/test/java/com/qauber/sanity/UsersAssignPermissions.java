@@ -33,6 +33,7 @@ public class UsersAssignPermissions extends PageObjectModelResources {
         //setUpWithUser creates TestCaseUser, access with testUser()
         setUpScript();
         assignPermissionsUsers();
+        breakDownHelper();
     }
     @Test(priority = 1)
     public void testAsAU() throws AWTException, InterruptedException {
@@ -43,20 +44,22 @@ public class UsersAssignPermissions extends PageObjectModelResources {
     }
 
     public void assignPermissionsUsers() throws InterruptedException, AWTException {
-        int userIndex = 3;
+
         /** NOTE: index in the list is different while logged in as different users*/
-        int entityIndex = 2;
+        int userIndex = 2;
+        int entityIndex = 1;
+
         testDriver().get(testConfig().getBaseURL());
-        Thread.sleep(sleepTime/2);
+        Thread.sleep(sleepTime/3);
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(sleepTime/2);
+        Thread.sleep(sleepTime/3);
         getNavBar().usersButton().click();
-        Thread.sleep(sleepTime/2);
+        Thread.sleep(sleepTime/3);
         getUsers().assignPermissionsButtonByIndex(userIndex).click();
         Thread.sleep(sleepTime/8);
-        getUsersPermissionsDialog().detachUserPermissions(entityIndex);
+        getUsersPermissionsDialog().detachUserPermissionsTR(entityIndex);
         Thread.sleep(sleepTime/8);
-        getUsersPermissionsDialog().setUserAsAdmin(entityIndex);
+        getUsersPermissionsDialog().setUserAsAdminTR(entityIndex);
         Thread.sleep(sleepTime/8);
         getUsersPermissionsDialog().closeDialogByPressESC();
         Thread.sleep(sleepTime/8);
