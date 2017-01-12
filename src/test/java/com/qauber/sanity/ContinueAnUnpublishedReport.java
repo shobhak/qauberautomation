@@ -15,8 +15,6 @@ import org.testng.annotations.Test;
 public class ContinueAnUnpublishedReport extends PageObjectModelResources {
 
     private int sleepTime;
-    String keyWord = "last";
-    String expectedPageHeader = "Field Interview Card";
 
     @BeforeClass
     public void setUp() throws InterruptedException {
@@ -45,6 +43,7 @@ public class ContinueAnUnpublishedReport extends PageObjectModelResources {
         getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime);
 
+        String keyWord = "last";
         try {
             getReports().pagination(keyWord).click();
             Thread.sleep(sleepTime);
@@ -57,6 +56,7 @@ public class ContinueAnUnpublishedReport extends PageObjectModelResources {
 
         try
         {
+            String expectedPageHeader = "Field Interview Card";
             Assert.assertTrue(getAddReportOrganization().pageHeader().getText().equals(expectedPageHeader));
         }
         catch (AssertionError e)
