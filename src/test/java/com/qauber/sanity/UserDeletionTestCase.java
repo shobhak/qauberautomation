@@ -3,51 +3,70 @@ package com.qauber.sanity;
 import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
  * Created by lenochka on 27.12.2016.
+ * TODO: add asserts!
+ * TODO: add to TestRail
+ * TODO: (low priority) modify to create new user(s), then delete them :-)
  */
 public class UserDeletionTestCase extends PageObjectModelResources {
 
-    WebDriver driver;
+    private int sleepTime;
 
     @BeforeClass
-    public void setUp() {
-        driver = new ChromeDriver();
-        setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with testUser()
+    public void setUp() throws InterruptedException {
+        setUpWithConfigFile();
+        setUpUser(User.UserType.SAU);
+
+//        testConfig().getTestRail().setCaseID(82764);
+//        testConfig().getTestRail().setTester("MadMax");
+
+        sleepTime = testConfig().getSleepTime();
+        setUpScript();
+
+        testDriver().get(testConfig().getBaseURL());
+        Thread.sleep(sleepTime);
+
+        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
+        Thread.sleep(sleepTime);
     }
 
 
     @Test
     public void userDeletion() throws InterruptedException {
-        driver.manage().window().maximize();
-        driver.get(Config.getBaseURL());
-        Thread.sleep(3000);
+        testDriver().get(Config.getBaseURL());
+        Thread.sleep(sleepTime);
 
         //String emailName = "kennith.willms@hotmail.com";
 
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime);
+
+        //preconditions
+        getPreconditions().getUsersPreconditions().ensureUsersAtLeast(10);
 
         getNavBar().clickUsers();
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime);
 
         //getUserDeletion().deleteUserByEmail(emailName).click();
-       // Thread.sleep(3000);
+        // Thread.sleep(sleepTime);
 
-        getUsers().deleteButtonByIndex(1).click();
-        Thread.sleep(3000);
+        getUsers().deleteButtonByIndex(9).click();
+        Thread.sleep(sleepTime);
 
         getUsers().deleteConfirmationButton().click();
-        Thread.sleep(3000);
+        Thread.sleep(sleepTime);
 
-         driver.manage().deleteAllCookies();
-         driver.quit();
-        }
     }
+
+
+    @AfterClass
+    public void breakDown() {
+        breakDownHelper();
+    }
+}

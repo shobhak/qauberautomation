@@ -14,8 +14,11 @@ import java.util.List;
 
 /**
  * Created by Jing Xu on 12/30/2016.
+ * TODO: add case to TestRail
+ * TODO: is the first assert part of the test case? if not, replace assertEquals with .equals()
  */
 public class RegularUserNotDeleteOrChangeSubscription extends PageObjectModelResources {
+    private int sleepTime;
 
     @BeforeClass
     public void setUp() {
@@ -24,6 +27,7 @@ public class RegularUserNotDeleteOrChangeSubscription extends PageObjectModelRes
         testConfig().getTestRail().setCaseID(00000);    //add TC number from the TestRail
         testConfig().getTestRail().setTester("");       //add user name
 
+        sleepTime = testConfig().getSleepTime();
         setUpUser(User.UserType.SAU);
         setUpScript();
     }
@@ -35,23 +39,23 @@ public class RegularUserNotDeleteOrChangeSubscription extends PageObjectModelRes
         List<String> hideEntitiesNameListRU = new ArrayList<String>();
 
         getDriver().get(testConfig().getBaseURL());
-        Thread.sleep(10000);
+        Thread.sleep(sleepTime*2);
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime);
 
         getHeader().userName().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
         getProfilePanel().settinsButton().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
         try{
             Assert.assertEquals(getProfilePanel().settingsText().getText(), "Settings");
         }
         catch (NoSuchElementException e) {
             getHeader().userName().click();
-            Thread.sleep(2000);
+            Thread.sleep(sleepTime/2);
         }
 
         // List out the entities for Super Admin users
@@ -62,35 +66,35 @@ public class RegularUserNotDeleteOrChangeSubscription extends PageObjectModelRes
         }
 
         getProfilePanel().userButton().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
         getNavBar().addReportButton().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
         getHeader().userName().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
         getProfilePanel().logOutButton().click();
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime);
 
         setUpUser(User.UserType.RU);
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime);
 
         getHeader().userName().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
         getProfilePanel().settinsButton().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
         try{
             Assert.assertEquals(getProfilePanel().settingsText().getText(), "Settings");
         }
         catch (NoSuchElementException e) {
             getHeader().userName().click();
-            Thread.sleep(2000);
+            Thread.sleep(sleepTime/2);
         }
 
         // Verify that there is no entity displayed for Regular users or Admin users
@@ -108,7 +112,7 @@ public class RegularUserNotDeleteOrChangeSubscription extends PageObjectModelRes
             System.out.println(hideEntitiesNameListRU.get(j));
         }
 
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
     }
 

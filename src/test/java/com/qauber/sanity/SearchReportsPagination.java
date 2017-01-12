@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 
 /**
  * Created by Maksim on 12/26/2016.
+ *
  */
 public class SearchReportsPagination extends PageObjectModelResources {
 

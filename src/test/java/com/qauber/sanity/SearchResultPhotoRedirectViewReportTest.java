@@ -9,16 +9,20 @@ import org.testng.annotations.Test;
 
 /**
  * Created by jingx on 12/22/2016.
+ * TODO: add to TestRail
+ * TODO: preconditions / check if row exists before comparing ID
  */
 public class SearchResultPhotoRedirectViewReportTest extends PageObjectModelResources {
 
+    private int sleepTime;
     @BeforeClass
     public void setUp() {
         setUpWithConfigFile();
 
         testConfig().getTestRail().setCaseID(00000);    //add TC number from the TestRail
         testConfig().getTestRail().setTester("");       //add user name
-
+        sleepTime = testConfig().getSleepTime();
+        
         setUpUser(User.UserType.SAU);
         setUpScript();
     }
@@ -29,36 +33,36 @@ public class SearchResultPhotoRedirectViewReportTest extends PageObjectModelReso
         String getreportidfromphoto;
         int rowindex = 3;
         getDriver().get(testConfig().getBaseURL());
-        Thread.sleep(10000);
+        Thread.sleep(sleepTime*2);
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime);
 
         getNavBar().reportsButton().click();
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime);
 
         getReports().clickPublishedOnCheckbox();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
         getReports().selectReport(rowindex).click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
         getreportidfromview = getReportsViewReport().reportID().getText();
         System.out.println("The report ID from clicking view button: " + getreportidfromview);
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
         getNavBar().reportsButton().click();
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime);
 
         getReports().clickPublishedOnCheckbox();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
         getReports().searchResultPhoto(rowindex).click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
         getreportidfromphoto = getReportsViewReport().reportID().getText();
         System.out.println("The report ID from clicking view button: " + getreportidfromphoto);
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
         Assert.assertEquals(getreportidfromphoto,getreportidfromview);
 

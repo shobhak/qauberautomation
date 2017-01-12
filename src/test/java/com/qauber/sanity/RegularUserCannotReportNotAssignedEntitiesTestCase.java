@@ -1,13 +1,10 @@
 package com.qauber.sanity;
 
-import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -20,6 +17,8 @@ import java.util.List;
 
 /**
  * Created by Jing Xu on 12/27/2016.
+ * TODO: add to TestRail
+ * TODO: add some precondition / helper methods? believe this will fail if RU is assigned to all entities (as expected).
  */
 public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObjectModelResources {
     private int sleepTime;
@@ -43,10 +42,8 @@ public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObje
 
     @Test
     public void regularUserCannotReportNotAssginedEntities() throws InterruptedException, AWTException {
-        String RUemail = "jing_qa_011011@mailinator.com";
         int totalrows;
         List<String> notassginedlist = new ArrayList<String>();
-
 
         testDriver().get(testConfig().getBaseURL());
         Thread.sleep(sleepTime);
@@ -54,10 +51,12 @@ public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObje
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(sleepTime);
 
+        setUpUser(User.UserType.RU); //change testUser to RU
+
         getNavBar().usersButton().click();
         Thread.sleep(sleepTime);
 
-        getUsers().assignPermissionsButtonByEmail(RUemail).click();
+        getUsers().assignPermissionsButtonByEmail(testUser().getUsername()).click();
         Thread.sleep(sleepTime);
 
         List<WebElement> userentitieslist = getUsersPermissionsDialog().userEntitiesList();
@@ -90,8 +89,8 @@ public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObje
         getProfilePanel().logOutButton().click();
         Thread.sleep(sleepTime);
 
-        setUpUser(User.UserType.RU);
-        Thread.sleep(sleepTime);
+//        setUpUser(User.UserType.RU);
+//        Thread.sleep(sleepTime);
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(sleepTime);
