@@ -1,8 +1,10 @@
 package com.qauber.sanity;
 
+import com.qauber.assertutil.AssertUber;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
+import org.apache.commons.lang3.StringUtils;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -46,13 +48,14 @@ public class ViewReport extends PageObjectModelResources {
 
         String reportID = getReportsViewReport().reportID().getText();
         String suspectName = getReportsViewReport().suspectName().getText();
+        String suspectType = getReportsViewReport().suspectType().getText();
+        String IdName = reportID + ". " + suspectName;
+        String IdNameType = reportID + ". " + suspectName + " (" + suspectType + ")";
 
-
-        try {
-            Assert.assertEquals(searchReportResultID,reportID + ". " + suspectName);
-            } catch (AssertionError e) {
-            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Report ID and suspect name do not match "+e.getLocalizedMessage());
-            throw e;
+        if (StringUtils.isBlank(suspectType)) {
+            AssertUber.assertEquals(searchReportResultID, IdName, "ReportID and suspectName don't match ");
+        } else {
+            AssertUber.assertEquals(searchReportResultID, IdNameType, "ReportID, suspectName, suspectType don't match ");
         }
 
         testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
