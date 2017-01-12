@@ -32,32 +32,42 @@ public class EntitiesAssignPermissions extends PageObjectModelResources {
     @Test
     public void testAsSAU() throws AWTException, InterruptedException {
         setUpUser(User.UserType.SAU); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with testUser()
 
         setUpScript();
+
+
+        //flowing method sets precondition for AU in next test(while already logged in as SAU)
         assignPermissionsEntities();
+        getPreconditions().getPermissionsPreconditions().setAUasAdminToAllEntities(testDriver());
+        breakDownHelper();
     }
     @Test(priority = 1)
     public void testAsAU() throws AWTException, InterruptedException {
+//        getPreconditions().getPermissionsPreconditions().ensureAUIsAdminAllEntities();
+
         setUpUser(User.UserType.AU); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with testUser()
 
         setUpScript();
         assignPermissionsEntities();
     }
 
     public void assignPermissionsEntities() throws InterruptedException, AWTException {
+
+        /** NOTE: index in the list is different while logged in as different user(different permissions)*/
+        int EntityDepSubdepIndex = 1;
+        int userIndex = 2;
+
         testDriver().get(testConfig().getBaseURL());
         Thread.sleep(sleepTime/2);
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(sleepTime);
         getNavBar().entitiesButton().click();
         Thread.sleep(sleepTime/2);
-        getEntities().assignPermissionButton(1).click();
+        getEntities().assignPermissionButton(EntityDepSubdepIndex).click();
+        Thread.sleep(sleepTime/8);
+        getEntitiesPermissionsDialog().detachUserPermissionsTR(userIndex);
         Thread.sleep(sleepTime/10);
-        getEntitiesPermissionsDialog().detachUserPermissions(1);
-        Thread.sleep(sleepTime/10);
-        getEntitiesPermissionsDialog().setUserAsRegularUser(1);
+        getEntitiesPermissionsDialog().setUserAsRegularUser(userIndex);
         Thread.sleep(sleepTime/10);
         getEntitiesPermissionsDialog().closeDialogByPressESC();
         Thread.sleep(sleepTime/10);

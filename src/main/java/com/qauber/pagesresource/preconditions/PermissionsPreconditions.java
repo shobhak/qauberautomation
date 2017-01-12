@@ -2,6 +2,7 @@ package com.qauber.pagesresource.preconditions;
 
 import com.qauber.pagesresource.*;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 
@@ -34,33 +35,38 @@ public class PermissionsPreconditions extends PageObjectModelResources {
             Thread.sleep(sleepTime/2);
             System.out.println("To meet preconditions Logged in as "+testUser().getUserType()+"  "+testUser().getUsername());
 
-            getNavBar().usersButton().click();
-            Thread.sleep(sleepTime/8);
-
-            UserFactory userFactory = new UserFactory();
-            User au = userFactory.getUser(User.UserType.AU);
-            String  AUemail =   au.getUsername().toLowerCase();
-            getUsers().assignPermissionsButtonByEmail(AUemail).click();
-            Thread.sleep(sleepTime/6);
-
-            for (int i = 1; i <= getUsersPermissionsDialog().userEntitiesList().size(); i++){
-                WebElement detachButt = getUsersPermissionsDialog().detachButtonByEntity(i);
-                if (detachButt.isDisplayed()){
-                    detachButt.click();
-                }
-                else{
-                    ((JavascriptExecutor)testDriver()).executeScript("arguments[0].scrollIntoView(true);", detachButt);
-                    detachButt.click();}
-                getUsersPermissionsDialog().dropDownListByEntity(i).selectByVisibleText("Admin");
-                Thread.sleep(sleepTime/12);
-                getUsersPermissionsDialog().saveButtonByEntity(i).click();
-                Thread.sleep(sleepTime/8);
-                Assert.assertEquals(getUsersPermissionsDialog().rightsSavedByEntity(i).getText(), "Admin");
-            }
+            setAUasAdminToAllEntities(testDriver());
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally { breakDown(); } //breakdown
+    }
+    public void setAUasAdminToAllEntities(WebDriver driver) throws InterruptedException {
+        PageResources page = PageResourcesFactory.getPageResources(driver);
+        page.getNavBar().usersButton().click();
+        Thread.sleep(sleepTime/8);
+
+        UserFactory userFactory = new UserFactory();
+        User au = userFactory.getUser(User.UserType.AU);
+        String  AUemail =   au.getUsername().toLowerCase();
+        page.getUsers().assignPermissionsButtonByEmail(AUemail).click();
+        Thread.sleep(sleepTime/6);
+
+        for (int i = 1; i <= page.getUsersPermissionsDialog().userEntitiesList().size(); i++){
+            WebElement detachButt = page.getUsersPermissionsDialog().detachButtonByEntity(i);
+            if (detachButt.isDisplayed()){
+                detachButt.click();
+            }
+            else{
+                ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView(true);", detachButt);
+                detachButt.click();}
+            page.getUsersPermissionsDialog().dropDownListByEntity(i).selectByVisibleText("Admin");
+            Thread.sleep(sleepTime/12);
+            page.getUsersPermissionsDialog().saveButtonByEntity(i).click();
+            Thread.sleep(sleepTime/8);
+            Assert.assertEquals(page.getUsersPermissionsDialog().rightsSavedByEntity(i).getText(), "Admin");
+        }
+
     }
     public void ensureRUisRegUserToAll() {
         setUp();
