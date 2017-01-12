@@ -2,7 +2,11 @@ package com.qauber.pagesresource.preconditions;
 
 import com.github.javafaker.Faker;
 import com.qauber.pages.*;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+
+import java.util.List;
 
 /**
  * Created by Alya on 1/4/2017.
@@ -39,6 +43,7 @@ public class EntitiesNamesPreconditions {
     }
 
     public boolean isEntityNameInSystem(String entityName) {
+        //List<WebElement>
         for (int i = 0; i < entities.organizationList().size(); i++) {
             if (entities.organizationList().get(i).getText().equals(entityName)) {
                 return true;
