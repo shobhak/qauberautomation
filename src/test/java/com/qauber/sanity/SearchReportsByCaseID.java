@@ -43,7 +43,7 @@ public class SearchReportsByCaseID extends PageObjectModelResources {
         getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime);
 
-        getPreconditions().getReportPreconditions().ensureReportsAtLeast(21);
+        getPreconditions().getReportPreconditions().ensureReportsAtLeast(10);
 
         if(getReports().publishedOnCheckBox().isSelected())
             getReports().publishedOnCheckBox().click();

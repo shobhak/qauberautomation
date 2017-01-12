@@ -50,7 +50,7 @@ public class ReportPreconditions {
         int numberOfReportsNeeded = verifyReportsAtLeast(num);
         System.out.println("Number of reports we need to create: " + numberOfReportsNeeded);
         if (numberOfReportsNeeded > 0) {
-            createReport(numberOfReportsNeeded);
+            createPublishedReport(numberOfReportsNeeded);
         }
         Thread.sleep(sleepTime);
         try {
@@ -58,7 +58,7 @@ public class ReportPreconditions {
         }
         catch (Exception e)
         {}
-        ((JavascriptExecutor)driver).executeScript("scroll(0,-400)");
+        ((JavascriptExecutor)driver).executeScript("scroll(0,-100)");
     }
 
     /** verifyReportsAtLeast(int num)
@@ -111,38 +111,49 @@ public class ReportPreconditions {
      * Create reports fill out only required fields,
      * based on numberOfReportsNeeded.
      */
+    private void createReport() throws InterruptedException {
 
-    public void createReport(int numberOfReportsNeeded) throws InterruptedException {
 
+        navBar.addReportButton().click();
+        Thread.sleep(sleepTime);
+
+        addReportsOrganization.clickOrganization1();
+        Thread.sleep(sleepTime);
+
+        addReportNavigation.subjectInformationTab().click();
+        Thread.sleep(sleepTime);
+
+        addReportSubjectInformationPage.firstName().sendKeys(faker.name().firstName());
+        addReportSubjectInformationPage.lastName().sendKeys(faker.name().lastName());
+        addReportSubjectInformationPage.caseIdField().sendKeys(faker.idNumber().valid());
+        new Select(addReportSubjectInformationPage.subjectType()).selectByIndex(faker.number().numberBetween(1,5));
+        Thread.sleep(sleepTime);
+
+        addReportNavigation.environmentTab().click();
+        Thread.sleep(sleepTime);
+        addReportEnvironment.stopLocationField().sendKeys(faker.address().cityName());
+        Thread.sleep(sleepTime);
+
+        //scroll to top before clicking, for low resolution computers
+        ((JavascriptExecutor)driver).executeScript("scroll(0,-100)");
+        Thread.sleep(sleepTime/5);
+        addReportNavigation.previewTab().click();
+        Thread.sleep(sleepTime);
+    }
+
+    public void createPublishedReport(int numberOfReportsNeeded) throws InterruptedException
+    {
         for (int i = 0; i<numberOfReportsNeeded; i++) {
-            navBar.addReportButton().click();
-            Thread.sleep(sleepTime);
-
-            addReportsOrganization.clickOrganization1();
-            Thread.sleep(sleepTime);
-
-            addReportNavigation.subjectInformationTab().click();
-            Thread.sleep(sleepTime);
-
-            addReportSubjectInformationPage.firstName().sendKeys(faker.name().firstName());
-            addReportSubjectInformationPage.lastName().sendKeys(faker.name().lastName());
-            addReportSubjectInformationPage.caseIdField().sendKeys(faker.idNumber().valid());
-            new Select(addReportSubjectInformationPage.subjectType()).selectByIndex(faker.number().numberBetween(1,5));
-            Thread.sleep(sleepTime);
-
-            addReportNavigation.environmentTab().click();
-            Thread.sleep(sleepTime);
-            addReportEnvironment.stopLocationField().sendKeys(faker.address().cityName());
-            Thread.sleep(sleepTime);
-
-            //scroll to top before clicking, for low resolution computers
-            ((JavascriptExecutor)driver).executeScript("scroll(0,-100)");
-            Thread.sleep(sleepTime/5);
-            addReportNavigation.previewTab().click();
-            Thread.sleep(sleepTime);
-
+            createReport();
             addReportPreview.publishReportButton().click();
             Thread.sleep(sleepTime);
+        }
+    }
+
+    public void createUnpublishedReport(int numberOfReportsNeeded) throws InterruptedException
+    {
+        for (int i = 0; i < numberOfReportsNeeded; i++) {
+            createReport();
         }
     }
 }
