@@ -103,7 +103,6 @@ public class ReportPreconditions {
             int numberRemaining = num - list.size();
             return numberRemaining <=0 ? 0 : numberRemaining;
         }
-
     }
 
     /**
@@ -112,7 +111,6 @@ public class ReportPreconditions {
      * based on numberOfReportsNeeded.
      */
     private void createReport() throws InterruptedException {
-
 
         navBar.addReportButton().click();
         Thread.sleep(sleepTime);
