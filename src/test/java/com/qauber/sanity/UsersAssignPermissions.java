@@ -1,10 +1,7 @@
 package com.qauber.sanity;
 
-import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -13,45 +10,55 @@ import java.awt.*;
 
 
 //Created by Denys_G on 12/22/2016.
+//TODO: add asserts
 
 public class UsersAssignPermissions extends PageObjectModelResources {
 
-    WebDriver driver;
-    int sleepTime;
+    private int sleepTime;
+
+    /** NOTE: Preconditions about existing entities and admin assigned should be added*/
 
     @BeforeTest
     public void setUp() {
-        driver = new ChromeDriver();
+        setUpWithConfigFile(); //Read config file from disk, create if not present
+
+        //Misc configuration
+        sleepTime = testConfig().getSleepTime();
     }
 
     @Test
     public void testAsSAU() throws AWTException, InterruptedException {
-        setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
+        setUpUser(User.UserType.SAU); //pass userType and browser. see ~/QAUberTestConfig
         //setUpWithUser creates TestCaseUser, access with testUser()
+        setUpScript();
         assignPermissionsUsers();
+        breakDownHelper();
     }
     @Test(priority = 1)
     public void testAsAU() throws AWTException, InterruptedException {
-        setUpWithUser(User.UserType.AU, driver); //pass userType and browser. see ~/QAUberTestConfig
+        setUpUser(User.UserType.AU); //pass userType and browser. see ~/QAUberTestConfig
         //setUpWithUser creates TestCaseUser, access with testUser()
+        setUpScript();
         assignPermissionsUsers();
     }
 
     public void assignPermissionsUsers() throws InterruptedException, AWTException {
-        int userIndex = 3;
+
         /** NOTE: index in the list is different while logged in as different users*/
-        int entityIndex = 2;
-        driver.get(Config.getBaseURL());
-        Thread.sleep(sleepTime/2);
+        int userIndex = 2;
+        int entityIndex = 1;
+
+        testDriver().get(testConfig().getBaseURL());
+        Thread.sleep(sleepTime/3);
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(sleepTime/2);
+        Thread.sleep(sleepTime/3);
         getNavBar().usersButton().click();
-        Thread.sleep(sleepTime/2);
+        Thread.sleep(sleepTime/3);
         getUsers().assignPermissionsButtonByIndex(userIndex).click();
         Thread.sleep(sleepTime/8);
-        getUsersPermissionsDialog().detachUserPermissions(entityIndex);
+        getUsersPermissionsDialog().detachUserPermissionsTR(entityIndex);
         Thread.sleep(sleepTime/8);
-        getUsersPermissionsDialog().setUserAsAdmin(entityIndex);
+        getUsersPermissionsDialog().setUserAsAdminTR(entityIndex);
         Thread.sleep(sleepTime/8);
         getUsersPermissionsDialog().closeDialogByPressESC();
         Thread.sleep(sleepTime/8);
@@ -59,6 +66,6 @@ public class UsersAssignPermissions extends PageObjectModelResources {
 
     @AfterTest
     public void breakDown(){
-        breakDownHelper(driver);
+        breakDownHelper();
     }
 }

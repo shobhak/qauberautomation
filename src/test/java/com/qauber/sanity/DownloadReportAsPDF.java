@@ -1,6 +1,6 @@
 package com.qauber.sanity;
 
-import com.qauber.assertutil.Assert;
+import com.qauber.assertutil.AssertUber;
 import com.qauber.pagesresource.FileManager;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.TestRail;
@@ -52,7 +52,7 @@ public class DownloadReportAsPDF extends PageObjectModelResources {
         getReportsViewReport().downloadAsPDFButton().click();
         Thread.sleep(sleepTime);
 
-        Assert.assertTrue(isFileDownloaded(fileName), "Failed to download Expected document");
+        AssertUber.assertTrue(isFileDownloaded(fileName), "Failed to download Expected document");
 
         testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
