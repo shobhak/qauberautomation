@@ -90,11 +90,11 @@ public class PermissionsPreconditions extends PageObjectModelResources {
                     ((JavascriptExecutor)testDriver()).executeScript("arguments[0].scrollIntoView(true);", detachButt);
                     detachButt.click();}
                 Thread.sleep(sleepTime/12);
-                getUsersPermissionsDialog().dropdownMenu(i).selectByVisibleText("Regular User");
+                getUsersPermissionsDialog().dropdownMenuTR(i).selectByVisibleText("Regular User");
                 Thread.sleep(sleepTime/12);
                 getUsersPermissionsDialog().saveButtonByTR(i).click();
                 Thread.sleep(sleepTime/10);
-                Assert.assertEquals(getUsersPermissionsDialog().rightsSaved(i).getText(), "Regular User");
+                Assert.assertEquals(getUsersPermissionsDialog().rightsSavedTR(i).getText(), "Regular User");
             }
 
         } catch (InterruptedException e) {
