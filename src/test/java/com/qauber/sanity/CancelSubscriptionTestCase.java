@@ -1,5 +1,6 @@
 package com.qauber.sanity;
 
+import com.github.javafaker.Faker;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.NoSuchElementException;
@@ -16,6 +17,8 @@ import java.util.Random;
  */
 public class CancelSubscriptionTestCase extends PageObjectModelResources {
     private int sleepTime;
+    private String paypalEmailAccount = "jing_qauber_test01@test.com";
+    private String paypalPassword = "portnovschool";
 
     @BeforeClass
     public void setUp() {
@@ -61,6 +64,86 @@ public class CancelSubscriptionTestCase extends PageObjectModelResources {
             Thread.sleep(sleepTime);
         }
 
+        try{
+            Assert.assertNotEquals(getProfilePanel().entitiesList().size(), 0);
+        }
+        catch (AssertionError e){
+            Faker faker = new Faker();
+
+            getNavBar().clickEntities();
+            Thread.sleep(sleepTime);
+
+            getEntities().addOrganizationButton().click();
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().entityNameField().sendKeys(faker.name().username());
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().entityPhoneField().sendKeys(faker.phoneNumber().cellPhone());
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().entityEmailField().sendKeys(faker.internet().emailAddress());
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().entityCountryDropDown("Austria").click();
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().entityAddress1().sendKeys(faker.address().streetAddress());
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().entityAddress2().sendKeys(faker.address().streetAddress());
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().entityCity().sendKeys(faker.address().city());
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().entityState().sendKeys(faker.address().state());
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().entityPostalCode().sendKeys(faker.address().zipCode());
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().entityNextButtone().click();
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().inviteRegularUserNextButton().click();
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().inviteAdminUserNextButton().click();
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().finishButton().click();
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().payWithMyPayPal().click();
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().loginField().sendKeys(paypalEmailAccount);
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().passwordField().sendKeys(paypalPassword);
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().logInButton().click();
+            Thread.sleep(sleepTime);
+
+            getCreateOrganization().agreeAndContinueButton().click();
+            Thread.sleep(sleepTime*3);
+
+            getHeader().userName().click();
+            Thread.sleep(sleepTime/2);
+
+            getProfilePanel().settinsButton().click();
+            Thread.sleep(sleepTime/2);
+
+            try{
+                Assert.assertEquals(getProfilePanel().settingsText().getText(), "Settings");
+            }
+            catch (NoSuchElementException f) {
+                getHeader().userName().click();
+                Thread.sleep(sleepTime/2);
+            }
+        }
         entities = getProfilePanel().entitiesList().size();
         System.out.println(entities);
         cancelentityindex = randomInt.nextInt(entities) + 1;
