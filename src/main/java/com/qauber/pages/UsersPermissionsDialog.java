@@ -42,12 +42,12 @@ public class UsersPermissionsDialog {
     public WebElement rightsSavedByEntity(int index){
         return driver.findElement(By.xpath("//tr[td/div[@class='depth-level']]["+index+"]/td/div/div"));
     }
-    public WebElement rightsSaved(int index){
+    public WebElement rightsSavedTR(int index){
         return driver.findElement(By.xpath(
                 "//tr[@ng-repeat='entity in entities']["+index+"]/td/div/div"));
     }
 
-    public Select dropdownMenu(int index){
+    public Select dropdownMenuTR(int index){
         return new Select(driver.findElement(By.xpath
                 ("//tr[@ng-repeat='entity in entities']["+index+"]/td/select[@ng-model='entity.status']")));
     }
@@ -64,22 +64,22 @@ public class UsersPermissionsDialog {
         robot.keyPress(KeyEvent.VK_ESCAPE);
         robot.keyRelease(KeyEvent.VK_ESCAPE);
     }
-    public void detachUserPermissions(int index) throws InterruptedException {
+    public void detachUserPermissionsTR(int index) throws InterruptedException {
         detachButtonByTR(index).click();
         Thread.sleep(sleepTime/8);
-        Assert.assertEquals(dropdownMenu(index).getFirstSelectedOption().getText(),"Select Role");
+        Assert.assertEquals(dropdownMenuTR(index).getFirstSelectedOption().getText(),"Select Role");
     }
-    public void setUserAsAdmin(int index) throws InterruptedException {
-        dropdownMenu(index).selectByVisibleText("Admin");
-        Assert.assertEquals(dropdownMenu(index).getFirstSelectedOption().getText(),"Admin");
+    public void setUserAsAdminTR(int index) throws InterruptedException {
+        dropdownMenuTR(index).selectByVisibleText("Admin");
+        Assert.assertEquals(dropdownMenuTR(index).getFirstSelectedOption().getText(),"Admin");
         saveButtonByTR(index).click();
         Thread.sleep(sleepTime/8);
         Assert.assertTrue(driver.findElement
                 (By.xpath("//tr[@ng-repeat='entity in entities']['"+index+"']/td/div/div[text()='Admin']")).isDisplayed());
     }
-    public void setUserAsRegularUser(int index) throws InterruptedException {
-        dropdownMenu(index).selectByVisibleText("Regular user");
-        Assert.assertEquals(dropdownMenu(index).getFirstSelectedOption().getText(),"Regular user");
+    public void setUserAsRegularUserTR(int index) throws InterruptedException {
+        dropdownMenuTR(index).selectByVisibleText("Regular user");
+        Assert.assertEquals(dropdownMenuTR(index).getFirstSelectedOption().getText(),"Regular user");
         saveButtonByTR(index).click();
         Thread.sleep(sleepTime/8);
         Assert.assertTrue(driver.findElement
