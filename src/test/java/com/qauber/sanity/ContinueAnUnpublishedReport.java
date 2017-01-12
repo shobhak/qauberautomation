@@ -40,20 +40,20 @@ public class ContinueAnUnpublishedReport extends PageObjectModelResources {
     public void continueAnUnpublishedReport() throws InterruptedException
     {
         getNavBar().reportsButton().click();
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
 
         getReports().publishedOnCheckBox().click();
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
 
         try {
             getReports().pagination(keyWord).click();
-            Thread.sleep(sleepTime * 2);
+            Thread.sleep(sleepTime);
         }
         catch (Exception e)
         {}
 
         getReports().selectReport(keyWord).click();
-        Thread.sleep(sleepTime*2);
+        Thread.sleep(sleepTime);
 
         try
         {
@@ -61,7 +61,7 @@ public class ContinueAnUnpublishedReport extends PageObjectModelResources {
         }
         catch (AssertionError e)
         {
-            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Can't continue an unpublished report: "+e.getLocalizedMessage());
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Unpublished report can't be continue: "+e.getLocalizedMessage());
             throw e;
         }
         testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
