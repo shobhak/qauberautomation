@@ -11,7 +11,6 @@ import org.testng.annotations.Test;
 
 /**
  * Created by Alya on 12/20/2016.
- * TODO: add preconditions, fix assert to handle middle name/suspect type/gang name
  */
 public class ViewReport extends PageObjectModelResources {
 
@@ -38,6 +37,8 @@ public class ViewReport extends PageObjectModelResources {
         getNavBar().reportsButton().click();
         Thread.sleep(sleepTime/2);
         getReports().publishedOnCheckBox().click();
+        Thread.sleep(sleepTime/2);
+        getPreconditions().getReportPreconditions().ensureReportsAtLeast(1);
         Thread.sleep(sleepTime/2);
 
         String searchReportResultID = getReports().searchReportResultID(rowindex).getText();
