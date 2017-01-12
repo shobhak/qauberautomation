@@ -35,7 +35,7 @@ public class SiteLogoLeadsToReports extends PageObjectModelResources {
         String url = getDriver().getCurrentUrl();
 
         try {
-            Assert.assertEquals(url, "http://testwave.qabidder.net/#/app/reports");
+            Assert.assertEquals(url, testConfig().getBaseURL()+"/#/app/reports");
         } catch (AssertionError e) {
             testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Logo does not lead to reports "+e.getLocalizedMessage());
             throw e;

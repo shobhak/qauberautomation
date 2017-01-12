@@ -1,12 +1,16 @@
 package com.qauber.pagesresource;
 
 import com.qauber.pages.*;
+import org.apache.commons.lang3.SystemUtils;
+import org.openqa.selenium.Dimension;
+import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.safari.SafariDriver;
 
+import java.awt.*;
 import java.util.concurrent.TimeUnit;
 
 
@@ -102,8 +106,13 @@ public class PageObjectModelResources {
         //implicit wait
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 
+
+
         //maximize window for our viewing pleasure
-        driver.manage().window().maximize();
+        driver.manage().window().maximize(); //This does not work correctly on OS X with Chrome.
+        if (SystemUtils.IS_OS_MAC_OSX && driver instanceof ChromeDriver) { //so let's handle that here
+            maximizeScreen(driver);
+        }
 
         ////////////////// Done managing WebDriver
 
@@ -144,6 +153,17 @@ public class PageObjectModelResources {
     ///////GET ALL TEST CASE RESOURCES
     protected WebDriver getDriver() { //visible from subclasses, not public OR private
         return driver;
+    }
+
+    //Now for fun... Maximize does not work correctly on Chrome on OS X - here is workaround code from
+    //#11 @ https://bugs.chromium.org/p/chromedriver/issues/detail?id=985
+    public void maximizeScreen(WebDriver driver) {
+        java.awt.Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        Point position = new Point(0, 0);
+        driver.manage().window().setPosition(position);
+        Dimension maximizedScreenSize =
+                new Dimension((int) screenSize.getWidth(), (int) screenSize.getHeight());
+        driver.manage().window().setSize(maximizedScreenSize);
     }
 
 
