@@ -37,12 +37,13 @@ public class SearchReportsBySuspectType extends PageObjectModelResources {
     @Test
     public void searchReportsBySuspectType() throws InterruptedException
     {
+        getPreconditions().getReportPreconditions().ensureReportsAtLeast(10);
+        Thread.sleep(sleepTime);
         getNavBar().reportsButton().click();
         Thread.sleep(sleepTime);
         getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime);
 
-        getPreconditions().getReportPreconditions().ensureReportsAtLeast(10);
         suspectType = getPreconditions().getSearchHelper().randomSuspectType();
 
         if(getReports().publishedOnCheckBox().isSelected())

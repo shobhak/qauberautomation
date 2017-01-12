@@ -10,11 +10,12 @@ import org.testng.annotations.Test;
 
 /**
  * Created by Maksim on 12/26/2016.
+ *
  */
 public class SearchReportsByCaseID extends PageObjectModelResources {
 
-    int sleepTime;
-    String caseID;
+    private int sleepTime;
+    private String caseID;
 
     @BeforeClass
     public void setUp() throws InterruptedException {

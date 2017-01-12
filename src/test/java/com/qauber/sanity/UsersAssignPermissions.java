@@ -2,7 +2,6 @@ package com.qauber.sanity;
 
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -11,11 +10,11 @@ import java.awt.*;
 
 
 //Created by Denys_G on 12/22/2016.
+//TODO: add asserts
 
 public class UsersAssignPermissions extends PageObjectModelResources {
 
-    WebDriver driver;
-    int sleepTime;
+    private int sleepTime;
 
     /** NOTE: Preconditions about existing entities and admin assigned should be added*/
 

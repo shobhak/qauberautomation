@@ -2,7 +2,6 @@ package com.qauber.sanity;
 
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -12,7 +11,6 @@ import org.testng.annotations.Test;
  */
 public class SearchReportsByCreatedDate extends PageObjectModelResources {
 
-    WebDriver driver;
     int sleepTime;
     String date;
 

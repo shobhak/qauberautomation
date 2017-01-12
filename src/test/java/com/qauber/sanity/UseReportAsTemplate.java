@@ -11,6 +11,7 @@ import org.testng.annotations.Test;
 
 /**
  * Created by Alya on 12/20/2016.
+ * TODO: finish TestRail integration (does not upload result if test fails)
  */
 
 public class UseReportAsTemplate extends PageObjectModelResources {
