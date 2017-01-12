@@ -22,7 +22,7 @@ public class EntitiesPermissionsDialog {
         return driver.findElement(By.xpath
                 ("//tr[@ng-repeat='user in $assignCtrl.users']["+index+"]/td/button[@title='Detach']"));
     }
-    public void detachUserPermissions(int index) throws InterruptedException {
+    public void detachUserPermissionsTR(int index) throws InterruptedException {
         driver.findElement
                 (By.xpath("//tr[@ng-repeat='user in $assignCtrl.users']["+index+"]/td/button[@title='Detach']")).click();
         Select dropdown = new Select(driver.findElement(By.xpath
