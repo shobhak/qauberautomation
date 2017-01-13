@@ -227,6 +227,8 @@ public class Entities {
         return driver.findElements(By.xpath("/html/body/div[2]/section/div/div/pages-manager/div[2]/ul/li[4]/a")).size() > 0;
     }
 
+    public WebElement entityUpdatedMessage() {return driver.findElement(By.xpath("//div[text()='The organization has been updated.']"));}
+
 }
 
 

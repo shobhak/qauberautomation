@@ -78,34 +78,40 @@ public class PermissionsPreconditions extends PageObjectModelResources {
             Thread.sleep(sleepTime/2);
             System.out.println("To meet preconditions Logged in as "+testUser().getUserType()+"  "+testUser().getUsername());
 
-            getNavBar().usersButton().click();
-            Thread.sleep(sleepTime/8);
-
-            UserFactory userFactory = new UserFactory();
-            User au = userFactory.getUser(User.UserType.RU);
-            String  RUemail =   au.getUsername().toLowerCase();
-            getUsers().assignPermissionsButtonByEmail(RUemail).click();
-            Thread.sleep(sleepTime/6);
-
-            for (int i = 1; i <= getUsersPermissionsDialog().entitiesDepSubdepsAllList().size(); i++){
-                WebElement detachButt = getUsersPermissionsDialog().detachButtonByTR(i);
-                if (detachButt.isDisplayed()){
-                    detachButt.click();
-                }
-                else{
-                    ((JavascriptExecutor)testDriver()).executeScript("arguments[0].scrollIntoView(true);", detachButt);
-                    detachButt.click();}
-                Thread.sleep(sleepTime/12);
-                getUsersPermissionsDialog().dropdownMenuTR(i).selectByVisibleText("Regular User");
-                Thread.sleep(sleepTime/12);
-                getUsersPermissionsDialog().saveButtonByTR(i).click();
-                Thread.sleep(sleepTime/10);
-                Assert.assertEquals(getUsersPermissionsDialog().rightsSavedTR(i).getText(), "Regular User");
-            }
+            setRUasRegUserToAll(testDriver());
 
         } catch (InterruptedException e) {
             e.printStackTrace();
         } finally { breakDown(); } //breakdown
+    }
+    public void setRUasRegUserToAll(WebDriver driver) throws InterruptedException {
+        PageResources page = PageResourcesFactory.getPageResources(driver);
+        Thread.sleep(sleepTime/4);
+        page.getNavBar().usersButton().click();
+        Thread.sleep(sleepTime/8);
+
+        UserFactory userFactory = new UserFactory();
+        User au = userFactory.getUser(User.UserType.RU);
+        String  RUemail =   au.getUsername().toLowerCase();
+        page.getUsers().assignPermissionsButtonByEmail(RUemail).click();
+        Thread.sleep(sleepTime/6);
+
+        for (int i = 1; i <= page.getUsersPermissionsDialog().entitiesDepSubdepsAllList().size(); i++){
+            WebElement detachButt = page.getUsersPermissionsDialog().detachButtonByTR(i);
+            if (detachButt.isDisplayed()){
+                detachButt.click();
+            }
+            else{
+                ((JavascriptExecutor)testDriver()).executeScript("arguments[0].scrollIntoView(true);", detachButt);
+                detachButt.click();}
+            Thread.sleep(sleepTime/12);
+            page.getUsersPermissionsDialog().dropdownMenuTR(i).selectByVisibleText("Regular User");
+            Thread.sleep(sleepTime/12);
+            page.getUsersPermissionsDialog().saveButtonByTR(i).click();
+            Thread.sleep(sleepTime/10);
+            Assert.assertEquals(page.getUsersPermissionsDialog().rightsSavedTR(i).getText(), "Regular User");
+        }
+
     }
 
     public void breakDown() {

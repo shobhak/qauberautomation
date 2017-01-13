@@ -15,7 +15,7 @@ public class AssertUber {
         try {
             Assert.assertTrue(conditions, message);
         } catch (AssertionError e) {
-            config.getTestRail().addResults(TestRail.TestCaseResult.FAILED, message);
+            config.getTestRail().addResults(TestRail.TestCaseResult.FAILED, e.getLocalizedMessage());
             throw e;
         }
     }
@@ -24,7 +24,7 @@ public class AssertUber {
         try {
             Assert.assertEquals(actual, expected, message);
         } catch (AssertionError e) {
-            config.getTestRail().addResults(TestRail.TestCaseResult.FAILED, message);
+            config.getTestRail().addResults(TestRail.TestCaseResult.FAILED, e.getLocalizedMessage());
             throw e;
         }
     }
@@ -33,7 +33,7 @@ public class AssertUber {
         try {
             Assert.assertFalse(conditions, message);
         } catch (AssertionError e) {
-            config.getTestRail().addResults(TestRail.TestCaseResult.FAILED, message);
+            config.getTestRail().addResults(TestRail.TestCaseResult.FAILED, e.getLocalizedMessage());
             throw e;
         }
     }

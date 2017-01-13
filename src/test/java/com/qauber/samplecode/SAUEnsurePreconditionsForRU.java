@@ -2,6 +2,7 @@ package com.qauber.samplecode;
 
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
+import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -29,7 +30,7 @@ public class SAUEnsurePreconditionsForRU extends PageObjectModelResources {
         Thread.sleep(sleepTime/2);
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(sleepTime/2);
-        Assert.assertFalse(getNavBar().entitiesButton().isDisplayed());
+        Assert.assertFalse(getDriver().findElements(By.xpath("//a[@title='Entities']")).size() != 0);
 
     }
 
