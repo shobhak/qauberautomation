@@ -52,7 +52,7 @@ public class DownloadReportAsPDF extends PageObjectModelResources {
         getReportsViewReport().downloadAsPDFButton().click();
         Thread.sleep(sleepTime);
 
-        AssertUber.assertTrue(isFileDownloaded(fileName), "Failed to download Expected document");
+        AssertUber.assertTrue(isFileDownloaded(fileName), "File wasn't downloaded");
 
         testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
