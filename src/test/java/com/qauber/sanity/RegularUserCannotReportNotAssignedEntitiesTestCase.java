@@ -63,6 +63,7 @@ public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObje
         List<WebElement> userentitieslist = getUsersPermissionsDialog().userEntitiesList();
         totalrows = getUsersPermissionsDialog().userRowList().size();
 
+        // find out the user is assigned neither admin user or regular user for each organization
         for (int i = 1; i <= totalrows; i++){
             try{
                 Assert.assertNotEquals(true, getUsersPermissionsDialog().organizationByRow(i).isDisplayed());
@@ -70,11 +71,11 @@ public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObje
             catch (AssertionError d){
                 try{
                     orgRow++;
-                    testDriver().findElement(By.xpath("//tr[" + i + "][@ng-repeat='entity in entities']/td[@class='text-center'][1]//div[text()='Admin']"));
+                    getEntitiesPermissionsDialog().verifyUserAsAdminUser(i);
                 }
                 catch (NoSuchElementException e) {
                     try{
-                        testDriver().findElement(By.xpath("//tr[" + i + "][@ng-repeat='entity in entities']/td[@class='text-center'][1]//div[text()='Regular User']"));
+                        getEntitiesPermissionsDialog().verifyUserAsRegularUser(i);
                     }
                     catch (NoSuchElementException f) {
                         notassginedlist.add(userentitieslist.get(orgRow - 1).getText());;
@@ -113,6 +114,7 @@ public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObje
         List<WebElement> reportentitieslist = getAddReportOrganization().entitiesList();
         Thread.sleep(sleepTime);
 
+        // compare the add report radio button list with not assigned list to verify there isn't a match
         for (int x = 0; x < reportentitieslist.size(); x++){
             for (int y = 0; y < notassginedlist.size(); y++) {
                 System.out.println(reportentitieslist.get(x).getText());
