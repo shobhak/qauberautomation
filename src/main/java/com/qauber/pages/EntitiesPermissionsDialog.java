@@ -30,35 +30,20 @@ public class EntitiesPermissionsDialog {
         Assert.assertEquals(dropdown.getFirstSelectedOption().getText(),"Select Role");
     }
     public void setUserAsAdmin(int index) throws InterruptedException {
-        driver.findElement
-                (By.xpath("//tr[@ng-repeat='user in $assignCtrl.users']" +
-                        "["+index+"]/td/select[@ng-model='user.assignedRole']")).sendKeys("Admin");
-        driver.findElement(By.xpath
-                ("//tr[@ng-repeat='user in $assignCtrl.users']["+index+"]/td/button[@title='Save changes']")).click();
-        Select dropdown = new Select(driver.findElement(By.xpath
-                ("//tr[@ng-repeat='user in $assignCtrl.users']["+index+"]/td/select[@ng-model='user.assignedRole']")));
-        Thread.sleep(500);
-        Assert.assertEquals(dropdown.getFirstSelectedOption().getText(),"Admin");
+        rightsDropdownByIndex(index).selectByVisibleText("Admin");
+        saveButtonByIndex(index).click();
     }
     public void setUserAsRegularUser(int index) throws InterruptedException {
-        driver.findElement
-                (By.xpath("//tr[@ng-repeat='user in $assignCtrl.users']" +
-                        "["+index+"]/td/select[@ng-model='user.assignedRole']")).sendKeys("Regular user");
-        driver.findElement(By.xpath
-                ("//tr[@ng-repeat='user in $assignCtrl.users']["+index+"]/td/button[@title='Save changes']")).click();
-        Select dropdown = new Select(driver.findElement(By.xpath
-                ("//tr[@ng-repeat='user in $assignCtrl.users']["+index+"]/td/select[@ng-model='user.assignedRole']")));
-        Thread.sleep(500);
-        Assert.assertEquals(dropdown.getFirstSelectedOption().getText(),"Regular user");
+        rightsDropdownByIndex(index).selectByVisibleText("Regular user");
+        saveButtonByIndex(index).click();
     }
-
     public WebElement saveButtonByIndex(int index){
         return driver.findElement(By.xpath
                 ("//tr[@ng-repeat='user in $assignCtrl.users']["+index+"]/td/button[@title='Save changes']"));
     }
-    public WebElement rightsDropdownByIndex(int index){
-        return driver.findElement(By.xpath
-                ("//tr[@ng-repeat='user in $assignCtrl.users']["+index+"]/td/select[@ng-model='user.assignedRole']"));
+    public Select rightsDropdownByIndex(int index){
+        return new Select (driver.findElement(By.xpath
+                ("//tr[@ng-repeat='user in $assignCtrl.users']["+index+"]/td/select[@ng-model='user.assignedRole']")));
     }
     public void closeDialogByPressESC() {
         ((JavascriptExecutor)driver).executeScript("document.getElementsByClassName('ngdialog-close')[0].click();");
@@ -83,5 +68,5 @@ public class EntitiesPermissionsDialog {
         return rowindex;
     }
 
-    public List<WebElement> rightDropdownList() {return driver.findElements(By.xpath("//td/select"));}
+    public List<WebElement> rightAllDropdownsList() {return driver.findElements(By.xpath("//td/select"));}
 }
