@@ -38,7 +38,7 @@ public class ViewReport extends PageObjectModelResources {
         Thread.sleep(sleepTime/2);
         getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime/2);
-        getPreconditions().getReportPreconditions().ensureReportsAtLeast(1);
+        getPreconditions().getReportPreconditions().ensurePublishedReportsAtLeast(1);
         Thread.sleep(sleepTime/2);
 
         String searchReportResultID = getReports().searchReportResultID(rowindex).getText();

@@ -39,8 +39,14 @@ public class ReportPreconditionsTest extends PageObjectModelResources {
         getNavBar().reportsButton().click();
         Thread.sleep(sleepTime);
         getReports().publishedOnCheckBox().click();
-        getPreconditions().getReportPreconditions().ensureReportsAtLeast(26);
-        getPreconditions().getReportPreconditions().createUnpublishedReport(1);
+        getPreconditions().getReportPreconditions().ensurePublishedReportsAtLeast(45);
+
+        getNavBar().reportsButton().click();
+        Thread.sleep(sleepTime);
+        if(getReports().publishedOnCheckBox().isSelected())
+            getReports().publishedOnCheckBox().click();
+        Thread.sleep(sleepTime);
+        getPreconditions().getReportPreconditions().ensureUnpublishedReportsAtLeast(23);
     }
 
     @AfterClass

@@ -201,7 +201,13 @@ public class Reports {
         return list.get(reportNumber-1);
     }
 
-
+    public List<WebElement> unpublishedReportsRows() {
+        return driver.findElements(By.xpath("//div[@class='media-box-body']//span[@ng-show='!report.status']/div"));
+    }
+    public List<WebElement> publishedReportsRows()
+    {
+        return driver.findElements(By.xpath("//div[@class='media-box-body']//span[@ng-show='report.status']"));
+    }
 
 
     //Old code below for compatibility purposes

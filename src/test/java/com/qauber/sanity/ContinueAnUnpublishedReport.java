@@ -43,6 +43,12 @@ public class ContinueAnUnpublishedReport extends PageObjectModelResources {
         getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime);
 
+        getPreconditions().getReportPreconditions().ensureUnpublishedReportsAtLeast(1);
+
+        if(getReports().publishedOnCheckBox().isSelected())
+            getReports().publishedOnCheckBox().click();
+        Thread.sleep(sleepTime);
+
         String keyWord = "last";
         try {
             getReports().pagination(keyWord).click();

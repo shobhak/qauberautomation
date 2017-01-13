@@ -41,7 +41,7 @@ public class SearchReportsByCreatedDate extends PageObjectModelResources {
         getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime);
 
-        getPreconditions().getReportPreconditions().ensureReportsAtLeast(10);
+        getPreconditions().getReportPreconditions().ensurePublishedReportsAtLeast(10);
 
         if(getReports().publishedOnCheckBox().isSelected())
             getReports().publishedOnCheckBox().click();
