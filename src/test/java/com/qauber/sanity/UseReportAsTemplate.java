@@ -38,7 +38,7 @@ public class UseReportAsTemplate extends PageObjectModelResources {
         getNavBar().reportsButton().click();
         getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime/2);
-        getPreconditions().getReportPreconditions().ensureReportsAtLeast(1);
+        getPreconditions().getReportPreconditions().ensurePublishedReportsAtLeast(1);
         Thread.sleep(sleepTime/2);
         getReports().selectReport(rowindex).click();
         Thread.sleep(sleepTime/2);

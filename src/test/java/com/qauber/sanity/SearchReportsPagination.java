@@ -43,7 +43,7 @@ public class SearchReportsPagination extends PageObjectModelResources {
         getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime);
 
-        getPreconditions().getReportPreconditions().ensureReportsAtLeast(11);
+        getPreconditions().getReportPreconditions().ensurePublishedReportsAtLeast(11);
 
         if(getReports().publishedOnCheckBox().isSelected())
             getReports().publishedOnCheckBox().click();

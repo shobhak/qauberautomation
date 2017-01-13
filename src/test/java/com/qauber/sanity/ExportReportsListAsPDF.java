@@ -36,7 +36,7 @@ public class ExportReportsListAsPDF extends PageObjectModelResources{
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(sleepTime);
         getReports().publishedOnCheckBox().click();
-        getPreconditions().getReportPreconditions().ensureReportsAtLeast(1);
+        getPreconditions().getReportPreconditions().ensurePublishedReportsAtLeast(1);
         Thread.sleep(sleepTime/2);
 
         String fileName = downloadPath + "search_result.pdf";
