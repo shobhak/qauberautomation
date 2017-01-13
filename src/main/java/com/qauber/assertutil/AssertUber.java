@@ -28,4 +28,13 @@ public class AssertUber {
             throw e;
         }
     }
+
+    public static void assertFalse(boolean conditions, String message) {
+        try {
+            Assert.assertFalse(conditions, message);
+        } catch (AssertionError e) {
+            config.getTestRail().addResults(TestRail.TestCaseResult.FAILED, message);
+            throw e;
+        }
+    }
 }
