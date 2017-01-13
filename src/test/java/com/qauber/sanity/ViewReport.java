@@ -1,16 +1,16 @@
 package com.qauber.sanity;
 
+import com.qauber.assertutil.AssertUber;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
-import org.testng.Assert;
+import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
  * Created by Alya on 12/20/2016.
- * TODO: add preconditions, fix assert to handle middle name/suspect type/gang name
  */
 public class ViewReport extends PageObjectModelResources {
 
@@ -38,6 +38,8 @@ public class ViewReport extends PageObjectModelResources {
         Thread.sleep(sleepTime/2);
         getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime/2);
+        getPreconditions().getReportPreconditions().ensureReportsAtLeast(1);
+        Thread.sleep(sleepTime/2);
 
         String searchReportResultID = getReports().searchReportResultID(rowindex).getText();
 
@@ -46,13 +48,14 @@ public class ViewReport extends PageObjectModelResources {
 
         String reportID = getReportsViewReport().reportID().getText();
         String suspectName = getReportsViewReport().suspectName().getText();
+        String suspectType = getReportsViewReport().suspectType().getText();
+        String IdName = reportID + ". " + suspectName;
+        String IdNameType = reportID + ". " + suspectName + " (" + suspectType + ")";
 
-
-        try {
-            Assert.assertEquals(searchReportResultID,reportID + ". " + suspectName);
-            } catch (AssertionError e) {
-            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Report ID and suspect name do not match "+e.getLocalizedMessage());
-            throw e;
+        if (StringUtils.isBlank(suspectType)) {
+            AssertUber.assertEquals(searchReportResultID, IdName, "ReportID and suspectName don't match ");
+        } else {
+            AssertUber.assertEquals(searchReportResultID, IdNameType, "ReportID, suspectName, suspectType don't match ");
         }
 
         testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");

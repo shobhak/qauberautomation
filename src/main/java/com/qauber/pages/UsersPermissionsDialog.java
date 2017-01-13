@@ -24,7 +24,17 @@ public class UsersPermissionsDialog {
     public UsersPermissionsDialog(WebDriver driver) {this.driver = driver;}
 
     public List<WebElement> userEntitiesList() {
-             return driver.findElements(By.xpath("//tr//div[@class='depth-level']"));
+        return driver.findElements(By.xpath("//tr//div[@class='depth-level']"));
+    }
+
+    public WebElement organizationByRow(int index){
+        return driver.findElement(By.xpath("//tr[" + index + "]//div[@class='depth-level']"));
+    }
+//    public WebElement organizationByRow(int index){
+//        return (WebElement) driver.findElements(By.xpath("//tr[" + index + "]//div[@class='depth-level']"));
+//    }
+    public List<WebElement> userRowList() {
+        return driver.findElements(By.xpath("//tr[@ng-repeat='entity in entities']"));
     }
     public List<WebElement> entitiesDepSubdepsAllList() {
         return driver.findElements(By.xpath("//td[@style='border-left: none']/div"));
