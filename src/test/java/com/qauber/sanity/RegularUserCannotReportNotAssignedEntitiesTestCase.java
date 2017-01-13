@@ -43,6 +43,7 @@ public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObje
     @Test
     public void regularUserCannotReportNotAssginedEntities() throws InterruptedException, AWTException {
         int totalrows;
+        int orgRow = 0;
         List<String> notassginedlist = new ArrayList<String>();
 
         testDriver().get(testConfig().getBaseURL());
@@ -60,25 +61,36 @@ public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObje
         Thread.sleep(sleepTime);
 
         List<WebElement> userentitieslist = getUsersPermissionsDialog().userEntitiesList();
-        totalrows = userentitieslist.size();
+        totalrows = getUsersPermissionsDialog().userRowList().size();
 
         for (int i = 1; i <= totalrows; i++){
             try{
-                testDriver().findElement(By.xpath("//tr[" + i + "][@ng-repeat='entity in entities']/td[@class='text-center'][1]//div[text()='Admin']"));
+                Assert.assertNotEquals(true, getUsersPermissionsDialog().organizationByRow(i).isDisplayed());
             }
-            catch (NoSuchElementException e) {
+            catch (AssertionError d){
                 try{
-                    testDriver().findElement(By.xpath("//tr[" + i + "][@ng-repeat='entity in entities']/td[@class='text-center'][1]//div[text()='Regular User']"));
+                    orgRow++;
+                    testDriver().findElement(By.xpath("//tr[" + i + "][@ng-repeat='entity in entities']/td[@class='text-center'][1]//div[text()='Admin']"));
                 }
-                catch (NoSuchElementException f) {
-                    notassginedlist.add(userentitieslist.get(i - 1).getText());
+                catch (NoSuchElementException e) {
+                    try{
+                        testDriver().findElement(By.xpath("//tr[" + i + "][@ng-repeat='entity in entities']/td[@class='text-center'][1]//div[text()='Regular User']"));
+                    }
+                    catch (NoSuchElementException f) {
+                        notassginedlist.add(userentitieslist.get(orgRow - 1).getText());;
+                    }
                 }
+            }
+            catch (NoSuchElementException e){
+                System.out.println("This row is not an organization!");
             }
         }
+        Thread.sleep(sleepTime);
 
         for (int j = 0; j < notassginedlist.size(); j++){
             System.out.println(notassginedlist.get(j));
         }
+        Thread.sleep(sleepTime);
 
         getUsersPermissionsDialog().closeDialogByPressESC();
         Thread.sleep(sleepTime);

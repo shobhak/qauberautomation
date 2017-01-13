@@ -1,9 +1,9 @@
 package com.qauber.sanity;
 
+import com.qauber.assertutil.AssertUber;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -36,23 +36,13 @@ public class SiteMenuCollapsible extends PageObjectModelResources {
         getHeader().hamburgerMenu().click();
         Thread.sleep(sleepTime/2);
 
-        try {
-        Assert.assertFalse(getNavBar().mainNavigationText().isDisplayed());
-        } catch (AssertionError e) {
-            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "MainNavigationText displayed "+e.getLocalizedMessage());
-            throw e;
-        }
+        AssertUber.assertFalse(getNavBar().mainNavigationText().isDisplayed(), "MainNavigationText displayed");
 
         //uncollapse
         getHeader().hamburgerMenu().click();
         Thread.sleep(sleepTime/2);
 
-        try {
-        Assert.assertTrue(getNavBar().mainNavigationText().isDisplayed());
-        } catch (AssertionError e) {
-            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "MainNavigationText not displayed "+e.getLocalizedMessage());
-            throw e;
-        }
+        AssertUber.assertTrue(getNavBar().mainNavigationText().isDisplayed(), "MainNavigationText not displayed");
 
         testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
