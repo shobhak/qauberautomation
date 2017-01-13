@@ -1,17 +1,16 @@
 package com.qauber.sanity;
 
+import com.qauber.assertutil.AssertUber;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.apache.commons.lang3.StringUtils;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
  * Created by Alya on 12/20/2016.
- * TODO: finish TestRail integration (does not upload result if test fails)
  */
 
 public class UseReportAsTemplate extends PageObjectModelResources {
@@ -38,6 +37,8 @@ public class UseReportAsTemplate extends PageObjectModelResources {
         Thread.sleep(sleepTime);
         getNavBar().reportsButton().click();
         getReports().publishedOnCheckBox().click();
+        Thread.sleep(sleepTime/2);
+        getPreconditions().getReportPreconditions().ensureReportsAtLeast(1);
         Thread.sleep(sleepTime/2);
         getReports().selectReport(rowindex).click();
         Thread.sleep(sleepTime/2);
@@ -70,23 +71,27 @@ public class UseReportAsTemplate extends PageObjectModelResources {
         String buildString = getAddReportSubjectInformationPage().build().getAttribute("value");
         String eyeColorString = getAddReportSubjectInformationPage().eyeColor().getAttribute("value");
 
-        Assert.assertEquals(caseID, "");
+        AssertUber.assertEquals(caseID, "", "Case ID is displayed");
 
         if (StringUtils.isBlank(middleName)) {
-            Assert.assertEquals(suspectName, firstName + " " + lastName);
+            AssertUber.assertEquals(suspectName, firstName + " " + lastName, "Suspect name is different) ");
         } else {
-            Assert.assertEquals(suspectName, firstName + " " + middleName + " " + lastName);
+            AssertUber.assertEquals(suspectName, firstName + " " + middleName + " " + lastName, "Suspect name is different");
         }
 
-        Assert.assertEquals(suspectType, suspectTypeString);
+        AssertUber.assertEquals(suspectType, suspectTypeString, "Suspect type is different");
+        //Assert.assertEquals(suspectType, suspectTypeString);
 
-        Assert.assertEquals(nickname, nickName);
+        AssertUber.assertEquals(nickname, nickName, "NickName is different");
+        //Assert.assertEquals(nickname, nickName);
 
         String sex = StringUtils.isBlank(sexString) ? "" : sexString + " ";
         String build = StringUtils.isBlank(buildString) ? " " : " " + buildString + " ";
         String eyeColor = StringUtils.isBlank(eyeColorString) ? "" : " " + eyeColorString;
 
-        Assert.assertEquals(sexBuildEyeColor, sex + "/" + build + "/" + eyeColor);
+        AssertUber.assertEquals(sexBuildEyeColor, sex + "/" + build + "/" + eyeColor, "Sex, build, eyeColor are different");
+        //Assert.assertEquals(sexBuildEyeColor, sex + "/" + build + "/" + eyeColor);
+
         testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
 

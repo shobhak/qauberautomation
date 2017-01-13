@@ -1,11 +1,11 @@
 package com.qauber.sanity;
 
+import com.qauber.assertutil.AssertUber;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.ReportValueObject;
 import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.JavascriptExecutor;
-import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -65,8 +65,8 @@ public class AddReport extends PageObjectModelResources {
         Thread.sleep(sleepTime/4);
 
         //verify info entered matches info on preview
-        Assert.assertEquals(getAddReportPreview().suspectName().getText(),firstLastName);
-        Assert.assertEquals(getAddReportPreview().stopLocation().getText(), reportVO.getStopLocation());
+        AssertUber.assertEquals(getAddReportPreview().suspectName().getText(),firstLastName, "SuspectName is different");
+        AssertUber.assertEquals(getAddReportPreview().stopLocation().getText(), reportVO.getStopLocation(), "StopLocation is different");
 
         //verify report published
         String reportIdValue = getAddReportPreview().reportIdElement().getText();
@@ -74,12 +74,7 @@ public class AddReport extends PageObjectModelResources {
         getAddReportPreview().publishReportButton().click();
         Thread.sleep(sleepTime/4);
 
-        try {
-        Assert.assertTrue(verifyReportPublished(reportIdValue));
-        } catch (AssertionError e) {
-            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Report ID do not match Report ID searched "+e.getLocalizedMessage());
-            throw e;
-        }
+        AssertUber.assertTrue(verifyReportPublished(reportIdValue), "ReportID doesn't match ReportID searched");
 
         testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
