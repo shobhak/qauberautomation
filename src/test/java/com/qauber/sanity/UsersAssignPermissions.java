@@ -12,7 +12,6 @@ import java.awt.*;
 
 
 //Created by Denys_G on 12/22/2016.
-//TODO: add asserts
 
 public class UsersAssignPermissions extends PageObjectModelResources {
 
