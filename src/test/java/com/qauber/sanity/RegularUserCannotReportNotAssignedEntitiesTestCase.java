@@ -71,11 +71,11 @@ public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObje
             catch (AssertionError d){
                 try{
                     orgRow++;
-                    getEntitiesPermissionsDialog().verifyUserAsAdminUser(i);
+                    getUsersPermissionsDialog().verifyUserAsAdminUser(i);
                 }
                 catch (NoSuchElementException e) {
                     try{
-                        getEntitiesPermissionsDialog().verifyUserAsRegularUser(i);
+                        getUsersPermissionsDialog().verifyUserAsRegularUser(i);
                     }
                     catch (NoSuchElementException f) {
                         notassginedlist.add(userentitieslist.get(orgRow - 1).getText());;
