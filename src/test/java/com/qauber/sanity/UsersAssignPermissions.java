@@ -40,15 +40,6 @@ public class UsersAssignPermissions extends PageObjectModelResources {
         setUpScript();
         assignPermissionsUsers();
 
-        try {
-            Assert.assertEquals(getUsersPermissionsDialog().rightsSavedTR(entityIndex).getText(),
-                    "Admin");//method setUserAsAdmin
-        } catch (AssertionError e) {
-            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Other permission shown "+e.getLocalizedMessage());
-            throw e;
-        }
-        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
-
         breakDownHelper();//used to close window
     }
     @Test(priority = 1)
@@ -60,16 +51,6 @@ public class UsersAssignPermissions extends PageObjectModelResources {
         setUpScript();
         assignPermissionsUsers();
 
-
-        try {
-            Assert.assertEquals(getUsersPermissionsDialog().rightsSavedTR(entityIndex).getText(),
-                    "Admin");//method setUserAsAdmin
-        } catch (AssertionError e) {
-            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Other permission shown "+e.getLocalizedMessage());
-            throw e;
-        }
-
-        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }
 
     public void assignPermissionsUsers() throws InterruptedException, AWTException {
@@ -90,7 +71,15 @@ public class UsersAssignPermissions extends PageObjectModelResources {
         Thread.sleep(sleepTime/4);
         getUsers().assignPermissionsButtonByIndex(userIndex).click();
         Thread.sleep(sleepTime/8);
+        try {
+            Assert.assertEquals(getUsersPermissionsDialog().rightsSavedTR(entityIndex).getText(),
+                    "Admin");//method setUserAsAdmin
+        } catch (AssertionError e) {
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Other permission shown "+e.getLocalizedMessage());
+            throw e;
+        }
 
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
 
     }
 
