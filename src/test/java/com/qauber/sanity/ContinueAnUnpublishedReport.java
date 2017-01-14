@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 /**
  * Created by Maksim on 12/26/2016.
- * TODO: preconditions
+ *
  */
 public class ContinueAnUnpublishedReport extends PageObjectModelResources {
 
