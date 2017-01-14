@@ -95,5 +95,12 @@ public class UsersPermissionsDialog {
 //                (By.xpath("//tr[@ng-repeat='entity in entities']["+index+"]/td/div/div[text()='Regular user']")).isDisplayed());
     }
 
+    public WebElement verifyUserAsAdminUser(int index) {
+        return driver.findElement(By.xpath("//tr[" + index + "][@ng-repeat='entity in entities']/td[@class='text-center'][1]//div[text()='Admin']"));
+    }
+
+    public WebElement verifyUserAsRegularUser(int index) {
+        return driver.findElement(By.xpath("//tr[" + index + "][@ng-repeat='entity in entities']/td[@class='text-center'][1]//div[text()='Regular User']"));
+    }
 
 }
