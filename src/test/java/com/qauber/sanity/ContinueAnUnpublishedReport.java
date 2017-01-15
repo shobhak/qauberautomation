@@ -55,7 +55,9 @@ public class ContinueAnUnpublishedReport extends PageObjectModelResources {
             Thread.sleep(sleepTime);
         }
         catch (Exception e)
-        {}
+        {
+            System.out.println("Here only one page with reports.");
+        }
 
         getReports().selectReport(keyWord).click();
         Thread.sleep(sleepTime);
