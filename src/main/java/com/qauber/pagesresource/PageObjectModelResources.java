@@ -186,6 +186,8 @@ public class PageObjectModelResources {
 
     protected Entities getEntities() {return pages.getEntities();}
 
+    protected EntitiesDepartmentSetting getEntitiesDepartmentSettings() {return pages.getEntitiesDepartmentSetting();}
+
     protected EntitiesPermissionsDialog getEntitiesPermissionsDialog() {return pages.getEntitiesPermissionsDialog();}
 
     protected Users getUsers() {return pages.getUsers();}
