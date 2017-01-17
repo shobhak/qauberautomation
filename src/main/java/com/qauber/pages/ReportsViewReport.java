@@ -25,7 +25,7 @@ public class ReportsViewReport {
     }
 
     public WebElement reportID(){
-        return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[1]/div[2]/strong"));
+        return driver.findElement(By.xpath("//*[text()='Report ID']//following::div[1]"));
     }
 
     public WebElement caseID(){
