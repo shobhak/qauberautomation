@@ -19,7 +19,7 @@ public class SearchReportsBySuspectType extends PageObjectModelResources {
     @BeforeClass
     public void setUp() throws InterruptedException {
         setUpWithConfigFile();
-        setUpUser(User.UserType.SAU);
+        setUpUser(User.UserType.RU);
 
         testConfig().getTestRail().setCaseID(82768);
         testConfig().getTestRail().setTester("MadMax");
