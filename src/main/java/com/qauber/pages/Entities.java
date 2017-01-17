@@ -43,14 +43,14 @@ public class Entities {
     }
 
     // Web element list for edit button
-    public List<WebElement> editOrganizationButtonList(){
-        return driver.findElements(By.xpath("//*[@title='Edit']"));
-    }
+//    public List<WebElement> editOrganizationButtonList(){
+//        return driver.findElements(By.xpath("//*[@title='Edit']"));
+//    }
 
     // Web element list for finish create the entity
-    public List<WebElement> finishCreateTheEntityButtonList(){
-        return driver.findElements(By.xpath("//*[@title='Finish creating the entity']"));
-    }
+//    public List<WebElement> finishCreateTheEntityButtonList(){
+//        return driver.findElements(By.xpath("//*[@title='Finish creating the entity']"));
+//    }
 
     // Web element list for deletion
     public List<WebElement> deleteOrganizationButtonList(){
@@ -80,13 +80,14 @@ public class Entities {
 
     // Web element for "Action" edit organization
     public WebElement editOrganizationButton(int rowindex){
-        return editOrganizationButtonList().get(rowindex - 1);
+
+        return driver.findElement(By.xpath("//tr[@class='ng-scope'][" + rowindex + "]//*[@class='btn btn-default btn-sm bg-gray-lighter mr-sm' and @title='Edit']"));
     }
 
 
     // Web element for "Action" finish create an organization
     public WebElement finishCreateOrganizationButton(int rowindex){
-        return finishCreateTheEntityButtonList().get(rowindex - 1);
+        return driver.findElement(By.xpath("//tr[@class='ng-scope'][" + rowindex + "]//*[@class='btn btn-warning btn-sm mr-sm' and @title='Finish creating the entity']"));
     }
 
     // Web element for "Action" delete an organization
