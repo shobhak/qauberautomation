@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 /**
  * Created by Maksim on 12/26/2016.
- * TODO: preconditions
+ *
  */
 public class ContinueAnUnpublishedReport extends PageObjectModelResources {
 
@@ -55,7 +55,9 @@ public class ContinueAnUnpublishedReport extends PageObjectModelResources {
             Thread.sleep(sleepTime);
         }
         catch (Exception e)
-        {}
+        {
+            System.out.println("Here only one page with reports.");
+        }
 
         getReports().selectReport(keyWord).click();
         Thread.sleep(sleepTime);

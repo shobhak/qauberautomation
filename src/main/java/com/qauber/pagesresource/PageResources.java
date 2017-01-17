@@ -28,6 +28,7 @@ public class PageResources {
     //Navbar pages
     private Entities entities;
     private EntitiesPermissionsDialog entitiesPermissionsDialog;
+    private EntitiesDepartmentSetting entitiesDepartmentSetting;
     private Users users;
     private UsersPermissionsDialog usersPermissionsDialog;
     private EditOrganizationPage editOrganizationPage;
@@ -61,6 +62,7 @@ public class PageResources {
 
         entities = new Entities(driver);
         entitiesPermissionsDialog = new EntitiesPermissionsDialog(driver);
+        entitiesDepartmentSetting = new EntitiesDepartmentSetting(driver);
         users = new Users(driver);
         usersPermissionsDialog = new UsersPermissionsDialog(driver);
         editOrganizationPage = new EditOrganizationPage(driver);
@@ -130,6 +132,8 @@ public class PageResources {
     public EntitiesPermissionsDialog getEntitiesPermissionsDialog() {
         return entitiesPermissionsDialog;
     }
+
+    public EntitiesDepartmentSetting getEntitiesDepartmentSetting() { return entitiesDepartmentSetting; }
 
     public Users getUsers() {
         return users;
