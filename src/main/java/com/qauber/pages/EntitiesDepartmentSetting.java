@@ -29,24 +29,30 @@ public class EntitiesDepartmentSetting {
 
     // Web element for update button
     public WebElement departmentUpdatebutton(int rowindex){
-        element = driver.findElement(By.xpath("//*[@id=\"ngdialog2\"]//button[1]"));
+        element = driver.findElement(By.xpath("//div[2]/div[1]/form/button[1]"));
         return element;
     }
     // Web element for delite button
     public WebElement departmentDelitebutton(int rowindex){
-        element = driver.findElement(By.xpath("//*[@id=\"ngdialog2\"]//button[2]"));
+        element = driver.findElement(By.xpath("//div[2]/div[1]/form/button[2]"));
         return element;
     }
     // Web element for cancel button
     public WebElement departmentCancelbutton(int rowindex){
-        element = driver.findElement(By.xpath("//*[@id=\"ngdialog2\"]//button[3]"));
+        element = driver.findElement(By.xpath("//div[2]/div[1]/form/button[3]"));
         return element;
     }
-    // Web element for close button
-    public WebElement departmentClosebutton(int rowindex){
-        element = driver.findElement(By.xpath("//*[@id=\"ngdialog2\"]//button[2]"));
+    // Web element for confirm delite subdepartment button in dialog window
+    public WebElement departmentConfirmDeliteButton(int rowindex){
+        element = driver.findElement(By.xpath("//*[@class=\"ngdialog-content\"]//button[1]"));
         return element;
     }
+    // Web element for cancel subdepartment button in dialog window
+    public WebElement departmentCancelDeliteButton(int rowindex){
+        element = driver.findElement(By.xpath("//*[@class=\"ngdialog-content\"]//button[2]"));
+        return element;
+    }
+
 
 }
 
