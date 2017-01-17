@@ -1,6 +1,5 @@
 package com.qauber.sanity;
 
-import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
@@ -40,7 +39,7 @@ public class UserDeletionTestCase extends PageObjectModelResources {
 
     @Test
     public void userDeletion() throws InterruptedException {
-        testDriver().get(Config.getBaseURL());
+        testDriver().get(testConfig().getBaseURL());
         Thread.sleep(sleepTime);
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
