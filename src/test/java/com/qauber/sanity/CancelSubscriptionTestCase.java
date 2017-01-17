@@ -40,9 +40,7 @@ public class CancelSubscriptionTestCase extends PageObjectModelResources {
     @Test
     public void cancelSubscription() throws InterruptedException {
         int entities;
-        int cancelentityindex;
-        String str;
-        Random randomInt = new Random();
+        int lastSubscriptionindex;
 
         testDriver().get(testConfig().getBaseURL());
         Thread.sleep(sleepTime);
@@ -50,105 +48,85 @@ public class CancelSubscriptionTestCase extends PageObjectModelResources {
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(sleepTime);
 
-        getHeader().userName().click();
+        Faker faker = new Faker();
+
+        getNavBar().clickEntities();
         Thread.sleep(sleepTime);
+
+        getEntities().addOrganizationButton().click();
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().entityNameField().sendKeys(faker.name().username());
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().entityPhoneField().sendKeys(faker.phoneNumber().cellPhone());
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().entityEmailField().sendKeys(faker.internet().emailAddress());
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().entityCountryDropDown("Austria").click();
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().entityAddress1().sendKeys(faker.address().streetAddress());
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().entityAddress2().sendKeys(faker.address().streetAddress());
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().entityCity().sendKeys(faker.address().city());
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().entityState().sendKeys(faker.address().state());
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().entityPostalCode().sendKeys(faker.address().zipCode());
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().entityNextButtone().click();
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().inviteRegularUserNextButton().click();
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().inviteAdminUserNextButton().click();
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().finishButton().click();
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().payWithMyPayPal().click();
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().loginField().sendKeys(paypalEmailAccount);
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().passwordField().sendKeys(paypalPassword);
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().logInButton().click();
+        Thread.sleep(sleepTime);
+
+        getCreateOrganization().agreeAndContinueButton().click();
+        Thread.sleep(sleepTime);
+
+        getHeader().userName().click();
+        Thread.sleep(sleepTime/2);
 
         getProfilePanel().settinsButton().click();
-        Thread.sleep(sleepTime);
+        Thread.sleep(sleepTime/2);
 
         try{
-            Assert.assertEquals(getProfilePanel().subscriptionsText().getText(), "SUBSCRIPTIONS");
+            Assert.assertEquals(getProfilePanel().settingsText().getText(), "Settings");
         }
-        catch (NoSuchElementException e) {
-            getHeader().userName().click();
-            Thread.sleep(sleepTime);
-        }
-
-        try{
-            Assert.assertNotEquals(getProfilePanel().entitiesList().size(), 0);
-        }
-        catch (AssertionError e){
-            Faker faker = new Faker();
-
-            getNavBar().clickEntities();
-            Thread.sleep(sleepTime);
-
-            getEntities().addOrganizationButton().click();
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().entityNameField().sendKeys(faker.name().username());
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().entityPhoneField().sendKeys(faker.phoneNumber().cellPhone());
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().entityEmailField().sendKeys(faker.internet().emailAddress());
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().entityCountryDropDown("Austria").click();
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().entityAddress1().sendKeys(faker.address().streetAddress());
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().entityAddress2().sendKeys(faker.address().streetAddress());
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().entityCity().sendKeys(faker.address().city());
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().entityState().sendKeys(faker.address().state());
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().entityPostalCode().sendKeys(faker.address().zipCode());
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().entityNextButtone().click();
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().inviteRegularUserNextButton().click();
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().inviteAdminUserNextButton().click();
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().finishButton().click();
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().payWithMyPayPal().click();
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().loginField().sendKeys(paypalEmailAccount);
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().passwordField().sendKeys(paypalPassword);
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().logInButton().click();
-            Thread.sleep(sleepTime);
-
-            getCreateOrganization().agreeAndContinueButton().click();
-            Thread.sleep(sleepTime*3);
-
+        catch (NoSuchElementException f) {
             getHeader().userName().click();
             Thread.sleep(sleepTime/2);
-
-            getProfilePanel().settinsButton().click();
-            Thread.sleep(sleepTime/2);
-
-            try{
-                Assert.assertEquals(getProfilePanel().settingsText().getText(), "Settings");
-            }
-            catch (NoSuchElementException f) {
-                getHeader().userName().click();
-                Thread.sleep(sleepTime/2);
-            }
         }
-        entities = getProfilePanel().entitiesList().size();
-        System.out.println(entities);
-        cancelentityindex = randomInt.nextInt(entities) + 1;
-        System.out.println(cancelentityindex);
-        getProfilePanel().organizationLink(cancelentityindex).click();
+
+        lastSubscriptionindex = getProfilePanel().entitiesList().size();
+        System.out.println(lastSubscriptionindex);
+        getProfilePanel().organizationLink(lastSubscriptionindex).click();
         Thread.sleep(sleepTime);
 
         getSubscriptionSettings().cancelSubscriptionButton().click();
@@ -167,8 +145,9 @@ public class CancelSubscriptionTestCase extends PageObjectModelResources {
         getNavBar().entitiesButton().click();
         Thread.sleep(sleepTime);
 
-        str = getEntities().organizationSubscriptionUsers(cancelentityindex).getText();
-        Assert.assertEquals(str.substring(str.indexOf(" ") + 1), "of 0 Users used");
+        entities = getEntities().organizationList().size();
+        
+        Assert.assertEquals(true, getEntities().finishCreateOrganizationButton(entities).isDisplayed());
         Thread.sleep(sleepTime);
 
     }
