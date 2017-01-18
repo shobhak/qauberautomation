@@ -41,14 +41,23 @@ public class AddReportPreview {
     }
 
     public WebElement reportIdElement(){
-        return driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[9]/div[2]/div[1]/div[1]/div[2]/strong"));
+        return driver.findElement(By.xpath("//*[text()='Report ID'] //following::div[1]"));
     }
+
+    public WebElement lastName(){
+        return driver.findElement(By.xpath("//*[text()='Last Name'] //following::div[1]"));
+    }
+
+    public WebElement firstName(){
+        return driver.findElement(By.xpath("//*[text()='Last Name'] //following::div[3]"));
+    }
+
     public WebElement suspectName(){
         return driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[9]/div[2]/div[1]/div[3]/div[2]/strong"));
     }
 
-    public WebElement stopLocation(){
-        return driver.findElement(By.xpath("html/body/div[2]/section/div/div/div/form/div/div[9]/div[3]/div[2]/div[24]/div[2]/strong"));
+    public WebElement locationOfStop(){
+        return driver.findElement(By.xpath("//*[text()='Location of Stop'] //following::div[1]"));
     }
 }
 
