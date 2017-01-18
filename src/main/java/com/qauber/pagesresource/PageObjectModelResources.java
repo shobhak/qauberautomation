@@ -68,16 +68,6 @@ public class PageObjectModelResources {
         }
     }
 
-    @Deprecated
-    public void setUpWithConfig(ConfigOOP config) {
-        //get user information
-        testCaseUser = new User(config);
-        System.out.println(testCaseUser.getUsername());
-        System.out.println(testCaseUser.getPassword());
-        setUpScript(chooseDriver(config)); //call setUpScript with WebDriver from config
-
-    }
-
     public void setUpScript() {
         setUpScript(testConfig());
     }
@@ -133,21 +123,6 @@ public class PageObjectModelResources {
     public void breakDownHelper(WebDriver driver) {
         driver.manage().deleteAllCookies();
         driver.quit();
-    }
-
-
-    private WebDriver chooseDriver(ConfigOOP argConfig) { // Choose web browser/driver from Config
-        if (argConfig.getBrowserType() == ConfigOOP.BrowserType.FIREFOX) {
-            return new FirefoxDriver();
-        }
-        else if (argConfig.getBrowserType() == ConfigOOP.BrowserType.EDGE) {
-            return new EdgeDriver();
-        }
-        else if (argConfig.getBrowserType() == ConfigOOP.BrowserType.SAFARI) {
-            return new SafariDriver();
-        } else {
-            return new ChromeDriver(); //don't touch my enum
-        }
     }
 
     ///////GET ALL TEST CASE RESOURCES
