@@ -70,4 +70,6 @@ public class EntitiesPermissionsDialog {
 
     public List<WebElement> rightDropdownList() {return driver.findElements(By.xpath("//td/select"));}
 
+    public WebElement deleteOrgCancel() {return driver.findElement(By.xpath("//button[text()='Cancel']"));}
+    public WebElement deleteOrgDelete() {return driver.findElement(By.xpath("//button[text()='Delete']"));}
 }
