@@ -36,6 +36,10 @@ public class ReportsViewReport {
         return driver.findElement(By.xpath("//*[text()='First Name']//following::div[1]"));
     }
 
+    public WebElement gangName(){
+        return driver.findElement(By.xpath("//*[text()='Gang name']//following::div[1]"));
+    }
+
     public WebElement caseID(){
         return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[2]/div[2]/strong"));
     }
