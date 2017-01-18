@@ -41,7 +41,7 @@ public class ViewReport extends PageObjectModelResources {
         getPreconditions().getReportPreconditions().ensurePublishedReportsAtLeast(1);
         Thread.sleep(sleepTime/2);
 
-        //from Reports Search Results
+        //from Reports Search Results; may contain reportId*+firstName*+lastName*(*required)+suspectType+gangName
         String searchReportResultID = getReports().searchReportResultID(rowindex).getText();
 
         getReports().selectReport(rowindex).click();
@@ -52,13 +52,20 @@ public class ViewReport extends PageObjectModelResources {
         String lastName = getReportsViewReport().lastName().getText();
         String firstName = getReportsViewReport().firstName().getText();
         String suspectType = getReportsViewReport().suspectType().getText();
+        String gangName = getReportsViewReport().gangName().getText();
         String IdName = reportID + ". " + firstName + " " + lastName;
+        String IdNameTypeGang = reportID + ". " + firstName + " " + lastName + " (" + suspectType + ")" + " / " + gangName;
+        String IdNameGang = reportID + ". " + firstName + " " + lastName + " / " + gangName;
         String IdNameType = reportID + ". " + firstName + " " + lastName + " (" + suspectType + ")";
 
-        if (StringUtils.isBlank(suspectType)) {
+        if (StringUtils.isBlank(suspectType)&&StringUtils.isBlank(gangName)) {
             AssertUber.assertEquals(searchReportResultID, IdName, "ReportID and lastFirstName don't match ");
-        } else {
+        } else if (StringUtils.isBlank(suspectType)){
+            AssertUber.assertEquals(searchReportResultID, IdNameGang, "ReportID, lastFirstName, gangName don't match ");
+        } else if (StringUtils.isBlank(gangName)) {
             AssertUber.assertEquals(searchReportResultID, IdNameType, "ReportID, lastFirstName, suspectType don't match ");
+        } else {
+            AssertUber.assertEquals(searchReportResultID, IdNameTypeGang, "ReportID, lastFirstName, suspectType and gangName don't match ");
         }
 
         testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
