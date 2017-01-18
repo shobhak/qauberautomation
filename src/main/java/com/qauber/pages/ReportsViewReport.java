@@ -28,6 +28,14 @@ public class ReportsViewReport {
         return driver.findElement(By.xpath("//*[text()='Report ID']//following::div[1]"));
     }
 
+    public WebElement lastName(){
+        return driver.findElement(By.xpath("//*[text()='Last Name']//following::div[1]"));
+    }
+
+    public WebElement firstName() {
+        return driver.findElement(By.xpath("//*[text()='First Name']//following::div[1]"));
+    }
+
     public WebElement caseID(){
         return driver.findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[2]/div[2]/strong"));
     }
@@ -37,7 +45,7 @@ public class ReportsViewReport {
     }
 
     public WebElement suspectType(){
-        return downloadAsPDFButton().findElement(By.xpath("//*[@id='reportBody']/div[2]/div[1]/form/div[4]/div[2]/strong"));
+        return downloadAsPDFButton().findElement(By.xpath("//*[text()='Suspect Type']//following::div[1]"));
     }
 
      public WebElement dob() {
