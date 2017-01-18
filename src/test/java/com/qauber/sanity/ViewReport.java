@@ -41,21 +41,24 @@ public class ViewReport extends PageObjectModelResources {
         getPreconditions().getReportPreconditions().ensurePublishedReportsAtLeast(1);
         Thread.sleep(sleepTime/2);
 
+        //from Reports Search Results
         String searchReportResultID = getReports().searchReportResultID(rowindex).getText();
 
         getReports().selectReport(rowindex).click();
         Thread.sleep(sleepTime);
 
+        //from Reports: View
         String reportID = getReportsViewReport().reportID().getText();
-        String suspectName = getReportsViewReport().suspectName().getText();
+        String lastName = getReportsViewReport().lastName().getText();
+        String firstName = getReportsViewReport().firstName().getText();
         String suspectType = getReportsViewReport().suspectType().getText();
-        String IdName = reportID + ". " + suspectName;
-        String IdNameType = reportID + ". " + suspectName + " (" + suspectType + ")";
+        String IdName = reportID + ". " + firstName + " " + lastName;
+        String IdNameType = reportID + ". " + firstName + " " + lastName + " (" + suspectType + ")";
 
         if (StringUtils.isBlank(suspectType)) {
-            AssertUber.assertEquals(searchReportResultID, IdName, "ReportID and suspectName don't match ");
+            AssertUber.assertEquals(searchReportResultID, IdName, "ReportID and lastFirstName don't match ");
         } else {
-            AssertUber.assertEquals(searchReportResultID, IdNameType, "ReportID, suspectName, suspectType don't match ");
+            AssertUber.assertEquals(searchReportResultID, IdNameType, "ReportID, lastFirstName, suspectType don't match ");
         }
 
         testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
