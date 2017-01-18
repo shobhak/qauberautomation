@@ -40,6 +40,7 @@ public class ProfilePanel {
     public WebElement subscriptionsText() {return driver.findElement(By.xpath("//*[@class='layout-fixed offsidebar-open']//small[text()='Subscriptions']"));}
     public WebElement settingsText() {return driver.findElement(By.xpath("//*[@class='layout-fixed offsidebar-open']//h3[text()='Settings']"));}
     public List<WebElement> entitiesList() {return driver.findElements(By.xpath("//*[@class='']//a/*[@class='ng-binding']"));}
+    public WebElement entitiesName(int index) {return entitiesList().get(index-1);}
     public List<WebElement> hideEntitiesForNonSAU() {return driver.findElements(By.xpath("//*[@class='ng-hide']//a/*[@class='ng-binding']"));}
 
     public WebElement organizationLink(int number)
