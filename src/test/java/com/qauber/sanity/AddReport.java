@@ -36,7 +36,9 @@ public class AddReport extends PageObjectModelResources {
         Thread.sleep(sleepTime);
 
         ReportValueObject reportVO = new ReportValueObject();
-        String firstLastName = reportVO.getFirstName()+" "+reportVO.getLastName();
+
+        //from AddReport: Subject Information
+        String lastFirstName = reportVO.getLastName()+" "+reportVO.getFirstName();
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(sleepTime);
@@ -49,8 +51,8 @@ public class AddReport extends PageObjectModelResources {
 
         getAddReportNavigation().subjectInformationTab().click();
         Thread.sleep(sleepTime/4);
-        getAddReportSubjectInformationPage().firstName().sendKeys(reportVO.getFirstName());
         getAddReportSubjectInformationPage().lastName().sendKeys(reportVO.getLastName());
+        getAddReportSubjectInformationPage().firstName().sendKeys(reportVO.getFirstName());
         Thread.sleep(sleepTime/4);
 
         getAddReportNavigation().environmentTab().click();
@@ -64,9 +66,12 @@ public class AddReport extends PageObjectModelResources {
         getAddReportNavigation().previewTab().click();
         Thread.sleep(sleepTime/4);
 
+        //from AddReport: Preview
+        String lastNameFirstName = getAddReportPreview().lastName().getText()+" "+getAddReportPreview().firstName().getText();
+
         //verify info entered matches info on preview
-        AssertUber.assertEquals(getAddReportPreview().suspectName().getText(),firstLastName, "SuspectName is different");
-        AssertUber.assertEquals(getAddReportPreview().stopLocation().getText(), reportVO.getStopLocation(), "StopLocation is different");
+        AssertUber.assertEquals(lastNameFirstName, lastFirstName, "Last and first names are different");
+        AssertUber.assertEquals(getAddReportPreview().locationOfStop().getText(), reportVO.getStopLocation(), "StopLocation is different");
 
         //verify report published
         String reportIdValue = getAddReportPreview().reportIdElement().getText();
@@ -80,6 +85,7 @@ public class AddReport extends PageObjectModelResources {
     }
 
     public boolean verifyReportPublished(String reportNumber) throws InterruptedException {
+
         //search for reports which contain text (reportNumber)
         getReports().containsTextField().sendKeys(reportNumber);
         Thread.sleep(sleepTime/2);
