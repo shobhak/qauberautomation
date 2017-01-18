@@ -11,8 +11,8 @@ import org.testng.annotations.Test;
 
 /**
  * Created by lenochka on 12/22/16. //TODO: who made this? I think it is Lenochka? (yes)
- * //TODO: Asserts
- * //TODO: Test Rail integration
+ * //TODO: Asserts - done
+ * //TODO: Test Rail integration - done
  * TODO: move out PayPal into helper (talk to Jing first) - done
  */
 public class CreateSubscriptionPayPalTestcase extends PageObjectModelResources {
@@ -39,6 +39,7 @@ public class CreateSubscriptionPayPalTestcase extends PageObjectModelResources {
     @Test
     public void simpleSampleTestCase() throws InterruptedException {
         PayPalCredentials payPalCredentials = new PayPalCredentials(testDriver());
+        int rowIndex = 3;
 
         testDriver().get(testConfig().getBaseURL());
         Thread.sleep(sleepTime*2);
@@ -49,7 +50,7 @@ public class CreateSubscriptionPayPalTestcase extends PageObjectModelResources {
         getNavBar().entitiesButton().click();
         Thread.sleep(sleepTime*3/2);
 
-        getEntities().finishCreateOrganizationButton(3).click();
+        getEntities().finishCreateOrganizationButton(rowIndex).click();
         Thread.sleep(sleepTime);
 
         getCreateSubsciption().finishButton().click();
@@ -61,32 +62,20 @@ public class CreateSubscriptionPayPalTestcase extends PageObjectModelResources {
         Thread.sleep(sleepTime*2);
 
 
-        String proceedToPayPal = payPalCredentials.payWithPayPal();
-        System.out.println(proceedToPayPal);
+        payPalCredentials.payWithPayPal();
+        System.out.println(payPalCredentials);
         Thread.sleep(sleepTime*2);
 
-        getEntities().editOrganizationButton(3).click();
+        getEntities().editOrganizationButton(rowIndex).click();
 
-
-//        getCreateSubsciption().payWithMyPayPal().click();
-//        Thread.sleep(sleepTime*3/5);
-//
-//        getCreateSubsciption().loginField().sendKeys("jing_qauber_test01@test.com");
-//        Thread.sleep(sleepTime*3/5);
-//
-//        getCreateSubsciption().passwordField().sendKeys("portnovschool");
-//        Thread.sleep(sleepTime*3/5);
-//
-//        getCreateSubsciption().logInButton().click();
-//        Thread.sleep(sleepTime);
-//
-//        getCreateSubsciption().agreeAndContinueButton().click();
-//        Thread.sleep(sleepTime);
 
         try {
             String editOrgButton = "Edit";
 
-            Assert.assertTrue(getEntities().editOrganizationButton(3).equals(editOrgButton));
+            String actualResult = getEntities().editOrganizationButton(rowIndex).getAttribute("title");
+            System.out.println(actualResult);
+            //getEntities().editOrganizationButton().getAttribute("")
+            Assert.assertEquals(editOrgButton,actualResult);
         }
 
         catch (AssertionError e) {
