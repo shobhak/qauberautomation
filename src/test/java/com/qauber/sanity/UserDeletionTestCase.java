@@ -28,28 +28,24 @@ public class UserDeletionTestCase extends PageObjectModelResources {
 
         sleepTime = testConfig().getSleepTime();
         setUpScript();
-
-       // testDriver().get(testConfig().getBaseURL());
-//        Thread.sleep(sleepTime);
-//
-//        getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-//        Thread.sleep(sleepTime);
+        
     }
 
 
     @Test
     public void userDeletion() throws InterruptedException {
+
         testDriver().get(testConfig().getBaseURL());
         Thread.sleep(sleepTime);
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(sleepTime);
 
-        //preconditions
-        getPreconditions().getUsersPreconditions().ensureUsersAtLeast(10);
-
         getNavBar().clickUsers();
         Thread.sleep(sleepTime);
+
+        //preconditions
+        getPreconditions().getUsersPreconditions().ensureUsersAtLeast(10);
 
         //Get email address for row 10
         String emailAddressForRow10;
