@@ -26,12 +26,12 @@ public class Mailinator {
     }
 
     private WebElement getiFrameActivationLink() { //make sure to get link text... or find something that contains qabidder.net
-        return driver.findElement(By.xpath("//p[2]/a"));
+        return driver.findElements(By.xpath("/html/body//a")).get(0);
     }
 
     public String getFirstLinkInFirstEmailInAccount(String emailAddressLocalPart) throws InterruptedException { //returns first link in first email in the account as a string.
         driver.get(URL);
-        int waitTime = 2500;
+        int waitTime = 5000;
 
         Thread.sleep(waitTime);
 
@@ -45,8 +45,11 @@ public class Mailinator {
 
         //Switch to iFrame
         driver.switchTo().frame("publicshowmaildivcontent");
-
-        return getiFrameActivationLink().getAttribute("href"); //return link as string
+//driver.findElements(By.xpath("/html/body/a")).get(0).getAttribute("href")
+        String iFrameActivationLink = getiFrameActivationLink().getAttribute("href"); //return link as string
+        System.out.println(iFrameActivationLink);
+        driver.switchTo().parentFrame();
+        return iFrameActivationLink; //return link as string
 
     }
 
