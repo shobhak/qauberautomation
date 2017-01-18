@@ -11,6 +11,11 @@ import org.testng.annotations.Test;
 
 /**
  * Created by Alya on 12/20/2016.
+ *
+ * TO DO: change assertions due to new interface
+ *
+ * Template displays data from Subject Information page of the report, except case id, age, primary language,
+ * street address, country, city, state, zip, telephone, email, driver, passenger, pedestrian
  */
 
 public class UseReportAsTemplate extends PageObjectModelResources {
