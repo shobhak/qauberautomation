@@ -1,16 +1,19 @@
 package com.qauber.sanity;
 
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.PayPalCredentials;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
+import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
- * Created by (someone) on 12/22/16. //TODO: who made this? I think it is Lenochka?
+ * Created by lenochka on 12/22/16. //TODO: who made this? I think it is Lenochka? (yes)
  * //TODO: Asserts
  * //TODO: Test Rail integration
- * TODO: move out PayPal into helper (talk to Jing first)
+ * TODO: move out PayPal into helper (talk to Jing first) - done
  */
 public class CreateSubscriptionPayPalTestcase extends PageObjectModelResources {
 
@@ -23,8 +26,8 @@ public class CreateSubscriptionPayPalTestcase extends PageObjectModelResources {
         setUpUser(User.UserType.SAU); //Pass in user
 
         //TestRail Configuration
-//        testConfig().getTestRail().setCaseID(79853); //TestRail case ID
-//        testConfig().getTestRail().setTester("Erik's Script"); //put your name :-)
+       testConfig().getTestRail().setCaseID(82798); //TestRail case ID
+       testConfig().getTestRail().setTester("ElenaB"); //put your name :-)
 
         //Misc configuration
         sleepTime = testConfig().getSleepTime(); //set sleepTime locally - easier than writing testConfig().getSleepTime() everywhere
@@ -35,6 +38,8 @@ public class CreateSubscriptionPayPalTestcase extends PageObjectModelResources {
 
     @Test
     public void simpleSampleTestCase() throws InterruptedException {
+        PayPalCredentials payPalCredentials = new PayPalCredentials(testDriver());
+
         testDriver().get(testConfig().getBaseURL());
         Thread.sleep(sleepTime*2);
 
@@ -55,20 +60,42 @@ public class CreateSubscriptionPayPalTestcase extends PageObjectModelResources {
         System.out.println(currentURL);
         Thread.sleep(sleepTime*2);
 
-        getCreateSubsciption().payWithMyPayPal().click();
-        Thread.sleep(sleepTime*3/5);
 
-        getCreateSubsciption().loginField().sendKeys("jing_qauber_test01@test.com");
-        Thread.sleep(sleepTime*3/5);
+        String proceedToPayPal = payPalCredentials.payWithPayPal();
+        System.out.println(proceedToPayPal);
+        Thread.sleep(sleepTime*2);
 
-        getCreateSubsciption().passwordField().sendKeys("portnovschool");
-        Thread.sleep(sleepTime*3/5);
+        getEntities().editOrganizationButton(3).click();
 
-        getCreateSubsciption().logInButton().click();
-        Thread.sleep(sleepTime);
 
-        getCreateSubsciption().agreeAndContinueButton().click();
-        Thread.sleep(sleepTime);
+//        getCreateSubsciption().payWithMyPayPal().click();
+//        Thread.sleep(sleepTime*3/5);
+//
+//        getCreateSubsciption().loginField().sendKeys("jing_qauber_test01@test.com");
+//        Thread.sleep(sleepTime*3/5);
+//
+//        getCreateSubsciption().passwordField().sendKeys("portnovschool");
+//        Thread.sleep(sleepTime*3/5);
+//
+//        getCreateSubsciption().logInButton().click();
+//        Thread.sleep(sleepTime);
+//
+//        getCreateSubsciption().agreeAndContinueButton().click();
+//        Thread.sleep(sleepTime);
+
+        try {
+            String editOrgButton = "Edit";
+
+            Assert.assertTrue(getEntities().editOrganizationButton(3).equals(editOrgButton));
+        }
+
+        catch (AssertionError e) {
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Subscription is not created"+e.getLocalizedMessage());
+            throw e;
+        }
+
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
+
     }
 
     @AfterClass
