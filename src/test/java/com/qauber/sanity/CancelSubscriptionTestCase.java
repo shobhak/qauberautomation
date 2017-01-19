@@ -2,6 +2,7 @@ package com.qauber.sanity;
 
 import com.github.javafaker.Faker;
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
@@ -27,8 +28,8 @@ public class CancelSubscriptionTestCase extends PageObjectModelResources {
         setUpUser(User.UserType.SAU); //Pass in user
 
         //TestRail Configuration
-//        testConfig().getTestRail().setCaseID(79853); //TestRail case ID
-//        testConfig().getTestRail().setTester("Erik's Script"); //put your name :-)
+        testConfig().getTestRail().setCaseID(82802); //TestRail case ID
+        testConfig().getTestRail().setTester("Jing"); //put your name :-)
 
         //Misc configuration
         sleepTime = testConfig().getSleepTime(); //set sleepTime locally - easier than writing testConfig().getSleepTime() everywhere
@@ -53,7 +54,7 @@ public class CancelSubscriptionTestCase extends PageObjectModelResources {
         getNavBar().clickEntities();
         Thread.sleep(sleepTime);
 
-        getEntities().addOrganizationButton().click();
+        getEntities().addOrganizationButton().click(); // create a new organization
         Thread.sleep(sleepTime);
 
         getCreateOrganization().entityNameField().sendKeys(faker.name().username());
@@ -124,7 +125,7 @@ public class CancelSubscriptionTestCase extends PageObjectModelResources {
             Thread.sleep(sleepTime/2);
         }
 
-        lastSubscriptionindex = getProfilePanel().entitiesList().size();
+        lastSubscriptionindex = getProfilePanel().entitiesList().size();        // find last organization then cancel subscription for it
         System.out.println(lastSubscriptionindex);
         getProfilePanel().organizationLink(lastSubscriptionindex).click();
         Thread.sleep(sleepTime);
@@ -146,9 +147,16 @@ public class CancelSubscriptionTestCase extends PageObjectModelResources {
         Thread.sleep(sleepTime);
 
         entities = getEntities().organizationList().size();
-        
-        Assert.assertEquals(true, getEntities().finishCreateOrganizationButton(entities).isDisplayed());
-        Thread.sleep(sleepTime);
+
+        try {
+            Assert.assertEquals(true, getEntities().finishCreateOrganizationButton(entities).isDisplayed());
+        } catch (AssertionError e) {
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Subscription has not been cancelled: " + e.getLocalizedMessage() );
+            throw e;
+        }
+
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test Passed.");
+        Thread.sleep(sleepTime*2);
 
     }
 
