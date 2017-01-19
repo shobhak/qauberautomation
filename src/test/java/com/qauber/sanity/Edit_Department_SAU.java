@@ -1,33 +1,45 @@
 package com.qauber.sanity;
 
 import com.github.javafaker.Faker;
-import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
  * Created by San Jose on 12/22/16.
+ * * TODO: add assert (how to check when edit is successful?)
+ * TODO: multiple words (Reduce chance of changing to 'same' name)
+ * ---> faker.lorem().words(3)
+ * TODO: don't edit first department (pick a later number)
+ * TODO: add preconditions (when available)
  */
 public class Edit_Department_SAU extends PageObjectModelResources {
 
-    WebDriver driver;
     int sleepTime;
 
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
-        sleepTime = 5000;
-        setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
+        //Initial setup
+        setUpWithConfigFile(); //Read config file from disk, create if not present
+        setUpUser(User.UserType.SAU); //Pass in user
+
+        //TestRail Configuration
+//        testConfig().getTestRail().setCaseID(82798); //TestRail case ID
+//        testConfig().getTestRail().setTester("ElenaB"); //put your name :-)
+
+        //Misc configuration
+        sleepTime = testConfig().getSleepTime(); //set sleepTime locally - easier than writing testConfig().getSleepTime() everywhere
+
+        //Create driver & page objects, finish setup
+        setUpScript();
+
     }
 
     @Test
     public void editDepartmentSAU() throws InterruptedException{
-        driver.get(Config.getBaseURL());
+        testDriver().get(testConfig().getBaseURL());
         Faker faker = new Faker();
 
         String expectedResult = faker.lorem().word(); //department name
@@ -55,12 +67,10 @@ public class Edit_Department_SAU extends PageObjectModelResources {
         Thread.sleep(sleepTime);
         getEntitiesDepartmentSettings().departmentCancelbutton(1).click();
         Thread.sleep(sleepTime);
+    }
 
-
-
-
-
-        driver.quit();
-
+    @AfterClass
+    public void breakDown() {
+        breakDownHelper();
     }
 }
