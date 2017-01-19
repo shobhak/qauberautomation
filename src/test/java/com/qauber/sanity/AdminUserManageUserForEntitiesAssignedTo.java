@@ -36,7 +36,6 @@ public class AdminUserManageUserForEntitiesAssignedTo extends PageObjectModelRes
 
     @Test
     public void adminUserManageUserForEntitiesAssignTo() throws InterruptedException {
-        List<String> notassginedorglist = new ArrayList<String>();
         List<String> assginedorglist = new ArrayList<String>();
         List<String> orglistAU = new ArrayList<String>();
 
@@ -84,14 +83,6 @@ public class AdminUserManageUserForEntitiesAssignedTo extends PageObjectModelRes
 
         for (int j = 0; j < assginedorglist.size(); j++){
             System.out.println(assginedorglist.get(j));
-        }
-
-        for (int i = 0; i < getUsersPermissionsDialog().userEntitiesList().size(); i++){
-            if (assginedorglist.contains(getUsersPermissionsDialog().userEntitiesList().get(i))){
-                continue;
-            } else {
-                notassginedorglist.add(getUsersPermissionsDialog().userEntitiesList().get(i).getText());
-            }
         }
 
         getEntitiesPermissionsDialog().closeDialogByPressESC();
