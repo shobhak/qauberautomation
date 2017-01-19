@@ -47,16 +47,16 @@ public class AddReport extends PageObjectModelResources {
         Thread.sleep(sleepTime/4);
 
         getAddReportOrganization().clickOrganization1();
-        Thread.sleep(sleepTime/4);
+        Thread.sleep(sleepTime);
 
         getAddReportNavigation().subjectInformationTab().click();
-        Thread.sleep(sleepTime/4);
+        Thread.sleep(sleepTime/2);
         getAddReportSubjectInformationPage().lastName().sendKeys(reportVO.getLastName());
         getAddReportSubjectInformationPage().firstName().sendKeys(reportVO.getFirstName());
         Thread.sleep(sleepTime/4);
 
         getAddReportNavigation().environmentTab().click();
-        Thread.sleep(sleepTime/4);
+        Thread.sleep(sleepTime/2);
         getAddReportEnvironment().stopLocationField().sendKeys(reportVO.getStopLocation());
         Thread.sleep(sleepTime/4);
 
@@ -64,7 +64,7 @@ public class AddReport extends PageObjectModelResources {
         jse.executeScript("window.scrollBy(0,-1000)", "");
 
         getAddReportNavigation().previewTab().click();
-        Thread.sleep(sleepTime/4);
+        Thread.sleep(sleepTime/2);
 
         //from AddReport: Preview
         String lastNameFirstName = getAddReportPreview().lastName().getText()+" "+getAddReportPreview().firstName().getText();
@@ -77,7 +77,7 @@ public class AddReport extends PageObjectModelResources {
         String reportIdValue = getAddReportPreview().reportIdElement().getText();
 
         getAddReportPreview().publishReportButton().click();
-        Thread.sleep(sleepTime/4);
+        Thread.sleep(sleepTime/2);
 
         AssertUber.assertTrue(verifyReportPublished(reportIdValue), "ReportID doesn't match ReportID searched");
 
