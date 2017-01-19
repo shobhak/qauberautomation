@@ -35,7 +35,7 @@ public class AdminUserNotManageUserForEntitiesNotAssignedTo extends PageObjectMo
     }
 
     @Test
-    public void adminUserManageUserForEntitiesAssignTo() throws InterruptedException {
+    public void adminUserNotManageUserForEntitiesNotAssignTo() throws InterruptedException {
         List<String> notassginedorglist = new ArrayList<String>();
         List<String> assginedorglist = new ArrayList<String>();
         List<String> orglistAU = new ArrayList<String>();
