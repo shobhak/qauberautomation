@@ -3,6 +3,7 @@ package com.qauber.sanity;
 import com.github.javafaker.Faker;
 import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -27,8 +28,8 @@ public class InviteUserFromUsersListTestCase extends PageObjectModelResources {
 
     @Test
     public void testAsSAU() throws InterruptedException {
-//        testConfig().getTestRail().setCaseID();
-//        testConfig().getTestRail().setTester("Jing");
+        testConfig().getTestRail().setCaseID(82799);
+        testConfig().getTestRail().setTester("Jing");
         setUpUser(User.UserType.SAU); //pass userType and browser. see ~/QAUberTestConfig
         //setUpWithUser creates TestCaseUser, access with testUser()
         setUpScript();
@@ -38,8 +39,8 @@ public class InviteUserFromUsersListTestCase extends PageObjectModelResources {
     }
     @Test(priority = 1)
     public void testAsAU() throws InterruptedException {
-//        testConfig().getTestRail().setCaseID();
-//        testConfig().getTestRail().setTester("Jing");
+        testConfig().getTestRail().setCaseID(82799);
+        testConfig().getTestRail().setTester("Jing");
         setUpUser(User.UserType.AU); //pass userType and browser. see ~/QAUberTestConfig
         //setUpWithUser creates TestCaseUser, access with testUser()
         setUpScript();
@@ -82,8 +83,16 @@ public class InviteUserFromUsersListTestCase extends PageObjectModelResources {
             Thread.sleep(sleepTime/2);
         }
 
-        Assert.assertEquals(email, getUsers().userNameRows().get(getUsers().userNameRows().size() - 1).getText());
 
+        try {
+            Assert.assertEquals(email, getUsers().userNameRows().get(getUsers().userNameRows().size() - 1).getText());
+        } catch (AssertionError e) {
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Invited user email address not match: " + e.getLocalizedMessage() );
+            throw e;
+        }
+
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test Passed.");
+        Thread.sleep(sleepTime*2);
 
     }
 
