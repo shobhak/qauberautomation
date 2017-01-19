@@ -103,4 +103,14 @@ public class UsersPermissionsDialog {
         return driver.findElement(By.xpath("//tr[" + index + "][@ng-repeat='entity in entities']/td[@class='text-center'][1]//div[text()='Regular User']"));
     }
 
+    public WebElement verifyOrgDepthLevle(int row, int level){
+        String string = "";
+        if (level == 0){
+            string = "depth-level";
+        } else {
+            string = "depth-" + level + "level";
+        }
+        return driver.findElement(By.xpath("//tr[" + row + "]//div[@class='" + string + "']"));
+    }
+
 }
