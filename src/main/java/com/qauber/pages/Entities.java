@@ -223,9 +223,17 @@ public class Entities {
 
     public WebElement nextPageButton() {return driver.findElement(By.xpath("//li[contains(@class, 'pagination-next ng-scope')]/a[contains(@class, 'ng-binding')]")); } //next page, if Users paginated. SHOWS WHETHER ENABLED OR DISABLED
 
-    public boolean nextPageButtonDisabled()
+    public boolean nextPageButtonDisabled() //if nextPageButton is either disabled or does not exist, returns true
     {
-        return driver.findElements(By.xpath("/html/body/div[2]/section/div/div/pages-manager/div[2]/ul/li[4]/a")).size() > 0;
+        if (driver.findElements(By.xpath("/html/body/div[2]/section/div/div/pages-manager/div[2]/ul/li[4]/a")).size() > 0) { //if disabled next button exists...
+            return true;
+        }
+        else if (nextPageButton().isDisplayed()) { //if disabled next page button does not exist, is there a next page button at all?
+            return false; //nope
+        }
+        else { //there is no next page button
+            return true;
+        }
     }
 
     public WebElement entityUpdatedMessage() {return driver.findElement(By.xpath("//div[text()='The organization has been updated.']"));}
