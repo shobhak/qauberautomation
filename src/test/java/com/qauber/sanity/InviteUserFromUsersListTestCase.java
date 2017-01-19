@@ -26,7 +26,7 @@ public class InviteUserFromUsersListTestCase extends PageObjectModelResources {
     }
 
     @Test
-    public void testAsSAU() throws AWTException, InterruptedException {
+    public void testAsSAU() throws InterruptedException {
 //        testConfig().getTestRail().setCaseID();
 //        testConfig().getTestRail().setTester("Jing");
         setUpUser(User.UserType.SAU); //pass userType and browser. see ~/QAUberTestConfig
@@ -37,7 +37,7 @@ public class InviteUserFromUsersListTestCase extends PageObjectModelResources {
         breakDownHelper();//used to close window
     }
     @Test(priority = 1)
-    public void testAsAU() throws AWTException, InterruptedException {
+    public void testAsAU() throws InterruptedException {
 //        testConfig().getTestRail().setCaseID();
 //        testConfig().getTestRail().setTester("Jing");
         setUpUser(User.UserType.AU); //pass userType and browser. see ~/QAUberTestConfig
