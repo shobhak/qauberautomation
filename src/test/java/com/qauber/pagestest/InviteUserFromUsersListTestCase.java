@@ -1,68 +1,94 @@
 package com.qauber.pagestest;
 
+import com.github.javafaker.Faker;
 import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Test;
+import org.testng.Assert;
+import org.testng.annotations.*;
+
+import java.awt.*;
 
 /**
  * Created by Jing Xu on 12/27/2016.
  */
 public class InviteUserFromUsersListTestCase extends PageObjectModelResources {
-    WebDriver driver;
+    private int sleepTime;
 
-    @BeforeClass
+    @BeforeTest
     public void setUp() {
-        driver = new ChromeDriver();
-     //   setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with testUser()
+        setUpWithConfigFile(); //Read config file from disk, create if not present
 
-        setUpWithUser(User.UserType.AU, driver);
+        //Misc configuration
+        sleepTime = testConfig().getSleepTime();
     }
 
     @Test
-    public void inviteUserFromUsersList() throws InterruptedException {
-        String AUemail = "jing_qa_0110@mailinator.com";         // admin user email address
-        String RUemail = "jing_qa_011010@mailinator.com";       // regular user email address
+    public void testAsSAU() throws AWTException, InterruptedException {
+//        testConfig().getTestRail().setCaseID();
+//        testConfig().getTestRail().setTester("Jing");
+        setUpUser(User.UserType.SAU); //pass userType and browser. see ~/QAUberTestConfig
+        //setUpWithUser creates TestCaseUser, access with testUser()
+        setUpScript();
+        inviteUserFromUsersList();
 
-        driver.get(Config.getBaseURL());
-        Thread.sleep(10000);
+        breakDownHelper();//used to close window
+    }
+    @Test(priority = 1)
+    public void testAsAU() throws AWTException, InterruptedException {
+//        testConfig().getTestRail().setCaseID();
+//        testConfig().getTestRail().setTester("Jing");
+        setUpUser(User.UserType.AU); //pass userType and browser. see ~/QAUberTestConfig
+        //setUpWithUser creates TestCaseUser, access with testUser()
+        setUpScript();
+        inviteUserFromUsersList();
+
+    }
+    public void inviteUserFromUsersList() throws InterruptedException {
+        Faker faker = new Faker();
+        String email = faker.name().firstName().toLowerCase() + "." + faker.name().lastName().toLowerCase() + "@mailinator.com";
+
+        testDriver().get(testConfig().getBaseURL());
+        Thread.sleep(sleepTime);
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime);
 
         getNavBar().usersButton().click();
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime/2);
 
         getUsers().inviteUserButton().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
-     //   getUsers().inviteUserEmailField().sendKeys(AUemail);
-        getUsers().inviteUserEmailField().sendKeys(RUemail);
-        Thread.sleep(2000);
+        getUsers().inviteUserEmailField().sendKeys(email);
+        Thread.sleep(sleepTime/2);
 
         getUsers().cancelButton().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
         getUsers().inviteUserButton().click();
-        Thread.sleep(2000);
+        Thread.sleep(sleepTime/2);
 
-     //   getUsers().inviteUserEmailField().sendKeys(AUemail);
-        getUsers().inviteUserEmailField().sendKeys(RUemail);
-        Thread.sleep(2000);
+        getUsers().inviteUserEmailField().sendKeys(email);
+        Thread.sleep(sleepTime/2);
 
         getUsers().sendInviteButton().click();
-        Thread.sleep(5000);
+        Thread.sleep(sleepTime);
+
+        while (getUsers().nextPageButtonEnabled()){
+            getUsers().nextPageButton().click();
+            Thread.sleep(sleepTime/2);
+        }
+
+        Assert.assertEquals(email, getUsers().userNameRows().get(getUsers().userNameRows().size() - 1).getText());
 
 
     }
 
-    @AfterClass
+    @AfterTest
     public void breakDown(){
-        breakDownHelper(driver);
+        breakDownHelper();
     }
 }
