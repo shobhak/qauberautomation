@@ -96,7 +96,7 @@ public class UsersPreconditions {
 
 
         while (usersNeeded > 0) {
-            emailAddress = ("testuser"+faker.name().firstName()+faker.name().lastName()).toLowerCase()+"@mailinator.com"; //create email address
+            emailAddress = ("testuser"+faker.name().firstName()+faker.name().lastName()).replaceAll("[^A-Za-z]+", "").toLowerCase()+"@mailinator.com"; //create email address, without special characters...
 
             users.inviteUserWithoutActivation(emailAddress);
 
