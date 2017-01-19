@@ -2,6 +2,7 @@ package com.qauber.sanity;
 
 import com.github.javafaker.Faker;
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
@@ -34,8 +35,8 @@ public class EditOrganizationTest extends PageObjectModelResources {
         setUpUser(User.UserType.SAU); //Pass in user
 
         //TestRail Configuration
-//        testConfig().getTestRail().setCaseID(79853); //sample TestRail case ID, 
-//        testConfig().getTestRail().setTester("Erik's Script"); //put your name :-)
+        testConfig().getTestRail().setCaseID(82800); //sample TestRail case ID,
+        testConfig().getTestRail().setTester("Jing"); //put your name :-)
 
         //Misc configuration
         sleepTime = testConfig().getSleepTime(); //set sleepTime locally - easier than writing testConfig().getSleepTime() everywhere
@@ -56,8 +57,8 @@ public class EditOrganizationTest extends PageObjectModelResources {
 
         int newOrgIndex = 0;
 
-        String path1 = "System.getProperty(user.home)" + File.separator + "Downloads" + File.separator + "Eddie Cantor with Bert Gordon, aka \"the Mad Russian\".JPG";
-        String path2 = "System.getProperty(user.home)" + File.separator + "Downloads" + File.separator + "Il_Tempo_Gigante.jpg";
+//        String path1 = "System.getProperty(user.home)" + File.separator + "Downloads" + File.separator + "Eddie Cantor with Bert Gordon, aka \"the Mad Russian\".JPG";
+//        String path2 = "System.getProperty(user.home)" + File.separator + "Downloads" + File.separator + "Il_Tempo_Gigante.jpg";
 
         int countryindex = randomInt.nextInt(243);
 
@@ -256,7 +257,15 @@ public class EditOrganizationTest extends PageObjectModelResources {
             System.out.println("update organization failed");
         }
 
-        Assert.assertEquals(getEntities().organizationInfo(newOrgIndex).getText(), orgName);
+        try {
+            Assert.assertEquals(getEntities().organizationInfo(newOrgIndex).getText(), orgName);
+        } catch (AssertionError e) {
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Edited organization name not match: " + e.getLocalizedMessage() );
+            throw e;
+        }
+
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test Passed.");
+        Thread.sleep(sleepTime*2);
     }
     @AfterClass
     public void breakDown(){
