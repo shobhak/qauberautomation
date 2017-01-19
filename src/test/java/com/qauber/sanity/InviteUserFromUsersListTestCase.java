@@ -1,4 +1,4 @@
-package com.qauber.pagestest;
+package com.qauber.sanity;
 
 import com.github.javafaker.Faker;
 import com.qauber.config.Config;
