@@ -46,12 +46,12 @@ import org.openqa.selenium.WebElement;
         return element;
     }
 
-    public String payWithPayPal()throws InterruptedException
+    public void payWithPayPal()throws InterruptedException
 
     {
 
         //driver.get(URL);
-        int sleepTime = 3000;
+        int sleepTime = 5000;
         Thread.sleep(sleepTime);
 
         payWithMyPayPal().click();
@@ -71,23 +71,7 @@ import org.openqa.selenium.WebElement;
 
         agreeAndContinueBtn().click();
         Thread.sleep(sleepTime);
-        return payWithPayPal();
     }
 
-//
-
-//    public String getUsername() {
-//        return username;
-//    }
-//    public String getPassword() {
-//        return password; }
-
-//    public void setUsername(String username) {
-//        this.username = username;
-//    }
-//
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
 
 }

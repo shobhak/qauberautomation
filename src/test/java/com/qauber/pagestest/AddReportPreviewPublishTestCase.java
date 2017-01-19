@@ -63,7 +63,7 @@ public class AddReportPreviewPublishTestCase extends PageObjectModelResources {
         Thread.sleep(1000);
 
         Assert.assertEquals(getAddReportPreview().suspectName().getText(),firstLastName);
-        Assert.assertEquals(getAddReportPreview().stopLocation().getText(), reportVO.getStopLocation());
+        Assert.assertEquals(getAddReportPreview().locationOfStop().getText(), reportVO.getStopLocation());
 
         String reportIdValue = getAddReportPreview().reportIdElement().getText();
 
