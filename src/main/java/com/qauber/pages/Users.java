@@ -131,6 +131,10 @@ public class Users {
         sendInviteButton().click();
     }
 
+    public WebElement invalidEmailMessage(){
+        return driver.findElement(By.xpath("//*[@class='text-danger' and text()='Please enter a valid email address']"));
+    }
+
 }
 
 
