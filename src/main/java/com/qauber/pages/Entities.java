@@ -87,7 +87,12 @@ public class Entities {
 
     // Web element for "Action" finish create an organization
     public WebElement finishCreateOrganizationButton(int rowindex){
-        return driver.findElement(By.xpath("//tr[@class='ng-scope'][" + rowindex + "]//*[@class='btn btn-warning btn-sm mr-sm' and @title='Finish creating the entity']"));
+        return driver.findElement(By.xpath("//tr[@class='ng-scope'][" + rowindex + "]" +
+                "//*[@class='btn btn-warning btn-sm mr-sm' and @title='Finish creating the entity']"));
+    }
+    public List<WebElement> finishCreateOrganizationButtonList(int rowindex){
+        return driver.findElements(By.xpath("//tr[@class='ng-scope'][" + rowindex + "]" +
+                "//*[@class='btn btn-warning btn-sm mr-sm' and @title='Finish creating the entity']"));
     }
 
     // Web element for "Action" delete an organization
