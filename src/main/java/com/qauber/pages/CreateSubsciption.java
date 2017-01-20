@@ -3,6 +3,8 @@ package com.qauber.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 
 /**
  * Created by lenochka on 20.12.2016.
@@ -53,5 +55,24 @@ public class CreateSubsciption {
         return element;
     }
 
+    public WebElement textPaymentSuccessful(){
+        return driver.findElement(By.xpath("//div[@class='text-lg mb-lg' and text()='Payment successful.']"));}
+
+
+    public void sliderDragTo(int users) throws InterruptedException // type value that you want to get (from 5 to 40)
+    {
+        WebElement slider = driver.findElement(By.cssSelector(".slider-handle.min-slider-handle.round"));
+        WebElement element = driver.findElement(By.xpath("//div[@class='slider-handle min-slider-handle round']"));
+        Actions move = new Actions(driver);
+        Action action;
+        int i = 0;
+        while (Integer.parseInt(element.getAttribute("aria-valuenow")) != users) {
+            action = move.dragAndDropBy(slider, i / 3, 0).build();
+            action.perform();
+            if (Integer.parseInt(element.getAttribute("aria-valuenow")) < users)
+                i++;
+            else i--;
+        }
+    }
 
 }
