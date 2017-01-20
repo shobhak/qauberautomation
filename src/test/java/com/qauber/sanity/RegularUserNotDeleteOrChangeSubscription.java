@@ -1,6 +1,7 @@
 package com.qauber.sanity;
 
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
@@ -24,8 +25,8 @@ public class RegularUserNotDeleteOrChangeSubscription extends PageObjectModelRes
     public void setUp() {
         setUpWithConfigFile();
 
-        testConfig().getTestRail().setCaseID(00000);    //add TC number from the TestRail
-        testConfig().getTestRail().setTester("");       //add user name
+        testConfig().getTestRail().setCaseID(82809);    //add TC number from the TestRail
+        testConfig().getTestRail().setTester("Jing");       //add user name
 
         sleepTime = testConfig().getSleepTime();
         setUpUser(User.UserType.SAU);
@@ -102,17 +103,11 @@ public class RegularUserNotDeleteOrChangeSubscription extends PageObjectModelRes
             Assert.assertEquals(getProfilePanel().entitiesList().size(), 0);
         }
         catch(AssertionError e) {
-            System.out.println("The Regular User can access the subscription, it is a bug!!!");
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "There are some organization in profile panel: " + e.getLocalizedMessage() );
+            throw e;
         }
-
-        // finding out the hidden entities
-        System.out.println("There are " + getProfilePanel().hideEntitiesForNonSAU().size() + " entities hiden from Regular Users.");
-        for (int j = 0; j < getProfilePanel().hideEntitiesForNonSAU().size(); j++){
-            hideEntitiesNameListRU.add((String) ((JavascriptExecutor) getDriver()).executeScript("return arguments[0].innerHTML", getProfilePanel().hideEntitiesForNonSAU().get(j)));
-            System.out.println(hideEntitiesNameListRU.get(j));
-        }
-
-        Thread.sleep(sleepTime/2);
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test Passed.");
+        Thread.sleep(sleepTime*2);
 
     }
 

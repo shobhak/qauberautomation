@@ -1,6 +1,7 @@
 package com.qauber.sanity;
 
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.NoSuchElementException;
 import org.testng.Assert;
@@ -24,8 +25,8 @@ public class AdminUserManageUserForEntitiesAssignedTo extends PageObjectModelRes
         setUpUser(User.UserType.SAU); //Pass in user
 
         //TestRail Configuration
-//        testConfig().getTestRail().setCaseID(79853); //TestRail case ID
-//        testConfig().getTestRail().setTester("Erik's Script"); //put your name :-)
+        testConfig().getTestRail().setCaseID(82803); //TestRail case ID
+        testConfig().getTestRail().setTester("Jing"); //put your name :-)
 
         //Misc configuration
         sleepTime = testConfig().getSleepTime(); //set sleepTime locally - easier than writing testConfig().getSleepTime() everywhere
@@ -111,8 +112,15 @@ public class AdminUserManageUserForEntitiesAssignedTo extends PageObjectModelRes
         Assert.assertEquals(assginedorglist.size(), orglistAU.size());
 
         for (int i = 0; i < orglistAU.size(); i++){
-            Assert.assertEquals(true, assginedorglist.contains(orglistAU.get(i)));
+            try {
+                Assert.assertEquals(true, assginedorglist.contains(orglistAU.get(i)));
+            } catch (AssertionError e) {
+                testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "There organization list not matched: " + e.getLocalizedMessage() );
+                throw e;
+            }
         }
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test Passed.");
+        Thread.sleep(sleepTime*2);
 
     }
 

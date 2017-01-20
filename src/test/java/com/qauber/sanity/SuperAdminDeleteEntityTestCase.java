@@ -3,6 +3,7 @@ package com.qauber.sanity;
 import com.github.javafaker.Faker;
 import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -30,8 +31,8 @@ public class SuperAdminDeleteEntityTestCase extends PageObjectModelResources {
         setUpUser(User.UserType.SAU); //Pass in user
 
         //TestRail Configuration
-//        testConfig().getTestRail().setCaseID(79853); //sample TestRail case ID,
-//        testConfig().getTestRail().setTester("Erik's Computer"); //put your name :-)
+        testConfig().getTestRail().setCaseID(82808); //sample TestRail case ID,
+        testConfig().getTestRail().setTester("Jing"); //put your name :-)
 
         //Misc configuration
         sleepTime = testConfig().getSleepTime(); //set sleepTime locally - easier than writing testConfig().getSleepTime() everywhere
@@ -42,7 +43,8 @@ public class SuperAdminDeleteEntityTestCase extends PageObjectModelResources {
 
     @Test
     public void superAdminDeleteEntity() throws InterruptedException {
-        int rowindex;
+        int numberofentitiesbeforedeletion;
+        int numberofentitiesafterdeletion;
         Random randomInt = new Random();
 
         testDriver().get(testConfig().getBaseURL());
@@ -110,12 +112,12 @@ public class SuperAdminDeleteEntityTestCase extends PageObjectModelResources {
 
 
         // find the organization row index
-        rowindex = getEntities().organizationList().size();
+        numberofentitiesbeforedeletion = getEntities().organizationList().size();
         Thread.sleep(sleepTime/3);
 
 
         // click the organization delete button;
-        getEntities().deleteOrganizationButton(rowindex).click();
+        getEntities().deleteOrganizationButton(numberofentitiesbeforedeletion).click();
         Thread.sleep(sleepTime/2);
 
         // click the cancel button
@@ -123,20 +125,24 @@ public class SuperAdminDeleteEntityTestCase extends PageObjectModelResources {
         Thread.sleep(sleepTime/2);
 
         // click the organization delete button;
-        getEntities().deleteOrganizationButton(rowindex).click();
+        getEntities().deleteOrganizationButton(numberofentitiesbeforedeletion).click();
         Thread.sleep(sleepTime/2);
 
         // click the delete button
         getEntitiesPermissionsDialog().deleteOrgDelete().click();
         Thread.sleep(sleepTime/2);
 
+        numberofentitiesafterdeletion = getEntities().organizationList().size();
+
         try{
-            getEntities().organizationInfo(rowindex).isDisplayed();
-            System.out.println("Failed to delete the entity");
+            Assert.assertNotEquals(numberofentitiesbeforedeletion, numberofentitiesafterdeletion);
         }
-        catch (IndexOutOfBoundsException e){
-            System.out.println("The newly created entity has been deleted");
+        catch (AssertionError e){
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "The last organization has not been deleted: " + e.getLocalizedMessage() );
+            throw e;
         }
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test Passed.");
+        Thread.sleep(sleepTime*2);
 
     }
 

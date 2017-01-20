@@ -1,32 +1,42 @@
 package com.qauber.sanity;
 
-import com.qauber.config.Config;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.User;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
  * Created by San Jose on 12/22/16.
+ * TODO: add assert (how to check when delete is successful?)
+ * TODO: add to TestRail
+ * TODO: don't delete first department
+ * TODO: add preconditions (when available)
  */
 public class Delete_Department_SAU extends PageObjectModelResources {
 
-    WebDriver driver;
     int sleepTime;
 
     @BeforeClass
     public void setUp() {
-        driver = new ChromeDriver();
-        sleepTime = 5000;
-        setUpWithUser(User.UserType.SAU, driver); //pass userType and browser. see ~/QAUberTestConfig
-        //setUpWithUser creates TestCaseUser, access with getTestCaseUser()
+        //Initial setup
+        setUpWithConfigFile(); //Read config file from disk, create if not present
+        setUpUser(User.UserType.SAU); //Pass in user
+
+        //TestRail Configuration
+//        testConfig().getTestRail().setCaseID(82798); //TestRail case ID
+//        testConfig().getTestRail().setTester("ElenaB"); //put your name :-)
+
+        //Misc configuration
+        sleepTime = testConfig().getSleepTime(); //set sleepTime locally - easier than writing testConfig().getSleepTime() everywhere
+
+        //Create driver & page objects, finish setup
+        setUpScript();
     }
 
     @Test
-    public void editDepartmentAU() throws InterruptedException{
-        driver.get(Config.getBaseURL());
+    public void deleteDepartmentSAU() throws InterruptedException{
+        testDriver().get(testConfig().getBaseURL());
 
 
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
@@ -50,10 +60,9 @@ public class Delete_Department_SAU extends PageObjectModelResources {
         getEntitiesDepartmentSettings().departmentConfirmDeliteButton(1).click();
         Thread.sleep(sleepTime);
 
+    }
 
-
-
-        driver.quit();
-
+    @AfterClass public void breakDown() {
+        breakDownHelper();
     }
 }

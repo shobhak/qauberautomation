@@ -1,6 +1,7 @@
 package com.qauber.sanity;
 
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
@@ -30,8 +31,8 @@ public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObje
         setUpUser(User.UserType.SAU); //Pass in user
 
         //TestRail Configuration
-//        testConfig().getTestRail().setCaseID(79853); //TestRail case ID
-//        testConfig().getTestRail().setTester("Erik's Script"); //put your name :-)
+        testConfig().getTestRail().setCaseID(82805); //TestRail case ID
+        testConfig().getTestRail().setTester("Jing"); //put your name :-)
 
         //Misc configuration
         sleepTime = testConfig().getSleepTime(); //set sleepTime locally - easier than writing testConfig().getSleepTime() everywhere
@@ -119,9 +120,16 @@ public class RegularUserCannotReportNotAssignedEntitiesTestCase extends PageObje
             for (int y = 0; y < notassginedlist.size(); y++) {
                 System.out.println(reportentitieslist.get(x).getText());
                 System.out.println(notassginedlist.get(y));
-                Assert.assertNotEquals(reportentitieslist.get(x).getText(), notassginedlist.get(y));
+                try {
+                    Assert.assertNotEquals(reportentitieslist.get(x).getText(), notassginedlist.get(y));
+                } catch (AssertionError e) {
+                    testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "There is an organization should not be here: " + e.getLocalizedMessage() );
+                    throw e;
+                }
             }
         }
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test Passed.");
+        Thread.sleep(sleepTime*2);
 
     }
     @AfterClass
