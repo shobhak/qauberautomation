@@ -28,7 +28,7 @@ public class ProfilePanelSettingsTabClickable extends PageObjectModelResources {
     }
 
     @Test
-    public void userStatusShown() throws InterruptedException {
+    public void ProfilePanelSettingsTabClickable() throws InterruptedException {
 
         testDriver().get(testConfig().getBaseURL());
         Thread.sleep(sleepTime * 2);
