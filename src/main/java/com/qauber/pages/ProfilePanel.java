@@ -34,6 +34,8 @@ public class ProfilePanel {
     public WebElement editCompanyButton() {
         return driver.findElement(By.xpath("//button[@ng-click='$ctrl.editCompany()']"));
     }
+
+    public WebElement trialPeriod() {return driver.findElement(By.xpath("//h4[text() = 'Trial Period']"));}
     public WebElement logOutButton() {
         return driver.findElement(By.xpath("//button[@ng-click='app.logout()']"));
     }
