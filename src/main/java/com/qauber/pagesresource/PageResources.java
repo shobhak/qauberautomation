@@ -17,6 +17,8 @@ public class PageResources {
     private LoginPage login;
     private RegistrationPage1 registrationPage1;
     private RegistrationPage2 registrationPage2;
+    private ConfirmRegistrationFromEmail confirmRegistrationFromEmail;
+    private ConfirmActivationFromEmail confirmActivationFromEmail;
 
     //Pages/elements accessible from all pages
     private Header header;
@@ -54,6 +56,8 @@ public class PageResources {
         login = new LoginPage(driver);
         registrationPage1 = new RegistrationPage1(driver);
         registrationPage2 = new RegistrationPage2(driver);
+        confirmRegistrationFromEmail = new ConfirmRegistrationFromEmail(driver);
+        confirmActivationFromEmail = new ConfirmActivationFromEmail(driver);
         header = new Header(driver);
         navBar = new NavBar(driver);
         profilePanel = new ProfilePanel(driver);
@@ -104,6 +108,11 @@ public class PageResources {
     public RegistrationPage2 getRegistrationPage2() {
         return registrationPage2;
     }
+
+    public ConfirmRegistrationFromEmail getConfirmRegistrationFromEmail() {
+        return confirmRegistrationFromEmail;
+    }
+    public ConfirmActivationFromEmail getConfirmActivationFromEmail() { return confirmActivationFromEmail; }
 
     public Header getHeader() {
         return header;
@@ -198,4 +207,5 @@ public class PageResources {
     public CreateOrganization getCreateOrganization() {
         return createOrganization;
     }
+
 }

@@ -24,8 +24,11 @@ public class PageObjectModelResources {
     private UserFactory userFactory;
     private PageResources pages;
 
+    //Helpers
+    private HelperResources helpers;
+
     //Preconditions
-    private PreconditionsResources preconditionsResources;
+    private PreconditionsResources preconditions;
 
     //Constructor
     public PageObjectModelResources() {
@@ -109,8 +112,11 @@ public class PageObjectModelResources {
         //Get page resources
         pages = PageResourcesFactory.getPageResources(driver);
 
+        //Helpers
+        helpers = new HelperResources(driver);
+
         //Preconditions
-        preconditionsResources = new PreconditionsResources(driver);
+        preconditions = new PreconditionsResources(driver);
 
     }
 
@@ -219,7 +225,10 @@ public class PageObjectModelResources {
     protected CompanyCreationSAU getCompanyCreationSAU(){ return pages.getCompanyCreationSAU(); }
 
     //Users preconditions
-    protected PreconditionsResources getPreconditions() { return preconditionsResources; }
+    protected PreconditionsResources getPreconditions() { return preconditions; }
+
+    //Helpers
+    protected HelperResources getHelpers() { return helpers; }
 
     //Test Resources - testDriver, testUser, testConfig //TODO: rename? (getTestConfig, etc....) probably not
     protected WebDriver testDriver() {
