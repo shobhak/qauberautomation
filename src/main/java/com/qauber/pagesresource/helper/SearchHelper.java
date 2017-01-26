@@ -1,4 +1,4 @@
-package com.qauber.pagesresource.preconditions;
+package com.qauber.pagesresource.helper;
 
 import com.github.javafaker.Faker;
 import com.qauber.pages.Reports;
