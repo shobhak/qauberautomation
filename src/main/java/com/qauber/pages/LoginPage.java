@@ -1,5 +1,6 @@
 package com.qauber.pages;
 
+import com.qauber.pagesresource.User;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -39,6 +40,10 @@ public class LoginPage {
 
     public WebElement registerButton() {
         return driver.findElement(By.xpath("//div[2]/a"));
+    }
+
+    public void loginToWave(User user) {
+        loginToWave(user.getUsername(), user.getPassword());
     }
 
     public void loginToWave(String strUserName,String strPassword){

@@ -127,7 +127,7 @@ public class Users {
         ((JavascriptExecutor)driver).executeScript("javascript:window.scrollBy(0,-400)"); //scroll to top of page, thank you Denis
         inviteUserButton().click();
         inviteUserEmailField().sendKeys(emailAddress);
-        Thread.sleep(200);
+        Thread.sleep(500);
         sendInviteButton().click();
     }
 
