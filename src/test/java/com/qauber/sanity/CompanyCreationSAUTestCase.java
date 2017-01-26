@@ -13,8 +13,8 @@ import org.testng.annotations.Test;
 
 /**
  * Created by lenochka on 27.12.2016.
- * TODO: Add preconditions
- * TODO: add to TestRail
+ * TODO: Add preconditions ?
+ * TODO: add to TestRail  done
  */
 public class CompanyCreationSAUTestCase extends PageObjectModelResources {
     private int sleepTime;
@@ -38,14 +38,16 @@ public class CompanyCreationSAUTestCase extends PageObjectModelResources {
 
     @Test
     public void companyCreationSAUTestCase() throws InterruptedException {
+
         testDriver().get(testConfig().getBaseURL());
+
         Thread.sleep(sleepTime);
 
         Faker faker = new Faker();
+
         String pswd = faker.internet().password();
         System.out.println(pswd);
-        String companyname = faker.name().username();
-        System.out.println(companyname);
+
         //Goal: create mailinator email address with and without domain (@mailinator.com)
         // create a user name
         String fullName = faker.name().name();
@@ -56,14 +58,16 @@ public class CompanyCreationSAUTestCase extends PageObjectModelResources {
 
         String fullEmailAddress = localPartOfEmailAddress + "@mailinator.com";
 
-        Mailinator mailinator = new Mailinator(testDriver());
+        String companyName = faker.name().username();
+        String companyEmailAddress = companyName + "@mailinator.com";
+
+         Mailinator mailinator = new Mailinator(testDriver());
 
         String country; //= "Switzerland";
 
         getCompanyCreationSAU().registerNow().click();
         Thread.sleep(sleepTime);
-
-        getCompanyCreationSAU().regName().sendKeys(fullName);
+       getCompanyCreationSAU().regName().sendKeys(fullName);
         Thread.sleep(sleepTime * 2 / 3);
 
         getCompanyCreationSAU().regEmail().sendKeys(fullEmailAddress);
@@ -78,13 +82,13 @@ public class CompanyCreationSAUTestCase extends PageObjectModelResources {
         getCompanyCreationSAU().regContinueRegistration().click();
         Thread.sleep(sleepTime * 2 / 3);
 
-        getCompanyCreationSAU().companyName().sendKeys(faker.name().username());
+        getCompanyCreationSAU().companyName().sendKeys(companyName);
         Thread.sleep(sleepTime * 2 / 3);
 
         getCompanyCreationSAU().companyPhone().sendKeys(faker.phoneNumber().cellPhone());
         Thread.sleep(sleepTime * 2 / 3);
 
-        getCompanyCreationSAU().companyEmail().sendKeys(faker.internet().emailAddress());
+        getCompanyCreationSAU().companyEmail().sendKeys(companyEmailAddress);
         Thread.sleep(sleepTime * 2 / 3);
 
         country = "United States";

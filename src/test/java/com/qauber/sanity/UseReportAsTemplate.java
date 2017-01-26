@@ -4,15 +4,12 @@ import com.qauber.assertutil.AssertUber;
 import com.qauber.pagesresource.PageObjectModelResources;
 import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
-import org.apache.commons.lang3.StringUtils;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
  * Created by Alya on 12/20/2016.
- *
- * TO DO: change assertions due to new interface
  *
  * Template displays data from Subject Information page of the report, except case id, age, primary language,
  * street address, country, city, state, zip, telephone, email, driver, passenger, pedestrian
@@ -48,14 +45,26 @@ public class UseReportAsTemplate extends PageObjectModelResources {
         getReports().selectReport(rowindex).click();
         Thread.sleep(sleepTime/2);
 
-        String suspectName = getReportsViewReport().suspectName().getText();
+        // Reports: View page
+
         String suspectType = getReportsViewReport().suspectType().getText();
-        String dob = getReportsViewReport().dob().getText();
+        String lastName = getReportsViewReport().lastName().getText();
+        String firstName = getReportsViewReport().firstName().getText();
+        String middleName = getReportsViewReport().middleName().getText();
         String nickname = getReportsViewReport().nickName().getText();
-        String raceHeightWeight = getReportsViewReport().raceHeightWeight().getText();
-        String hairColorHairLengthHairStyle = getReportsViewReport().hairColorHairLengthHairStyle().getText();
-        String sexBuildEyeColor = getReportsViewReport().sexBuildEyeColor().getText();
-        String complexionTeethHandPreference = getReportsViewReport().complexionTeethHandPreference().getText();
+        String dob = getReportsViewReport().dob().getText();
+        String sex = getReportsViewReport().sex().getText();
+        String race = getReportsViewReport().race().getText();
+        String height = getReportsViewReport().height().getText();
+        String weight = getReportsViewReport().weight().getText();
+        String build = getReportsViewReport().build().getText();
+        String hairColor = getReportsViewReport().hairColor().getText();
+        String hairLength = getReportsViewReport().hairLength().getText();
+        String hairStyle = getReportsViewReport().hairStyle().getText();
+        String eyeColor = getReportsViewReport().eyeColor().getText();
+        String complexion = getReportsViewReport().complexion().getText();
+        String teeth = getReportsViewReport().teeth().getText();
+        String handPreference = getReportsViewReport().handPreference().getText();
 
         getReportsViewReport().useAsTemplateButton().click();
         Thread.sleep(sleepTime/2);
@@ -63,19 +72,15 @@ public class UseReportAsTemplate extends PageObjectModelResources {
         Thread.sleep(sleepTime/2);
         getAddReportNavigation().subjectInformationTab().click();
 
-        /*suspectName = firstName+middleName+lastName, suspectType = suspectTypeString, nickname = nickName,
-        sexBuildEyeColor = sexString+buildString+eyeColorString,
-        hairColorHairLengthHairStyle = hairColorString+hairLengthString+hairTypeString,
-        complexionTeethHandPreference = complexionString+teethString+handPreferenceString,
-        raceHeightWeight = raceString+heightString+weightString
-        dob = doB*/
+        // Add Report: Subject information
+
         String caseID = getAddReportSubjectInformationPage().caseIdField().getAttribute("value");
-        String firstName = getAddReportSubjectInformationPage().firstName().getAttribute("value");
-        String middleName = getAddReportSubjectInformationPage().middleName().getAttribute("value");
-        String lastName = getAddReportSubjectInformationPage().lastName().getAttribute("value");
+        String firstNameString = getAddReportSubjectInformationPage().firstName().getAttribute("value");
+        String middleNameString = getAddReportSubjectInformationPage().middleName().getAttribute("value");
+        String lastNameString = getAddReportSubjectInformationPage().lastName().getAttribute("value");
         String suspectTypeString = getAddReportSubjectInformationPage().subjectType().getAttribute("value");
-        String doB = getAddReportSubjectInformationPage().dateOfBirth().getAttribute("value");
-        String nickName = getAddReportSubjectInformationPage().nickName().getAttribute("value");
+        String nickNameString = getAddReportSubjectInformationPage().nickName().getAttribute("value");
+        String dobString = getAddReportSubjectInformationPage().dateOfBirth().getAttribute("value");
         String raceString = getAddReportSubjectInformationPage().race().getAttribute("value");
         String heightString = getAddReportSubjectInformationPage().height().getAttribute("value");
         String weightString = getAddReportSubjectInformationPage().weight().getAttribute("value");
@@ -90,42 +95,24 @@ public class UseReportAsTemplate extends PageObjectModelResources {
         String handPreferenceString = getAddReportSubjectInformationPage().handPreference().getAttribute("value");
 
         AssertUber.assertEquals(caseID, "", "Case ID is displayed");
-
-        if (StringUtils.isBlank(middleName)) {
-            AssertUber.assertEquals(suspectName, firstName + " " + lastName, "Suspect name is different) ");
-        } else {
-            AssertUber.assertEquals(suspectName, firstName + " " + middleName + " " + lastName, "Suspect name is different");
-        }
-
         AssertUber.assertEquals(suspectType, suspectTypeString, "Suspect type is different");
-
-        AssertUber.assertEquals(dob,doB, "Date of birth is different");
-
-        AssertUber.assertEquals(nickname, nickName, "NickName is different");
-
-        String race = StringUtils.isBlank(raceString) ? "" : raceString + " ";
-        String height = StringUtils.isBlank(heightString) ? " " : " " + heightString + " ";
-        String weight = StringUtils.isBlank(weightString) ? "" : " " + weightString;
-
-        AssertUber.assertEquals(raceHeightWeight, race + "/" + height + "/" + weight, "Race, height, weight are different");
-
-        String hairColor = StringUtils.isBlank(hairColorString) ? "" : hairColorString + " ";
-        String hairLength = StringUtils.isBlank(hairLengthString) ? " " : " " + hairLengthString + " ";
-        String hairStyle = StringUtils.isBlank(hairStyleString) ? "" : " " + hairStyleString;
-
-        AssertUber.assertEquals(hairColorHairLengthHairStyle, hairColor +"/" + hairLength + "/" + hairStyle, "Hair color, length, style are different");
-
-        String sex = StringUtils.isBlank(sexString) ? "" : sexString + " ";
-        String build = StringUtils.isBlank(buildString) ? " " : " " + buildString + " ";
-        String eyeColor = StringUtils.isBlank(eyeColorString) ? "" : " " + eyeColorString;
-
-        AssertUber.assertEquals(sexBuildEyeColor, sex + "/" + build + "/" + eyeColor, "Sex, build, eyeColor are different");
-
-        String complexion = StringUtils.isBlank(complexionString) ? "" : complexionString + " ";
-        String teeth = StringUtils.isBlank(teethString) ? " " : " " + teethString + " ";
-        String handPreference = StringUtils.isBlank(handPreferenceString) ? "" : " " + handPreferenceString;
-
-        AssertUber.assertEquals(complexionTeethHandPreference, complexion + "/" + teeth + "/" + handPreference, "Complexion, teeth, handPreference are different");
+        AssertUber.assertEquals(lastName, lastNameString, "Last name is different");
+        AssertUber.assertEquals(firstName, firstNameString, "First name is different");
+        AssertUber.assertEquals(middleName, middleNameString, "Middle name is different");
+        AssertUber.assertEquals(nickname, nickNameString, "Nick name is different");
+        AssertUber.assertEquals(dob,dobString, "Date of birth is different");
+        AssertUber.assertEquals(race, raceString, "Race is different");
+        AssertUber.assertEquals(height, heightString, "Height is different");
+        AssertUber.assertEquals(weight, weightString, "Weight is different");
+        AssertUber.assertEquals(hairColor, hairColorString, "Hair color is different");
+        AssertUber.assertEquals(hairLength, hairLengthString, "Hair length is different");
+        AssertUber.assertEquals(hairStyle, hairStyleString, "Hair style is different");
+        AssertUber.assertEquals(sex, sexString, "Sex is different");
+        AssertUber.assertEquals(build, buildString, "Build is different");
+        AssertUber.assertEquals(eyeColor, eyeColorString, "Eye color is different");
+        AssertUber.assertEquals(complexion, complexionString, "Complexion is different");
+        AssertUber.assertEquals(teeth, teethString, "Teeth is different");
+        AssertUber.assertEquals(handPreference, handPreferenceString, "Hand preference is different");
 
         testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test passed");
     }

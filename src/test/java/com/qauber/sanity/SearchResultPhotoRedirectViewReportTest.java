@@ -1,6 +1,7 @@
 package com.qauber.sanity;
 
 import com.qauber.pagesresource.PageObjectModelResources;
+import com.qauber.pagesresource.TestRail;
 import com.qauber.pagesresource.User;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
@@ -19,8 +20,8 @@ public class SearchResultPhotoRedirectViewReportTest extends PageObjectModelReso
     public void setUp() {
         setUpWithConfigFile();
 
-        testConfig().getTestRail().setCaseID(00000);    //add TC number from the TestRail
-        testConfig().getTestRail().setTester("");       //add user name
+        testConfig().getTestRail().setCaseID(82807);    //add TC number from the TestRail
+        testConfig().getTestRail().setTester("Jing");       //add user name
         sleepTime = testConfig().getSleepTime();
         
         setUpUser(User.UserType.SAU);
@@ -31,7 +32,7 @@ public class SearchResultPhotoRedirectViewReportTest extends PageObjectModelReso
     public void searchResultPhotoRedirectViewReport() throws InterruptedException {
         String getreportidfromview;
         String getreportidfromphoto;
-        int rowindex = 3;
+        int rowindex = 1;
         getDriver().get(testConfig().getBaseURL());
         Thread.sleep(sleepTime*2);
 
@@ -64,7 +65,14 @@ public class SearchResultPhotoRedirectViewReportTest extends PageObjectModelReso
         System.out.println("The report ID from clicking view button: " + getreportidfromphoto);
         Thread.sleep(sleepTime/2);
 
-        Assert.assertEquals(getreportidfromphoto,getreportidfromview);
+        try {
+            Assert.assertEquals(getreportidfromphoto,getreportidfromview);
+        } catch (AssertionError e) {
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "The report ID not matched: " + e.getLocalizedMessage() );
+            throw e;
+        }
+        testConfig().getTestRail().addResults(TestRail.TestCaseResult.PASSED, "Test Passed.");
+        Thread.sleep(sleepTime*2);
 
 
     }

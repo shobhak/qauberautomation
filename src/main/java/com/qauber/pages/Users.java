@@ -131,6 +131,17 @@ public class Users {
         sendInviteButton().click();
     }
 
+    public WebElement invalidEmailMessage(){
+        return driver.findElement(By.xpath("//*[@class='text-danger' and text()='Please enter a valid email address']"));
+    }
+
+    public WebElement notRegistered(){
+        return driver.findElement(By.xpath("//tbody/tr[1]/td[1]/div/div[3]/span[3]/span"));
+    }
+
+    public WebElement active(){
+        return driver.findElement(By.xpath("//tbody/tr[1]/td[1]/div/div[3]/span[1]"));
+    }
 }
 
 

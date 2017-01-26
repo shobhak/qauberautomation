@@ -15,7 +15,7 @@ public class PreconditionsResources {
     private EntityPreconditions entityPreconditions;
     private SearchHelper searchHelper;
     private PermissionsPreconditions permissionsPreconditions;
-//    private EntityPreconditions entityPreconditions;
+    private EntityPreconditions entityPreconditions;
 
 
     public PreconditionsResources(WebDriver driver) {
