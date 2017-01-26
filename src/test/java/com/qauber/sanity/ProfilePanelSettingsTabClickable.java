@@ -42,24 +42,12 @@ public class ProfilePanelSettingsTabClickable extends PageObjectModelResources {
         getProfilePanel().settinsButton().click();
         Thread.sleep(sleepTime);
 
-        getProfilePanel().settingsText().getText();
-        Thread.sleep(sleepTime);
-
-        String setting = getProfilePanel().settingsText().getText();
-
-        getProfilePanel().userButton().click();
-        Thread.sleep(sleepTime);
-
-        getProfilePanel().logOutButton().click();
-        Thread.sleep(sleepTime);
-
-
        try{
-            Assert.assertTrue(setting.equals("Settings"));
+            Assert.assertTrue(getProfilePanel().settingsText().isDisplayed());
 
         }
         catch (AssertionError e) {
-            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Settings tab is not clickable " + e.getLocalizedMessage() );
+            testConfig().getTestRail().addResults(TestRail.TestCaseResult.FAILED, "Settings is not visible " + e.getLocalizedMessage() );
             throw e;
         }
 

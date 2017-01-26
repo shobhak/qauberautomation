@@ -34,19 +34,15 @@ public class TrialPeriodFlag extends PageObjectModelResources {
         getLogin().loginToWave(testUser().getUsername(), testUser().getPassword());
         Thread.sleep(sleepTime);
 
+
         getHeader().userName().click();
         Thread.sleep(sleepTime);
 
         getProfilePanel().trialPeriod().click();
         Thread.sleep(sleepTime);
 
-        String trialPeriod = getProfilePanel().trialPeriod().getText();
-
-        getProfilePanel().logOutButton().click();
-        Thread.sleep(sleepTime);
-
         try{
-            Assert.assertTrue(trialPeriod.equals("Trial Period"));
+            Assert.assertTrue(getProfilePanel().trialPeriod().isDisplayed());
 
         }
         catch (AssertionError e) {
