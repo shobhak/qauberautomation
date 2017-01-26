@@ -229,4 +229,7 @@ public class PageObjectModelResources {
     protected User testUser() {
         return testCaseUser;
     }
+    protected ConfirmRegistrationFromEmail getConfirmRegistrationFromEmail() {
+        return pages.getConfirmRegistrationFromEmail();
+    }
 }
