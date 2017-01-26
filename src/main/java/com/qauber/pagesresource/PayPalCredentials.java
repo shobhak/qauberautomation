@@ -21,8 +21,17 @@ import org.openqa.selenium.WebElement;
     private String password = "mypaypalsandbox";
 
     private WebElement payWithMyPayPal(){
-
         return driver.findElement(By.xpath("//*[@id='loadLogin']"));
+    }
+
+    private boolean payWithMyPayPalExists(){
+        if (driver.findElements(By.xpath("//*[@id='loadLogin']")).size() == 0) {
+            return false;
+        }
+       else {
+            return true;
+        }
+
     }
 
     private WebElement loginField() {
@@ -54,15 +63,20 @@ import org.openqa.selenium.WebElement;
         int sleepTime = 5000;
         Thread.sleep(sleepTime);
 
-        payWithMyPayPal().click();
-        Thread.sleep(sleepTime);
+        if (payWithMyPayPalExists()) {
+
+            payWithMyPayPal().click();
+            Thread.sleep(sleepTime);
+        }
 
         loginField().click();
         Thread.sleep(sleepTime);
 
-        loginField().sendKeys(login);
-        Thread.sleep(sleepTime);
-
+        if(loginField().getAttribute("value").equals("")) {
+            loginField().sendKeys(login);
+            Thread.sleep(sleepTime);
+        }
+        
         passField().sendKeys(password);
         Thread.sleep(sleepTime);
 
