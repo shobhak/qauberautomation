@@ -5,21 +5,30 @@ package com.qauber.pagesresource;
  */
 public class User {
 
-    private String username = "user@gmail.com";
-    private String password = "password";
-    private String name = "Sample User";
+    private String username;// = "user@gmail.com";
+    private String password; //= "password";
+    private String name; // = "Sample User";
+    private String firstName;
+    private String lastName;
     protected UserType userType;
 
-    public User(ConfigOOP config) {
-
-     }
-
-     public User() {
+    public User() {
          username="defaultUserName";
          password="defaultPassword";
          name="Default User";
+         firstName = "Default";
+         lastName = "User";
          userType=UserType.SAU;
-     }
+    }
+
+
+    public User(String username, String password, String firstName, String lastName) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.name = this.firstName+" "+this.lastName;
+    }
 
     public enum UserType {
         SAU,
@@ -62,4 +71,24 @@ public class User {
         System.out.println("User Name:"+getUsername());
         System.out.println("User Password:"+getPassword());
     }
+
+
+
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    protected void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    protected void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
 }

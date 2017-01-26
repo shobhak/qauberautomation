@@ -1,5 +1,6 @@
 package com.qauber.pagesresource;
 
+import com.qauber.pagesresource.helper.SearchHelper;
 import com.qauber.pagesresource.preconditions.*;
 import org.openqa.selenium.WebDriver;
 
@@ -11,6 +12,7 @@ public class PreconditionsResources {
     private UsersPreconditionsSampleRunAsSeparateUser samplePreconditionsAsSeparateUser;
     private ReportPreconditions reportPreconditions;
     private EntitiesNamesPreconditions entitiesNamesPreconditions;
+    private EntityPreconditions entityPreconditions;
     private SearchHelper searchHelper;
     private PermissionsPreconditions permissionsPreconditions;
 //    private EntityPreconditions entityPreconditions;
@@ -18,7 +20,7 @@ public class PreconditionsResources {
 
     public PreconditionsResources(WebDriver driver) {
         usersPreconditions = new UsersPreconditions(driver);
-//        entityPreconditions = new EntityPreconditions(driver);
+        entityPreconditions = new EntityPreconditions(driver);
         reportPreconditions = new ReportPreconditions(driver);
         samplePreconditionsAsSeparateUser = new UsersPreconditionsSampleRunAsSeparateUser();
         entitiesNamesPreconditions = new EntitiesNamesPreconditions(driver);
@@ -30,7 +32,7 @@ public class PreconditionsResources {
         return usersPreconditions;
     }
 
-//    public EntityPreconditions getEntityPreconditions() { return entityPreconditions; }
+    public EntityPreconditions getEntityPreconditions() { return entityPreconditions; }
 
     public ReportPreconditions getReportPreconditions(){
 
