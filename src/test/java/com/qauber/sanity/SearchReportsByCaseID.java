@@ -49,7 +49,7 @@ public class SearchReportsByCaseID extends PageObjectModelResources {
         if(getReports().publishedOnCheckBox().isSelected())
             getReports().publishedOnCheckBox().click();
 
-        caseID = getPreconditions().getSearchHelper().randomCaseID();
+        caseID = getHelpers().getSearchHelper().randomCaseID();
 
         getReports().caseIdField().clear();
         getReports().caseIdField().sendKeys(caseID);
