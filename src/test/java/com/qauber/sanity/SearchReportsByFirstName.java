@@ -47,7 +47,7 @@ public class SearchReportsByFirstName extends PageObjectModelResources {
         if(getReports().publishedOnCheckBox().isSelected())
             getReports().publishedOnCheckBox().click();
 
-        firstName = getPreconditions().getSearchHelper().randomFirstName();
+        firstName = getHelpers().getSearchHelper().randomFirstName();
         getReports().firstNameField().clear();
         getReports().firstNameField().sendKeys(firstName);
         Thread.sleep(sleepTime);
