@@ -46,7 +46,7 @@ public class SearchReportsByCreatedDate extends PageObjectModelResources {
         if(getReports().publishedOnCheckBox().isSelected())
             getReports().publishedOnCheckBox().click();
 
-        date = getPreconditions().getSearchHelper().randomDate();
+        date = getHelpers().getSearchHelper().randomDate();
 
         getReports().createdDateFromIcon(date);
         getReports().createdDateToIcon(date);
