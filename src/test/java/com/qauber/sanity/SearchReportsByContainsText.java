@@ -50,7 +50,7 @@ public class SearchReportsByContainsText extends PageObjectModelResources {
         if(getReports().publishedOnCheckBox().isSelected())
             getReports().publishedOnCheckBox().click();
 
-        someText = getPreconditions().getSearchHelper().randomContainText();
+        someText = getHelpers().getSearchHelper().randomContainText();
 
         getReports().containsTextField().clear();
         getReports().containsTextField().sendKeys(someText);
