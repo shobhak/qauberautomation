@@ -47,7 +47,7 @@ public class SearchReportsByLastName extends PageObjectModelResources {
         if(getReports().publishedOnCheckBox().isSelected())
             getReports().publishedOnCheckBox().click();
 
-        lastName = getPreconditions().getSearchHelper().randomLastName();
+        lastName = getHelpers().getSearchHelper().randomLastName();
 
         getReports().lastNameField().clear();
         getReports().lastNameField().sendKeys(lastName);
