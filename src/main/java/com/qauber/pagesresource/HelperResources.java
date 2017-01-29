@@ -1,5 +1,6 @@
 package com.qauber.pagesresource;
 
+import com.qauber.pages.com.qauber.pages.helper.EntityHelper;
 import com.qauber.pagesresource.helper.SearchHelper;
 import org.openqa.selenium.WebDriver;
 
@@ -9,15 +10,22 @@ import org.openqa.selenium.WebDriver;
 public class HelperResources {
     WebDriver driver;
     SearchHelper searchHelper;
-    //EntityHelper entityHelper;
+    EntityHelper entityHelper;
 
     public HelperResources(WebDriver driver) {
         this.driver = driver;
         searchHelper = new SearchHelper(driver);
-        //entityHelper = new EntityHelper(driver);
+        entityHelper = new EntityHelper(driver);
     }
 
     public SearchHelper getSearchHelper() {
         return searchHelper;
     }
+
+    public EntityHelper getEntityHelper() {
+        return entityHelper;
+    }
+
+
 }
+
