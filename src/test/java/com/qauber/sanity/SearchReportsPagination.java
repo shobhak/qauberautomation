@@ -49,7 +49,7 @@ public class SearchReportsPagination extends PageObjectModelResources {
             getReports().publishedOnCheckBox().click();
         Thread.sleep(sleepTime);
 
-        pagination = getPreconditions().getSearchHelper().randomPagination();
+        pagination = getHelpers().getSearchHelper().randomPagination();
 
         getReports().pagination(pagination).click();
         Thread.sleep(sleepTime);
