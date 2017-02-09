@@ -73,7 +73,7 @@ public class EntityHelper {
             pageResources.getCreateOrganization().entityNextButtone().click();
             Thread.sleep(sleepTime);
 
-            pageResources.getCreateOrganization().inviteRegularUserEmailField().sendKeys(faker.internet().emailAddress() + "@mailinator.com");
+            pageResources.getCreateOrganization().inviteRegularUserEmailField().sendKeys(faker.name().username() + "@mailinator.com");
             Thread.sleep(sleepTime);
 
             pageResources.getCreateOrganization().inviteRegularUserNextButton().click();
@@ -82,7 +82,7 @@ public class EntityHelper {
             pageResources.getCreateOrganization().inviteRegularUserDoneButton().click();
             Thread.sleep(sleepTime*2);
 
-            pageResources.getCreateOrganization().inviteAdminUserEmailField().sendKeys(faker.internet().emailAddress() +"@mailinator.com");
+            pageResources.getCreateOrganization().inviteAdminUserEmailField().sendKeys(faker.name().username() +"@mailinator.com");
             Thread.sleep(sleepTime);
 
             pageResources.getCreateOrganization().inviteAdminUserNextButton().click();
