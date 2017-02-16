@@ -3,7 +3,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 
-# This script is testing the Main Navigation of Wave Fit test wave application
+# This script is testing the Main Navigation of the application
 # specifically testing #T76679	Verify that the "Logout" on the menu bar is function. There is login
 #and then logs out of the application and exits the browser. This is on Chrome.
 # tester- Shobha Vaidyanathan
