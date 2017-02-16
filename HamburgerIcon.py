@@ -3,7 +3,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 
-### This test verifies that hamburger icon in the testwave of wave fit web application are
+### This test verifies that hamburger icon in the testwave of the web application are
 ### functional beginning from logging in checking the hamburger icon to the application until logging out.
 # specifically  testing T76670	Verify the hamburger icon is functional,
 ###  tester -Shobha Vaidyanathan
