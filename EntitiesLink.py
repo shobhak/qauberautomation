@@ -3,7 +3,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 
-# This script is testing the Main Navigation of Wave Fit test wave application
+# This script is testing the Main Navigation ofthe application
 # specifically testing T76674	Verify "Entities" link is functional. There is login, checking the Entities
 #link is functional and then logs out of the application and exits the browser. This is on Chrome.
 # tester- Shobha Vaidyanathan
