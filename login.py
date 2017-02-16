@@ -7,8 +7,7 @@ from selenium.webdriver.support.wait import WebDriverWait
 #from selenium.webdriver.support import expected_conditions as EC
 
 
-### This test verifies that the login and logout funcctionality of the WAVE fit
-## testwave application is working. The browser used is Chrome.
+### This test verifies that the login and logout funcctionality of then is working. The browser used is Chrome.
 ###  tester -Shobha Vaidyanathan
 
 
