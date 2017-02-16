@@ -3,7 +3,7 @@ import time
 from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 
-#### This test verifies that all the functionalities in the web application WAVE FIT are
+#### This test verifies that all the functionalities in the web application are
 ### functional beginning from logging in to the application
 #  specifically testing  Main Navigation functionality -test case #T76671	Verify "Reports" link is functional
 # and logging out and exiting in the end.  This test uses chrome driver.
