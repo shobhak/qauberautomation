@@ -4,7 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.support.wait import WebDriverWait
 
 
-### This test is for the waveit application.
+### This test is for theapplication.
 # It  checks Super admin test case T76682 on Chrome Browser
 # Verify "Page numbers" are functional in the Users Panel.The application then logs
 #out and exits after closing the browser
